@@ -1,0 +1,29 @@
+@font-face {
+	font-family: 'OpenSauceSans';
+	src: url('fonts/OpenSauceSans-Regular.ttf') format('truetype');
+	font-weight: 500;
+}
+@font-face {
+	font-family: 'OpenSauceSans';
+	src: url('fonts/OpenSauceSans-Medium.ttf') format('truetype');
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'OpenSauceSans';
+	src: url('fonts/OpenSauceSans-SemiBold.ttf') format('truetype');
+	font-weight: 700;
+}
+@font-face {
+	font-family: 'OpenSauceSans';
+	src: url('fonts/OpenSauceSans-Bold.ttf') format('truetype');
+	font-weight: 800;
+}
+
+html {
+	font-family: OpenSauceSans, Arial, Helvetica, sans-serif;
+	font-weight: 500;
+}
+body {
+	background: #16181c;
+	color: #e9e9ec;
+}

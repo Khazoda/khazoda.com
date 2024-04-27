@@ -13,12 +13,15 @@
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="dialog-inner" on:click|stopPropagation>
+		<!-- svelte-ignore a11y-autofocus -->
+		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
+			>✖</button
+		>
 		<slot name="header" />
 		<hr />
-		<slot />
+		<slot name="description" />
 		<hr />
-		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()}>close modal</button>
+		<slot name="info" />
 	</div>
 </dialog>
 
@@ -60,7 +63,25 @@
 			transform: scale(1);
 		}
 	}
-	button {
+	.modal-close-button {
 		display: block;
+		margin: 0;
+		padding: 0;
+		margin-left: auto;
+
+		width: 40px;
+		height: 40px;
+		aspect-ratio: 1;
+		border: none;
+
+		background: #383838;
+		color: #e9e9ec;
+		font-size: x-large;
+		cursor: pointer;
+
+		border-radius: 0.5rem;
+		&:hover {
+			transform: scale(1.05);
+		}
 	}
 </style>

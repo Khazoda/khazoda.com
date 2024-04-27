@@ -9,7 +9,11 @@
 
 	import Modal from '../components/Modal.svelte';
 	import IconoirTwitter from 'virtual:icons/iconoir/twitter';
-
+	import SimpleIconsModrinth from 'virtual:icons/simple-icons/modrinth';
+	import SimpleIconsCurseforge from 'virtual:icons/simple-icons/curseforge';
+	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
+	import SimpleIconsYoutube from 'virtual:icons/simple-icons/youtube';
+	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
 	let showModal: boolean[] = [];
 	$: currentlyHovered = 'Plushables';
 </script>
@@ -67,46 +71,109 @@
 </div>
 <!-- Plushables Modal -->
 <Modal bind:showModal modalID={0}>
-	<h2 slot="header">Plushables</h2>
+	<h2 slot="header" class="header-slot">
+		Plushables
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
 
-	<ol class="definition-list">
-		<li>of or relating to modality in logic</li>
-		<li>
-			containing provisions as to the mode of procedure or the manner of taking effect —used of a
-			contract or legacy
-		</li>
-		<li>of or relating to a musical mode</li>
-		<li>of or relating to structure as opposed to substance</li>
-		<li>
-			of, relating to, or constituting a grammatical form or category characteristically indicating
-			predication
-		</li>
-		<li>of or relating to a statistical mode</li>
-	</ol>
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Plushables adds over 40 new plushies to Minecraft.</li>
+			<li>
+				From cats to dogs to mushroom people, wizards and mammoths - there's a plushie for everyone.
+			</li>
+			<li>
+				Plushables comes with its own unique crafting block and system - fully EMI & REI compatible.
+			</li>
+			<li>Some plushies have custom sounds, particle effects and even animations!</li>
+		</ul>
+		<p>
+			Do you want the plushies but without bells and whistles? Try Plushables Lite - a leaner
+			version of the mod that gets updated before the main one. <br />You can swap between the two
+			mods in your world as long as you follow the precautions layed out in the mod page.
+		</p>
+	</div>
 
-	<a href="https://www.merriam-webster.com/dictionary/modal">Modrinth</a>
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/plushables">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/Plushables">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://plushables.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+	</div>
 </Modal>
 
 <!-- Basic Weapons Modal -->
 <Modal bind:showModal modalID={1}>
-	<h2 slot="header">Basic Weapons</h2>
+	<h2 slot="header" class="header-slot">
+		Basic Weapons
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/basic-weapons?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
 
-	<ol class="definition-list">
-		<li>of or relating to modality in logic</li>
-		<li>
-			containing provisions as to the mode of procedure or the manner of taking effect —used of a
-			contract or legacy
-		</li>
-		<li>of or relating to a musical mode</li>
-		<li>of or relating to structure as opposed to substance</li>
-		<li>
-			of, relating to, or constituting a grammatical form or category characteristically indicating
-			predication
-		</li>
-		<li>of or relating to a statistical mode</li>
-	</ol>
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Basic Weapons adds 5 new vanilla-esque weapon types to Minecraft.</li>
+			<li>Each weapon has a distinctly different combat style.</li>
+			<li>
+				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> mod lets
+				Basic Weapons really shine.
+			</li>
+			<li>
+				Sword & axe melee combat is too repetitive - treat yourself to some other options with Basic
+				Weapons!
+			</li>
+		</ul>
+	</div>
 
-	<a href="https://www.merriam-webster.com/dictionary/modal">Modrinth</a>
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/basic-weapons">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basic-weapons">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/basic-weapons">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://basicweapons.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+	</div>
 </Modal>
 
 <style lang="scss">
@@ -250,6 +317,59 @@
 		span {
 			font-size: small;
 			font-family: monospace;
+		}
+	}
+	.header-slot {
+		display: flex;
+		justify-content: space-between;
+		line-height: 0.8;
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+	.info-slot {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	a {
+		color: rgb(128, 215, 255);
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	.modal-link {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+		color: rgb(128, 215, 255);
+		text-decoration: none;
+		line-height: 1.5rem;
+		font-size: large;
+		&.modrinth {
+			color: rgb(128, 255, 160);
+		}
+		&.curseforge {
+			color: rgb(255, 158, 94);
+		}
+		&.github {
+			color: rgb(197, 209, 222);
+		}
+		&.wiki {
+			color: rgb(197, 209, 222);
+		}
+		&.youtube {
+			color: rgb(255, 92, 113);
+		}
+		a {
+			color: inherit;
+			text-decoration: inherit;
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 </style>

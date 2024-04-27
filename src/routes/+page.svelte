@@ -33,7 +33,7 @@
 			</li>
 			<li
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
-				on:focus={() => (currentlyHovered = 'Basic WEapons')}
+				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 			>
 				<button on:click={() => (showModal[1] = true)}>
 					<img src={basicweapons_icon} alt="" width="512" draggable="false" />
@@ -172,6 +172,98 @@
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
 			<a href="https://basicweapons.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+	</div>
+</Modal>
+
+<!-- Beef & Blade Modal -->
+<Modal bind:showModal modalID={3}>
+	<h2 slot="header" class="header-slot">
+		Beef & Blade
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Placeholder</li>
+			<li>Placeholder</li>
+			<li>Placeholder</li>
+			<li>Placeholder</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/beef-and-blade">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/beef-blade">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/beef-and-blade">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://beef-and-blade.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+	</div>
+</Modal>
+
+<!-- Beef & Blade Modal -->
+<Modal bind:showModal modalID={4}>
+	<h2 slot="header" class="header-slot">
+		Dwayne 'The Block' Johnson
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Placeholder</li>
+			<li>Placeholder</li>
+			<li>Placeholder</li>
+			<li>Placeholder</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/dwayne">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/dwayne-the-block-johnson">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/dwayne-the-block-johnson">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://dwayne-the-block-johnson.khazoda.com/en/latest/">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -327,6 +419,9 @@
 			max-width: 100%;
 			height: auto;
 		}
+	}
+	ul {
+		padding-left: 1.5rem;
 	}
 	.info-slot {
 		display: flex;

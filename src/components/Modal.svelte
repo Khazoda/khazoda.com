@@ -27,7 +27,7 @@
 
 <style lang="scss">
 	dialog {
-		min-width: 20rem;
+		min-width: 25rem;
 		max-width: 30%;
 		min-height: 100vh;
 		width: 100%;

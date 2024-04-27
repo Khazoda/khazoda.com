@@ -1,6 +1,7 @@
 <script lang="ts">
 	import plushables_icon from '$lib/img/plushables_icon.png';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
+	import bronze_icon from '$lib/img/bronze_icon.png';
 	import beef_icon from '$lib/img/beef_icon.png';
 	import dwayne_icon from '$lib/img/dwayne_icon.png';
 
@@ -34,12 +35,9 @@
 					<img src={basicweapons_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
-			<li
-				on:mouseover={() => (currentlyHovered = 'Bronze')}
-				on:focus={() => (currentlyHovered = 'Bronze')}
-			>
+			<li on:mouseover={() => (currentlyHovered = '?')} on:focus={() => (currentlyHovered = '?')}>
 				<button on:click={() => (showModal[2] = true)}>
-					<img src={plushables_icon} alt="" width="512" draggable="false" />
+					<img src={bronze_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
 			<li

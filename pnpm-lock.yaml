@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      svelte-sound:
+        specifier: ^0.6.0
+        version: 0.6.0
     devDependencies:
       '@iconify/json':
         specifier: ^2.2.204
@@ -787,6 +791,9 @@ packages:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
 
+  howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
+
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
@@ -1259,6 +1266,9 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  svelte-sound@0.6.0:
+    resolution: {integrity: sha512-n0JJwWwNEmsGntSN9oe57yevHrIg8Lw3tW2XsfdrDhJXwrbAAmLvbBJQ0Z3TFqONUW7+OWb5Yx04CSCo7q56fA==}
 
   svelte@4.2.15:
     resolution: {integrity: sha512-j9KJSccHgLeRERPlhMKrCXpk2TqL2m5Z+k+OBTQhZOhIdCCd3WfqV+ylPWeipEwq17P/ekiSFWwrVQv93i3bsg==}
@@ -2141,6 +2151,8 @@ snapshots:
 
   has-flag@4.0.0: {}
 
+  howler@2.2.4: {}
+
   human-signals@2.1.0: {}
 
   human-signals@5.0.0: {}
@@ -2554,6 +2566,10 @@ snapshots:
       postcss-load-config: 3.1.4(postcss@8.4.38)
       sass: 1.75.0
       typescript: 5.4.5
+
+  svelte-sound@0.6.0:
+    dependencies:
+      howler: 2.2.4
 
   svelte@4.2.15:
     dependencies:

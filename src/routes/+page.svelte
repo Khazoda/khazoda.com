@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { useSound } from 'svelte-sound';
+
 	import plushables_icon from '$lib/img/plushables_icon.png';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
 	import bronze_icon from '$lib/img/bronze_icon.png';
@@ -7,6 +9,8 @@
 
 	import profile_icon from '$lib/img/profile.png';
 
+	import btn_press_sound from '$lib/sound/click.mp3';
+
 	import Modal from '../components/Modal.svelte';
 	import IconoirTwitter from 'virtual:icons/iconoir/twitter';
 	import SimpleIconsModrinth from 'virtual:icons/simple-icons/modrinth';
@@ -14,12 +18,14 @@
 	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
 	import SimpleIconsYoutube from 'virtual:icons/simple-icons/youtube';
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
+
 	let showModal: boolean[] = [];
+	const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
 	$: currentlyHovered = 'Plushables';
 </script>
 
 <div class="page-container">
-	<h1 class="big-title">Khazoda's Mods<img src={profile_icon} alt="" width="128" /></h1>
+	<h1 class="big-title"><img src={profile_icon} alt="" width="128" /> Khazoda's Mods</h1>
 	<div class="center-container">
 		<span class="hovered-name">{currentlyHovered}</span>
 		<ul class="projects-container">
@@ -27,7 +33,7 @@
 				on:mouseover={() => (currentlyHovered = 'Plushables')}
 				on:focus={() => (currentlyHovered = 'Plushables')}
 			>
-				<button on:click={() => (showModal[0] = true)}>
+				<button on:click={() => (showModal[0] = true)} use:btn_sound>
 					<img src={plushables_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -35,12 +41,12 @@
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 			>
-				<button on:click={() => (showModal[1] = true)}>
+				<button on:click={() => (showModal[1] = true)} use:btn_sound>
 					<img src={basicweapons_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
 			<li on:mouseover={() => (currentlyHovered = '?')} on:focus={() => (currentlyHovered = '?')}>
-				<button on:click={() => (showModal[2] = true)}>
+				<button on:click={() => (showModal[2] = true)} use:btn_sound>
 					<img src={bronze_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -48,7 +54,7 @@
 				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
 				on:focus={() => (currentlyHovered = 'Beef & Blade')}
 			>
-				<button on:click={() => (showModal[3] = true)}>
+				<button on:click={() => (showModal[3] = true)} use:btn_sound>
 					<img src={beef_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -56,7 +62,7 @@
 				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 			>
-				<button on:click={() => (showModal[4] = true)}>
+				<button on:click={() => (showModal[4] = true)} use:btn_sound>
 					<img src={dwayne_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -284,13 +290,13 @@
 		color: rgb(226, 226, 226);
 		font-weight: 800;
 		margin-top: 10rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
 		img {
-			position: absolute;
-			left: 50%;
-			top: 2.5rem;
-			transform: translateX(-50%);
-			z-index: -1;
-			opacity: 0.5;
+			opacity: 1;
 		}
 	}
 	.center-container {
@@ -312,7 +318,7 @@
 		padding: 0.25rem 2rem;
 		border-radius: 1rem;
 		opacity: 0;
-		transition: opacity 0.1s ease;
+		transition: opacity 0.25s ease-out;
 	}
 	.center-container:has(ul.projects-container:hover) .hovered-name {
 		opacity: 1;
@@ -344,6 +350,9 @@
 		outline: inherit;
 		&:hover {
 			scale: 1.05;
+		}
+		&:active {
+			scale: 0.95;
 		}
 	}
 
@@ -411,10 +420,13 @@
 			font-family: monospace;
 		}
 	}
+	//#region Modal Styles
 	.header-slot {
 		display: flex;
 		justify-content: space-between;
-		line-height: 0.8;
+		align-items: end;
+		line-height: 1.2;
+		text-wrap: pretty;
 		img {
 			max-width: 100%;
 			height: auto;

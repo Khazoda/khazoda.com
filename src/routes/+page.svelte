@@ -18,6 +18,9 @@
 	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
 	import SimpleIconsYoutube from 'virtual:icons/simple-icons/youtube';
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
+	import StreamlineLinkChainSolid from 'virtual:icons/streamline/link-chain-solid';
+
+	import PlushablesColoured from '../components/PlushablesColoured.svelte';
 
 	let showModal: boolean[] = [];
 	$: currentlyHovered = 'Plushables';
@@ -100,9 +103,11 @@
 			<li>Some plushies have custom sounds, particle effects and even animations!</li>
 		</ul>
 		<p>
-			Do you want the plushies but without bells and whistles? Try Plushables Lite - a leaner
-			version of the mod that gets updated before the main one. <br />You can swap between the two
-			mods in your world as long as you follow the precautions layed out in the mod page.
+			Do you want the plushies but without bells and whistles? Try <PlushablesColoured />
+			<span style="font-style:italic;">Lite</span>
+			- a leaner version of the mod that gets updated before the main one. <br />You can swap
+			between the two mods in your world as long as you follow the precautions layed out in the mod
+			page.
 		</p>
 	</div>
 
@@ -110,12 +115,20 @@
 		<span class="modal-link modrinth">
 			<SimpleIconsModrinth />
 			<a href="https://modrinth.com/mod/plushables">Download on Modrinth</a>
+			|
+			<a href="https://modrinth.com/mod/plushables-lite"
+				><span style="font-style: italic;">Lite</span></a
+			>
 		</span>
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables">
 				Download on CurseForge
 			</a>
+			|
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables-lite"
+				><span style="font-style: italic;">Lite</span></a
+			>
 		</span>
 		<span class="modal-link youtube">
 			<SimpleIconsYoutube />
@@ -125,29 +138,14 @@
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/Plushables">View the GitHub repository</a>
+			|
+			<a href="https://github.com/Khazoda/plushables-lite"
+				><span style="font-style: italic;">Lite</span></a
+			>
 		</span>
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
 			<a href="https://plushables.khazoda.com/en/latest/">Visit the Wiki</a>
-		</span>
-		<br />
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://plushables.khazoda.com/en/latest/" class="coloured-text">
-				<span class="coloured-text-inner">
-					<span class="c-1">P</span>
-					<span class="c-2">l</span>
-					<span class="c-3">u</span>
-					<span class="c-4">s</span>
-					<span class="c-5">h</span>
-					<span class="c-6">a</span>
-					<span class="c-7">b</span>
-					<span class="c-1">l</span>
-					<span class="c-2">e</span>
-					<span class="c-3">s </span>
-				</span>
-				<span style="font-style:italic;">Lite</span>
-			</a>
 		</span>
 	</div>
 </Modal>
@@ -503,32 +501,17 @@
 		}
 	}
 
-	.coloured-text {
+	//#region Generic Styles
+	.flex {
 		display: flex;
-		gap: 0.25rem;
-		.c-1 {
-			color: #ff5555;
+		&.row {
+			flex-direction: row;
 		}
-		.c-2 {
-			color: #ff8e17;
+		&.col {
+			flex-direction: column;
 		}
-		.c-3 {
-			color: #ffd83b;
+		&.gap-md {
+			gap: 0.25rem;
 		}
-		.c-4 {
-			color: #54ff55;
-		}
-		.c-5 {
-			color: #63e9ff;
-		}
-		.c-6 {
-			color: #5555f2;
-		}
-		.c-7 {
-			color: #aa00aa;
-		}
-	}
-	.coloured-text-inner {
-		display: flex;
 	}
 </style>

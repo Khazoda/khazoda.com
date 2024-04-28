@@ -20,8 +20,11 @@
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
 
 	let showModal: boolean[] = [];
-	const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
 	$: currentlyHovered = 'Plushables';
+
+	// FIXME: Reverse comments on next two lines for production
+	const btn_sound = (p0: HTMLButtonElement) => {};
+	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
 </script>
 
 <div class="page-container">
@@ -126,6 +129,25 @@
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
 			<a href="https://plushables.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+		<br />
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://plushables.khazoda.com/en/latest/" class="coloured-text">
+				<span class="coloured-text-inner">
+					<span class="c-1">P</span>
+					<span class="c-2">l</span>
+					<span class="c-3">u</span>
+					<span class="c-4">s</span>
+					<span class="c-5">h</span>
+					<span class="c-6">a</span>
+					<span class="c-7">b</span>
+					<span class="c-1">l</span>
+					<span class="c-2">e</span>
+					<span class="c-3">s </span>
+				</span>
+				<span style="font-style:italic;">Lite</span>
+			</a>
 		</span>
 	</div>
 </Modal>
@@ -319,6 +341,7 @@
 		border-radius: 1rem;
 		opacity: 0;
 		transition: opacity 0.25s ease-out;
+		user-select: none;
 	}
 	.center-container:has(ul.projects-container:hover) .hovered-name {
 		opacity: 1;
@@ -478,5 +501,34 @@
 				text-decoration: underline;
 			}
 		}
+	}
+
+	.coloured-text {
+		display: flex;
+		gap: 0.25rem;
+		.c-1 {
+			color: #ff5555;
+		}
+		.c-2 {
+			color: #ff8e17;
+		}
+		.c-3 {
+			color: #ffd83b;
+		}
+		.c-4 {
+			color: #54ff55;
+		}
+		.c-5 {
+			color: #63e9ff;
+		}
+		.c-6 {
+			color: #5555f2;
+		}
+		.c-7 {
+			color: #aa00aa;
+		}
+	}
+	.coloured-text-inner {
+		display: flex;
 	}
 </style>

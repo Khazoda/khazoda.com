@@ -44,6 +44,13 @@
 			opacity: 0.75;
 		}
 	}
+	@media screen and (max-width: 1000px) {
+		dialog {
+			max-width: auto;
+			min-width: fit-content;
+			width: 100%;
+		}
+	}
 	dialog[open] {
 		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
@@ -82,6 +89,13 @@
 		border-radius: 0.5rem;
 		&:hover {
 			transform: scale(1.05);
+		}
+	}
+	// Mobile
+	@media screen and (max-width: 1000px) {
+		.modal-close-button {
+			margin-left: 0;
+			margin-right: auto;
 		}
 	}
 </style>

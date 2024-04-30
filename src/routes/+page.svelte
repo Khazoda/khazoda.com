@@ -45,7 +45,7 @@
 				on:mouseover={() => (currentlyHovered = 'Plushables')}
 				on:focus={() => (currentlyHovered = 'Plushables')}
 			>
-				<button on:click={() => (showModal[0] = true)} use:btn_sound>
+				<button on:click={() => (showModal[0] = true)} use:btn_sound type="button">
 					<img src={plushables_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -53,12 +53,12 @@
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 			>
-				<button on:click={() => (showModal[1] = true)} use:btn_sound>
+				<button on:click={() => (showModal[1] = true)} use:btn_sound type="button">
 					<img src={basicweapons_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
 			<li on:mouseover={() => (currentlyHovered = '?')} on:focus={() => (currentlyHovered = '?')}>
-				<button on:click={() => (showModal[2] = true)} use:btn_sound>
+				<button on:click={() => (showModal[2] = true)} use:btn_sound type="button">
 					<img src={bronze_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -66,7 +66,7 @@
 				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
 				on:focus={() => (currentlyHovered = 'Beef & Blade')}
 			>
-				<button on:click={() => (showModal[3] = true)} use:btn_sound>
+				<button on:click={() => (showModal[3] = true)} use:btn_sound type="button">
 					<img src={beef_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -74,7 +74,7 @@
 				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 			>
-				<button on:click={() => (showModal[4] = true)} use:btn_sound>
+				<button on:click={() => (showModal[4] = true)} use:btn_sound type="button">
 					<img src={dwayne_icon} alt="" width="512" draggable="false" />
 				</button>
 			</li>
@@ -350,8 +350,6 @@
 		justify-content: center;
 		align-items: center;
 	}
-	@media screen and (max-width: 1000px) {
-	}
 
 	.hovered-name {
 		position: relative;
@@ -364,17 +362,34 @@
 		transition: opacity 0.25s ease-out;
 		user-select: none;
 	}
+	// Mobile
+	@media screen and (max-width: 1000px) {
+		.hovered-name {
+			position: absolute;
+			top: unset;
+			width: auto;
+			height: fit-content;
+			bottom: 6rem;
+		}
+	}
 	.center-container:has(ul.projects-container:hover) .hovered-name {
 		opacity: 1;
 	}
 
-	.projects-container {
+	ul.projects-container {
 		position: relative;
 		width: 256px;
 		height: 256px;
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+	}
+	// Mobile
+	@media screen and (max-width: 1000px) {
+		ul.projects-container {
+			width: 192px;
+			height: 192px;
+		}
 	}
 
 	.projects-container li {
@@ -402,6 +417,9 @@
 	}
 
 	.projects-container {
+		li {
+			transition: transform 0.4s ease-out;
+		}
 		li:nth-child(1) {
 			transform: translateX(-400px) translateY(34px) rotate(-10deg);
 			animation-delay: 100ms;
@@ -426,6 +444,34 @@
 			transform: translateX(400px) translateY(17px) rotate(6deg);
 			animation-delay: 80ms;
 			animation-duration: 4.8s;
+		}
+
+		@media screen and (max-width: 1000px) {
+			li:nth-child(1) {
+				transform: translateX(-80px) translateY(-175px) rotate(-10deg);
+				animation-delay: 100ms;
+				animation-duration: 6s;
+			}
+			li:nth-child(2) {
+				transform: translateX(80px) translateY(-175px) rotate(-4deg);
+				animation-delay: 0ms;
+				animation-duration: 4.5s;
+			}
+			li:nth-child(3) {
+				transform: translateX(-80px) translateY(0px) rotate(2deg);
+				animation-delay: 40ms;
+				animation-duration: 5.2s;
+			}
+			li:nth-child(4) {
+				transform: translateX(80px) translateY(0px) rotate(-3deg);
+				animation-delay: 135ms;
+				animation-duration: 5.8s;
+			}
+			li:nth-child(5) {
+				transform: translateX(-80px) translateY(175px) rotate(6deg);
+				animation-delay: 80ms;
+				animation-duration: 4.8s;
+			}
 		}
 	}
 
@@ -484,6 +530,12 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+	}
+
+	@media screen and (max-width: 1000px) {
+		.modal-link.wiki {
+			margin-bottom: 2rem;
+		}
 	}
 	a {
 		color: rgb(128, 215, 255);

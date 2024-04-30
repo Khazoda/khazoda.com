@@ -46,7 +46,7 @@
 				on:focus={() => (currentlyHovered = 'Plushables')}
 			>
 				<button on:click={() => (showModal[0] = true)} use:btn_sound type="button">
-					<img src={plushables_icon} alt="" width="512" draggable="false" />
+					<img src={plushables_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
@@ -54,12 +54,18 @@
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 			>
 				<button on:click={() => (showModal[1] = true)} use:btn_sound type="button">
-					<img src={basicweapons_icon} alt="" width="512" draggable="false" />
+					<img
+						src={basicweapons_icon}
+						alt=""
+						width="512"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
 				</button>
 			</li>
 			<li on:mouseover={() => (currentlyHovered = '?')} on:focus={() => (currentlyHovered = '?')}>
 				<button on:click={() => (showModal[2] = true)} use:btn_sound type="button">
-					<img src={bronze_icon} alt="" width="512" draggable="false" />
+					<img src={bronze_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
@@ -67,7 +73,7 @@
 				on:focus={() => (currentlyHovered = 'Beef & Blade')}
 			>
 				<button on:click={() => (showModal[3] = true)} use:btn_sound type="button">
-					<img src={beef_icon} alt="" width="512" draggable="false" />
+					<img src={beef_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
@@ -75,7 +81,7 @@
 				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 			>
 				<button on:click={() => (showModal[4] = true)} use:btn_sound type="button">
-					<img src={dwayne_icon} alt="" width="512" draggable="false" />
+					<img src={dwayne_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
 		</ul>

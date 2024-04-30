@@ -214,10 +214,11 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>Placeholder</li>
-			<li>Placeholder</li>
-			<li>Placeholder</li>
-			<li>Placeholder</li>
+			<li>
+				Beef & Blade is a serverside mod that lets you prioritize raw beef or leather from cow drops
+			</li>
+			<li>Using a sword will yield leather drops</li>
+			<li>Using an axe will yield raw beef drops</li>
 		</ul>
 	</div>
 
@@ -260,10 +261,11 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>Placeholder</li>
-			<li>Placeholder</li>
-			<li>Placeholder</li>
-			<li>Placeholder</li>
+			<li>
+				Have you ever wanted to place The Block's head in your world? This mod is the solution.
+			</li>
+			<li>Adds dwayne's head as an item, a block, stairs, walls, plant pots and even flowers.</li>
+			<li>There are some magical interactions with the blocks that are up to you to discover.</li>
 		</ul>
 	</div>
 

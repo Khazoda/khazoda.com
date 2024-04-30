@@ -30,6 +30,12 @@
 	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
 </script>
 
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Khazoda's Mods</title>
+</head>
 <div class="page-container">
 	<h1 class="big-title"><img src={profile_icon} alt="" width="128" /> Khazoda's Mods</h1>
 	<div class="center-container">
@@ -306,6 +312,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+	//#region Page Title
 	.big-title {
 		font-size: 5rem;
 		letter-spacing: 0.25rem;
@@ -321,6 +328,18 @@
 			opacity: 1;
 		}
 	}
+	// Mobile
+	@media screen and (max-width: 1000px) {
+		.big-title {
+			font-size: 2rem;
+			margin-top: 2rem;
+			img {
+				max-width: 64px;
+			}
+		}
+	}
+
+	//#region Center Container
 	.center-container {
 		position: fixed;
 		inset: 0;
@@ -330,6 +349,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+	}
+	@media screen and (max-width: 1000px) {
 	}
 
 	.hovered-name {
@@ -361,6 +382,7 @@
 		position: absolute;
 		inset: 0;
 		animation: float infinite 5s ease-in-out;
+		will-change: transform;
 	}
 	.projects-container button {
 		transition: scale 0.15s ease-out;

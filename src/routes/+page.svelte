@@ -33,7 +33,7 @@
 
 	// FIXME: Use first line in dev environment, second line for prod
 	// const btn_sound = (p0: HTMLButtonElement) => {};
-	const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
+	const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
 </script>
 
 <head>

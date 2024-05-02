@@ -31,11 +31,14 @@
 		if (distance_swiped >= swipe_dist_required) {
 			dialog_inner.style.transform = 'translateY(150%)';
 			dialog_inner.style.opacity = '0';
+			dialog.style.setProperty('--mobile-backdrop-opacity', '0');
+
 			setTimeout(() => {
 				document.getElementsByTagName('body')[0].style.overscrollBehavior = 'unset';
 				dialog.close();
 				dialog_inner.style.transform = 'translateY(0%)';
 				dialog_inner.style.opacity = '1';
+				dialog.style.setProperty('--mobile-backdrop-opacity', '1');
 			}, 450);
 		}
 	};
@@ -70,6 +73,8 @@
 
 <style lang="scss">
 	dialog {
+		--mobile-backdrop-opacity: 1;
+
 		min-width: 25rem;
 		max-width: 30%;
 		min-height: 100vh;
@@ -89,9 +94,12 @@
 	}
 	@media screen and (max-width: 1000px) {
 		dialog {
-			max-width: auto;
 			min-width: fit-content;
 			width: 100%;
+
+			&::backdrop {
+				opacity: var(--mobile-backdrop-opacity);
+			}
 		}
 	}
 	dialog[open] {

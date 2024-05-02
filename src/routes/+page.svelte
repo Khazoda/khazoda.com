@@ -31,9 +31,9 @@
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
 	};
 
-	// FIXME: Reverse comments on next two lines for production
-	const btn_sound = (p0: HTMLButtonElement) => {};
-	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
+	// FIXME: Use first line in dev environment, second line for prod
+	// const btn_sound = (p0: HTMLButtonElement) => {};
+	const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.65 });
 </script>
 
 <head>

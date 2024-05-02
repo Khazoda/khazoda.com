@@ -20,9 +20,16 @@
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
 
 	import PlushablesColoured from '../components/PlushablesColoured.svelte';
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	let showModal: boolean[] = [];
 	$: currentlyHovered = 'Plushables';
+
+	const setModalVisibility = (modalID: number, visible: boolean) => {
+		showModal[modalID] = visible;
+		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
+	};
 
 	// FIXME: Reverse comments on next two lines for production
 	const btn_sound = (p0: HTMLButtonElement) => {};
@@ -44,7 +51,7 @@
 				on:mouseover={() => (currentlyHovered = 'Plushables')}
 				on:focus={() => (currentlyHovered = 'Plushables')}
 			>
-				<button on:click={() => (showModal[0] = true)} use:btn_sound type="button">
+				<button on:click={() => setModalVisibility(0, true)} use:btn_sound type="button">
 					<img src={plushables_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
@@ -52,7 +59,7 @@
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 			>
-				<button on:click={() => (showModal[1] = true)} use:btn_sound type="button">
+				<button on:click={() => setModalVisibility(1, true)} use:btn_sound type="button">
 					<img
 						src={basicweapons_icon}
 						alt=""
@@ -63,7 +70,7 @@
 				</button>
 			</li>
 			<li on:mouseover={() => (currentlyHovered = '?')} on:focus={() => (currentlyHovered = '?')}>
-				<button on:click={() => (showModal[2] = true)} use:btn_sound type="button">
+				<button on:click={() => setModalVisibility(2, true)} use:btn_sound type="button">
 					<img src={bronze_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
@@ -71,7 +78,7 @@
 				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
 				on:focus={() => (currentlyHovered = 'Beef & Blade')}
 			>
-				<button on:click={() => (showModal[3] = true)} use:btn_sound type="button">
+				<button on:click={() => setModalVisibility(3, true)} use:btn_sound type="button">
 					<img src={beef_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
@@ -79,7 +86,7 @@
 				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 			>
-				<button on:click={() => (showModal[4] = true)} use:btn_sound type="button">
+				<button on:click={() => setModalVisibility(4, true)} use:btn_sound type="button">
 					<img src={dwayne_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
@@ -114,11 +121,9 @@
 			<li>Some plushies have custom sounds, particle effects and even animations!</li>
 		</ul>
 		<p>
-			Do you want the plushies but without bells and whistles? Try <PlushablesColoured />
+			Want the newest version of Plushables ASAP? Try <PlushablesColoured />
 			<span style="font-style:italic;">Lite</span>
-			- a leaner version of the mod that gets updated before the main one. <br />You can swap
-			between the two mods in your world as long as you follow the precautions layed out in the mod
-			page.
+			- a leaner version of the mod that gets updated before the main one.
 		</p>
 	</div>
 

@@ -7,15 +7,37 @@
 	let dialog_inner: HTMLDivElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
 
-	const swipeCloseModal = () => {
-		dialog_inner.style.transform = 'translateY(-150%)';
-		dialog_inner.style.opacity = '0';
+	// Modal Swipe Detection
+	let touchStart: number | null = null;
+	let touchEnd: number | null = null;
+	const swipe_dist_required = 80;
 
-		setTimeout(() => {
-			dialog.close();
-			dialog_inner.style.transform = 'translateY(0%)';
-			dialog_inner.style.opacity = '1';
-		}, 450);
+	const swipeStart = (e: TouchEvent) => {
+		touchEnd = null;
+		touchStart = e.targetTouches[0].clientY;
+		console.log('start: ' + touchStart);
+	};
+	const swipeMove = (e: TouchEvent) => {
+		touchEnd = e.targetTouches[0].clientY;
+		console.log(touchEnd);
+	};
+	const swipeEnd = (e: TouchEvent) => {
+		// Null check
+		if (!touchStart || !touchEnd) return;
+
+		const distance_swiped = touchEnd - touchStart;
+		console.log(distance_swiped);
+
+		if (distance_swiped >= swipe_dist_required) {
+			dialog_inner.style.transform = 'translateY(150%)';
+			dialog_inner.style.opacity = '0';
+			setTimeout(() => {
+				document.getElementsByTagName('body')[0].style.overscrollBehavior = 'unset';
+				dialog.close();
+				dialog_inner.style.transform = 'translateY(0%)';
+				dialog_inner.style.opacity = '1';
+			}, 450);
+		}
 	};
 </script>
 
@@ -30,7 +52,9 @@
 		bind:this={dialog_inner}
 		class="dialog-inner"
 		on:click|stopPropagation
-		on:touchmove={() => swipeCloseModal()}
+		on:touchstart|capture={(e) => swipeStart(e)}
+		on:touchmove={(e) => swipeMove(e)}
+		on:touchend={(e) => swipeEnd(e)}
 	>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
@@ -42,9 +66,6 @@
 		<hr />
 		<slot name="info" />
 	</div>
-	<button on:click={() => dialog.close()} class="modal-close-button" type="button"
-		><MingcuteCloseFill /></button
-	>
 </dialog>
 
 <style lang="scss">

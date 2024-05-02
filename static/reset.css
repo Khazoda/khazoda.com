@@ -50,6 +50,7 @@ button,
 input,
 label {
 	line-height: 1.1;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 /* Balance text wrapping on headings */

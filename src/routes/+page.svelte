@@ -18,7 +18,6 @@
 	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
 	import SimpleIconsYoutube from 'virtual:icons/simple-icons/youtube';
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
-	import StreamlineLinkChainSolid from 'virtual:icons/streamline/link-chain-solid';
 
 	import PlushablesColoured from '../components/PlushablesColoured.svelte';
 
@@ -338,7 +337,7 @@
 	@media screen and (max-width: 1000px) {
 		.big-title {
 			font-size: 2rem;
-			margin-top: 2rem;
+			margin-top: 0;
 			img {
 				max-width: 64px;
 			}

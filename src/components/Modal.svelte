@@ -1,8 +1,22 @@
 <script lang="ts">
+	import MingcuteCloseFill from 'virtual:icons/mingcute/close-fill';
+
 	export let showModal: boolean[];
 	export let modalID: number;
 	let dialog: HTMLDialogElement;
+	let dialog_inner: HTMLDivElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
+
+	const swipeCloseModal = () => {
+		dialog_inner.style.transform = 'translateY(-150%)';
+		dialog_inner.style.opacity = '0';
+
+		setTimeout(() => {
+			dialog.close();
+			dialog_inner.style.transform = 'translateY(0%)';
+			dialog_inner.style.opacity = '1';
+		}, 450);
+	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
@@ -12,10 +26,15 @@
 	on:click|self={() => dialog.close()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div class="dialog-inner" on:click|stopPropagation>
+	<div
+		bind:this={dialog_inner}
+		class="dialog-inner"
+		on:click|stopPropagation
+		on:touchmove={() => swipeCloseModal()}
+	>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-			>✖</button
+			><MingcuteCloseFill /></button
 		>
 		<slot name="header" />
 		<hr />
@@ -23,6 +42,9 @@
 		<hr />
 		<slot name="info" />
 	</div>
+	<button on:click={() => dialog.close()} class="modal-close-button" type="button"
+		><MingcuteCloseFill /></button
+	>
 </dialog>
 
 <style lang="scss">
@@ -61,6 +83,9 @@
 		border-radius: 0.5rem;
 		padding: 1rem;
 		background: #141414;
+		transition:
+			transform 0.5s ease,
+			opacity 0.5s ease;
 	}
 	@keyframes zoom {
 		from {
@@ -71,7 +96,9 @@
 		}
 	}
 	.modal-close-button {
-		display: block;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		margin: 0;
 		padding: 0;
 		margin-left: auto;
@@ -82,8 +109,11 @@
 		border: none;
 
 		background: #383838;
-		color: #e9e9ec;
+		color: #ffffff;
 		font-size: x-large;
+		line-height: 1;
+		box-sizing: content-box;
+
 		cursor: pointer;
 
 		border-radius: 0.5rem;

@@ -375,11 +375,7 @@
 	// Mobile
 	@media screen and (max-width: 1000px) {
 		.hovered-name {
-			position: absolute;
-			top: unset;
-			width: auto;
-			height: fit-content;
-			bottom: 6rem;
+			display: none;
 		}
 	}
 	.center-container:has(ul.projects-container:hover) .hovered-name {

@@ -59,7 +59,7 @@
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
 			><MingcuteCloseFill /></button
-		>
+		><span class="mobile-swipe-indicator">swipe down to close</span>
 		<slot name="header" />
 		<hr />
 		<slot name="description" />
@@ -145,8 +145,32 @@
 	// Mobile
 	@media screen and (max-width: 1000px) {
 		.modal-close-button {
-			margin-left: 0;
-			margin-right: auto;
+			display: none;
+		}
+	}
+
+	.mobile-swipe-indicator {
+		display: none;
+	}
+	@media screen and (max-width: 1000px) {
+		.mobile-swipe-indicator {
+			width: 100%;
+			display: inline-flex;
+			position: relative;
+			justify-content: center;
+			color: #868686;
+			font-size: small;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: -1.25rem;
+				width: 4rem;
+				height: 0px;
+				border-left: 10px solid transparent;
+				border-right: 10px solid transparent;
+				border-top: 10px solid rgb(116, 156, 100);
+			}
 		}
 	}
 </style>

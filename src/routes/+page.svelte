@@ -218,6 +218,58 @@
 	</div>
 </Modal>
 
+<!-- Basic Weapons Modal -->
+<Modal bind:showModal modalID={2}>
+	<h2 slot="header" class="header-slot">
+		Bronze
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Bronze adds two new materials; Tin and Bronze.</li>
+			<li>Bronze can be turned into new armor, weaponry, tools and blocks.</li>
+			<li>
+				The bronze tier is slightly better than iron across the board, though significantly worse
+				than diamond.
+			</li>
+			<li>
+				Bronze is intended to be a material expansion that fits neatly into vanilla gameplay and
+				progression.
+			</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/bronze">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/bronze-mod">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/bronze">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://bronze.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+	</div>
+</Modal>
+
 <!-- Beef & Blade Modal -->
 <Modal bind:showModal modalID={3}>
 	<h2 slot="header" class="header-slot">
@@ -265,7 +317,7 @@
 	</div>
 </Modal>
 
-<!-- Beef & Blade Modal -->
+<!-- Dwayne The Block Johnson Modal -->
 <Modal bind:showModal modalID={4}>
 	<h2 slot="header" class="header-slot">
 		Dwayne 'The Block' Johnson

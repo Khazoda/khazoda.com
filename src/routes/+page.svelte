@@ -32,8 +32,8 @@
 	};
 
 	// FIXME: Use first line in dev environment, second line for prod
-	// const btn_sound = (p0: HTMLButtonElement) => {};
-	const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
+	const btn_sound = (p0: HTMLButtonElement) => {};
+	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
 </script>
 
 <head>
@@ -69,7 +69,10 @@
 					/>
 				</button>
 			</li>
-			<li on:mouseover={() => (currentlyHovered = '?')} on:focus={() => (currentlyHovered = '?')}>
+			<li
+				on:mouseover={() => (currentlyHovered = 'Bronze')}
+				on:focus={() => (currentlyHovered = 'Bronze')}
+			>
 				<button on:click={() => setModalVisibility(2, true)} use:btn_sound type="button">
 					<img src={bronze_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>

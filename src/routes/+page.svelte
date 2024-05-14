@@ -43,7 +43,9 @@
 	<title>Khazoda's Mods</title>
 </head>
 <div class="page-container">
-	<h1 class="big-title"><img src={profile_icon} alt="" width="128" /> Khazoda's Mods</h1>
+	<h1 class="big-title fade-in-on-load">
+		<img src={profile_icon} alt="" width="128" /> Khazoda's Mods
+	</h1>
 	<div class="center-container">
 		<span class="hovered-name">{currentlyHovered}</span>
 		<ul class="projects-container">

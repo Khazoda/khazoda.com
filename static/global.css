@@ -27,6 +27,11 @@
 	src: url('fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
 }
 
+@font-face {
+	font-family: 'Lexend';
+	src: url('fonts/Lexend-VariableFont_wght.ttf') format('truetype');
+}
+
 html {
 	font-family: OpenSauceSans, Arial, Helvetica, sans-serif;
 	font-weight: 500;

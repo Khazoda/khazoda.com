@@ -384,7 +384,8 @@
 		font-size: 5rem;
 		letter-spacing: 0.25rem;
 		color: rgb(226, 226, 226);
-		font-weight: 800;
+		font-family: Lexend, Quicksand, Calibri;
+		font-weight: 300;
 		margin-top: 10rem;
 		display: flex;
 		justify-content: center;
@@ -398,8 +399,8 @@
 	// Mobile
 	@media screen and (max-width: 1000px) {
 		.big-title {
-			font-size: 2rem;
-			margin-top: 0;
+			font-size: 1.75rem;
+			margin-top: 0.25rem;
 			img {
 				max-width: 64px;
 			}

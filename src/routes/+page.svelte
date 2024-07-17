@@ -5,6 +5,7 @@
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
 	import bronze_icon from '$lib/img/bronze_icon.png';
 	import beef_icon from '$lib/img/beef_icon.png';
+	import basicstorage_icon from '$lib/img/basicstorage_icon.png';
 	import dwayne_icon from '$lib/img/dwayne_icon.png';
 
 	import profile_icon from '$lib/img/profile.png';
@@ -36,6 +37,7 @@
 	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
 </script>
 
+<!-- #region HTML-->
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,7 +55,12 @@
 				on:mouseover={() => (currentlyHovered = 'Plushables')}
 				on:focus={() => (currentlyHovered = 'Plushables')}
 			>
-				<button on:click={() => setModalVisibility(0, true)} use:btn_sound type="button">
+				<button
+					on:click={() => setModalVisibility(0, true)}
+					use:btn_sound
+					type="button"
+					title="Plushables"
+				>
 					<img src={plushables_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
@@ -61,7 +68,12 @@
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 			>
-				<button on:click={() => setModalVisibility(1, true)} use:btn_sound type="button">
+				<button
+					on:click={() => setModalVisibility(1, true)}
+					use:btn_sound
+					type="button"
+					title="Basic Weapons"
+				>
 					<img
 						src={basicweapons_icon}
 						alt=""
@@ -75,7 +87,12 @@
 				on:mouseover={() => (currentlyHovered = 'Bronze')}
 				on:focus={() => (currentlyHovered = 'Bronze')}
 			>
-				<button on:click={() => setModalVisibility(2, true)} use:btn_sound type="button">
+				<button
+					on:click={() => setModalVisibility(2, true)}
+					use:btn_sound
+					type="button"
+					title="Bronze"
+				>
 					<img src={bronze_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
@@ -83,28 +100,53 @@
 				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
 				on:focus={() => (currentlyHovered = 'Beef & Blade')}
 			>
-				<button on:click={() => setModalVisibility(3, true)} use:btn_sound type="button">
+				<button
+					on:click={() => setModalVisibility(3, true)}
+					use:btn_sound
+					type="button"
+					title="Beef & Blade"
+				>
 					<img src={beef_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
-				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
-				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+				on:mouseover={() => (currentlyHovered = 'Basic Storage')}
+				on:focus={() => (currentlyHovered = 'Basic Storage')}
 			>
-				<button on:click={() => setModalVisibility(4, true)} use:btn_sound type="button">
-					<img src={dwayne_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
+				<button
+					on:click={() => setModalVisibility(4, true)}
+					use:btn_sound
+					type="button"
+					title="Basic Storage"
+				>
+					<img
+						src={basicstorage_icon}
+						alt=""
+						width="512"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
 				</button>
 			</li>
 		</ul>
 	</div>
 
+	<button
+		on:click={() => setModalVisibility(99, true)}
+		use:btn_sound
+		type="button"
+		title="Dwayne 'The Block' Johnson"
+		class="dwayne-btn"
+	>
+		<img src={dwayne_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+	</button>
 	<footer>
 		<a href="https://twitter.com/Khazoda"><IconoirTwitter /></a><span
 			>&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span
 		>
 	</footer>
 </div>
-<!-- Plushables Modal -->
+<!--#region Plushables Modal -->
 <Modal bind:showModal modalID={0}>
 	<h2 slot="header" class="header-slot">
 		Plushables
@@ -171,7 +213,7 @@
 	</div>
 </Modal>
 
-<!-- Basic Weapons Modal -->
+<!--#region Basic Weapons Modal -->
 <Modal bind:showModal modalID={1}>
 	<h2 slot="header" class="header-slot">
 		Basic Weapons
@@ -223,7 +265,7 @@
 	</div>
 </Modal>
 
-<!-- Basic Weapons Modal -->
+<!-- #region Basic Weapons Modal -->
 <Modal bind:showModal modalID={2}>
 	<h2 slot="header" class="header-slot">
 		Bronze
@@ -275,7 +317,7 @@
 	</div>
 </Modal>
 
-<!-- Beef & Blade Modal -->
+<!-- #region Beef & Blade Modal -->
 <Modal bind:showModal modalID={3}>
 	<h2 slot="header" class="header-slot">
 		Beef & Blade
@@ -322,8 +364,60 @@
 	</div>
 </Modal>
 
-<!-- Dwayne The Block Johnson Modal -->
+<!-- #region Basic Storage Modal -->
 <Modal bind:showModal modalID={4}>
+	<h2 slot="header" class="header-slot">
+		Basic Storage
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/basic-storage?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Basic Storage adds one block - the crate.</li>
+			<li>
+				Crates fulfil a nieche in Minecraft's storage blocks that chests, barrels, shulker boxes and
+				bundles don't.
+			</li>
+			<li>Interaction with crates happens directly, rather then in a GUI.</li>
+			<li>
+				Crates can hold up to 1 billion items of a single type, and retain their contents when
+				broken.
+			</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/basic-storage">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basic-storage">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/basic-storage">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://modded.wiki/w/Mod:Basic_Storage">Visit the Wiki</a>
+		</span>
+	</div>
+</Modal>
+
+<!--#region Dwayne The Block Johnson Modal -->
+<Modal bind:showModal modalID={99}>
 	<h2 slot="header" class="header-slot">
 		Dwayne 'The Block' Johnson
 		<img
@@ -369,6 +463,7 @@
 	</div>
 </Modal>
 
+<!-- #region CSS-->
 <style lang="scss">
 	.page-container {
 		position: static;
@@ -594,6 +689,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+		margin-top: 1rem;
 	}
 
 	@media screen and (max-width: 1000px) {
@@ -652,6 +748,20 @@
 		}
 		&.gap-md {
 			gap: 0.25rem;
+		}
+	}
+
+	//#region Other Styles
+	.dwayne-btn {
+		background: none;
+		border: none;
+		position: fixed;
+		bottom: 0.25rem;
+		right: 0.25rem;
+		z-index: 99;
+		cursor: pointer;
+		&:hover {
+			scale: 1.05;
 		}
 	}
 </style>

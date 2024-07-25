@@ -330,7 +330,7 @@
 	<div slot="description" class="definition-list">
 		<ul>
 			<li>
-				Beef & Blade is a serverside mod that lets you prioritize raw beef or leather from cow drops
+				Beef & Blade is a serverside datapack that lets you prioritize raw beef or leather from cow drops
 			</li>
 			<li>Using a sword will yield leather drops</li>
 			<li>Using an axe will yield raw beef drops</li>

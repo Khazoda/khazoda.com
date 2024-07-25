@@ -476,19 +476,21 @@
 	}
 	//#region Page Title
 	.big-title {
-		font-size: 5rem;
+		font-size: 4rem;
 		letter-spacing: 0.25rem;
 		color: rgb(226, 226, 226);
 		font-family: Lexend, Quicksand, Calibri;
-		font-weight: 300;
-		margin-top: 10rem;
+		font-weight: 350;
+		margin-top: 5rem;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 1rem;
+		gap: 0.125rem;
 
 		img {
 			opacity: 1;
+			width: 10rem;
 		}
 	}
 	// Mobile

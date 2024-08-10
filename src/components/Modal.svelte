@@ -94,7 +94,7 @@
 	}
 	@media screen and (max-width: 1000px) {
 		dialog {
-			min-width: fit-content;
+			min-width: 100%;
 			width: 100%;
 
 			&::backdrop {

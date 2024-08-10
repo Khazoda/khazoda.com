@@ -518,7 +518,7 @@
 
 	.hovered-name {
 		position: relative;
-		top: -2rem;
+		top: 0rem;
 		font-size: larger;
 		background: #2c2c2c;
 		padding: 0.25rem 2rem;

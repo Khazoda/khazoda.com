@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { useSound } from 'svelte-sound';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+
 
 	import plushables_icon from '$lib/img/plushables_icon.png';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
@@ -36,6 +38,8 @@
 	// FIXME: Use first line in dev environment, second line for prod
 	const btn_sound = (p0: HTMLButtonElement) => {};
 	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
+
+	injectSpeedInsights();
 </script>
 
 <!-- #region HTML-->

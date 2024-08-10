@@ -139,22 +139,25 @@
 	</div>
 
 	<div class="edge-mini-wrapper">
-		<button
-			on:click={() => setModalVisibility(5, true)}
-			use:btn_sound
-			type="button"
-			title="Beef & Blade"
-		>
-			<img src={beef_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
-		</button>
-		<button
-			on:click={() => setModalVisibility(99, true)}
-			use:btn_sound
-			type="button"
-			title="Dwayne 'The Block' Johnson"
-		>
-			<img src={dwayne_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
-		</button>
+		<span>smaller mods</span>
+		<div>
+			<button
+				on:click={() => setModalVisibility(5, true)}
+				use:btn_sound
+				type="button"
+				title="Beef & Blade"
+			>
+				<img src={beef_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+			</button>
+			<button
+				on:click={() => setModalVisibility(99, true)}
+				use:btn_sound
+				type="button"
+				title="Dwayne 'The Block' Johnson"
+			>
+				<img src={dwayne_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+			</button>
+		</div>
 	</div>
 	<footer>
 		<a href="https://twitter.com/Khazoda"><IconoirTwitter /></a><span
@@ -537,6 +540,12 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+	// Mobile
+	@media screen and (max-width: 1000px) {
+		.page-container {
+			align-items: flex-start;
+		}
+	}
 	//#region Page Title
 	.big-title {
 		font-size: 4rem;
@@ -550,7 +559,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 0.125rem;
-
+		width: 100%;
 		img {
 			opacity: 1;
 			width: 10rem;
@@ -735,6 +744,13 @@
 			font-family: monospace;
 		}
 	}
+	// Mobile
+	@media screen and (max-width: 1000px) {
+		footer {
+			width: auto;
+		}
+	}
+
 	//#region Modal Styles
 	.header-slot {
 		display: flex;
@@ -819,17 +835,38 @@
 	//#region Other Styles
 	.edge-mini-wrapper {
 		position: fixed;
+		display: flex;
+		flex-direction: column;
 		bottom: 0.25rem;
 		right: 0.25rem;
 		z-index: 99;
-	
-		button {
-			background: none;
-			border: none;
-			cursor: pointer;
-		&:hover {
-			scale: 1.05;
+
+		border: 2px solid hsl(0deg, 0%, 15%);
+		border-top-left-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+
+		padding: 0.5rem;
+		padding-top: 0.25rem;
+		div {
+			margin-left: auto;
+			display: inline-flex;
+			justify-content: end;
+
+			button {
+				background: none;
+				border: none;
+				padding: 0;
+				margin-left: 0.25rem;
+
+				cursor: pointer;
+				&:hover {
+					scale: 1.05;
+				}
+			}
 		}
+		span {
+			color: #747474;
+			font-family: Lexend, Quicksand, Calibri;
 		}
 	}
 </style>

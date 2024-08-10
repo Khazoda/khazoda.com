@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { useSound } from 'svelte-sound';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+	import { inject } from '@vercel/analytics'
 
 	import plushables_icon from '$lib/img/plushables_icon.png';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';

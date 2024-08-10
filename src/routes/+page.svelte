@@ -4,8 +4,9 @@
 	import plushables_icon from '$lib/img/plushables_icon.png';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
 	import bronze_icon from '$lib/img/bronze_icon.png';
-	import beef_icon from '$lib/img/beef_icon.png';
+	import breakerplacer_icon from '$lib/img/breakerplacer_icon.png';
 	import basicstorage_icon from '$lib/img/basicstorage_icon.png';
+	import beef_icon from '$lib/img/beef_icon.png';
 	import dwayne_icon from '$lib/img/dwayne_icon.png';
 
 	import profile_icon from '$lib/img/profile.png';
@@ -97,16 +98,22 @@
 				</button>
 			</li>
 			<li
-				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
-				on:focus={() => (currentlyHovered = 'Beef & Blade')}
+				on:mouseover={() => (currentlyHovered = 'Block Breaker & Block Placer')}
+				on:focus={() => (currentlyHovered = 'Block Breaker & Block Placer')}
 			>
 				<button
 					on:click={() => setModalVisibility(3, true)}
 					use:btn_sound
 					type="button"
-					title="Beef & Blade"
+					title="Block Breaker & Block Placer"
 				>
-					<img src={beef_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
+					<img
+						src={breakerplacer_icon}
+						alt=""
+						width="512"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
 				</button>
 			</li>
 			<li
@@ -131,15 +138,24 @@
 		</ul>
 	</div>
 
-	<button
-		on:click={() => setModalVisibility(99, true)}
-		use:btn_sound
-		type="button"
-		title="Dwayne 'The Block' Johnson"
-		class="dwayne-btn"
-	>
-		<img src={dwayne_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
-	</button>
+	<div class="edge-mini-wrapper">
+		<button
+			on:click={() => setModalVisibility(5, true)}
+			use:btn_sound
+			type="button"
+			title="Beef & Blade"
+		>
+			<img src={beef_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+		</button>
+		<button
+			on:click={() => setModalVisibility(99, true)}
+			use:btn_sound
+			type="button"
+			title="Dwayne 'The Block' Johnson"
+		>
+			<img src={dwayne_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+		</button>
+	</div>
 	<footer>
 		<a href="https://twitter.com/Khazoda"><IconoirTwitter /></a><span
 			>&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span
@@ -317,34 +333,33 @@
 	</div>
 </Modal>
 
-<!-- #region Beef & Blade Modal -->
+<!-- #region Block Breaker & Block Placer -->
 <Modal bind:showModal modalID={3}>
 	<h2 slot="header" class="header-slot">
-		Beef & Blade
+		Block Breaker & Block Placer
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=Latest%20Version&color=%2311B848"
 		/>
 	</h2>
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>
-				Beef & Blade is a serverside datapack that lets you prioritize raw beef or leather from cow drops
-			</li>
-			<li>Using a sword will yield leather drops</li>
-			<li>Using an axe will yield raw beef drops</li>
+			<li>Block Breaker & Block Placer is a content mod that adds two new blocks.</li>
+			<li>The Breaker breaks a block in front of it when powered by a redstone pulse.</li>
+			<li>The Placer places a block in front of it when powered by a redstone pulse.</li>
+			<li>Considerations have been made in regards to gameplay balance for the Breaker</li>
 		</ul>
 	</div>
 
 	<div class="info-slot" slot="info">
 		<span class="modal-link modrinth">
 			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/beef-and-blade">Download on Modrinth</a>
+			<a href="https://modrinth.com/mod/breakerplacer">Download on Modrinth</a>
 		</span>
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/beef-blade">
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/breakerplacer">
 				Download on CurseForge
 			</a>
 		</span>
@@ -355,11 +370,11 @@
 		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/beef-and-blade">View the GitHub repository</a>
+			<a href="https://github.com/Khazoda/block-breaker-placer">View the GitHub repository</a>
 		</span>
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
-			<a href="https://beef-and-blade.khazoda.com/en/latest/">Visit the Wiki</a>
+			<a href="https://modded.wiki/w/Mod:Block_Breaker_Block_Placer">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -412,6 +427,54 @@
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
 			<a href="https://modded.wiki/w/Mod:Basic_Storage">Visit the Wiki</a>
+		</span>
+	</div>
+</Modal>
+
+<!-- #region Beef & Blade Modal -->
+<Modal bind:showModal modalID={5}>
+	<h2 slot="header" class="header-slot">
+		Beef & Blade
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>
+				Beef & Blade is a serverside datapack that lets you prioritize raw beef or leather from cow
+				drops
+			</li>
+			<li>Using a sword will yield leather drops</li>
+			<li>Using an axe will yield raw beef drops</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/beef-and-blade">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/beef-blade">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
+		</span>
+		<br />
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/beef-and-blade">View the GitHub repository</a>
+		</span>
+		<span class="modal-link wiki">
+			<SimpleIconsBookstack />
+			<a href="https://beef-and-blade.khazoda.com/en/latest/">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -754,16 +817,19 @@
 	}
 
 	//#region Other Styles
-	.dwayne-btn {
-		background: none;
-		border: none;
+	.edge-mini-wrapper {
 		position: fixed;
 		bottom: 0.25rem;
 		right: 0.25rem;
 		z-index: 99;
-		cursor: pointer;
+	
+		button {
+			background: none;
+			border: none;
+			cursor: pointer;
 		&:hover {
 			scale: 1.05;
+		}
 		}
 	}
 </style>

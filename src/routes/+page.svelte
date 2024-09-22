@@ -34,10 +34,7 @@
 	};
 
 	// Only populate sound component in production environment
-	let btn_sound = (p0: HTMLButtonElement) => {};
-	if (import.meta.env.PROD) {
-		btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
-	}
+	let btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
 </script>
 
 <!-- #region HTML-->

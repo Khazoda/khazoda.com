@@ -730,7 +730,7 @@
 
 		&:focus-visible {
 			scale: 1.05;
-			filter: drop-shadow(0 0 10px  var(--color-background-dark)) brightness(1.1);
+			filter: drop-shadow(0 0 10px var(--color-background-dark)) brightness(1.1);
 			transform: scale(1.05);
 		}
 
@@ -882,20 +882,6 @@
 		}
 	}
 
-	//#region Generic Styles
-	.flex {
-		display: flex;
-		&.row {
-			flex-direction: row;
-		}
-		&.col {
-			flex-direction: column;
-		}
-		&.gap-md {
-			gap: 0.25rem;
-		}
-	}
-
 	//#region Other Styles
 	.audio-toggle {
 		position: fixed;
@@ -965,8 +951,7 @@
 
 				&:focus-visible {
 					transform: scale(1.1);
-					box-shadow: 0 0 0 3px rgba(128, 215, 255, 0.4); // Subtle glow effect
-					outline: none;
+					border: 2px var(--color-background-dark);
 				}
 
 				img {

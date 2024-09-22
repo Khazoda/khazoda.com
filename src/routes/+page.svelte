@@ -708,7 +708,7 @@
 			li:nth-child(#{$i}) {
 				$x: nth((-400px, -200px, 0px, 200px, 400px), $i);
 				$y: nth((34px, -13px, 4px, -19px, 17px), $i);
-				$rotate: nth((-10deg, -4deg, 2deg, -3deg, 6deg), $i);
+				$rotate: nth((-10deg, -4deg, 3deg, -3deg, 6deg), $i);
 				$delay: nth((100ms, 0ms, 40ms, 135ms, 80ms), $i);
 				$duration: nth((6s, 4.5s, 5.2s, 5.8s, 4.8s), $i);
 

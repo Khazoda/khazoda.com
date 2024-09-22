@@ -33,9 +33,11 @@
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
 	};
 
-	// FIXME: Use first line in dev environment, second line for prod
-	const btn_sound = (p0: HTMLButtonElement) => {};
-	// const btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
+	// Only populate sound component in production environment
+	let btn_sound = (p0: HTMLButtonElement) => {};
+	if (import.meta.env.PROD) {
+		btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
+	}
 </script>
 
 <!-- #region HTML-->

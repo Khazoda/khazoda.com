@@ -21,6 +21,10 @@
 
 	import PlushablesColoured from '../components/PlushablesColoured.svelte';
 
+	import { onMount } from 'svelte';
+	import IconoirSoundHigh from 'virtual:icons/iconoir/sound-high';
+	import IconoirSoundOff from 'virtual:icons/iconoir/sound-off';
+
 	let showModal: boolean[] = [];
 	$: currentlyHovered = 'Plushables';
 
@@ -29,11 +33,27 @@
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
 	};
 
+	let audioEnabled = true;
+
+	onMount(() => {
+		const storedPreference = localStorage.getItem('audioEnabled');
+		if (storedPreference !== null) {
+			audioEnabled = storedPreference === 'true';
+		}
+	});
+
+	function toggleAudio() {
+		audioEnabled = !audioEnabled;
+		localStorage.setItem('audioEnabled', audioEnabled.toString());
+	}
+
 	function playClickSound(node: HTMLElement) {
 		const handleClick = () => {
-			const audio = document.getElementById('click-sound') as HTMLAudioElement;
-			audio.volume = 0.4;
-			audio?.play();
+			if (audioEnabled) {
+				const audio = document.getElementById('click-sound') as HTMLAudioElement;
+				audio.volume = 0.4;
+				audio?.play();
+			}
 		};
 		node.addEventListener('click', handleClick);
 		return {
@@ -54,6 +74,13 @@
 		<source src={btn_press_sound} type="audio/mpeg" />
 		Your browser does not support the audio element.
 	</audio>
+	<button class="audio-toggle" on:click={toggleAudio} title="Toggle audio">
+		{#if audioEnabled}
+			<IconoirSoundHigh />
+		{:else}
+			<IconoirSoundOff />
+		{/if}
+	</button>
 	<h1 class="big-title fade-in-on-load">
 		<img src={profile_icon} alt="" width="128" /> Khazoda's Mods
 	</h1>
@@ -149,7 +176,7 @@
 	</div>
 
 	<div class="edge-mini-wrapper">
-		<span>smaller mods</span>
+		<span>mini mods</span>
 		<div>
 			<button
 				on:click={() => setModalVisibility(5, true)}
@@ -843,40 +870,74 @@
 	}
 
 	//#region Other Styles
+	.audio-toggle {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		color: #747474;
+		font-size: 1.3rem;
+		cursor: pointer;
+		z-index: 1000;
+		padding: 0.4rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba(44, 44, 44, 0.7);
+		border-radius: 25%;
+		transition: background-color 0.2s ease-out;
+
+		&:hover {
+			background-color: rgba(44, 44, 44, 1);
+		}
+	}
+
+	// Mobile styles
+	@media screen and (max-width: 1000px) {
+		.audio-toggle {
+			top: 0.5rem;
+			right: 0.5rem;
+			font-size: 1.1rem;
+		}
+	}
 	.edge-mini-wrapper {
 		position: fixed;
 		display: flex;
 		flex-direction: column;
-		bottom: 0.25rem;
-		right: 0.25rem;
+		align-items: center;
+		bottom: 0.5rem;
+		right: 0.5rem;
 		z-index: 99;
-
 		border: 2px solid hsl(0deg, 0%, 15%);
-		border-top-left-radius: 0.5rem;
-		border-bottom-right-radius: 0.5rem;
-
+		border-radius: 0.5rem;
 		padding: 0.5rem;
-		padding-top: 0.25rem;
+		span {
+			color: #747474;
+			font-family: Lexend, Quicksand, Calibri;
+			margin-bottom: 0.25rem;
+		}
+
 		div {
-			margin-left: auto;
-			display: inline-flex;
-			justify-content: end;
+			display: flex;
+			justify-content: center;
 
 			button {
 				background: none;
 				border: none;
-				padding: 0;
-				margin-left: 0.25rem;
-
+				padding: 0.25rem;
+				margin: 0 0.125rem;
 				cursor: pointer;
+				transition: transform 0.2s ease;
+
 				&:hover {
-					scale: 1.05;
+					transform: scale(1.1);
+				}
+
+				img {
+					display: block;
 				}
 			}
-		}
-		span {
-			color: #747474;
-			font-family: Lexend, Quicksand, Calibri;
 		}
 	}
 </style>

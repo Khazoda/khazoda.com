@@ -566,8 +566,22 @@
 	</div>
 </Modal>
 
+
+
 <!-- #region CSS-->
 <style lang="scss">
+	:root {
+		--color-text-primary: #e2e2e2;
+		--color-text-secondary: #747474;
+		--color-background-dark: #2c2c2c;
+		--color-background-darker: #141414;
+		--color-link: rgb(128, 215, 255);
+		--color-link-modrinth: rgb(128, 255, 160);
+		--color-link-curseforge: rgb(255, 158, 94);
+		--color-link-generic: rgb(197, 209, 222);
+		--color-link-youtube: rgb(255, 92, 113);
+	}
+
 	.page-container {
 		position: static;
 		width: 100%;
@@ -587,7 +601,7 @@
 	.big-title {
 		font-size: 4rem;
 		letter-spacing: 0.25rem;
-		color: rgb(226, 226, 226);
+		color: var(--color-text-primary);
 		font-family: Lexend, Quicksand, Calibri;
 		font-weight: 350;
 		margin-top: 5rem;
@@ -629,7 +643,7 @@
 		position: relative;
 		top: 0rem;
 		font-size: larger;
-		background: #2c2c2c;
+		background: var(--color-background-dark);
 		padding: 0.25rem 2rem;
 		border-radius: 1rem;
 		opacity: 0;
@@ -690,64 +704,39 @@
 		li {
 			transition: transform 0.4s ease-out;
 		}
-		li:nth-child(1) {
-			transform: translateX(-400px) translateY(34px) rotate(-10deg);
-			animation-delay: 100ms;
-			animation-duration: 6s;
-		}
-		li:nth-child(2) {
-			transform: translateX(-200px) translateY(-13px) rotate(-4deg);
-			animation-delay: 0ms;
-			animation-duration: 4.5s;
-		}
-		li:nth-child(3) {
-			transform: translateX(0px) translateY(4px) rotate(2deg);
-			animation-delay: 40ms;
-			animation-duration: 5.2s;
-		}
-		li:nth-child(4) {
-			transform: translateX(200px) translateY(-19px) rotate(-3deg);
-			animation-delay: 135ms;
-			animation-duration: 5.8s;
-		}
-		li:nth-child(5) {
-			transform: translateX(400px) translateY(17px) rotate(6deg);
-			animation-delay: 80ms;
-			animation-duration: 4.8s;
-		}
+		@for $i from 1 through 5 {
+			li:nth-child(#{$i}) {
+				$x: nth((-400px, -200px, 0px, 200px, 400px), $i);
+				$y: nth((34px, -13px, 4px, -19px, 17px), $i);
+				$rotate: nth((-10deg, -4deg, 2deg, -3deg, 6deg), $i);
+				$delay: nth((100ms, 0ms, 40ms, 135ms, 80ms), $i);
+				$duration: nth((6s, 4.5s, 5.2s, 5.8s, 4.8s), $i);
 
+				transform: translateX($x) translateY($y) rotate($rotate);
+				animation-delay: $delay;
+				animation-duration: $duration;
+			}
+		}
 		@media screen and (max-width: 1000px) {
-			li:nth-child(1) {
-				transform: translateX(-80px) translateY(-175px) rotate(-10deg);
-				animation-delay: 100ms;
-				animation-duration: 6s;
-			}
-			li:nth-child(2) {
-				transform: translateX(80px) translateY(-175px) rotate(-4deg);
-				animation-delay: 0ms;
-				animation-duration: 4.5s;
-			}
-			li:nth-child(3) {
-				transform: translateX(-80px) translateY(0px) rotate(2deg);
-				animation-delay: 40ms;
-				animation-duration: 5.2s;
-			}
-			li:nth-child(4) {
-				transform: translateX(80px) translateY(0px) rotate(-3deg);
-				animation-delay: 135ms;
-				animation-duration: 5.8s;
-			}
-			li:nth-child(5) {
-				transform: translateX(-80px) translateY(175px) rotate(6deg);
-				animation-delay: 80ms;
-				animation-duration: 4.8s;
+			@for $i from 1 through 5 {
+				li:nth-child(#{$i}) {
+					$x: if($i % 2 == 0, 80px, -80px);
+					$y: nth((-175px, -175px, 0px, 0px, 175px), $i);
+					$rotate: nth((-10deg, -4deg, 2deg, -3deg, 6deg), $i);
+					$delay: nth((100ms, 0ms, 40ms, 135ms, 80ms), $i);
+					$duration: nth((6s, 4.5s, 5.2s, 5.8s, 4.8s), $i);
+
+					transform: translateX($x) translateY($y) rotate($rotate);
+					animation-delay: $delay;
+					animation-duration: $duration;
+				}
 			}
 		}
 	}
 
 	@keyframes float {
 		0% {
-			filter: drop-shadow(0px 20px 10px #141414);
+			filter: drop-shadow(0px 20px 10px var(--color-background-darker));
 			translate: 0px 0px;
 		}
 		50% {
@@ -755,14 +744,14 @@
 			translate: 0px 20px;
 		}
 		100% {
-			filter: drop-shadow(0px 20px 10px #141414);
+			filter: drop-shadow(0px 20px 10px var(--color-background-darker));
 			translate: 0px 0px;
 		}
 	}
 
 	footer {
 		font-size: x-large;
-		color: hsl(0deg, 0%, 25%);
+		color: var(--color-text-secondary);
 		z-index: 2;
 		display: flex;
 		flex-direction: column;
@@ -816,7 +805,7 @@
 		}
 	}
 	a {
-		color: rgb(128, 215, 255);
+		color: var(--color-link);
 		text-decoration: none;
 		&:hover {
 			text-decoration: underline;
@@ -827,24 +816,24 @@
 		flex-direction: row;
 		align-items: center;
 		gap: 0.5rem;
-		color: rgb(128, 215, 255);
+		color: var(--color-link);
 		text-decoration: none;
 		line-height: 1.5rem;
 		font-size: large;
 		&.modrinth {
-			color: rgb(128, 255, 160);
+			color: var(--color-link-modrinth);
 		}
 		&.curseforge {
-			color: rgb(255, 158, 94);
+			color: var(--color-link-curseforge);
 		}
 		&.github {
-			color: rgb(197, 209, 222);
+			color: var(--color-link-generic);
 		}
 		&.wiki {
-			color: rgb(197, 209, 222);
+			color: var(--color-link-generic);
 		}
 		&.youtube {
-			color: rgb(255, 92, 113);
+			color: var(--color-link-youtube);
 		}
 		a {
 			color: inherit;
@@ -876,7 +865,7 @@
 		right: 1rem;
 		background: none;
 		border: none;
-		color: #747474;
+		color: var(--color-text-secondary);
 		font-size: 1.3rem;
 		cursor: pointer;
 		z-index: 1000;
@@ -889,7 +878,7 @@
 		transition: background-color 0.2s ease-out;
 
 		&:hover {
-			background-color: rgba(44, 44, 44, 1);
+			background-color: var(--color-background-dark);
 		}
 	}
 
@@ -909,11 +898,11 @@
 		bottom: 0.5rem;
 		right: 0.5rem;
 		z-index: 99;
-		border: 2px solid hsl(0deg, 0%, 15%);
+		border: 2px solid var(--color-background-dark);
 		border-radius: 0.5rem;
 		padding: 0.5rem;
 		span {
-			color: #747474;
+			color: var(--color-text-secondary);
 			font-family: Lexend, Quicksand, Calibri;
 			margin-bottom: 0.25rem;
 		}

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { useSound } from 'svelte-sound';
-
 	import plushables_icon from '$lib/img/plushables_icon.png';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
 	import bronze_icon from '$lib/img/bronze_icon.png';
@@ -22,8 +20,6 @@
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
 
 	import PlushablesColoured from '../components/PlushablesColoured.svelte';
-	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
 
 	let showModal: boolean[] = [];
 	$: currentlyHovered = 'Plushables';
@@ -33,7 +29,6 @@
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
 	};
 
-	// Only populate sound component in production environment
 	let btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
 </script>
 

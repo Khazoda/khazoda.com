@@ -29,7 +29,17 @@
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
 	};
 
-	let btn_sound = useSound(btn_press_sound, ['click'], { volume: 0.35 });
+	function playClickSound(node: HTMLElement) {
+		const handleClick = () => {
+			const audio = document.getElementById('click-sound') as HTMLAudioElement;
+			audio.volume = 0.4;
+			audio?.play();
+		};
+		node.addEventListener('click', handleClick);
+		return {
+			destroy: () => node.removeEventListener('click', handleClick)
+		};
+	}
 </script>
 
 <!-- #region HTML-->
@@ -40,6 +50,10 @@
 	<title>Khazoda's Mods</title>
 </head>
 <div class="page-container">
+	<audio id="click-sound">
+		<source src={btn_press_sound} type="audio/mpeg" />
+		Your browser does not support the audio element.
+	</audio>
 	<h1 class="big-title fade-in-on-load">
 		<img src={profile_icon} alt="" width="128" /> Khazoda's Mods
 	</h1>
@@ -51,8 +65,10 @@
 				on:focus={() => (currentlyHovered = 'Plushables')}
 			>
 				<button
-					on:click={() => setModalVisibility(0, true)}
-					use:btn_sound
+					on:click={() => {
+						setModalVisibility(0, true);
+					}}
+					use:playClickSound
 					type="button"
 					title="Plushables"
 				>
@@ -65,7 +81,7 @@
 			>
 				<button
 					on:click={() => setModalVisibility(1, true)}
-					use:btn_sound
+					use:playClickSound
 					type="button"
 					title="Basic Weapons"
 				>
@@ -84,7 +100,7 @@
 			>
 				<button
 					on:click={() => setModalVisibility(2, true)}
-					use:btn_sound
+					use:playClickSound
 					type="button"
 					title="Bronze"
 				>
@@ -97,7 +113,7 @@
 			>
 				<button
 					on:click={() => setModalVisibility(3, true)}
-					use:btn_sound
+					use:playClickSound
 					type="button"
 					title="Block Breaker & Block Placer"
 				>
@@ -116,7 +132,7 @@
 			>
 				<button
 					on:click={() => setModalVisibility(4, true)}
-					use:btn_sound
+					use:playClickSound
 					type="button"
 					title="Basic Storage"
 				>
@@ -137,7 +153,7 @@
 		<div>
 			<button
 				on:click={() => setModalVisibility(5, true)}
-				use:btn_sound
+				use:playClickSound
 				type="button"
 				title="Beef & Blade"
 			>
@@ -145,7 +161,7 @@
 			</button>
 			<button
 				on:click={() => setModalVisibility(99, true)}
-				use:btn_sound
+				use:playClickSound
 				type="button"
 				title="Dwayne 'The Block' Johnson"
 			>

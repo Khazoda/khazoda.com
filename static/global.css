@@ -44,7 +44,14 @@ h3 {
 }
 
 body {
-	background: #16181c;
+	background: linear-gradient(
+		to bottom,
+		#1a1c20 0%,
+		#191b1f 40%,
+		#181a1e 60%,
+		#17191d 80%,
+		#16181c 100%
+	);
 	color: #e9e9ec;
 }
 

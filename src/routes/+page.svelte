@@ -98,8 +98,15 @@
 					use:playClickSound
 					type="button"
 					title="Plushables"
+					tabindex="0"
 				>
-					<img src={plushables_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
+					<img
+						src={plushables_icon}
+						alt="Plushables"
+						width="512"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
 				</button>
 			</li>
 			<li
@@ -111,10 +118,11 @@
 					use:playClickSound
 					type="button"
 					title="Basic Weapons"
+					tabindex="0"
 				>
 					<img
 						src={basicweapons_icon}
-						alt=""
+						alt="Basic Weapons"
 						width="512"
 						draggable="false"
 						class="ms-edge-imgfix"
@@ -130,8 +138,15 @@
 					use:playClickSound
 					type="button"
 					title="Bronze"
+					tabindex="0"
 				>
-					<img src={bronze_icon} alt="" width="512" draggable="false" class="ms-edge-imgfix" />
+					<img
+						src={bronze_icon}
+						alt="Bronze"
+						width="512"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
 				</button>
 			</li>
 			<li
@@ -143,10 +158,11 @@
 					use:playClickSound
 					type="button"
 					title="Block Breaker & Block Placer"
+					tabindex="0"
 				>
 					<img
 						src={breakerplacer_icon}
-						alt=""
+						alt="Block Breaker & Block Placer"
 						width="512"
 						draggable="false"
 						class="ms-edge-imgfix"
@@ -162,10 +178,11 @@
 					use:playClickSound
 					type="button"
 					title="Basic Storage"
+					tabindex="0"
 				>
 					<img
 						src={basicstorage_icon}
-						alt=""
+						alt="Basic Storage"
 						width="512"
 						draggable="false"
 						class="ms-edge-imgfix"
@@ -183,16 +200,30 @@
 				use:playClickSound
 				type="button"
 				title="Beef & Blade"
+				tabindex="0"
 			>
-				<img src={beef_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+				<img
+					src={beef_icon}
+					alt="Beef & Blade"
+					width="32"
+					draggable="false"
+					class="ms-edge-imgfix"
+				/>
 			</button>
 			<button
 				on:click={() => setModalVisibility(99, true)}
 				use:playClickSound
 				type="button"
 				title="Dwayne 'The Block' Johnson"
+				tabindex="0"
 			>
-				<img src={dwayne_icon} alt="" width="32" draggable="false" class="ms-edge-imgfix" />
+				<img
+					src={dwayne_icon}
+					alt="Dwayne 'The Block' Johnson"
+					width="32"
+					draggable="false"
+					class="ms-edge-imgfix"
+				/>
 			</button>
 		</div>
 	</div>
@@ -566,8 +597,6 @@
 	</div>
 </Modal>
 
-
-
 <!-- #region CSS-->
 <style lang="scss">
 	:root {
@@ -680,21 +709,31 @@
 		user-select: none;
 		position: absolute;
 		inset: 0;
-		animation: float infinite 5s ease-in-out;
-		will-change: transform;
+		animation: float infinite 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+		will-change: transform, filter;
 	}
 	.projects-container button {
-		transition: scale 0.15s ease-out;
+		transition:
+			scale 0.15s ease-out,
+			box-shadow 0.2s ease-out;
 		background: none;
 		color: inherit;
 		border: none;
 		padding: 0;
 		font: inherit;
 		cursor: pointer;
-		outline: inherit;
+		outline: none;
+
 		&:hover {
 			scale: 1.05;
 		}
+
+		&:focus-visible {
+			scale: 1.05;
+			filter: drop-shadow(0 0 10px  var(--color-background-dark)) brightness(1.1);
+			transform: scale(1.05);
+		}
+
 		&:active {
 			scale: 0.95;
 		}
@@ -733,18 +772,17 @@
 			}
 		}
 	}
-
 	@keyframes float {
 		0% {
-			filter: drop-shadow(0px 20px 10px var(--color-background-darker));
+			filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0));
 			translate: 0px 0px;
 		}
 		50% {
-			filter: drop-shadow(0px 15px 3px #000000);
+			filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 1));
 			translate: 0px 20px;
 		}
 		100% {
-			filter: drop-shadow(0px 20px 10px var(--color-background-darker));
+			filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0));
 			translate: 0px 0px;
 		}
 	}
@@ -917,10 +955,18 @@
 				padding: 0.25rem;
 				margin: 0 0.125rem;
 				cursor: pointer;
-				transition: transform 0.2s ease;
+				transition:
+					transform 0.2s ease,
+					box-shadow 0.2s ease-out;
 
 				&:hover {
 					transform: scale(1.1);
+				}
+
+				&:focus-visible {
+					transform: scale(1.1);
+					box-shadow: 0 0 0 3px rgba(128, 215, 255, 0.4); // Subtle glow effect
+					outline: none;
 				}
 
 				img {
@@ -928,5 +974,9 @@
 				}
 			}
 		}
+	}
+
+	.page-container {
+		background: transparent;
 	}
 </style>

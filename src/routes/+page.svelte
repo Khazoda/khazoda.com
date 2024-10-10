@@ -656,6 +656,14 @@
 		}
 	}
 
+	@media screen and (max-width: 1000px) and (max-height: 660px) {
+		.big-title,footer {
+			visibility: hidden;
+			opacity: 0;
+		}
+		
+	}
+
 	//#region Center Container
 	.center-container {
 		position: fixed;
@@ -685,6 +693,19 @@
 			display: none;
 		}
 	}
+
+
+	@media screen and (max-width: 1000px) and (max-height: 1000px) {
+		.center-container {
+			padding-top: 20vh;
+		}
+	}
+	@media screen and (max-width: 1000px) and (max-height: 750px) {
+		.center-container {
+			padding-top: 0;
+		}
+	}
+	
 	.center-container:has(ul.projects-container:hover) .hovered-name {
 		opacity: 1;
 	}

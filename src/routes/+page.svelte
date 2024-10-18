@@ -518,6 +518,39 @@
 	</div>
 </Modal>
 
+<!--#region Hook a Duck Modal -->
+<Modal bind:showModal modalID={98}>
+	<h2 slot="header" class="header-slot">
+		Hook a Duck
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>
+				This mod was made for Modfest: Carnival in 2023
+			</li>
+			<li>Colourful ducks spawn in the rivers of your world.</li>
+			<li>Hook them up with a fishing rod to receive tickets and prizes!</li>
+			<li>For the best experience, try this mod out with the <a href="https://modrinth.com/modpack/modfest-carnival">Modfest Carnival</a> modpack</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/hookaduck">Download on Modrinth</a>
+		</span>
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/Hook-a-Duck">View the GitHub repository</a>
+		</span>
+	</div>
+</Modal>
+
 <!-- #region Beef & Blade Modal -->
 <Modal bind:showModal modalID={5}>
 	<h2 slot="header" class="header-slot">

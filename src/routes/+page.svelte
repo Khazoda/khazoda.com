@@ -75,7 +75,7 @@
 		<source src={btn_press_sound} type="audio/mpeg" />
 		Your browser does not support the audio element.
 	</audio>
-	<button class="audio-toggle" on:click={toggleAudio} title="Toggle audio">
+	<button class="audio-toggle" on:click={toggleAudio} title="Toggle audio" type="button">
 		{#if audioEnabled}
 			<IconoirSoundHigh />
 		{:else}
@@ -91,6 +91,8 @@
 			<li
 				on:mouseover={() => (currentlyHovered = 'Plushables')}
 				on:focus={() => (currentlyHovered = 'Plushables')}
+				on:mouseenter={() => (currentlyHovered = 'Plushables')}
+				on:focus|capture={() => (currentlyHovered = 'Plushables')}
 			>
 				<button
 					on:click={() => {
@@ -113,6 +115,8 @@
 			<li
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
+				on:mouseenter={() => (currentlyHovered = 'Basic Weapons')}
+				on:focus|capture={() => (currentlyHovered = 'Basic Weapons')}
 			>
 				<button
 					on:click={() => setModalVisibility(1, true)}
@@ -133,6 +137,8 @@
 			<li
 				on:mouseover={() => (currentlyHovered = 'Bronze')}
 				on:focus={() => (currentlyHovered = 'Bronze')}
+				on:mouseenter={() => (currentlyHovered = 'Bronze')}
+				on:focus|capture={() => (currentlyHovered = 'Bronze')}
 			>
 				<button
 					on:click={() => setModalVisibility(2, true)}
@@ -153,6 +159,8 @@
 			<li
 				on:mouseover={() => (currentlyHovered = 'Block Breaker & Block Placer')}
 				on:focus={() => (currentlyHovered = 'Block Breaker & Block Placer')}
+				on:mouseenter={() => (currentlyHovered = 'Block Breaker & Block Placer')}
+				on:focus|capture={() => (currentlyHovered = 'Block Breaker & Block Placer')}
 			>
 				<button
 					on:click={() => setModalVisibility(3, true)}
@@ -173,6 +181,8 @@
 			<li
 				on:mouseover={() => (currentlyHovered = 'Basic Storage')}
 				on:focus={() => (currentlyHovered = 'Basic Storage')}
+				on:mouseenter={() => (currentlyHovered = 'Basic Storage')}
+				on:focus|capture={() => (currentlyHovered = 'Basic Storage')}
 			>
 				<button
 					on:click={() => setModalVisibility(4, true)}
@@ -198,6 +208,10 @@
 		<div>
 			<button
 				on:click={() => setModalVisibility(98, true)}
+				on:mouseover={() => (currentlyHovered = 'Hook a Duck')}
+				on:focus={() => (currentlyHovered = 'Hook a Duck')}
+				on:mouseenter={() => (currentlyHovered = 'Hook a Duck')}
+				on:focus|capture={() => (currentlyHovered = 'Hook a Duck')}
 				use:playClickSound
 				type="button"
 				title="Hook a Duck"
@@ -213,6 +227,10 @@
 			</button>
 			<button
 				on:click={() => setModalVisibility(5, true)}
+				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
+				on:focus={() => (currentlyHovered = 'Beef & Blade')}
+				on:mouseenter={() => (currentlyHovered = 'Beef & Blade')}
+				on:focus|capture={() => (currentlyHovered = 'Beef & Blade')}
 				use:playClickSound
 				type="button"
 				title="Beef & Blade"
@@ -228,6 +246,10 @@
 			</button>
 			<button
 				on:click={() => setModalVisibility(99, true)}
+				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+				on:mouseenter={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+				on:focus|capture={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 				use:playClickSound
 				type="button"
 				title="Dwayne 'The Block' Johnson"
@@ -720,7 +742,10 @@
 		}
 	}
 	
-	.center-container:has(ul.projects-container:hover) .hovered-name {
+	.center-container:has(ul.projects-container:hover) .hovered-name,
+	.center-container:has(ul.projects-container:focus-within) .hovered-name,
+	.page-container:has(.edge-mini-wrapper button:hover) .hovered-name,
+	.page-container:has(.edge-mini-wrapper button:focus-within) .hovered-name {
 		opacity: 1;
 	}
 

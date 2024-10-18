@@ -79,7 +79,7 @@
 
 		min-width: 25rem;
 		max-width: 30%;
-		min-height: 100vh;
+		min-height: 100dvh;
 		width: 100%;
 		height: 100%;
 		padding: 0.5rem;

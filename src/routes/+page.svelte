@@ -266,7 +266,7 @@
 		</div>
 	</div>
 	<footer>
-		<a href="https://bsky.app/profile/khazoda.com"><IconoirBluesky /></a><span
+		<a href="https://bsky.app/profile/khazoda.com" aria-label="Khazoda on Bluesky" ><IconoirBluesky /></a><span
 			>&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span
 		>
 	</footer>

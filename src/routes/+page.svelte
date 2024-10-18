@@ -300,7 +300,6 @@
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/Plushables">View the GitHub repository</a>
@@ -308,10 +307,6 @@
 			<a href="https://github.com/Khazoda/plushables-lite"
 				><span style="font-style: italic;">Lite</span></a
 			>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://plushables.khazoda.com/en/latest/">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -356,7 +351,6 @@
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/basic-weapons">View the GitHub repository</a>
@@ -368,7 +362,7 @@
 	</div>
 </Modal>
 
-<!-- #region Basic Weapons Modal -->
+<!-- #region Bronze Modal -->
 <Modal bind:showModal modalID={2}>
 	<h2 slot="header" class="header-slot">
 		Bronze
@@ -408,14 +402,9 @@
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/bronze">View the GitHub repository</a>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://bronze.khazoda.com/en/latest/">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -454,14 +443,9 @@
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/block-breaker-placer">View the GitHub repository</a>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://modded.wiki/w/Mod:Block_Breaker_Block_Placer">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -506,7 +490,6 @@
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/basic-storage">View the GitHub repository</a>
@@ -583,18 +566,9 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
-		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/beef-and-blade">View the GitHub repository</a>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://beef-and-blade.khazoda.com/en/latest/">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -630,18 +604,9 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
-		</span>
-		<br />
 		<span class="modal-link github">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/dwayne-the-block-johnson">View the GitHub repository</a>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://dwayne-the-block-johnson.khazoda.com/en/latest/">Visit the Wiki</a>
 		</span>
 	</div>
 </Modal>
@@ -935,6 +900,9 @@
 			color: var(--color-link-curseforge);
 		}
 		&.github {
+			padding-top: 1rem;
+			margin-top: 0.5rem;
+			border-top: 2px solid var(--color-background-dark);
 			color: var(--color-link-generic);
 		}
 		&.wiki {

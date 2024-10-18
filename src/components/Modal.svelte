@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MingcuteCloseFill from 'virtual:icons/mingcute/close-fill';
+	import IcRoundSwipeLeft from 'virtual:icons/ic/round-swipe-left';
 
 	export let showModal: boolean[];
 	export let modalID: number;
@@ -8,35 +9,35 @@
 	$: if (dialog && showModal[modalID]) dialog.showModal();
 
 	// Modal Swipe Detection
-	let touchStart: number | null = null;
-	let touchEnd: number | null = null;
+	let touchStartX: number | null = null;
+	let touchEndX: number | null = null;
 	const swipe_dist_required = 80;
 
 	const swipeStart = (e: TouchEvent) => {
-		touchEnd = null;
-		touchStart = e.targetTouches[0].clientY;
-		// console.log('start: ' + touchStart);
+		touchEndX = null;
+		touchStartX = e.targetTouches[0].clientX;
+		// console.log('start: ' + touchStartX);
 	};
 	const swipeMove = (e: TouchEvent) => {
-		touchEnd = e.targetTouches[0].clientY;
-		// console.log(touchEnd);
+		touchEndX = e.targetTouches[0].clientX;
+		// console.log(touchEndX);
 	};
 	const swipeEnd = (e: TouchEvent) => {
 		// Null check
-		if (!touchStart || !touchEnd) return;
+		if (!touchStartX || !touchEndX) return;
 
-		const distance_swiped = touchEnd - touchStart;
+		const distance_swiped = touchStartX - touchEndX;
 		// console.log(distance_swiped);
 
 		if (distance_swiped >= swipe_dist_required) {
-			dialog_inner.style.transform = 'translateY(150%)';
+			dialog_inner.style.transform = 'translateX(-150%)';
 			dialog_inner.style.opacity = '0';
 			dialog.style.setProperty('--mobile-backdrop-opacity', '0');
 
 			setTimeout(() => {
 				document.getElementsByTagName('body')[0].style.overscrollBehavior = 'unset';
 				dialog.close();
-				dialog_inner.style.transform = 'translateY(0%)';
+				dialog_inner.style.transform = 'translateX(0%)';
 				dialog_inner.style.opacity = '1';
 				dialog.style.setProperty('--mobile-backdrop-opacity', '1');
 			}, 450);
@@ -61,8 +62,9 @@
 	>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-			><MingcuteCloseFill /></button
-		><span class="mobile-swipe-indicator">swipe down to close</span>
+			><MingcuteCloseFill />
+		</button>
+		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft/> swipe left anywhere to close</span>
 		<slot name="header" />
 		<hr />
 		<slot name="description" />
@@ -163,20 +165,22 @@
 		.mobile-swipe-indicator {
 			width: 100%;
 			display: inline-flex;
+			gap: 0.25rem;
 			position: relative;
-			justify-content: center;
+			justify-content: flex-start;
 			color: #868686;
 			font-size: small;
 
 			&::before {
 				content: '';
 				position: absolute;
-				top: -1.25rem;
-				width: 4rem;
-				height: 0px;
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-				border-top: 10px solid rgb(116, 156, 100);
+				top: 50%;
+				left: -1rem;
+				width: 0.5rem;
+				height: 2rem;
+				background-color: rgba(134, 199, 108, 0.8);
+				border-radius: 0 0.25rem 0.25rem 0;
+				transform: translateY(-50%);
 			}
 		}
 	}

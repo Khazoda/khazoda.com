@@ -15,18 +15,18 @@
 	const swipeStart = (e: TouchEvent) => {
 		touchEnd = null;
 		touchStart = e.targetTouches[0].clientY;
-		console.log('start: ' + touchStart);
+		// console.log('start: ' + touchStart);
 	};
 	const swipeMove = (e: TouchEvent) => {
 		touchEnd = e.targetTouches[0].clientY;
-		console.log(touchEnd);
+		// console.log(touchEnd);
 	};
 	const swipeEnd = (e: TouchEvent) => {
 		// Null check
 		if (!touchStart || !touchEnd) return;
 
 		const distance_swiped = touchEnd - touchStart;
-		console.log(distance_swiped);
+		// console.log(distance_swiped);
 
 		if (distance_swiped >= swipe_dist_required) {
 			dialog_inner.style.transform = 'translateY(150%)';

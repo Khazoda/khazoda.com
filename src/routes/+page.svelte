@@ -12,7 +12,7 @@
 	import btn_press_sound from '$lib/sound/click.mp3';
 
 	import Modal from '../components/Modal.svelte';
-	import IconoirTwitter from 'virtual:icons/iconoir/twitter';
+	import IconoirBluesky from 'virtual:icons/simple-icons/bluesky';
 	import SimpleIconsModrinth from 'virtual:icons/simple-icons/modrinth';
 	import SimpleIconsCurseforge from 'virtual:icons/simple-icons/curseforge';
 	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
@@ -228,7 +228,7 @@
 		</div>
 	</div>
 	<footer>
-		<a href="https://twitter.com/Khazoda"><IconoirTwitter /></a><span
+		<a href="https://bsky.app/profile/khazoda.com"><IconoirBluesky /></a><span
 			>&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span
 		>
 	</footer>

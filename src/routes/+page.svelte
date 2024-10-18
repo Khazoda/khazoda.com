@@ -1,13 +1,14 @@
 <script lang="ts">
-	import plushables_icon from '$lib/img/plushables_icon.png';
-	import basicweapons_icon from '$lib/img/basicweapons_icon.png';
-	import bronze_icon from '$lib/img/bronze_icon.png';
-	import breakerplacer_icon from '$lib/img/breakerplacer_icon.png';
-	import basicstorage_icon from '$lib/img/basicstorage_icon.png';
-	import beef_icon from '$lib/img/beef_icon.png';
-	import dwayne_icon from '$lib/img/dwayne_icon.png';
+	import plushables_icon from '$lib/img/plushables_icon.webp';
+	import basicweapons_icon from '$lib/img/basicweapons_icon.webp';
+	import bronze_icon from '$lib/img/bronze_icon.webp';
+	import breakerplacer_icon from '$lib/img/breakerplacer_icon.webp';
+	import basicstorage_icon from '$lib/img/basicstorage_icon.webp';
+	import beef_icon from '$lib/img/beef_icon.webp';
+	import dwayne_icon from '$lib/img/dwayne_icon.webp';
+	import hookaduck_icon from '$lib/img/hookaduck_icon.webp';
 
-	import profile_icon from '$lib/img/profile.png';
+	import profile_icon from '$lib/img/profile_icon.webp';
 
 	import btn_press_sound from '$lib/sound/click.mp3';
 
@@ -193,8 +194,23 @@
 	</div>
 
 	<div class="edge-mini-wrapper">
-		<span>mini mods</span>
+		<span>smaller mods</span>
 		<div>
+			<button
+				on:click={() => setModalVisibility(98, true)}
+				use:playClickSound
+				type="button"
+				title="Hook a Duck"
+				tabindex="0"
+			>
+				<img
+					src={hookaduck_icon}
+					alt="Hook a Duck"
+					width="32"
+					draggable="false"
+					class="ms-edge-imgfix"
+				/>
+			</button>
 			<button
 				on:click={() => setModalVisibility(5, true)}
 				use:playClickSound

@@ -11,7 +11,7 @@
 	// Modal Swipe Detection
 	let touchStartX: number | null = null;
 	let touchEndX: number | null = null;
-	const swipe_dist_required = 80;
+	const swipe_dist_required = 50;
 
 	const swipeStart = (e: TouchEvent) => {
 		touchEndX = null;

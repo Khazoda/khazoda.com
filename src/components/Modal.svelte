@@ -98,6 +98,9 @@
 		color: #e9e9ec;
 		margin: 0 auto 0 0;
 
+		scrollbar-width: thin;
+        scrollbar-color: #383838 #141414; 
+
 		&::backdrop {
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
 			opacity: 0.75;
@@ -121,9 +124,6 @@
         &::-webkit-scrollbar-thumb:hover {
             background-color: #505050; 
         }
-
-        scrollbar-width: thin; // Firefox
-        scrollbar-color: #383838 #141414; // Firefox
 	}
 	@media screen and (max-width: 1000px) {
 		dialog {

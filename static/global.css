@@ -35,7 +35,7 @@
 html {
 	font-family: OpenSauceSans, Arial, Helvetica, sans-serif;
 	font-weight: 500;
-	background:#1a1c20;
+	background-color:#1a1c20;
 }
 
 h1,
@@ -54,6 +54,8 @@ body {
 		#16181c 100%
 	);
 	color: #e9e9ec;
+	z-index: 0;
+	position: relative;
 }
 
 body::after {

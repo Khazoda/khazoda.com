@@ -976,10 +976,11 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		margin-top: 1rem;
+		margin: 1rem 0;
 	}
 
 	.feature-slot {
+		max-width: 350px;
 		margin-top: 1rem;
 		display: inline-block;
 		background-color: #222222;

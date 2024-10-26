@@ -43,22 +43,27 @@
 			}, 450);
 		}
 	};
+	const closeDialog = () => {
+		showModal[modalID] = false;
+		dialog.close();
+		history.replaceState(null, '', window.location.pathname + window.location.search);
+	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog
 	bind:this={dialog}
-	on:close={() => (showModal[modalID] = false)}
-	on:click|self={() => dialog.close()}
+	on:close={closeDialog}
+	on:click|self={closeDialog}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		bind:this={dialog_inner}
 		class="dialog-inner"
 		on:click|stopPropagation
-		on:touchstart|capture={(e) => swipeStart(e)}
-		on:touchmove={(e) => swipeMove(e)}
-		on:touchend={(e) => swipeEnd(e)}
+		on:touchstart|capture={swipeStart}
+		on:touchmove={swipeMove}
+		on:touchend={swipeEnd}
 	>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"

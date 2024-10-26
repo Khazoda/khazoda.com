@@ -32,10 +32,30 @@
 
 	let showModal: boolean[] = [];
 	$: currentlyHovered = 'Plushables';
+	const hashToModalID: Record<string, number> = {
+		'#plushables': 0,
+		'#basic-weapons': 1,
+		'#bronze': 2,
+		'#breakerplacer': 3,
+		'#basic-storage': 4,
+		'#kreebles': 96,
+		'#hookaduck': 97,
+		'#beef-and-blade': 98,
+		'#dwayne': 99
+	};
 
-	const setModalVisibility = (modalID: number, visible: boolean) => {
-		showModal[modalID] = visible;
+	const modalIDToHash = Object.fromEntries(
+		Object.entries(hashToModalID).map(([hash, id]) => [id, hash])
+	);
+	const showDialog = (modalID: number) => {
+		showModal[modalID] = true;
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
+
+		// Add the hash to the URL when the modal is opened
+		const hash = modalIDToHash[modalID];
+		if (hash) {
+			history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+		}
 	};
 
 	let audioEnabled = true;
@@ -44,6 +64,12 @@
 		const storedPreference = localStorage.getItem('audioEnabled');
 		if (storedPreference !== null) {
 			audioEnabled = storedPreference === 'true';
+		}
+		// Page # url get
+		const hash = window.location.hash;
+		if (hash && hashToModalID[hash] !== undefined) {
+			const modalID = hashToModalID[hash];
+			showDialog(modalID);
 		}
 	});
 
@@ -100,7 +126,7 @@
 			>
 				<button
 					on:click={() => {
-						setModalVisibility(0, true);
+						showDialog(0);
 					}}
 					use:playClickSound
 					type="button"
@@ -123,7 +149,7 @@
 				on:focus|capture={() => (currentlyHovered = 'Basic Weapons')}
 			>
 				<button
-					on:click={() => setModalVisibility(1, true)}
+					on:click={() => showDialog(1)}
 					use:playClickSound
 					type="button"
 					title="Basic Weapons"
@@ -145,7 +171,7 @@
 				on:focus|capture={() => (currentlyHovered = 'Bronze')}
 			>
 				<button
-					on:click={() => setModalVisibility(2, true)}
+					on:click={() => showDialog(2)}
 					use:playClickSound
 					type="button"
 					title="Bronze"
@@ -167,7 +193,7 @@
 				on:focus|capture={() => (currentlyHovered = 'Block Breaker & Block Placer')}
 			>
 				<button
-					on:click={() => setModalVisibility(3, true)}
+					on:click={() => showDialog(3)}
 					use:playClickSound
 					type="button"
 					title="Block Breaker & Block Placer"
@@ -189,7 +215,7 @@
 				on:focus|capture={() => (currentlyHovered = 'Basic Storage')}
 			>
 				<button
-					on:click={() => setModalVisibility(4, true)}
+					on:click={() => showDialog(4)}
 					use:playClickSound
 					type="button"
 					title="Basic Storage"
@@ -211,7 +237,7 @@
 		<span>smaller mods</span>
 		<div>
 			<button
-				on:click={() => setModalVisibility(97, true)}
+				on:click={() => showDialog(96)}
 				on:mouseover={() => (currentlyHovered = 'Kreebles')}
 				on:focus={() => (currentlyHovered = 'Kreebles')}
 				on:mouseenter={() => (currentlyHovered = 'Kreebles')}
@@ -230,7 +256,7 @@
 				/>
 			</button>
 			<button
-				on:click={() => setModalVisibility(98, true)}
+				on:click={() => showDialog(97)}
 				on:mouseover={() => (currentlyHovered = 'Hook a Duck')}
 				on:focus={() => (currentlyHovered = 'Hook a Duck')}
 				on:mouseenter={() => (currentlyHovered = 'Hook a Duck')}
@@ -249,7 +275,7 @@
 				/>
 			</button>
 			<button
-				on:click={() => setModalVisibility(5, true)}
+				on:click={() => showDialog(98)}
 				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
 				on:focus={() => (currentlyHovered = 'Beef & Blade')}
 				on:mouseenter={() => (currentlyHovered = 'Beef & Blade')}
@@ -268,7 +294,7 @@
 				/>
 			</button>
 			<button
-				on:click={() => setModalVisibility(99, true)}
+				on:click={() => showDialog(99)}
 				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
 				on:mouseenter={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
@@ -553,7 +579,7 @@
 </Modal>
 
 <!--#region Kreebles Modal -->
-<Modal bind:showModal modalID={97}>
+<Modal bind:showModal modalID={96}>
 	<h2 slot="header" class="header-slot">
 		Kreebles
 		<img
@@ -600,7 +626,7 @@
 </Modal>
 
 <!--#region Hook a Duck Modal -->
-<Modal bind:showModal modalID={98}>
+<Modal bind:showModal modalID={97}>
 	<h2 slot="header" class="header-slot">
 		Hook a Duck
 		<img
@@ -635,7 +661,7 @@
 </Modal>
 
 <!-- #region Beef & Blade Modal -->
-<Modal bind:showModal modalID={5}>
+<Modal bind:showModal modalID={98}>
 	<h2 slot="header" class="header-slot">
 		Beef & Blade
 		<img

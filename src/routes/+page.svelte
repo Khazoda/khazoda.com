@@ -790,10 +790,15 @@
 			width: 10rem;
 		}
 	}
-	// Special case for 1600x900 PC screens
+	// Special cases for 1600x900 PC screens
 	@media screen and (max-height: 850px) {
 		.big-title {
 			margin-top: 0.25rem;
+		}
+	}
+	@media screen and (max-height: 600px) {
+		.big-title {
+			color: var(--color-text-secondary);
 		}
 	}
 	// Mobile

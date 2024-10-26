@@ -218,4 +218,9 @@
 		}
 	}
 
+	hr {
+		border-style: solid;
+		border-color: #868686;
+	}
+
 </style>

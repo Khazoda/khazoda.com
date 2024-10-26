@@ -2,6 +2,8 @@
 	import MingcuteCloseFill from 'virtual:icons/mingcute/close-fill';
 	import IcRoundSwipeLeft from 'virtual:icons/ic/round-swipe-left';
 
+	import { replaceState } from '$app/navigation';
+
 	export let showModal: boolean[];
 	export let modalID: number;
 	let dialog: HTMLDialogElement;
@@ -46,7 +48,7 @@
 	const closeDialog = () => {
 		showModal[modalID] = false;
 		dialog.close();
-		history.replaceState(null, '', window.location.pathname + window.location.search);
+		replaceState('', window.location.pathname + window.location.search);
 	};
 </script>
 

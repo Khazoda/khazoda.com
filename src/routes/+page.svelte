@@ -27,6 +27,7 @@
 	import PlushablesColoured from '../components/PlushablesColoured.svelte';
 
 	import { onMount } from 'svelte';
+	import { replaceState } from '$app/navigation';
 	import IconoirSoundHigh from 'virtual:icons/iconoir/sound-high';
 	import IconoirSoundOff from 'virtual:icons/iconoir/sound-off';
 
@@ -54,7 +55,7 @@
 		// Add the hash to the URL when the modal is opened
 		const hash = modalIDToHash[modalID];
 		if (hash) {
-			history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+			history.replaceState('', window.location.pathname + window.location.search + hash);
 		}
 	};
 

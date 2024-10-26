@@ -70,10 +70,13 @@
 		<slot name="description" />
 		<hr />
 		<slot name="info" />
+		<hr />
+		<slot name="feature" class="feature-slot"/>	
 	</div>
 </dialog>
 
 <style lang="scss">
+	
 	dialog {
 		--mobile-backdrop-opacity: 1;
 
@@ -184,4 +187,5 @@
 			}
 		}
 	}
+
 </style>

@@ -9,6 +9,8 @@
 	import hookaduck_icon from '$lib/img/hookaduck_icon.webp';
 	import kreebles_icon from '$lib/img/kreebles_icon.webp';
 
+	import kreebles_feature from '$lib/img/animated/kreebles_feature.png';
+
 	import profile_icon from '$lib/img/profile_icon.webp';
 
 	import btn_press_sound from '$lib/sound/click.mp3';
@@ -591,6 +593,10 @@
 			<a href="https://github.com/Khazoda/kreebles">View the GitHub repository</a>
 		</span>
 	</div>
+
+	<div class="feature-slot" slot="feature">
+		<img src={kreebles_feature} alt="Kreebles Feature">
+	</div>
 </Modal>
 
 <!--#region Hook a Duck Modal -->
@@ -973,6 +979,32 @@
 		margin-top: 1rem;
 	}
 
+	.feature-slot {
+		margin-top: 1rem;
+		display: inline-block;
+		background-color: #222222;
+		border-radius: 8px;
+		padding: 12px;
+		box-shadow: 
+			inset 0 3px 6px rgba(0, 0, 0, 0.3),
+			inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+		border: 2px solid #1a1a1a;
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%);
+			border-radius: 6px;
+		}
+		img {
+			filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+		}
+	}
+
 	@media screen and (max-width: 1000px) {
 		.modal-link.wiki {
 			margin-bottom: 2rem;
@@ -1103,4 +1135,5 @@
 	.page-container {
 		background: transparent;
 	}
+
 </style>

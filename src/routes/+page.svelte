@@ -55,7 +55,7 @@
 		// Add the hash to the URL when the modal is opened
 		const hash = modalIDToHash[modalID];
 		if (hash) {
-			replaceState('', window.location.pathname + window.location.search + hash);
+			replaceState(window.location.pathname + window.location.search + hash, {});
 		}
 	};
 

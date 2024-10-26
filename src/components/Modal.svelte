@@ -48,7 +48,7 @@
 	const closeDialog = () => {
 		showModal[modalID] = false;
 		dialog.close();
-		replaceState('', window.location.pathname + window.location.search);
+		replaceState(window.location.pathname + window.location.search, {});
 	};
 </script>
 

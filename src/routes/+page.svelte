@@ -7,6 +7,7 @@
 	import beef_icon from '$lib/img/beef_icon.webp';
 	import dwayne_icon from '$lib/img/dwayne_icon.webp';
 	import hookaduck_icon from '$lib/img/hookaduck_icon.webp';
+	import kreebles_icon from '$lib/img/kreebles_icon.webp';
 
 	import profile_icon from '$lib/img/profile_icon.webp';
 
@@ -206,6 +207,25 @@
 	<div class="edge-mini-wrapper">
 		<span>smaller mods</span>
 		<div>
+			<button
+				on:click={() => setModalVisibility(97, true)}
+				on:mouseover={() => (currentlyHovered = 'Kreebles')}
+				on:focus={() => (currentlyHovered = 'Kreebles')}
+				on:mouseenter={() => (currentlyHovered = 'Kreebles')}
+				on:focus|capture={() => (currentlyHovered = 'Kreebles')}
+				use:playClickSound
+				type="button"
+				title="Kreebles"
+				tabindex="0"
+			>
+				<img
+					src={kreebles_icon}
+					alt="Kreebles"
+					width="32"
+					draggable="false"
+					class="ms-edge-imgfix"
+				/>
+			</button>
 			<button
 				on:click={() => setModalVisibility(98, true)}
 				on:mouseover={() => (currentlyHovered = 'Hook a Duck')}
@@ -519,6 +539,49 @@
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
 			<a href="https://modded.wiki/w/Mod:Basic_Storage">Visit the Wiki</a>
+		</span>
+	</div>
+</Modal>
+
+<!--#region Kreebles Modal -->
+<Modal bind:showModal modalID={97}>
+	<h2 slot="header" class="header-slot">
+		Kreebles
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=Latest%20Version&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>
+				This mod was made for SpookyJam 2024
+			</li>
+			<li>Mining stone & deepslate can sometimes yield more than you bargained for.</li>
+			<li>Kreebles jump out of broken rocks and attack any prey they can see.</li>
+			<li>Bearing the dastardly talisman, a rare drop from kreebles, will make them freeze in fear.</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/kreebles">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/kreebles">
+				Download on CurseForge
+			</a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://youtube.com/shorts/SvPh7RlwnbA?feature=shared">Watch a Teaser</a>
+		</span>
+		<span class="modal-link github">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/kreebles">View the GitHub repository</a>
 		</span>
 	</div>
 </Modal>

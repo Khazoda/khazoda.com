@@ -316,11 +316,16 @@
 	</div>
 	<footer>
 		<span class="socials-container">
-			<a href="https://bsky.app/profile/khazoda.com" aria-label="Khazoda on Bluesky" title="Khazoda on Bluesky"
-				><IconoirBluesky /></a
+			<a
+				href="https://bsky.app/profile/khazoda.com"
+				aria-label="Khazoda on Bluesky"
+				title="Khazoda on Bluesky"><IconoirBluesky /></a
 			>
-			<a href="https://discord.com/invite/vEZUkSxwR9" aria-label="Get support on Discord" title="Get support on Discord" target="_blank"
-				><IconoirDiscord /></a
+			<a
+				href="https://discord.com/invite/vEZUkSxwR9"
+				aria-label="Get support on Discord"
+				title="Get support on Discord"
+				target="_blank"><IconoirDiscord /></a
 			>
 		</span>
 		<span class="copyright">&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span>
@@ -621,7 +626,7 @@
 	</div>
 
 	<div class="feature-slot" slot="feature">
-		<img src={kreebles_feature} alt="Kreebles Feature">
+		<img src={kreebles_feature} alt="Kreebles Feature" />
 	</div>
 </Modal>
 
@@ -785,11 +790,17 @@
 			width: 10rem;
 		}
 	}
+	// Special case for 1600x900 PC screens
+	@media screen and (max-height: 850px) {
+		.big-title {
+			margin-top: 0.25rem;
+		}
+	}
 	// Mobile
 	@media screen and (max-width: 1000px) {
 		.big-title {
 			font-size: 1.75rem;
-			margin-top: 0.25rem;
+			margin-top: 0.5rem;
 			img {
 				max-width: 64px;
 			}
@@ -1011,9 +1022,9 @@
 		display: inline-block;
 		background-color: #141414;
 		border-radius: 10px;
-		border: 1px solid rgba(255,255,255,0.05);
+		border: 1px solid rgba(255, 255, 255, 0.05);
 		padding: 12px;
-		box-shadow: 
+		box-shadow:
 			inset 0 2px 4px rgba(0, 0, 0, 0.3),
 			inset 0 -1px 1px rgba(255, 255, 255, 0.05);
 		position: relative;
@@ -1025,9 +1036,8 @@
 			left: -2px;
 			right: -2px;
 			bottom: -2px;
-			background-image: 
-				linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-				linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+			background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+				linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 			background-size: 17.5px 17.5px; /* 350px / 20 = 17.5px */
 			background-position: 0 0;
 			pointer-events: none;
@@ -1040,7 +1050,11 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: linear-gradient(to bottom, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.02) 100%);
+			background: linear-gradient(
+				to bottom,
+				rgba(255, 255, 255, 0.02) 0%,
+				rgba(0, 0, 0, 0.02) 100%
+			);
 			border-radius: 8px;
 		}
 		img {
@@ -1180,5 +1194,4 @@
 	.page-container {
 		background: transparent;
 	}
-
 </style>

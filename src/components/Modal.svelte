@@ -90,8 +90,7 @@
 		min-height: 100dvh;
 		width: 100%;
 		height: 100%;
-		padding: 0.5rem;
-
+		padding: 0.5rem 0 0.5rem 0.5rem;
 		background: none;
 		border: none;
 		color: #e9e9ec;
@@ -101,11 +100,34 @@
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
 			opacity: 0.75;
 		}
+
+		&::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #141414; 
+            border-radius: 0.5rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #383838; 
+            border-radius: 0.5rem;
+            border: 2px solid #141414; 
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: #505050; 
+        }
+
+        scrollbar-width: thin; // Firefox
+        scrollbar-color: #383838 #141414; // Firefox
 	}
 	@media screen and (max-width: 1000px) {
 		dialog {
 			min-width: 100%;
 			width: 100%;
+			padding: 0.5rem;
 
 			&::backdrop {
 				opacity: var(--mobile-backdrop-opacity);
@@ -120,6 +142,7 @@
 		width: 100%;
 		border-radius: 0.5rem;
 		padding: 1rem;
+		margin: 0;
 		background: #141414;
 		transition:
 			transform 0.5s ease,

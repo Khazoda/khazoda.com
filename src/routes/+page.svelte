@@ -15,6 +15,7 @@
 
 	import Modal from '../components/Modal.svelte';
 	import IconoirBluesky from 'virtual:icons/simple-icons/bluesky';
+	import IconoirDiscord from 'virtual:icons/simple-icons/discord';
 	import SimpleIconsModrinth from 'virtual:icons/simple-icons/modrinth';
 	import SimpleIconsCurseforge from 'virtual:icons/simple-icons/curseforge';
 	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
@@ -286,9 +287,15 @@
 		</div>
 	</div>
 	<footer>
-		<a href="https://bsky.app/profile/khazoda.com" aria-label="Khazoda on Bluesky" ><IconoirBluesky /></a><span
-			>&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span
-		>
+		<span class="socials-container">
+			<a href="https://bsky.app/profile/khazoda.com" aria-label="Khazoda on Bluesky" title="Khazoda on Bluesky"
+				><IconoirBluesky /></a
+			>
+			<a href="https://discord.com/invite/vEZUkSxwR9" aria-label="Get support on Discord" title="Get support on Discord" target="_blank"
+				><IconoirDiscord /></a
+			>
+		</span>
+		<span class="copyright">&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span>
 	</footer>
 </div>
 <!--#region Plushables Modal -->
@@ -555,12 +562,12 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>
-				This mod was made for SpookyJam 2024
-			</li>
+			<li>This mod was made for SpookyJam 2024</li>
 			<li>Mining stone & deepslate can sometimes yield more than you bargained for.</li>
 			<li>Kreebles jump out of broken rocks and attack any prey they can see.</li>
-			<li>Bearing the dastardly talisman, a rare drop from kreebles, will make them freeze in fear.</li>
+			<li>
+				Bearing the dastardly talisman, a rare drop from kreebles, will make them freeze in fear.
+			</li>
 		</ul>
 	</div>
 
@@ -598,12 +605,14 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>
-				This mod was made for Modfest: Carnival in 2023
-			</li>
+			<li>This mod was made for Modfest: Carnival in 2023</li>
 			<li>Colourful ducks spawn in the rivers of your world.</li>
 			<li>Hook them up with a fishing rod to receive tickets and prizes!</li>
-			<li>For the best experience, try this mod out with the <a href="https://modrinth.com/modpack/modfest-carnival">Modfest Carnival</a> modpack</li>
+			<li>
+				For the best experience, try this mod out with the <a
+					href="https://modrinth.com/modpack/modfest-carnival">Modfest Carnival</a
+				> modpack
+			</li>
 		</ul>
 	</div>
 
@@ -756,11 +765,11 @@
 	}
 
 	@media screen and (max-width: 1000px) and (max-height: 660px) {
-		.big-title,footer {
+		.big-title,
+		footer {
 			visibility: hidden;
 			opacity: 0;
 		}
-		
 	}
 
 	//#region Center Container
@@ -793,7 +802,6 @@
 		}
 	}
 
-
 	@media screen and (max-width: 1000px) and (max-height: 1000px) {
 		.center-container {
 			padding-top: 20vh;
@@ -804,7 +812,7 @@
 			padding-top: 0;
 		}
 	}
-	
+
 	.center-container:has(ul.projects-container:hover) .hovered-name,
 	.center-container:has(ul.projects-container:focus-within) .hovered-name,
 	.page-container:has(.edge-mini-wrapper button:hover) .hovered-name,
@@ -926,7 +934,12 @@
 				color: hsl(0deg, 0%, 50%);
 			}
 		}
-		span {
+		span.socials-container {
+			display: inline-flex;
+			font-size: 1.25rem;
+			gap: 0.5rem;
+		}
+		span.copyright {
 			font-size: small;
 			font-family: monospace;
 		}

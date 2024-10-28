@@ -7,7 +7,6 @@
 
 	export let showModal: boolean[];
 	export let modalID: number;
-	export let projectLogo: string | undefined;
 
 	let dialog: HTMLDialogElement;
 	let dialog_inner: HTMLDivElement;
@@ -56,11 +55,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:close={closeDialog}
-	on:click|self={closeDialog}
->
+<dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		bind:this={dialog_inner}
@@ -71,27 +66,21 @@
 		on:touchend={swipeEnd}
 	>
 		<!-- svelte-ignore a11y-autofocus -->
-		 <span class="modal-top-container">
-			<img class="project-logo" src={projectLogo} alt="logo for the currently opened project" width="64"
-			draggable="false">
-			<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-				><MingcuteCloseFill />
-			</button>
-		 </span>
-		
-		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft/> swipe left anywhere to close</span>
+		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
+			><MingcuteCloseFill />
+		</button>
+		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft /> swipe left anywhere to close</span>
 		<slot name="header" />
 		<hr />
 		<slot name="description" />
 		<hr />
 		<slot name="info" />
 		<hr />
-		<slot name="feature" class="feature-slot"/>	
+		<slot name="feature" class="feature-slot" />
 	</div>
 </dialog>
 
 <style lang="scss">
-	
 	dialog {
 		--mobile-backdrop-opacity: 1;
 
@@ -107,7 +96,7 @@
 		margin: 0 auto 0 0;
 
 		scrollbar-width: thin;
-        scrollbar-color: #383838 #141414; 
+		scrollbar-color: #383838 #141414;
 
 		&::backdrop {
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
@@ -115,23 +104,23 @@
 		}
 
 		&::-webkit-scrollbar {
-            width: 8px;
-        }
+			width: 8px;
+		}
 
-        &::-webkit-scrollbar-track {
-            background: #141414; 
-            border-radius: 0.5rem;
-        }
+		&::-webkit-scrollbar-track {
+			background: #141414;
+			border-radius: 0.5rem;
+		}
 
-        &::-webkit-scrollbar-thumb {
-            background-color: #383838; 
-            border-radius: 0.5rem;
-            border: 2px solid #141414; 
-        }
+		&::-webkit-scrollbar-thumb {
+			background-color: #383838;
+			border-radius: 0.5rem;
+			border: 2px solid #141414;
+		}
 
-        &::-webkit-scrollbar-thumb:hover {
-            background-color: #505050; 
-        }
+		&::-webkit-scrollbar-thumb:hover {
+			background-color: #505050;
+		}
 	}
 	@media screen and (max-width: 1000px) {
 		dialog {
@@ -166,19 +155,13 @@
 			transform: scale(1);
 		}
 	}
-
-	.modal-top-container {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 	.modal-close-button {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		margin: 0;
 		padding: 0;
-
+		margin-left: auto;
 		width: 40px;
 		height: 40px;
 		aspect-ratio: 1;
@@ -235,5 +218,4 @@
 		border-style: solid;
 		border-color: #868686;
 	}
-
 </style>

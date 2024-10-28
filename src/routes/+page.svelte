@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Site Exclusive Icons
 	import plushables_icon from '$lib/img/plushables_icon.webp';
 	import basicweapons_icon from '$lib/img/basicweapons_icon.webp';
 	import bronze_icon from '$lib/img/bronze_icon.webp';
@@ -9,6 +10,18 @@
 	import hookaduck_icon from '$lib/img/hookaduck_icon.webp';
 	import kreebles_icon from '$lib/img/kreebles_icon.webp';
 
+	// Modified Project Icons
+	import plushables_project_icon from '$lib/img/plushables_project_icon.webp';
+	import basicweapons_project_icon from '$lib/img/basicweapons_project_icon.webp';
+	import bronze_project_icon from '$lib/img/bronze_project_icon.webp';
+	import breakerplacer_project_icon from '$lib/img/breakerplacer_project_icon.webp';
+	import basicstorage_project_icon from '$lib/img/basicstorage_project_icon.webp';
+	import beef_project_icon from '$lib/img/beef_project_icon.webp';
+	import dwayne_project_icon from '$lib/img/dwayne_project_icon.webp';
+	import hookaduck_project_icon from '$lib/img/hookaduck_project_icon.webp';
+	import kreebles_project_icon from '$lib/img/kreebles_project_icon.webp';
+
+	// Project Feature Images
 	import kreebles_feature from '$lib/img/animated/kreebles_feature.png';
 
 	import profile_icon from '$lib/img/profile_icon.webp';
@@ -68,7 +81,7 @@
 		if (storedPreference !== null) {
 			audioEnabled = storedPreference === 'true';
 		}
-		// setTimeout in order to delay and allow document root to be hydrated 
+		// setTimeout in order to delay and allow document root to be hydrated
 		setTimeout(() => {
 			const hash = $page.url.hash;
 			if (hash && hashToModalID[hash] !== undefined) {
@@ -337,12 +350,22 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal modalID={0} projectLogo={plushables_icon}>
+<Modal bind:showModal modalID={0}>
 	<h2 slot="header" class="header-slot">
-		Plushables
+		
+		<span>
+			<img
+				class="project-logo"
+				src={plushables_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Plushables
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -383,11 +406,11 @@
 				><span style="font-style: italic;">Lite</span></a
 			>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/Plushables">View the GitHub repository</a>
 			|
@@ -399,12 +422,21 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal modalID={1} projectLogo={basicweapons_icon}>
+<Modal bind:showModal modalID={1}>
 	<h2 slot="header" class="header-slot">
-		Basic Weapons
+		<span>
+			<img
+				class="project-logo"
+				src={basicweapons_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Basic Weapons
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/basic-weapons?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/basic-weapons?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -434,11 +466,11 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/basic-weapons">View the GitHub repository</a>
 		</span>
@@ -450,12 +482,21 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal modalID={2} projectLogo={bronze_icon}>
+<Modal bind:showModal modalID={2}>
 	<h2 slot="header" class="header-slot">
-		Bronze
+		<span>
+			<img
+				class="project-logo"
+				src={bronze_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Bronze
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -485,11 +526,11 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/bronze">View the GitHub repository</a>
 		</span>
@@ -497,12 +538,21 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal modalID={3} projectLogo={breakerplacer_icon}>
+<Modal bind:showModal modalID={3}>
 	<h2 slot="header" class="header-slot">
-		Block Breaker & Block Placer
+		<span>
+			<img
+				class="project-logo"
+				src={breakerplacer_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Block Breaker & Block Placer
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -526,11 +576,11 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/block-breaker-placer">View the GitHub repository</a>
 		</span>
@@ -538,12 +588,21 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal modalID={4} projectLogo={basicstorage_icon}>
+<Modal bind:showModal modalID={4}>
 	<h2 slot="header" class="header-slot">
-		Basic Storage
+		<span>
+			<img
+				class="project-logo"
+				src={basicstorage_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Basic Storage
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/basic-storage?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/basic-storage?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -573,11 +632,11 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch a Showcase</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/basic-storage">View the GitHub repository</a>
 		</span>
@@ -589,12 +648,21 @@
 </Modal>
 
 <!--#region Kreebles Modal -->
-<Modal bind:showModal modalID={96} projectLogo={kreebles_icon}>
+<Modal bind:showModal modalID={96}>
 	<h2 slot="header" class="header-slot">
-		Kreebles
+		<span>
+			<img
+				class="project-logo"
+				src={kreebles_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Kreebles
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -620,11 +688,11 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
 			<a href="https://youtube.com/shorts/SvPh7RlwnbA?feature=shared">Watch a Teaser</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/kreebles">View the GitHub repository</a>
 		</span>
@@ -636,12 +704,21 @@
 </Modal>
 
 <!--#region Hook a Duck Modal -->
-<Modal bind:showModal modalID={97} projectLogo={hookaduck_icon}>
+<Modal bind:showModal modalID={97}>
 	<h2 slot="header" class="header-slot">
-		Hook a Duck
+		<span>
+			<img
+				class="project-logo"
+				src={hookaduck_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Hook a Duck
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -663,7 +740,7 @@
 			<SimpleIconsModrinth />
 			<a href="https://modrinth.com/mod/hookaduck">Download on Modrinth</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/Hook-a-Duck">View the GitHub repository</a>
 		</span>
@@ -671,12 +748,21 @@
 </Modal>
 
 <!-- #region Beef & Blade Modal -->
-<Modal bind:showModal modalID={98} projectLogo={beef_icon}>
+<Modal bind:showModal modalID={98}>
 	<h2 slot="header" class="header-slot">
-		Beef & Blade
+		<span>
+			<img
+				class="project-logo"
+				src={beef_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Beef & Blade
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -702,7 +788,7 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/beef-and-blade">View the GitHub repository</a>
 		</span>
@@ -710,12 +796,21 @@
 </Modal>
 
 <!--#region Dwayne The Block Johnson Modal -->
-<Modal bind:showModal modalID={99} projectLogo={dwayne_icon}>
+<Modal bind:showModal modalID={99}>
 	<h2 slot="header" class="header-slot">
-		Dwayne 'The Block' Johnson
+		<span>
+			<img
+				class="project-logo"
+				src={dwayne_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Dwayne 'The Block' Johnson
+		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=Latest%20Version&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -740,7 +835,7 @@
 				Download on CurseForge
 			</a>
 		</span>
-		<span class="modal-link github">
+		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/dwayne-the-block-johnson">View the GitHub repository</a>
 		</span>
@@ -1007,13 +1102,20 @@
 	//#region Modal Styles
 	.header-slot {
 		display: flex;
+		flex-direction: row;
 		justify-content: space-between;
-		align-items: end;
-		line-height: 1.2;
+		align-items: center;
+		line-height: 2rem;
+		gap: 0.5rem;
 		text-wrap: pretty;
 		img {
 			max-width: 100%;
 			height: auto;
+		}
+		span {
+			display: inline-flex;
+			align-items: flex-start;
+			gap: 0.5rem;
 		}
 	}
 	ul {
@@ -1095,6 +1197,12 @@
 		text-decoration: none;
 		line-height: 1.5rem;
 		font-size: large;
+
+		&.separator-top {
+			padding-top: 1rem;
+			margin-top: 0.5rem;
+			border-top: 2px solid var(--color-background-dark);
+		}
 		&.modrinth {
 			color: var(--color-link-modrinth);
 		}
@@ -1102,9 +1210,6 @@
 			color: var(--color-link-curseforge);
 		}
 		&.github {
-			padding-top: 1rem;
-			margin-top: 0.5rem;
-			border-top: 2px solid var(--color-background-dark);
 			color: var(--color-link-generic);
 		}
 		&.wiki {

@@ -3,9 +3,12 @@
 	import IcRoundSwipeLeft from 'virtual:icons/ic/round-swipe-left';
 
 	import { replaceState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let showModal: boolean[];
 	export let modalID: number;
+	export let projectLogo: string | undefined;
+
 	let dialog: HTMLDialogElement;
 	let dialog_inner: HTMLDivElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
@@ -48,7 +51,7 @@
 	const closeDialog = () => {
 		showModal[modalID] = false;
 		dialog.close();
-		replaceState(window.location.pathname + window.location.search, {});
+		replaceState($page.url.origin, {});
 	};
 </script>
 
@@ -68,9 +71,14 @@
 		on:touchend={swipeEnd}
 	>
 		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-			><MingcuteCloseFill />
-		</button>
+		 <span class="modal-top-container">
+			<img class="project-logo" src={projectLogo} alt="logo for the currently opened project" width="64"
+			draggable="false">
+			<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
+				><MingcuteCloseFill />
+			</button>
+		 </span>
+		
 		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft/> swipe left anywhere to close</span>
 		<slot name="header" />
 		<hr />
@@ -158,13 +166,18 @@
 			transform: scale(1);
 		}
 	}
+
+	.modal-top-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 	.modal-close-button {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		margin: 0;
 		padding: 0;
-		margin-left: auto;
 
 		width: 40px;
 		height: 40px;

@@ -28,10 +28,11 @@
 
 	import { onMount } from 'svelte';
 	import { replaceState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import IconoirSoundHigh from 'virtual:icons/iconoir/sound-high';
 	import IconoirSoundOff from 'virtual:icons/iconoir/sound-off';
 
-	let showModal: boolean[] = [];
+	var showModal: boolean[] = Array(100).fill(false);
 	$: currentlyHovered = 'Plushables';
 	const hashToModalID: Record<string, number> = {
 		'#plushables': 0,
@@ -44,18 +45,19 @@
 		'#beef-and-blade': 98,
 		'#dwayne': 99
 	};
-
 	const modalIDToHash = Object.fromEntries(
 		Object.entries(hashToModalID).map(([hash, id]) => [id, hash])
 	);
+
 	const showDialog = (modalID: number) => {
+		if (!showModal) return;
 		showModal[modalID] = true;
 		document.getElementsByTagName('body')[0].style.overscrollBehavior = 'none';
 
 		// Add the hash to the URL when the modal is opened
 		const hash = modalIDToHash[modalID];
 		if (hash) {
-			replaceState(window.location.pathname + window.location.search + hash, {});
+			replaceState($page.url.origin + hash, {});
 		}
 	};
 
@@ -66,12 +68,14 @@
 		if (storedPreference !== null) {
 			audioEnabled = storedPreference === 'true';
 		}
-		// Page # url get
-		const hash = window.location.hash;
-		if (hash && hashToModalID[hash] !== undefined) {
-			const modalID = hashToModalID[hash];
-			showDialog(modalID);
-		}
+		// setTimeout in order to delay and allow document root to be hydrated 
+		setTimeout(() => {
+			const hash = $page.url.hash;
+			if (hash && hashToModalID[hash] !== undefined) {
+				const modalID = hashToModalID[hash];
+				showDialog(modalID);
+			}
+		}, 0);
 	});
 
 	function toggleAudio() {
@@ -333,7 +337,7 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal modalID={0}>
+<Modal bind:showModal modalID={0} projectLogo={plushables_icon}>
 	<h2 slot="header" class="header-slot">
 		Plushables
 		<img
@@ -395,7 +399,7 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal modalID={1}>
+<Modal bind:showModal modalID={1} projectLogo={basicweapons_icon}>
 	<h2 slot="header" class="header-slot">
 		Basic Weapons
 		<img
@@ -446,7 +450,7 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal modalID={2}>
+<Modal bind:showModal modalID={2} projectLogo={bronze_icon}>
 	<h2 slot="header" class="header-slot">
 		Bronze
 		<img
@@ -493,7 +497,7 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal modalID={3}>
+<Modal bind:showModal modalID={3} projectLogo={breakerplacer_icon}>
 	<h2 slot="header" class="header-slot">
 		Block Breaker & Block Placer
 		<img
@@ -534,7 +538,7 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal modalID={4}>
+<Modal bind:showModal modalID={4} projectLogo={basicstorage_icon}>
 	<h2 slot="header" class="header-slot">
 		Basic Storage
 		<img
@@ -585,7 +589,7 @@
 </Modal>
 
 <!--#region Kreebles Modal -->
-<Modal bind:showModal modalID={96}>
+<Modal bind:showModal modalID={96} projectLogo={kreebles_icon}>
 	<h2 slot="header" class="header-slot">
 		Kreebles
 		<img
@@ -632,7 +636,7 @@
 </Modal>
 
 <!--#region Hook a Duck Modal -->
-<Modal bind:showModal modalID={97}>
+<Modal bind:showModal modalID={97} projectLogo={hookaduck_icon}>
 	<h2 slot="header" class="header-slot">
 		Hook a Duck
 		<img
@@ -667,7 +671,7 @@
 </Modal>
 
 <!-- #region Beef & Blade Modal -->
-<Modal bind:showModal modalID={98}>
+<Modal bind:showModal modalID={98} projectLogo={beef_icon}>
 	<h2 slot="header" class="header-slot">
 		Beef & Blade
 		<img
@@ -706,7 +710,7 @@
 </Modal>
 
 <!--#region Dwayne The Block Johnson Modal -->
-<Modal bind:showModal modalID={99}>
+<Modal bind:showModal modalID={99} projectLogo={dwayne_icon}>
 	<h2 slot="header" class="header-slot">
 		Dwayne 'The Block' Johnson
 		<img

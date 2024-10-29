@@ -692,6 +692,10 @@
 			<SimpleIconsYoutube />
 			<a href="https://youtube.com/shorts/SvPh7RlwnbA?feature=shared">Watch a Teaser</a>
 		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/watch?v=0YIWTT6_AQk">Watch a Showcase</a>
+		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/kreebles">View the GitHub repository</a>

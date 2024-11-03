@@ -805,7 +805,7 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>This mod was made for Modfest: Carnival in 2023</li>
+			<li>This mod was made for Modfest: Carnival in 2024</li>
 			<li>Colourful ducks spawn in the rivers of your world.</li>
 			<li>Hook them up with a fishing rod to receive tickets and prizes!</li>
 			<li>

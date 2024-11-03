@@ -9,6 +9,7 @@
 	import dwayne_icon from '$lib/img/dwayne_icon.webp';
 	import hookaduck_icon from '$lib/img/hookaduck_icon.webp';
 	import kreebles_icon from '$lib/img/kreebles_icon.webp';
+	import plastar_icon from '$lib/img/plastar_icon.webp';
 
 	// Modified Project Icons
 	import plushables_project_icon from '$lib/img/plushables_project_icon.webp';
@@ -20,7 +21,8 @@
 	import dwayne_project_icon from '$lib/img/dwayne_project_icon.webp';
 	import hookaduck_project_icon from '$lib/img/hookaduck_project_icon.webp';
 	import kreebles_project_icon from '$lib/img/kreebles_project_icon.webp';
-
+	import plastar_project_icon from '$lib/img/plastar_project_icon.webp';
+	
 	// Project Feature Images
 	import kreebles_feature from '$lib/img/animated/kreebles_feature.png';
 
@@ -44,6 +46,7 @@
 	import { page } from '$app/stores';
 	import IconoirSoundHigh from 'virtual:icons/iconoir/sound-high';
 	import IconoirSoundOff from 'virtual:icons/iconoir/sound-off';
+	import LucideUsersRound from 'virtual:icons/lucide/users-round';
 
 	var showModal: boolean[] = Array(100).fill(false);
 	$: currentlyHovered = 'Plushables';
@@ -53,6 +56,7 @@
 		'#bronze': 2,
 		'#breakerplacer': 3,
 		'#basic-storage': 4,
+		'#plastar': 95,
 		'#kreebles': 96,
 		'#hookaduck': 97,
 		'#beef-and-blade': 98,
@@ -255,6 +259,25 @@
 		<div class="collaborations-container">
 			<span>collaborations</span>
 			<div>
+				<button
+					on:click={() => showDialog(95)}
+					on:mouseover={() => (currentlyHovered = 'Mecha Soldier PLASTAR')}
+					on:focus={() => (currentlyHovered = 'Mecha Soldier PLASTAR')}
+					on:mouseenter={() => (currentlyHovered = 'Mecha Soldier PLASTAR')}
+					on:focus|capture={() => (currentlyHovered = 'Mecha Soldier PLASTAR')}
+					use:playClickSound
+					type="button"
+					title="Mecha Soldier PLASTAR"
+					tabindex="0"
+				>
+					<img
+						src={plastar_icon}
+						alt="Mecha Soldier PLASTAR"
+						width="32"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
+				</button>
 				<button
 					on:click={() => showDialog(97)}
 					on:mouseover={() => (currentlyHovered = 'Hook a Duck')}
@@ -653,6 +676,54 @@
 	</div>
 </Modal>
 
+<!--#region PLASTAR Modal -->
+<Modal bind:showModal modalID={95}>
+	<h2 slot="header" class="header-slot">
+		<span>
+			<img
+				class="project-logo"
+				src={plastar_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				draggable="false"
+			/>
+			Mecha Soldier PLASTAR
+		</span>
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/plastar?style=flat&label=&color=%2311B848"
+		/>
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>This mod was made for Modfest 1.21 in October 2024</li>
+			<li>Tree resin can be turned into modular mecha</li>
+			<li>These mecha can fight for you and perform various tasks.</li>
+			<p class="collabtext">
+				<LucideUsersRound />
+				This project was a collaboration between
+				<a href="https://modrinth.com/user/MattiDragon">MattiDragon</a>,
+				<a href="https://modrinth.com/user/Kneelawk">Kneelawk</a>,
+				<a href="https://modrinth.com/user/LemmaEOF">LemmaEOF</a>,
+				<a href="https://modrinth.com/user/Pug">Pug</a>,
+				<a href="https://modrinth.com/user/snakefangox">snakefangox</a> and I.
+			</p>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/plastar">Download on Modrinth</a>
+		</span>
+		<span class="modal-link github separator-top">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Kneelawk/Mecha-Soldier-PLASTAR">View the GitHub repository</a>
+		</span>
+	</div>
+</Modal>
+
 <!--#region Kreebles Modal -->
 <Modal bind:showModal modalID={96}>
 	<h2 slot="header" class="header-slot">
@@ -856,10 +927,11 @@
 <style lang="scss">
 	:root {
 		--color-text-primary: #e2e2e2;
-		--color-text-secondary: #747474;
+		--color-text-secondary: #aaaaaa;
 		--color-background-dark: #2c2c2c;
 		--color-background-darker: #141414;
 		--color-link: rgb(128, 215, 255);
+		--color-link-muted: rgb(149, 187, 204);
 		--color-link-modrinth: rgb(128, 255, 160);
 		--color-link-curseforge: rgb(255, 158, 94);
 		--color-link-generic: rgb(197, 209, 222);
@@ -1283,8 +1355,9 @@
 		border: 2px solid var(--color-background-dark);
 		border-radius: 0.5rem;
 		padding: 0.5rem;
+		gap: 0.5rem;
 
-		&>div {
+		& > div {
 			display: flex;
 			flex-flow: column wrap;
 			align-items: flex-end;
@@ -1322,6 +1395,13 @@
 					display: block;
 				}
 			}
+		}
+	}
+
+	.collabtext {
+		color: var(--color-text-secondary);
+		a {
+			color: var(--color-link-muted);
 		}
 	}
 

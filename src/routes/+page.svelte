@@ -252,84 +252,91 @@
 	</div>
 
 	<div class="edge-mini-wrapper">
-		<span>smaller mods</span>
-		<div>
-			<button
-				on:click={() => showDialog(96)}
-				on:mouseover={() => (currentlyHovered = 'Kreebles')}
-				on:focus={() => (currentlyHovered = 'Kreebles')}
-				on:mouseenter={() => (currentlyHovered = 'Kreebles')}
-				on:focus|capture={() => (currentlyHovered = 'Kreebles')}
-				use:playClickSound
-				type="button"
-				title="Kreebles"
-				tabindex="0"
-			>
-				<img
-					src={kreebles_icon}
-					alt="Kreebles"
-					width="32"
-					draggable="false"
-					class="ms-edge-imgfix"
-				/>
-			</button>
-			<button
-				on:click={() => showDialog(97)}
-				on:mouseover={() => (currentlyHovered = 'Hook a Duck')}
-				on:focus={() => (currentlyHovered = 'Hook a Duck')}
-				on:mouseenter={() => (currentlyHovered = 'Hook a Duck')}
-				on:focus|capture={() => (currentlyHovered = 'Hook a Duck')}
-				use:playClickSound
-				type="button"
-				title="Hook a Duck"
-				tabindex="0"
-			>
-				<img
-					src={hookaduck_icon}
-					alt="Hook a Duck"
-					width="32"
-					draggable="false"
-					class="ms-edge-imgfix"
-				/>
-			</button>
-			<button
-				on:click={() => showDialog(98)}
-				on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
-				on:focus={() => (currentlyHovered = 'Beef & Blade')}
-				on:mouseenter={() => (currentlyHovered = 'Beef & Blade')}
-				on:focus|capture={() => (currentlyHovered = 'Beef & Blade')}
-				use:playClickSound
-				type="button"
-				title="Beef & Blade"
-				tabindex="0"
-			>
-				<img
-					src={beef_icon}
-					alt="Beef & Blade"
-					width="32"
-					draggable="false"
-					class="ms-edge-imgfix"
-				/>
-			</button>
-			<button
-				on:click={() => showDialog(99)}
-				on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
-				on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
-				on:mouseenter={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
-				on:focus|capture={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
-				use:playClickSound
-				type="button"
-				title="Dwayne 'The Block' Johnson"
-				tabindex="0"
-			>
-				<img
-					src={dwayne_icon}
-					alt="Dwayne 'The Block' Johnson"
-					width="32"
-					draggable="false"
-					class="ms-edge-imgfix"
-				/>
-			</button>
+		<div class="collaborations-container">
+			<span>collaborations</span>
+			<div>
+				<button
+					on:click={() => showDialog(97)}
+					on:mouseover={() => (currentlyHovered = 'Hook a Duck')}
+					on:focus={() => (currentlyHovered = 'Hook a Duck')}
+					on:mouseenter={() => (currentlyHovered = 'Hook a Duck')}
+					on:focus|capture={() => (currentlyHovered = 'Hook a Duck')}
+					use:playClickSound
+					type="button"
+					title="Hook a Duck"
+					tabindex="0"
+				>
+					<img
+						src={hookaduck_icon}
+						alt="Hook a Duck"
+						width="32"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
+				</button>
+			</div>
+		</div>
+		<div class="mini-mods-container">
+			<span>mini mods</span>
+			<div>
+				<button
+					on:click={() => showDialog(96)}
+					on:mouseover={() => (currentlyHovered = 'Kreebles')}
+					on:focus={() => (currentlyHovered = 'Kreebles')}
+					on:mouseenter={() => (currentlyHovered = 'Kreebles')}
+					on:focus|capture={() => (currentlyHovered = 'Kreebles')}
+					use:playClickSound
+					type="button"
+					title="Kreebles"
+					tabindex="0"
+				>
+					<img
+						src={kreebles_icon}
+						alt="Kreebles"
+						width="32"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
+				</button>
+				<button
+					on:click={() => showDialog(98)}
+					on:mouseover={() => (currentlyHovered = 'Beef & Blade')}
+					on:focus={() => (currentlyHovered = 'Beef & Blade')}
+					on:mouseenter={() => (currentlyHovered = 'Beef & Blade')}
+					on:focus|capture={() => (currentlyHovered = 'Beef & Blade')}
+					use:playClickSound
+					type="button"
+					title="Beef & Blade"
+					tabindex="0"
+				>
+					<img
+						src={beef_icon}
+						alt="Beef & Blade"
+						width="32"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
+				</button>
+				<button
+					on:click={() => showDialog(99)}
+					on:mouseover={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+					on:focus={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+					on:mouseenter={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+					on:focus|capture={() => (currentlyHovered = 'Dwayne "The Block" Johnson')}
+					use:playClickSound
+					type="button"
+					title="Dwayne 'The Block' Johnson"
+					tabindex="0"
+				>
+					<img
+						src={dwayne_icon}
+						alt="Dwayne 'The Block' Johnson"
+						width="32"
+						draggable="false"
+						class="ms-edge-imgfix"
+					/>
+				</button>
+			</div>
 		</div>
 	</div>
 	<footer>
@@ -352,7 +359,6 @@
 <!--#region Plushables Modal -->
 <Modal bind:showModal modalID={0}>
 	<h2 slot="header" class="header-slot">
-		
 		<span>
 			<img
 				class="project-logo"
@@ -1263,27 +1269,36 @@
 			font-size: 1.1rem;
 		}
 	}
+
+	//#region Edge Mini Section
 	.edge-mini-wrapper {
 		position: fixed;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-end;
+		justify-content: flex-end;
 		bottom: 0.5rem;
 		right: 0.5rem;
 		z-index: 99;
 		border: 2px solid var(--color-background-dark);
 		border-radius: 0.5rem;
 		padding: 0.5rem;
-		span {
-			color: var(--color-text-secondary);
-			font-family: Lexend, Quicksand, Calibri;
-			margin-bottom: 0.25rem;
-		}
 
-		div {
+		&>div {
 			display: flex;
-			justify-content: center;
+			flex-flow: column wrap;
+			align-items: flex-end;
 
+			div {
+				width: 100%;
+				display: inline-flex;
+				justify-content: flex-end;
+			}
+			span {
+				color: var(--color-text-secondary);
+				font-family: Lexend, Quicksand, Calibri;
+				margin-bottom: 0.25rem;
+			}
 			button {
 				background: none;
 				border: none;

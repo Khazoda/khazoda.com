@@ -702,12 +702,12 @@
 			<li>These mecha can fight for you and perform various tasks.</li>
 			<p class="collabtext">
 				<PixelArticonsUsers />
-				This project was a collaboration between
+				This project was a collaboration with
 				<a href="https://modrinth.com/user/MattiDragon">MattiDragon</a>,
 				<a href="https://modrinth.com/user/Kneelawk">Kneelawk</a>,
 				<a href="https://modrinth.com/user/LemmaEOF">LemmaEOF</a>,
-				<a href="https://modrinth.com/user/Pug">Pug</a>,
-				<a href="https://modrinth.com/user/snakefangox">snakefangox</a> and I.
+				<a href="https://modrinth.com/user/Pug">Pug</a> and
+				<a href="https://modrinth.com/user/snakefangox">snakefangox</a>.
 			</p>
 		</ul>
 	</div>
@@ -815,8 +815,8 @@
 			</li>
 			<p class="collabtext">
 				<PixelArticonsUsers />
-				This project was a collaboration between
-				<a href="https://modrinth.com/user/Dabloon">Dabloon</a> and I.
+				This project was a collaboration with
+				<a href="https://modrinth.com/user/Dabloon">Dabloon</a>.
 			</p>
 		</ul>
 	</div>

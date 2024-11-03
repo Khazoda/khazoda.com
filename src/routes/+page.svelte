@@ -46,7 +46,7 @@
 	import { page } from '$app/stores';
 	import IconoirSoundHigh from 'virtual:icons/iconoir/sound-high';
 	import IconoirSoundOff from 'virtual:icons/iconoir/sound-off';
-	import LucideUsersRound from 'virtual:icons/lucide/users-round';
+	import PixelArticonsUsers from 'virtual:icons/pixelarticons/users';
 
 	var showModal: boolean[] = Array(100).fill(false);
 	$: currentlyHovered = 'Plushables';
@@ -701,7 +701,7 @@
 			<li>Tree resin can be turned into modular mecha</li>
 			<li>These mecha can fight for you and perform various tasks.</li>
 			<p class="collabtext">
-				<LucideUsersRound />
+				<PixelArticonsUsers />
 				This project was a collaboration between
 				<a href="https://modrinth.com/user/MattiDragon">MattiDragon</a>,
 				<a href="https://modrinth.com/user/Kneelawk">Kneelawk</a>,
@@ -813,6 +813,11 @@
 					href="https://modrinth.com/modpack/modfest-carnival">Modfest Carnival</a
 				> modpack
 			</li>
+			<p class="collabtext">
+				<PixelArticonsUsers />
+				This project was a collaboration between
+				<a href="https://modrinth.com/user/Dabloon">Dabloon</a> and I.
+			</p>
 		</ul>
 	</div>
 
@@ -1402,6 +1407,11 @@
 		color: var(--color-text-secondary);
 		a {
 			color: var(--color-link-muted);
+		}
+
+		:global(svg) {
+			vertical-align: bottom;
+			margin-right: 0.15rem;
 		}
 	}
 

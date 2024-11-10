@@ -474,7 +474,7 @@
 			<li>Basic Weapons adds 6 new vanilla-esque weapon types to Minecraft.</li>
 			<li>Each weapon has a distinctly different combat style.</li>
 			<li>
-				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> mod lets
+				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> and <a href="https://khazoda.com#bronze">Bronze</a> mods lets
 				Basic Weapons really shine.
 			</li>
 			<li>

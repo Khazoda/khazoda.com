@@ -471,7 +471,7 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>Basic Weapons adds 5 new vanilla-esque weapon types to Minecraft.</li>
+			<li>Basic Weapons adds 6 new vanilla-esque weapon types to Minecraft.</li>
 			<li>Each weapon has a distinctly different combat style.</li>
 			<li>
 				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> mod lets
@@ -494,10 +494,6 @@
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basic-weapons">
 				Download on CurseForge
 			</a>
-		</span>
-		<span class="modal-link youtube separator-top">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />

@@ -22,7 +22,7 @@
 	import hookaduck_project_icon from '$lib/img/hookaduck_project_icon.webp';
 	import kreebles_project_icon from '$lib/img/kreebles_project_icon.webp';
 	import plastar_project_icon from '$lib/img/plastar_project_icon.webp';
-	
+
 	// Project Feature Images
 	import kreebles_feature from '$lib/img/animated/kreebles_feature.png';
 
@@ -123,17 +123,20 @@
 	<title>Khazoda's Mods</title>
 </head>
 <div class="page-container">
-	<audio id="click-sound">
-		<source src={btn_press_sound} type="audio/mpeg" />
-		Your browser does not support the audio element.
-	</audio>
-	<button class="audio-toggle" on:click={toggleAudio} title="Toggle audio" type="button">
-		{#if audioEnabled}
-			<IconoirSoundHigh />
-		{:else}
-			<IconoirSoundOff />
-		{/if}
-	</button>
+	<div class="top-right-container">
+		<audio id="click-sound">
+			<source src={btn_press_sound} type="audio/mpeg" />
+			Your browser does not support the audio element.
+		</audio>
+		<button class="audio-toggle" on:click={toggleAudio} title="Toggle audio" type="button">
+			{#if audioEnabled}
+				<IconoirSoundHigh />
+			{:else}
+				<IconoirSoundOff />
+			{/if}
+		</button>
+		<!-- ADD BUTTON HERE FOR SPREADSHEET -->
+	</div>
 	<h1 class="big-title fade-in-on-load">
 		<img src={profile_icon} alt="" width="128" /> Khazoda's Mods
 	</h1>
@@ -474,8 +477,8 @@
 			<li>Basic Weapons adds 6 new vanilla-esque weapon types to Minecraft.</li>
 			<li>Each weapon has a distinctly different combat style.</li>
 			<li>
-				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> and <a href="https://khazoda.com#bronze">Bronze</a> mods lets
-				Basic Weapons really shine.
+				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> and
+				<a href="https://khazoda.com#bronze">Bronze</a> mods lets Basic Weapons really shine.
 			</li>
 			<li>
 				Sword & axe melee combat is too repetitive - treat yourself to some other options with Basic
@@ -1311,16 +1314,18 @@
 	}
 
 	//#region Other Styles
-	.audio-toggle {
+	.top-right-container {
 		position: fixed;
 		top: 1rem;
 		right: 1rem;
+		z-index: 1000;
+	}
+	.audio-toggle {
 		background: none;
 		border: none;
 		color: var(--color-text-secondary);
 		font-size: 1.3rem;
 		cursor: pointer;
-		z-index: 1000;
 		padding: 0.4rem;
 		display: flex;
 		align-items: center;

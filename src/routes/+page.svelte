@@ -1,27 +1,27 @@
 <script lang="ts">
 	// Site Exclusive Icons
-	import plushables_icon from '$lib/img/plushables_icon.webp';
-	import basicweapons_icon from '$lib/img/basicweapons_icon.webp';
-	import bronze_icon from '$lib/img/bronze_icon.webp';
-	import breakerplacer_icon from '$lib/img/breakerplacer_icon.webp';
-	import basicstorage_icon from '$lib/img/basicstorage_icon.webp';
-	import beef_icon from '$lib/img/beef_icon.webp';
-	import dwayne_icon from '$lib/img/dwayne_icon.webp';
-	import hookaduck_icon from '$lib/img/hookaduck_icon.webp';
-	import kreebles_icon from '$lib/img/kreebles_icon.webp';
-	import plastar_icon from '$lib/img/plastar_icon.webp';
+	import plushables_icon from '$lib/img/site_icons/plushables_icon.webp';
+	import basicweapons_icon from '$lib/img/site_icons/basicweapons_icon.webp';
+	import bronze_icon from '$lib/img/site_icons/bronze_icon.webp';
+	import breakerplacer_icon from '$lib/img/site_icons/breakerplacer_icon.webp';
+	import basicstorage_icon from '$lib/img/site_icons/basicstorage_icon.webp';
+	import beef_icon from '$lib/img/site_icons/beef_icon.webp';
+	import dwayne_icon from '$lib/img/site_icons/dwayne_icon.webp';
+	import hookaduck_icon from '$lib/img/site_icons/hookaduck_icon.webp';
+	import kreebles_icon from '$lib/img/site_icons/kreebles_icon.webp';
+	import plastar_icon from '$lib/img/site_icons/plastar_icon.webp';
 
-	// Modified Project Icons
-	import plushables_project_icon from '$lib/img/plushables_project_icon.webp';
-	import basicweapons_project_icon from '$lib/img/basicweapons_project_icon.webp';
-	import bronze_project_icon from '$lib/img/bronze_project_icon.webp';
-	import breakerplacer_project_icon from '$lib/img/breakerplacer_project_icon.webp';
-	import basicstorage_project_icon from '$lib/img/basicstorage_project_icon.webp';
-	import beef_project_icon from '$lib/img/beef_project_icon.webp';
-	import dwayne_project_icon from '$lib/img/dwayne_project_icon.webp';
-	import hookaduck_project_icon from '$lib/img/hookaduck_project_icon.webp';
-	import kreebles_project_icon from '$lib/img/kreebles_project_icon.webp';
-	import plastar_project_icon from '$lib/img/plastar_project_icon.webp';
+	// Project Icons (Same as Modrinth/Curseforge)
+	import plushables_project_icon from '$lib/img/project_icons/plushables_project_icon.webp';
+	import basicweapons_project_icon from '$lib/img/project_icons/basicweapons_project_icon.webp';
+	import bronze_project_icon from '$lib/img/project_icons/bronze_project_icon.webp';
+	import breakerplacer_project_icon from '$lib/img/project_icons/breakerplacer_project_icon.webp';
+	import basicstorage_project_icon from '$lib/img/project_icons/basicstorage_project_icon.webp';
+	import beef_project_icon from '$lib/img/project_icons/beef_project_icon.webp';
+	import dwayne_project_icon from '$lib/img/project_icons/dwayne_project_icon.webp';
+	import hookaduck_project_icon from '$lib/img/project_icons/hookaduck_project_icon.webp';
+	import kreebles_project_icon from '$lib/img/project_icons/kreebles_project_icon.webp';
+	import plastar_project_icon from '$lib/img/project_icons/plastar_project_icon.webp';
 
 	// Project Feature Images
 	import kreebles_feature from '$lib/img/animated/kreebles_feature.png';
@@ -38,6 +38,8 @@
 	import SimpleIconsGithub from 'virtual:icons/simple-icons/github';
 	import SimpleIconsYoutube from 'virtual:icons/simple-icons/youtube';
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
+	import IconoirCollageFrame from 'virtual:icons/iconoir/collage-frame';
+	import IconoirViewGrid from 'virtual:icons/iconoir/view-grid';
 
 	import PlushablesColoured from '../components/PlushablesColoured.svelte';
 
@@ -49,6 +51,7 @@
 	import PixelArticonsUsers from 'virtual:icons/pixelarticons/users';
 
 	var showModal: boolean[] = Array(100).fill(false);
+	var isVersionSheetHovered = false;
 	$: currentlyHovered = 'Plushables';
 	const hashToModalID: Record<string, number> = {
 		'#plushables': 0,
@@ -120,6 +123,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="index.css" />
 	<title>Khazoda's Mods</title>
 </head>
 <div class="page-container">
@@ -128,14 +132,28 @@
 			<source src={btn_press_sound} type="audio/mpeg" />
 			Your browser does not support the audio element.
 		</audio>
-		<button class="audio-toggle" on:click={toggleAudio} title="Toggle audio" type="button">
+		<button class="square-btn" on:click={toggleAudio} title="Toggle audio" type="button">
 			{#if audioEnabled}
 				<IconoirSoundHigh />
 			{:else}
 				<IconoirSoundOff />
 			{/if}
 		</button>
-		<!-- ADD BUTTON HERE FOR SPREADSHEET -->
+		<a
+			href="/versions"
+			class="square-btn"
+			title="Version Sheet"
+			on:mouseenter={() => (isVersionSheetHovered = true)}
+			on:mouseleave={() => (isVersionSheetHovered = false)}
+			on:focusin={() => (isVersionSheetHovered = true)}
+			on:focusout={() => (isVersionSheetHovered = false)}
+		>
+			{#if isVersionSheetHovered}
+				<IconoirViewGrid />
+			{:else}
+				<IconoirCollageFrame />
+			{/if}
+		</a>
 	</div>
 	<h1 class="big-title fade-in-on-load">
 		<img src={profile_icon} alt="" width="128" /> Khazoda's Mods
@@ -941,7 +959,6 @@
 		--color-link-generic: rgb(197, 209, 222);
 		--color-link-youtube: rgb(255, 92, 113);
 	}
-
 	.page-container {
 		position: static;
 		width: 100%;
@@ -1319,17 +1336,22 @@
 		top: 1rem;
 		right: 1rem;
 		z-index: 1000;
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
 	}
-	.audio-toggle {
+	.square-btn {
 		background: none;
 		border: none;
-		color: var(--color-text-secondary);
-		font-size: 1.3rem;
+		padding: 0;
+		margin: 0;
 		cursor: pointer;
-		padding: 0.4rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		color: var(--color-text-secondary);
+		font-size: 1.3rem;
+		padding: 0.4rem;
 		background-color: rgba(44, 44, 44, 0.7);
 		border-radius: 25%;
 		transition: background-color 0.2s ease-out;

@@ -39,7 +39,7 @@ export let mods: ModCompatibility[] = [
         modId: 'plushables',
         icon: plushables_project_icon,
         name: 'Plushables',
-        supportedVersions: ['1.16.5','1.19','1.20','1.20.1','1.20.2','1.20.4','1.20.5','1.20.6','1.21']
+        supportedVersions: ['1.16.5','1.19','1.20','1.20.1','1.20.2','1.20.4','1.20.5','1.20.6','1.21','1.21.1']
     },
     {
         modId: 'basic-weapons',
@@ -81,18 +81,18 @@ export let mods: ModCompatibility[] = [
         modId: 'hookaduck',
         icon: hookaduck_project_icon,
         name: 'Hook a Duck',
-        supportedVersions: ['1.21']
+        supportedVersions: ['1.21','1.21.1']
     },
     {
         modId: 'beef-and-blade',
         icon: beef_project_icon,
         name: 'Beef & Blade',
-        supportedVersions: ['1.19','1.19.3','1.20.1','1.21']
+        supportedVersions: ['1.19','1.19.3','1.20.1','1.21','1.21.1']
     },
     {
         modId: 'dwayne',
         icon: dwayne_project_icon,
         name: 'Dwayne "The Block" Johnson',
-        supportedVersions: ['1.18.2','1.19','1.19.4','1.20','1.20.1','1.21']
+        supportedVersions: ['1.18.2','1.19','1.19.4','1.20','1.20.1','1.21','1.21.1']
     }
 ];

@@ -166,19 +166,12 @@
 		height: 40px;
 		aspect-ratio: 1;
 		border: none;
-
-		background: #383838;
-		color: #ffffff;
 		font-size: x-large;
 		line-height: 1;
 		box-sizing: content-box;
 
 		cursor: pointer;
-
 		border-radius: 0.5rem;
-		&:hover {
-			transform: scale(1.05);
-		}
 	}
 	// Mobile
 	@media screen and (max-width: 1000px) {

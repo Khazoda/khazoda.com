@@ -7,10 +7,13 @@
 	import IconoirSquare from 'virtual:icons/iconoir/square';
 	import IconoirCheckSquare from 'virtual:icons/iconoir/check-square';
 	import IconoirHomeSimpleDoor from 'virtual:icons/iconoir/home-simple-door';
+	import IconoirInfoCircle from 'virtual:icons/iconoir/info-circle';
+	import CenterModal from '../../components/CenterModal.svelte';
 
 	var showSupercededVersions = false;
 	var sortOrder: SortOrder = 'newest';
 	var displayedVersions: MinecraftVersion[] = [];
+	var showModal: boolean[] = Array(1).fill(false);
 
 	// Filtering & Sorting
 	$: {
@@ -44,13 +47,20 @@
 		else if (sortOrder === 'oldest') sortOrder = 'major';
 		else sortOrder = 'newest';
 	}
+
+	function openModal() {
+		showModal[0] = true;
+	}
 </script>
 
 <div class="table-container">
 	<div class="table-controls">
-		<a href="/">
+		<a href="/" class="home-btn">
 			<IconoirHomeSimpleDoor width="100%" height="100%" />
 		</a>
+		<button class="help-btn" on:click={openModal} type="button">
+			<IconoirInfoCircle width="100%" height="100%" />
+		</button>
 		<span>
 			<button
 				type="button"
@@ -131,6 +141,38 @@
 	</div>
 </div>
 
+<CenterModal bind:showModal modalID={0}>
+	<div slot="description" class="definition-list">
+		<h2>Version Types</h2>
+		<ul>
+			<li>
+				<span class="major-text">Major Versions</span> - Minecraft versions that modpacks target for
+				a long time as a stable version.
+			</li>
+			<li>
+				<span class="minor-text">Minor Versions</span> - Versions that aren't targeted by large modpacks
+				and which mod developers sometimes choose to skip when updating.
+			</li>
+			<li>
+				<span class="superceded-text">Superceded Versions</span> - These versions are usually replaced
+				by a hotfix put out by Mojang. (hidden by default)
+			</li>
+		</ul>
+		<h2>Version Support Policy</h2>
+		<p>
+			I prioritize supporting the latest major Minecraft versions. Going forward this is likely to
+			be the major version number or first subsequent patch e.g. 1.20.1, 1.21.1
+			<br />
+			<br />
+			If I have the time and capacity I'll also maintain compatibility with select minor versions where
+			possible.
+			<br />
+			<br />
+			Superceded versions may be maintained for archival purposes but usually will not receive updates.
+		</p>
+	</div>
+</CenterModal>
+
 <style lang="scss">
 	:root {
 		/* Background Colours */
@@ -190,38 +232,52 @@
 		padding: 1rem 1rem 0 1rem;
 		display: inline-flex;
 		justify-content: flex-end;
-		gap: 1rem;
+		gap: 0.5rem;
 		background: var(--v-color-background);
 
 		span {
 			display: flex;
 			gap: 1rem;
 		}
-
 		button,
 		a {
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
 			padding: 0.5rem 1rem;
-			background: var(--v-color-background-dark);
 			border: 1px solid var(--v-color-border);
 			border-radius: 4px;
 			color: var(--v-color-text-primary);
 
 			&:hover {
-				background: var(--v-color-background-light);
 				cursor: pointer;
 			}
 		}
-		a {
-			margin-right: auto;
+		a,
+		.help-btn {
 			height: 2.5rem;
 			width: 2.5rem;
 			padding: 0.5rem;
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
+		}
+
+		.home-btn {
+			background: #234066;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			&:hover {
+				background: #2d527f;
+				box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+			}
+		}
+		.help-btn {
+			background: #8f4422;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			&:hover {
+				background: #a54f28;
+				box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+			}
 		}
 	}
 
@@ -378,6 +434,40 @@
 				padding: 0.75rem;
 				z-index: 1000;
 			}
+		}
+	}
+
+	.help-btn {
+		margin-right: auto;
+	}
+
+	@media (max-width: 530px) {
+		.table-container .table-controls {
+			> .help-btn {
+				position: fixed;
+				bottom: 0.5rem;
+				left: calc(50% - 5rem);
+				transform: translateX(-50%);
+				width: 4rem;
+				height: 4rem;
+				padding: 0.75rem;
+				z-index: 1000;
+			}
+		}
+	}
+
+	.definition-list {
+		ul li {
+			margin-bottom: 0.5rem;
+		}
+		.major-text {
+			color: var(--v-color-text-major);
+		}
+		.minor-text {
+			color: var(--v-color-text-secondary);
+		}
+		.superceded-text {
+			color: var(--v-color-text-disabled);
 		}
 	}
 </style>

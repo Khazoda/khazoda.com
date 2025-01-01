@@ -1,15 +1,15 @@
 import type { MinecraftVersion, ModCompatibility } from './types';
 
-import plushables_project_icon from '$lib/img/project_icons/plushables_project_icon.webp';
-import basicweapons_project_icon from '$lib/img/project_icons/basicweapons_project_icon.webp';
-import bronze_project_icon from '$lib/img/project_icons/bronze_project_icon.webp';
-import breakerplacer_project_icon from '$lib/img/project_icons/breakerplacer_project_icon.webp';
-import basicstorage_project_icon from '$lib/img/project_icons/basicstorage_project_icon.webp';
-import beef_project_icon from '$lib/img/project_icons/beef_project_icon.webp';
-import dwayne_project_icon from '$lib/img/project_icons/dwayne_project_icon.webp';
-import hookaduck_project_icon from '$lib/img/project_icons/hookaduck_project_icon.webp';
-import kreebles_project_icon from '$lib/img/project_icons/kreebles_project_icon.webp';
-import plastar_project_icon from '$lib/img/project_icons/plastar_project_icon.webp';
+import plushables_project_icon from '$lib/media/project_icons/plushables_project_icon.webp';
+import basicweapons_project_icon from '$lib/media/project_icons/basicweapons_project_icon.webp';
+import bronze_project_icon from '$lib/media/project_icons/bronze_project_icon.webp';
+import breakerplacer_project_icon from '$lib/media/project_icons/breakerplacer_project_icon.webp';
+import basicstorage_project_icon from '$lib/media/project_icons/basicstorage_project_icon.webp';
+import beef_project_icon from '$lib/media/project_icons/beef_project_icon.webp';
+import dwayne_project_icon from '$lib/media/project_icons/dwayne_project_icon.webp';
+import hookaduck_project_icon from '$lib/media/project_icons/hookaduck_project_icon.webp';
+import kreebles_project_icon from '$lib/media/project_icons/kreebles_project_icon.webp';
+import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.webp';
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [

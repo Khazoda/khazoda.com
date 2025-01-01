@@ -1,32 +1,33 @@
 <script lang="ts">
 	// Site Exclusive Icons
-	import plushables_icon from '$lib/img/site_icons/plushables_icon.webp';
-	import basicweapons_icon from '$lib/img/site_icons/basicweapons_icon.webp';
-	import bronze_icon from '$lib/img/site_icons/bronze_icon.webp';
-	import breakerplacer_icon from '$lib/img/site_icons/breakerplacer_icon.webp';
-	import basicstorage_icon from '$lib/img/site_icons/basicstorage_icon.webp';
-	import beef_icon from '$lib/img/site_icons/beef_icon.webp';
-	import dwayne_icon from '$lib/img/site_icons/dwayne_icon.webp';
-	import hookaduck_icon from '$lib/img/site_icons/hookaduck_icon.webp';
-	import kreebles_icon from '$lib/img/site_icons/kreebles_icon.webp';
-	import plastar_icon from '$lib/img/site_icons/plastar_icon.webp';
+	import plushables_icon from '$lib/media/site_icons/plushables_icon.webp';
+	import basicweapons_icon from '$lib/media/site_icons/basicweapons_icon.webp';
+	import bronze_icon from '$lib/media/site_icons/bronze_icon.webp';
+	import breakerplacer_icon from '$lib/media/site_icons/breakerplacer_icon.webp';
+	import basicstorage_icon from '$lib/media/site_icons/basicstorage_icon.webp';
+	import beef_icon from '$lib/media/site_icons/beef_icon.webp';
+	import dwayne_icon from '$lib/media/site_icons/dwayne_icon.webp';
+	import hookaduck_icon from '$lib/media/site_icons/hookaduck_icon.webp';
+	import kreebles_icon from '$lib/media/site_icons/kreebles_icon.webp';
+	import plastar_icon from '$lib/media/site_icons/plastar_icon.webp';
 
 	// Project Icons (Same as Modrinth/Curseforge)
-	import plushables_project_icon from '$lib/img/project_icons/plushables_project_icon.webp';
-	import basicweapons_project_icon from '$lib/img/project_icons/basicweapons_project_icon.webp';
-	import bronze_project_icon from '$lib/img/project_icons/bronze_project_icon.webp';
-	import breakerplacer_project_icon from '$lib/img/project_icons/breakerplacer_project_icon.webp';
-	import basicstorage_project_icon from '$lib/img/project_icons/basicstorage_project_icon.webp';
-	import beef_project_icon from '$lib/img/project_icons/beef_project_icon.webp';
-	import dwayne_project_icon from '$lib/img/project_icons/dwayne_project_icon.webp';
-	import hookaduck_project_icon from '$lib/img/project_icons/hookaduck_project_icon.webp';
-	import kreebles_project_icon from '$lib/img/project_icons/kreebles_project_icon.webp';
-	import plastar_project_icon from '$lib/img/project_icons/plastar_project_icon.webp';
+	import plushables_project_icon from '$lib/media/project_icons/plushables_project_icon.webp';
+	import basicweapons_project_icon from '$lib/media/project_icons/basicweapons_project_icon.webp';
+	import bronze_project_icon from '$lib/media/project_icons/bronze_project_icon.webp';
+	import breakerplacer_project_icon from '$lib/media/project_icons/breakerplacer_project_icon.webp';
+	import basicstorage_project_icon from '$lib/media/project_icons/basicstorage_project_icon.webp';
+	import beef_project_icon from '$lib/media/project_icons/beef_project_icon.webp';
+	import dwayne_project_icon from '$lib/media/project_icons/dwayne_project_icon.webp';
+	import hookaduck_project_icon from '$lib/media/project_icons/hookaduck_project_icon.webp';
+	import kreebles_project_icon from '$lib/media/project_icons/kreebles_project_icon.webp';
+	import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.webp';
 
 	// Project Feature Images
-	import kreebles_feature from '$lib/img/animated/kreebles_feature.png';
+	import plushables_feature from '$lib/media/animated/plushables_feature.webm';
+	import kreebles_feature from '$lib/media/animated/kreebles_feature.png';
 
-	import profile_icon from '$lib/img/profile_icon.webp';
+	import profile_icon from '$lib/media/profile_icon.webp';
 
 	import btn_press_sound from '$lib/sound/click.mp3';
 
@@ -411,7 +412,7 @@
 				width="32"
 				draggable="false"
 			/>
-			Plushables
+			<PlushablesColoured />
 		</span>
 		<img
 			alt="latest minecraft version"
@@ -421,40 +422,33 @@
 
 	<div slot="description" class="definition-list">
 		<ul>
-			<li>Plushables adds over 40 new plushies to Minecraft.</li>
+			<li>Plushables adds over 45 new plushies to Minecraft.</li>
 			<li>
-				From cats to dogs to mushroom people, wizards and mammoths - there's a plushie for everyone.
+				From cats to dogs to small mushroom people, wizards and mammoths - there's a plushie for
+				everyone.
 			</li>
 			<li>
-				Plushables comes with its own unique crafting block and system - fully EMI & REI compatible.
+				Plushables aims to bring fresh new designs into the game rather than recreating existing
+				Minecraft mobs.
 			</li>
-			<li>Some plushies have custom sounds, particle effects and even animations!</li>
+			<li>
+				Along with Plushables' original designs you will find plushies based on a variety of other
+				mods.
+			</li>
+			<li>Some plushies have custom sounds and particle effects!</li>
 		</ul>
-		<p>
-			Want the newest version of Plushables ASAP? Try <PlushablesColoured />
-			<span style="font-style:italic;">Lite</span>
-			- a leaner version of the mod that gets updated before the main one.
-		</p>
 	</div>
 
 	<div class="info-slot" slot="info">
 		<span class="modal-link modrinth">
 			<SimpleIconsModrinth />
 			<a href="https://modrinth.com/mod/plushables">Download on Modrinth</a>
-			|
-			<a href="https://modrinth.com/mod/plushables-lite"
-				><span style="font-style: italic;">Lite</span></a
-			>
 		</span>
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables">
 				Download on CurseForge
 			</a>
-			|
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables-lite"
-				><span style="font-style: italic;">Lite</span></a
-			>
 		</span>
 		<span class="modal-link youtube separator-top">
 			<SimpleIconsYoutube />
@@ -463,11 +457,10 @@
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/Plushables">View the GitHub repository</a>
-			|
-			<a href="https://github.com/Khazoda/plushables-lite"
-				><span style="font-style: italic;">Lite</span></a
-			>
 		</span>
+	</div>
+	<div class="feature-slot" slot="feature">
+		<video src={plushables_feature} autoplay loop muted playsinline></video>
 	</div>
 </Modal>
 
@@ -1232,9 +1225,9 @@
 	}
 
 	.feature-slot {
-		max-width: 350px;
+		max-width: 325px;
 		margin-top: 1rem;
-		display: inline-block;
+		display: inline-flex;
 		background-color: #141414;
 		border-radius: 10px;
 		border: 1px solid rgba(255, 255, 255, 0.05);
@@ -1272,7 +1265,11 @@
 			);
 			border-radius: 8px;
 		}
-		img {
+		img,
+		video {
+			border-radius: 8px;
+			width: 100%;
+			object-fit: scale-down;
 			position: relative;
 			z-index: 1;
 			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));

@@ -12,7 +12,7 @@
 	const closeDialog = () => {
 		showModal[modalID] = false;
 		dialog.close();
-		replaceState($page.url.origin, {});
+		replaceState($page.url.origin + '/versions', {});
 	};
 </script>
 

@@ -31,23 +31,20 @@
 <style lang="scss">
 	dialog {
 		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		inset: 0;
+		margin: auto;
 		max-width: 500px;
 		width: 90%;
 		max-height: 90vh;
+		height: fit-content;
 		overflow-y: auto;
 		padding: 0;
 		background: none;
 		border: none;
 		color: #e9e9ec;
-		margin: auto;
 
 		@media (max-width: 530px) {
-			top: auto;
-			bottom: 5vh;
-			transform: translateX(-50%);
+			margin: auto auto 5vh;
 			max-height: 85vh;
 		}
 
@@ -69,10 +66,10 @@
 
 	@keyframes zoom {
 		from {
-			transform: translate(-50%, -50%) scale(0.95);
+			scale: 0.95;
 		}
 		to {
-			transform: translate(-50%, -50%) scale(1);
+			scale: 1;
 		}
 	}
 

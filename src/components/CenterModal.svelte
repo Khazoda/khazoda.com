@@ -66,20 +66,20 @@
 
 	@keyframes zoom {
 		from {
-			scale: 0.95;
+			transform: scale(0.95);
 		}
 		to {
-			scale: 1;
+			transform: scale(1);
 		}
 	}
 
 	@media (max-width: 530px) {
 		@keyframes zoom {
 			from {
-				transform: translateX(-50%) scale(0.95);
+				transform: scale(0.95);
 			}
 			to {
-				transform: translateX(-50%) scale(1);
+				transform: scale(1);
 			}
 		}
 	}

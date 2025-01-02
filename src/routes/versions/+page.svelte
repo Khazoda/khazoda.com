@@ -470,4 +470,102 @@
 			color: var(--v-color-text-disabled);
 		}
 	}
+
+	@media (max-width: 530px) {
+		.table-container th,
+		.table-container td {
+			padding: 0.35rem;
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		.table-container th img,
+		.table-container td div {
+			width: 1.75rem;
+			height: 1.75rem;
+		}
+	}
+
+	.table-container .table-controls {
+		@media (max-width: 530px) {
+			position: fixed;
+			bottom: 0;
+			top: auto;
+			left: 0;
+			right: 0;
+			height: auto;
+			background: var(--v-color-background-darkest);
+			border-top: 1px solid var(--v-color-border);
+			padding: 0.5rem;
+			z-index: 1000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5rem;
+
+			span {
+				height: 2.25rem;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				gap: 0.5rem;
+			}
+
+			button,
+			a {
+				font-size: 0.85rem;
+				padding: 0.35rem 0.7rem;
+				height: 2.25rem;
+				min-height: 2.25rem;
+				background: var(--v-color-background-darker);
+				border: 1px solid var(--v-color-border);
+				white-space: nowrap;
+			}
+
+			.home-btn,
+			.help-btn {
+				position: fixed;
+				top: 0.5rem;
+				width: 2.25rem;
+				height: 2.25rem;
+				padding: 0.4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: var(--v-color-background-dark);
+			}
+
+			.home-btn {
+				left: 2rem;
+			}
+
+			.help-btn {
+				left: 5rem;
+			}
+
+			// Make the control buttons more compact
+			.control-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.25rem;
+
+				:global(svg) {
+					width: 1.2rem;
+					height: 1.2rem;
+				}
+			}
+		}
+	}
+	@media (max-width: 530px) {
+		.table-container {
+			margin: 0.5rem auto;
+			margin-top: 2.5rem;
+			padding: 0.5rem;
+		}
+		.table-wrapper {
+			padding-top: 0rem;
+			padding-bottom: 0.5rem;
+			margin: 0;
+		}
+	}
 </style>

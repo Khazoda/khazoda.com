@@ -56,7 +56,7 @@
 	$: currentlyHovered = 'Plushables';
 	const hashToModalID: Record<string, number> = {
 		'#plushables': 0,
-		'#basic-weapons': 1,
+		'#basicweapons': 1,
 		'#bronze': 2,
 		'#breakerplacer': 3,
 		'#basic-storage': 4,
@@ -479,7 +479,7 @@
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/basic-weapons?style=flat&label=&color=%2311B848"
+			src="https://img.shields.io/modrinth/game-versions/basicweapons?style=flat&label=&color=%2311B848"
 		/>
 	</h2>
 
@@ -501,17 +501,17 @@
 	<div class="info-slot" slot="info">
 		<span class="modal-link modrinth">
 			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/basic-weapons">Download on Modrinth</a>
+			<a href="https://modrinth.com/mod/basicweapons">Download on Modrinth</a>
 		</span>
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basic-weapons">
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basicweapons">
 				Download on CurseForge
 			</a>
 		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/basic-weapons">View the GitHub repository</a>
+			<a href="https://github.com/Khazoda/basicweapons">View the GitHub repository</a>
 		</span>
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />

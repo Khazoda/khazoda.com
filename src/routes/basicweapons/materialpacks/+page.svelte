@@ -1,6 +1,7 @@
 <script lang="ts">
 	import HomeButton from 'components/HomeButton.svelte';
 	import HugeiconsPlusSignSquare from 'virtual:icons/hugeicons/plus-sign-square';
+	import HugeiconsQuillWrite02 from 'virtual:icons/hugeicons/quill-write-02';
 	import HugeiconsLibrary from 'virtual:icons/hugeicons/library';
 	import HugeiconsBubbleChatQuestion from 'virtual:icons/hugeicons/bubble-chat-question';
 
@@ -10,6 +11,7 @@
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
 	import FanButton from 'src/components/materialpack/FanButton.svelte';
+	import { materialPacks } from '$lib/stores/materialPackStore';
 
 	let pageReady = false;
 
@@ -53,7 +55,7 @@
 						color="blue"
 						href="/basicweapons/materialpacks/list"
 						icon={HugeiconsLibrary}
-						label="View Material Packs"
+						label="Public Material Packs"
 						fanImages={[empty_frame, empty_frame, copper_dagger]}
 					/>
 				</span>
@@ -61,8 +63,12 @@
 					<FanButton
 						color="green"
 						href="/basicweapons/materialpacks/create"
-						icon={HugeiconsPlusSignSquare}
-						label="Create Material Pack"
+						icon={Object.keys($materialPacks.packs).length > 0
+							? HugeiconsQuillWrite02
+							: HugeiconsPlusSignSquare}
+						label={Object.keys($materialPacks.packs).length > 0
+							? 'Your Material Packs'
+							: 'Create Material Pack'}
 						fanImages={[empty_frame, empty_frame, empty_frame]}
 					/>
 				</span>
@@ -72,11 +78,6 @@
 </div>
 
 <style lang="scss">
-	.absolute-top-left {
-		position: absolute;
-		top: 1rem;
-		left: 1rem;
-	}
 	.page-container {
 		width: calc(100dvw - 16px);
 		height: calc(100dvh - 16px);

@@ -123,6 +123,11 @@ button:hover {
 }
 
 /* Some tailwind-esque generics to reuse */
+.absolute-top-left {
+	position: absolute;
+	top: 1.5rem;
+	left: 1.5rem;
+}
 .flex {
 	display: flex;
 }

@@ -6,9 +6,9 @@
 	import IconoirSortUp from 'virtual:icons/iconoir/sort-up';
 	import IconoirSquare from 'virtual:icons/iconoir/square';
 	import IconoirCheckSquare from 'virtual:icons/iconoir/check-square';
-	import IconoirHomeSimpleDoor from 'virtual:icons/iconoir/home-simple-door';
 	import IconoirInfoCircle from 'virtual:icons/iconoir/info-circle';
 	import CenterModal from '../../components/CenterModal.svelte';
+	import HomeButton from '../../components/HomeButton.svelte';
 
 	var showSupercededVersions = false;
 	var sortOrder: SortOrder = 'newest';
@@ -55,9 +55,7 @@
 
 <div class="table-container">
 	<div class="table-controls">
-		<a href="/" class="home-btn">
-			<IconoirHomeSimpleDoor width="100%" height="100%" />
-		</a>
+		<HomeButton />
 		<button class="help-btn" on:click={openModal} type="button">
 			<IconoirInfoCircle width="100%" height="100%" />
 		</button>
@@ -263,14 +261,6 @@
 			align-items: center;
 		}
 
-		.home-btn {
-			background: #234066;
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-			&:hover {
-				background: #2d527f;
-				box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-			}
-		}
 		.help-btn {
 			background: #8f4422;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

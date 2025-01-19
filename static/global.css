@@ -104,6 +104,14 @@ body::after {
 	}
 }
 
+a {
+	color: #c1e1f1;
+}
+
+a:hover {
+	color: #ffffff;
+}
+
 button {
 	color: #ffffff;
 	background: #383838;
@@ -111,4 +119,24 @@ button {
 
 button:hover {
 	background: #404040;
+	cursor: pointer;
+}
+
+/* Some tailwind-esque generics to reuse */
+.flex {
+	display: flex;
+}
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.align-center {
+	align-items: center;
 }

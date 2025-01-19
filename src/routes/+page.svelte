@@ -42,7 +42,7 @@
 	import IconoirCollageFrame from 'virtual:icons/iconoir/collage-frame';
 	import IconoirViewGrid from 'virtual:icons/iconoir/view-grid';
 
-	import PlushablesColoured from '../components/PlushablesColoured.svelte';
+	import PlushablesColoured from 'components/PlushablesColoured.svelte';
 
 	import { onMount } from 'svelte';
 	import { replaceState } from '$app/navigation';
@@ -120,13 +120,11 @@
 </script>
 
 <!-- #region HTML-->
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<svelte:head>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<link rel="stylesheet" href="index.css" />
 	<title>Khazoda's Mods</title>
-</head>
+</svelte:head>
 <div class="page-container">
 	<div class="top-right-container">
 		<audio id="click-sound">

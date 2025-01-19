@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { MinecraftVersion, SortOrder } from './types';
 	import { minecraftVersions, mods } from './data';
+	import { page } from '$app/stores';
 
 	import IconoirSortDown from 'virtual:icons/iconoir/sort-down';
 	import IconoirSortUp from 'virtual:icons/iconoir/sort-up';
@@ -139,7 +140,7 @@
 	</div>
 </div>
 
-<CenterModal bind:showModal modalID={0}>
+<CenterModal bind:showModal modalID={0} returnToURL={$page.url.origin + '/versions'}>
 	<div slot="description" class="definition-list">
 		<h2>Version Types</h2>
 		<ul>

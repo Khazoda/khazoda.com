@@ -1,10 +1,19 @@
+<script lang="ts" context="module">
+	export const closeDialog = () => {
+		const dialogs = document.querySelectorAll('dialog');
+		dialogs.forEach((dialog) => {
+			if (dialog.open) dialog.close();
+		});
+	};
+</script>
+
 <script lang="ts">
 	import MingcuteCloseFill from 'virtual:icons/mingcute/close-fill';
 	import { replaceState } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	export let showModal: boolean[];
 	export let modalID: number;
+	export let returnToURL: string | undefined = undefined;
 
 	let dialog: HTMLDialogElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
@@ -12,7 +21,7 @@
 	const closeDialog = () => {
 		showModal[modalID] = false;
 		dialog.close();
-		replaceState($page.url.origin + '/versions', {});
+		if (returnToURL) replaceState(returnToURL, {});
 	};
 </script>
 

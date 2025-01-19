@@ -4,9 +4,8 @@
 	import HugeiconsLibrary from 'virtual:icons/hugeicons/library';
 	import HugeiconsBubbleChatQuestion from 'virtual:icons/hugeicons/bubble-chat-question';
 
+	import empty_frame from '$lib/media/mod_specific_assets/basicweapons/empty_frame.png';
 	import copper_dagger from '$lib/media/mod_specific_assets/basicweapons/copper_dagger.png';
-	import copper_hammer from '$lib/media/mod_specific_assets/basicweapons/copper_hammer.png';
-	import copper_spear from '$lib/media/mod_specific_assets/basicweapons/copper_spear.png';
 
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
@@ -37,17 +36,17 @@
 		<div class="center-container">
 			<h1>Basic Weapons</h1>
 			<h2 transition:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>
-			<ul>
-				<li transition:fade={{ duration: 500, delay: 100 }}>
+			<div class="flex-col description">
+				<span transition:fade={{ duration: 500, delay: 100 }}>
 					Use this tool to create
 					<a href="/basicweapons/materialpacks/help">
 						material packs<span>?</span>
 					</a> for Basic Weapons
-				</li>
-				<li transition:fade={{ duration: 500, delay: 200 }}>
-					Define your own weapon stats and textures. The tool will take care of the rest
-				</li>
-			</ul>
+				</span>
+				<span transition:fade={{ duration: 500, delay: 200 }}>
+					Define your own weapon stats and textures
+				</span>
+			</div>
 			<div class="flex-row align-center">
 				<span transition:fly={{ y: 50, duration: 500, delay: 250 }}>
 					<FanButton
@@ -55,7 +54,7 @@
 						href="/basicweapons/materialpacks/list"
 						icon={HugeiconsLibrary}
 						label="View Material Packs"
-						fanImages={[copper_dagger, copper_hammer, copper_spear]}
+						fanImages={[empty_frame, empty_frame, copper_dagger]}
 					/>
 				</span>
 				<span transition:fly={{ y: 50, duration: 500, delay: 350 }}>
@@ -64,7 +63,7 @@
 						href="/basicweapons/materialpacks/create"
 						icon={HugeiconsPlusSignSquare}
 						label="Create Material Pack"
-						fanImages={[copper_hammer, copper_spear, copper_dagger]}
+						fanImages={[empty_frame, empty_frame, empty_frame]}
 					/>
 				</span>
 			</div>
@@ -99,7 +98,7 @@
 			opacity: 0.7;
 			padding-left: 0.2rem;
 			margin-top: 0.25rem;
-			margin-bottom: 1rem;
+			margin-bottom: 1.5rem;
 			text-transform: uppercase;
 			font-weight: 800;
 			font-size: 20px;
@@ -115,16 +114,15 @@
 			}
 		}
 	}
-	ul {
-		list-style-position: outside;
-		padding-inline: 1.25rem;
+	.description {
 		margin-bottom: 2rem;
-		li a span {
+		padding-left: 0.25rem;
+		span a span {
 			opacity: 0;
 			display: inline-block;
 			width: 0;
 		}
-		li a:hover span {
+		span a:hover span {
 			opacity: 1;
 			width: 0.5rem;
 		}

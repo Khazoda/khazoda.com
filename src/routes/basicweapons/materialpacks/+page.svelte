@@ -58,7 +58,7 @@
 						fanImages={[copper_dagger, copper_hammer, copper_spear]}
 					/>
 				</span>
-				<span transition:fly={{ y: 50, duration: 500, delay: 275 }}>
+				<span transition:fly={{ y: 50, duration: 500, delay: 350 }}>
 					<FanButton
 						color="green"
 						href="/basicweapons/materialpacks/create"

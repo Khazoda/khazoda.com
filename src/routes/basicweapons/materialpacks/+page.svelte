@@ -49,20 +49,24 @@
 				</li>
 			</ul>
 			<div class="flex-row align-center">
-				<FanButton
-					color="blue"
-					href="/basicweapons/materialpacks/list"
-					icon={HugeiconsLibrary}
-					label="View Material Packs"
-					fanImages={[copper_dagger, copper_hammer, copper_spear]}
-				/>
-				<FanButton
-					color="green"
-					href="/basicweapons/materialpacks/create"
-					icon={HugeiconsPlusSignSquare}
-					label="Create Material Pack"
-					fanImages={[copper_dagger, copper_hammer, copper_spear]}
-				/>
+				<span transition:fly={{ y: 50, duration: 500, delay: 250 }}>
+					<FanButton
+						color="blue"
+						href="/basicweapons/materialpacks/list"
+						icon={HugeiconsLibrary}
+						label="View Material Packs"
+						fanImages={[copper_dagger, copper_hammer, copper_spear]}
+					/>
+				</span>
+				<span transition:fly={{ y: 50, duration: 500, delay: 275 }}>
+					<FanButton
+						color="green"
+						href="/basicweapons/materialpacks/create"
+						icon={HugeiconsPlusSignSquare}
+						label="Create Material Pack"
+						fanImages={[copper_hammer, copper_spear, copper_dagger]}
+					/>
+				</span>
 			</div>
 		</div>
 	{/if}

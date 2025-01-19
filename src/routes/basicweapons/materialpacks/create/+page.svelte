@@ -350,22 +350,22 @@
 			background: none;
 			border: none;
 			.pack-label {
-				overflow: hidden;
-				text-overflow: ellipsis;
+				padding: 0.25rem 0.5rem;
+				display: inline;
 				position: absolute;
 				left: 0;
 				bottom: -0.5rem;
 				width: 100%;
-				font-size: 1.1rem;
 				text-align: center;
+				font-size: 1.1rem;
 				font-weight: 600;
+				overflow: hidden;
+				text-overflow: ellipsis;
 				text-wrap: nowrap;
-				background: #e6e6e6;
-				border: 2px solid white;
-				color: rgb(31, 31, 31);
-				border-radius: 2px;
-				padding: 0.25rem 0.5rem;
-				transition: transform 0.1s ease-in-out;
+				background: hsl(0, 0%, 95%);
+				color: rgb(49, 49, 49);
+				box-shadow: 0px 4px 0px 0 hsl(0, 0%, 55%);
+				border-radius: 4px;
 			}
 			&:hover .pack-label {
 				display: none;

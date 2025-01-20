@@ -47,7 +47,7 @@
 	let materials: Material[] = [];
 	let pack_icon: string | null = null; // For pack.png
 
-	let showModal: boolean[] = Array(2).fill(false);
+	let showModal: boolean[] = Array(3).fill(false);
 	let packToDelete: string | null = null;
 
 	let show_pack_creator = true;
@@ -71,9 +71,14 @@
 	}
 
 	function handleCreateNew() {
+		showModal[3] = true;
+	}
+
+	function handleStartFresh() {
 		try {
 			createNewPack();
 			show_pack_creator = true;
+			closeDialog();
 		} catch (error: any) {
 			alert(error?.message || 'Failed to create new pack');
 		}
@@ -220,7 +225,9 @@
 									</button>
 								</div>
 								<img src={pack.pack_icon || ''} alt="material pack icon" class="no-resample" />
-								<span class="pack-label">{pack.pack_name}</span>
+								{#if pack.pack_name}
+									<span class="pack-label">{pack.pack_name}</span>
+								{/if}
 							</div>
 						</div>
 					{/each}
@@ -447,6 +454,24 @@
 	</div>
 </CenterModal>
 
+<!-- Pack Creation Options Modal -->
+<CenterModal bind:showModal modalID={3}>
+	<div slot="description" class="modal-content">
+		<h2>Create New Material Pack</h2>
+		<p>Choose how you'd like to start your new material pack:</p>
+		<div class="creation-options">
+			<button class="option-btn" on:click={handleStartFresh}>
+				<span class="option-title">Start Fresh</span>
+				<span class="option-desc">Begin with a blank material pack</span>
+			</button>
+			<button class="option-btn disabled" title="Coming soon!">
+				<span class="option-title">From Template</span>
+				<span class="option-desc">Start from a pre-made template</span>
+			</button>
+		</div>
+	</div>
+</CenterModal>
+
 <!-- #region CSS -->
 <style lang="scss">
 	.back-btn-container {
@@ -579,22 +604,24 @@
 				font-size: 1rem;
 				letter-spacing: 0.05em;
 				line-height: 1;
+				transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			}
 			&:hover .pack-label {
-				display: none;
+				transform: scale(0.9);
 			}
 			.actions-container {
 				position: absolute;
-				bottom: -3rem;
-				left: 0;
-				width: 100%;
-				height: 48px;
+				top: 0;
+				right: -3rem;
+				width: 48px;
+				height: 100%;
 				display: flex;
+				flex-direction: column;
 				justify-content: space-evenly;
 				align-items: flex-start;
 				opacity: 0;
-				transform: translateY(-2rem);
-				transition: all 0.1s ease-in-out;
+				transform: translateY(-1.5rem);
+				transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 				button {
 					padding: 0;
@@ -615,7 +642,6 @@
 						color: rgb(65, 245, 125);
 					}
 				}
-
 				.edit-pack-btn {
 					&:hover {
 						color: rgb(91, 217, 255);
@@ -630,16 +656,7 @@
 			}
 			&:hover .actions-container {
 				opacity: 1;
-				transform: translateY(0.5rem);
-				.export-pack-btn {
-					transform: translateX(-10px);
-				}
-				.edit-pack-btn {
-					transform: translateX(0px);
-				}
-				.delete-pack-btn {
-					transform: translateX(10px);
-				}
+				transform: translateY(0rem);
 			}
 		}
 	}
@@ -907,6 +924,47 @@
 					background: #3b8de6;
 				}
 			}
+		}
+	}
+
+	.creation-options {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.option-btn {
+		width: 100%;
+		padding: 1rem;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 8px;
+		cursor: pointer;
+		text-align: left;
+		transition: all 0.2s ease;
+
+		&:hover:not(.disabled) {
+			background: #3a3a3a;
+			border-color: #5bd9ff;
+		}
+
+		&.disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		.option-title {
+			display: block;
+			font-size: 1.1rem;
+			font-weight: 600;
+			margin-bottom: 0.25rem;
+		}
+
+		.option-desc {
+			display: block;
+			font-size: 0.9rem;
+			opacity: 0.8;
 		}
 	}
 </style>

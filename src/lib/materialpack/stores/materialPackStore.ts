@@ -52,7 +52,7 @@ export const createNewPack = () => {
 	const newPack = {
 		...initialState,
 		localstorage_id,
-		pack_name: `New Pack ${Object.keys(get(materialPacks).packs).length + 1}`,
+		pack_name: ``,
 		pack_icon:
 			'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kbtLA0EQh78kimKUCFGwsAiSWBnRCEEbi4hGQS1iBF9NcnkJeRx3CRJsBVtBQbTxVehfoK1gLQiKIoi1too2KudcEkgQM8vOfvvbmWF3FqzhtJLRGwYgk81roWDAtbC45Gp6xYITOx46I4quzsxNhKlrn/cSLXbrNWvVj/vX7LG4roClWXhUUbW88KTw9FpeNXlHuENJRWLCZ8J9mlxQ+M7Uo2V+MTlZ5m+TtXBoDKztwq5kDUdrWElpGWF5Oe5MuqBU7mO+pDWenZ+TtUdmNzohggRwMcU4Y/gZZES8Hy8++mVHnfyBUv4sOclVxKsU0VglSYo8faIWpHpc1oTocRlpimb///ZVTwz5ytVbA9D4bBjvHmjahp8tw/g6MoyfY7A9wWW2mp87hOEP0beqmvsAHBtwflXVortwsQldj2pEi5Qkm0xrIgFvp9C2CM4baFku96xyzskDhNflq65hbx96Jd6x8gtehWfiZr0+nQAAAAlwSFlzAAALEwAACxMBAJqcGAAAACFQTFRFAAAANzc3VlZWek4/i4uLqWJKrmVMvX5pw4p3y8vL////0LzRUAAAAAF0Uk5TAEDm2GYAAABnSURBVCjPY2AgDARRAFBAvLy8vLgcCgpBAh0dHc0dUAARQGiQAAs0KsGAikQgWEBzJhTMEiNTQNgQISBsSCVDaSIgSoZAIoaA1yoYgAogAhkikJaWlpwGBWCB0NDQ4FAoCMQWlYQAALdlmknY+BjuAAAAAElFTkSuQmCC'
 	};

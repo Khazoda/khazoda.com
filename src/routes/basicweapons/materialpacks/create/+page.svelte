@@ -135,8 +135,12 @@
 		}
 	}
 
-	function showInfoModal() {
+	function showBrowserStorageInfoModal() {
 		showModal[1] = true;
+	}
+
+	function showMaterialPackSettingsInfoModal() {
+		showModal[2] = true;
 	}
 
 	function validateAndUpdateStore(event: Event, schema: z.ZodSchema, field: keyof MaterialPack) {
@@ -184,7 +188,7 @@
 							color="grey"
 						/>
 					</span>
-					<button class="icon-btn" on:click={showInfoModal}>
+					<button class="info-btn" on:click={showBrowserStorageInfoModal}>
 						<HugeiconsInformationSquare width="42" height="42" />
 					</button>
 				</div>
@@ -274,103 +278,99 @@
 				</div>
 				<!-- #endregion Material Tabs -->
 				<!-- #region Material Pack Settings -->
-				<form class="pack-settings-form">
-					<h3>
-						<span> <HugeiconsFolder01 width="32" height="32" /></span>
-						{'bwmp_' +
-							$materialPack.pack_name +
-							'_' +
-							($materialPack.mod_dependency_name
-								? $materialPack.mod_dependency_name
-								: 'minecraft') +
-							'.zip'}
-					</h3>
-					<div class="form-element imagepicker">
-						<ImagePicker
-							currentImage={$materialPack.pack_icon}
-							accept="image/png"
-							onImageSelect={(base64String) => {
-								materialPack.update((pack) => ({
-									...pack,
-									pack_icon: base64String
-								}));
-								materialPacks.update((state) => ({
-									...state,
-									packs: {
-										...state.packs,
-										[$materialPack.localstorage_id]: {
-											...state.packs[$materialPack.localstorage_id],
-											pack_icon: base64String
+				<div class="form-wrapper">
+					<button class="icon-btn form-info-btn" on:click={showMaterialPackSettingsInfoModal}>
+						<HugeiconsInformationSquare width="42" height="42" />
+					</button>
+					<form class="pack-settings-form">
+						<div class="pack-settings-header">
+							<span>
+								<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
+								<span class="pack-name-container">
+									{'bwmp_' +
+										$materialPack.pack_name +
+										'_' +
+										($materialPack.mod_dependency_name
+											? $materialPack.mod_dependency_name
+											: 'minecraft') +
+										'.zip'}
+								</span>
+							</span>
+						</div>
+
+						<div class="form-element imagepicker">
+							<ImagePicker
+								currentImage={$materialPack.pack_icon}
+								accept="image/png"
+								onImageSelect={(base64String) => {
+									materialPack.update((pack) => ({
+										...pack,
+										pack_icon: base64String
+									}));
+									materialPacks.update((state) => ({
+										...state,
+										packs: {
+											...state.packs,
+											[$materialPack.localstorage_id]: {
+												...state.packs[$materialPack.localstorage_id],
+												pack_icon: base64String
+											}
 										}
-									}
-								}));
-							}}
-						/>
-					</div>
-					<div class="grid-section-general flex-col">
-						<div class="form-element text">
-							<input
-								type="text"
-								id="pack_name"
-								placeholder=" "
-								bind:value={$materialPack.pack_name}
-								on:input={(e) => validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-								required
+									}));
+								}}
 							/>
-							<label for="pack_name">Material Pack Name</label>
 						</div>
-						<div class="grid-section-minecraft-version flex-col">
-							<VersionPicker />
-						</div>
-					</div>
-
-					<div class="grid-section-mod-dependency flex-col">
-						<h3>Mod Dependency (Optional)</h3>
-						<div class="form-element text" style="margin-bottom:0.75rem;">
-							<input
-								type="text"
-								id="mod_dependency_name"
-								placeholder=" "
-								bind:value={$materialPack.mod_dependency_name}
-								on:input={(e) =>
-									validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
-							/>
-							<label for="mod_dependency_name">Mod Name</label>
+						<div class="grid-section-general flex-col">
+							<div class="form-element text">
+								<input
+									type="text"
+									id="pack_name"
+									placeholder=" "
+									bind:value={$materialPack.pack_name}
+									on:input={(e) => validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
+									required
+								/>
+								<label for="pack_name">Material Pack Name</label>
+							</div>
+							<div class="grid-section-minecraft-version flex-col">
+								<VersionPicker />
+							</div>
 						</div>
 
-						<div class="form-element text">
-							<input
-								type="text"
-								id="mod_dependency_modid"
-								placeholder=" "
-								bind:value={$materialPack.mod_dependency_modid}
-								on:input={(e) =>
-									validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
-							/>
-							<label for="mod_dependency_modid">
-								Mod ID<span class="info-hover-icon"><HugeiconsInformationSquare /></span>
-							</label>
+						<div class="grid-section-mod-dependency flex-col">
+							<h3>Mod Dependency (Optional)</h3>
+							<div class="form-element text" style="margin-bottom:0.75rem;">
+								<input
+									type="text"
+									id="mod_dependency_name"
+									placeholder=" "
+									bind:value={$materialPack.mod_dependency_name}
+									on:input={(e) =>
+										validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
+								/>
+								<label for="mod_dependency_name">Mod Name</label>
+							</div>
+
+							<div class="form-element text">
+								<input
+									type="text"
+									id="mod_dependency_modid"
+									placeholder=" "
+									bind:value={$materialPack.mod_dependency_modid}
+									on:input={(e) =>
+										validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
+								/>
+								<label for="mod_dependency_modid"> Mod ID </label>
+							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			{/if}
 		</div>
 	{/if}
 </div>
 
-<!-- Material Pack Delete Modal -->
-<CenterModal bind:showModal modalID={0}>
-	<div slot="description" class="modal-content">
-		<h2>Delete Material Pack?</h2>
-		<p>Are you sure you want to delete this material pack? This action cannot be undone.</p>
-		<div class="modal-actions">
-			<button class="cancel-btn" on:click={closeDialog}>Cancel</button>
-			<button class="delete-btn" on:click={confirmDelete}>Delete</button>
-		</div>
-	</div>
-</CenterModal>
-
-<!-- Add the new info modal -->
+<!-- LocalStorage Info Modal -->
 <CenterModal bind:showModal modalID={1}>
 	<div slot="description" class="modal-content info-modal">
 		<h2>Browser Storage Information</h2>
@@ -394,28 +394,125 @@
 	</div>
 </CenterModal>
 
+<!-- Material Pack Delete Modal -->
+<CenterModal bind:showModal modalID={0}>
+	<div slot="description" class="modal-content">
+		<h2>Delete Material Pack?</h2>
+		<p>Are you sure you want to delete this material pack? This action cannot be undone.</p>
+		<div class="modal-actions">
+			<button class="cancel-btn" on:click={closeDialog}>Cancel</button>
+			<button class="delete-btn" on:click={confirmDelete}>Delete</button>
+		</div>
+	</div>
+</CenterModal>
+
+<!-- Material Pack Settings Info Modal -->
+<CenterModal bind:showModal modalID={2}>
+	<div slot="description" class="info-modal">
+		<h2>Material Pack Settings</h2>
+		<h4>Change the main settings for your material pack here.</h4>
+		<div class="modal-content">
+			<h4>Pack Icon</h4>
+			<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
+			<p>
+				Feel free to download the template image and edit it to display one of your weapon textures
+				in.
+			</p>
+			<h4>Pack Name</h4>
+			<p>
+				The material pack name should be either the name of your main material (e.g. 'copper',
+				'unobtainium'), or in the case of a materialpack with multiple materials, a name that is
+				short and makes sense (e.g. 'gems', 'tech-mats', 'all-mats').
+			</p>
+			<h4>Target Minecraft Version</h4>
+			<p>
+				The target Minecraft version informs the materialpack generator what pack format to use for
+				assets and data. Mojang changes how resources and data are structured from version to
+				version.
+			</p>
+			<h4>Mod Dependency</h4>
+			<p>
+				If your material pack uses materials from another mod rather than vanilla, include that
+				mod's name (e.g. 'mekanism', 'mythic-metals', 'applied-energistics-2').
+			</p>
+			<p>
+				The mod dependency ID <b>must</b> be the actual id (namespace) of the mod you're depending on
+				(e.g. 'mekanism', 'mythicmetals', 'appeng'). Basic Weapons will only load your pack if it detects
+				a mod with that id being loaded.
+			</p>
+		</div>
+		<div class="modal-actions">
+			<button class="ok-btn" on:click={closeDialog}>Ok 👍</button>
+		</div>
+	</div>
+</CenterModal>
+
 <!-- #region CSS -->
 <style lang="scss">
 	.back-btn-container {
 		display: block;
 		margin-bottom: 1rem;
 	}
-	.icon-btn {
+	.icon {
 		display: inline-flex;
-		align-items: flex-start;
-		justify-content: flex-end;
+		align-items: center;
+		justify-content: center;
 		padding: 0;
 		width: fit-content;
 		height: fit-content;
-		background: none;
-		border: none;
+		color: currentColor;
+	}
+
+	.icon-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25rem;
+		width: fit-content;
+		height: fit-content;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 16px;
 		cursor: pointer;
 		transform: scale(1);
-		transition: transform 0.1s ease-in-out;
+		transition: all 0.1s ease-out;
+
 		&:hover {
 			transform: scale(1.05);
+			background: #3a3a3a;
+			border-color: #5bd9ff;
+			color: #5bd9ff;
+		}
+
+		&:active {
+			transform: scale(0.95);
+			background: #1a1a1a;
 		}
 	}
+
+	.info-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25rem;
+		background: #333333;
+		border: 2px solid #1c1c1c;
+		border-radius: 16px;
+		box-shadow: 2px -2px 0px 0px #222222;
+		transition: all 0.2s ease;
+		&:hover {
+			background: rgb(77, 77, 77);
+			color: #71b3ff;
+			border: 2px solid #1c1c1c;
+			box-shadow: 1px -1px 0px 0px #222222;
+		}
+
+		&:active {
+			background: #1a1a1a;
+			box-shadow: 0px 0px 0px 0px #222222;
+		}
+	}
+
 	h1 {
 		margin: 0;
 		font-size: 1rem;
@@ -635,106 +732,139 @@
 		}
 	}
 	// #region Form Sections
-	form {
-		padding: 2rem;
-		background: #2c2c2c;
-		border: 2px solid #1c1c1c;
-		border-radius: 8px;
-		display: grid;
-		grid-template-columns: 1fr 2fr;
-		grid-template-rows: min(fit-content, 1fr) 1fr 1fr;
-		gap: 1rem;
-	}
-
-	h3 {
-		grid-column: 1 / 3;
-		grid-row: 1 / 2;
-		margin: 0 0 2rem 0;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		text-overflow: ellipsis;
-		font-size: medium;
-		span {
-			width: 32px;
-			height: 32px;
-		}
-	}
-	.form-element {
+	.form-wrapper {
 		position: relative;
-		margin-bottom: 2.5rem;
-		width: 100%;
 
-		&.text {
-			height: 3rem;
-			label {
-				width: 100%;
-				height: 100%;
-				display: inline-flex;
-				justify-content: flex-start;
-				align-items: center;
-				position: absolute;
-				left: 0.6rem;
-				top: 0;
-				padding: 0.5rem;
-				transform: translateY(0);
-				color: rgb(70, 70, 70);
-				font-weight: 500;
-				pointer-events: none;
-				transition: 0.2s ease;
-				border-top-right-radius: 4px;
-				border-top-left-radius: 4px;
+		form {
+			position: relative;
+			padding: 2rem;
+			background: #2c2c2c;
+			border: 2px solid #1c1c1c;
+			border-radius: 8px;
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			grid-template-rows: min(fit-content, 1fr) 1fr 1fr;
+			gap: 1rem;
+		}
+		.form-info-btn {
+			position: absolute;
+			right: -3.5rem;
+			top: 1.5rem;
+			padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+			background: #333333;
+			border: 2px solid #1c1c1c;
+			border-left: none;
+			border-radius: 0 6px 6px 0;
+
+			&:hover {
+				transform: translateX(4px);
+				background: rgb(77, 77, 77);
+				color: #71b3ff;
+				border: 2px solid #1c1c1c;
 			}
-			input {
-				width: 100%;
-				height: 100%;
-				padding: 0.5rem 1rem;
-				border-radius: 4px;
-				&::placeholder {
-					color: transparent;
+
+			&:active {
+				transform: translateX(2px);
+				background: #1a1a1a;
+			}
+		}
+
+		.pack-settings-header {
+			grid-column: 1 / 3;
+			grid-row: 1 / 2;
+			margin: 0 0 2rem 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			font-size: medium;
+			width: 500px;
+			max-width: 500px;
+		}
+		.pack-settings-header > span {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			.pack-name-container {
+				max-width: 450px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+		.form-element {
+			position: relative;
+			margin-bottom: 2.5rem;
+			width: 100%;
+
+			&.text {
+				height: 3rem;
+				label {
+					width: 100%;
+					height: 100%;
+					display: inline-flex;
+					justify-content: flex-start;
+					align-items: center;
+					position: absolute;
+					left: 0.6rem;
+					top: 0;
+					padding: 0.5rem;
+					transform: translateY(0);
+					color: rgb(70, 70, 70);
+					font-weight: 500;
+					pointer-events: none;
+					transition: 0.2s ease;
+					border-top-right-radius: 4px;
+					border-top-left-radius: 4px;
+				}
+				input {
+					width: 100%;
+					height: 100%;
+					padding: 0.5rem 1rem;
+					border-radius: 4px;
+					&::placeholder {
+						color: transparent;
+					}
+				}
+
+				input:focus + label,
+				input:not(:placeholder-shown) + label {
+					transform: translateY(-2.25rem);
+					left: -4px;
+					color: white;
+					font-size: 14px;
 				}
 			}
-
-			input:focus + label,
-			input:not(:placeholder-shown) + label {
-				transform: translateY(-2.25rem);
-				left: -4px;
-				color: white;
-				font-size: 14px;
+			&.imagepicker {
+				width: fit-content;
 			}
 		}
-		&.imagepicker {
-			width: fit-content;
-		}
-
-		.info-hover-icon {
-			width: 24px;
-			height: 24px;
-			margin-left: 0.25rem;
-			pointer-events: all;
-			cursor: pointer;
-			color: black;
-			&:hover {
-				transform: scale(1.05);
+		.grid-section-general {
+			max-height: 124px;
+			gap: 1rem;
+			justify-content: space-between;
+			div {
+				margin: 0;
 			}
 		}
-	}
-	.grid-section-general {
-		max-height: 124px;
-		gap: 1rem;
-		justify-content: space-between;
-		div {
-			margin: 0;
-		}
-	}
-	.grid-section-mod-dependency {
-		gap: 1rem;
-		grid-column: 1/3;
-		h3 {
-			margin-bottom: 1rem;
+		.grid-section-mod-dependency {
+			padding: 1rem 2rem;
+			gap: 1rem;
+			grid-column: 1/3;
+			box-shadow: inset 0px 0px 10px 0px #1c1c1c;
+			background: rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			h3 {
+				margin-bottom: 1rem;
+			}
 		}
 	}
 	//#region Modal Styles
+	.modal-content {
+		p {
+			opacity: 0.9;
+			font-size: 0.9rem;
+		}
+	}
 	.modal-actions {
 		display: flex;
 		justify-content: center;

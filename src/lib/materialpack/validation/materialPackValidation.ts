@@ -11,6 +11,7 @@ export const materialPackNameSchema = z
 
 export const modDependencySchema = z
 	.string()
+	.max(24, "Mod dependency name can't be longer than 24 characters")
 	.transform((val) => val.toLowerCase())
 	.transform((val) => val.replace(/\s+/g, '-'))
 	.transform((val) => val.replace(/[^a-z0-9-]/g, ''));

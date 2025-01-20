@@ -11,7 +11,7 @@ const PACK_FORMAT_VERSIONS = {
 } as const;
 
 export const getVersionRanges = () => {
-	return Object.keys(PACK_FORMAT_VERSIONS.data);
+	return Object.keys(PACK_FORMAT_VERSIONS.data).reverse();
 };
 
 export { PACK_FORMAT_VERSIONS };

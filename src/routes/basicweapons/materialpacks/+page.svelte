@@ -6,7 +6,7 @@
 	import HugeiconsBubbleChatQuestion from 'virtual:icons/hugeicons/bubble-chat-question';
 
 	import empty_frame from '$lib/materialpack/media/empty_frame.png';
-	import copper_dagger from '$lib/materialpack/media/copper_dagger.png';
+	import copper_dagger from '$lib/materialpack/media/bwmp_copper_minecraft.png';
 
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';

@@ -10,11 +10,6 @@
 	// Props for fan animation
 	export let fanImages: string[] = [];
 
-	// Validate fan images
-	$: if (fanImages.length > 0 && fanImages.length !== 3) {
-		console.warn('FanButton expects exactly 3 fan images when using animation');
-	}
-
 	let isHovered = false;
 </script>
 
@@ -29,11 +24,11 @@
 		{label}
 	</span>
 
-	{#if fanImages.length === 3 && isHovered}
+	{#if fanImages.length > 0 && isHovered}
 		<div class="fan-overlay">
-			<img src={fanImages[0]} alt="" class="fan-image fan-1" />
-			<img src={fanImages[1]} alt="" class="fan-image fan-2" />
-			<img src={fanImages[2]} alt="" class="fan-image fan-3" />
+			{#each fanImages.slice(0, 3) as image, i}
+				<img src={image} alt="" class="fan-image fan-{i + 1} no-resample" />
+			{/each}
 		</div>
 	{/if}
 </a>
@@ -111,6 +106,7 @@
 		opacity: 0;
 		transform-origin: bottom center;
 		transition: all 0.3s ease-out;
+		filter: blur(0px); // Fixes rotation creating jagged edges (maybe a GPU thing?)
 	}
 
 	.fan-1 {

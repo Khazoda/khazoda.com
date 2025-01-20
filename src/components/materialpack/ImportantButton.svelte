@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Props for button styling
-	export let color: 'blue' | 'green' = 'blue';
+	export let color: 'blue' | 'green' | 'grey' = 'blue';
 
 	// Props for content
 	export let icon: any; // Svelte component type for the icon
@@ -52,6 +52,18 @@
 				border-color: #0066ff;
 				span {
 					transform: scale(1.05);
+				}
+			}
+		}
+
+		&.grey {
+			border: 2px solid #a3a3a3;
+			box-shadow: 3px 3px 0px #a3a3a3;
+			&:hover {
+				box-shadow: 2px 2px 0px #6b6b6b;
+				border-color: #6b6b6b;
+				span {
+					transform: scale(0.95);
 				}
 			}
 		}

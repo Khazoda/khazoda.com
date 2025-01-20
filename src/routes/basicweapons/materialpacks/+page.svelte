@@ -5,13 +5,13 @@
 	import HugeiconsLibrary from 'virtual:icons/hugeicons/library';
 	import HugeiconsBubbleChatQuestion from 'virtual:icons/hugeicons/bubble-chat-question';
 
-	import empty_frame from '$lib/media/mod_specific_assets/basicweapons/empty_frame.png';
-	import copper_dagger from '$lib/media/mod_specific_assets/basicweapons/copper_dagger.png';
+	import empty_frame from '$lib/materialpack/media/empty_frame.png';
+	import copper_dagger from '$lib/materialpack/media/copper_dagger.png';
 
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
 	import FanButton from 'src/components/materialpack/FanButton.svelte';
-	import { materialPacks } from '$lib/stores/materialPackStore';
+	import { materialPacks } from 'src/lib/materialpack/stores/materialPackStore';
 
 	let pageReady = false;
 
@@ -69,7 +69,9 @@
 						label={Object.keys($materialPacks.packs).length > 0
 							? 'Your Material Packs'
 							: 'Create Material Pack'}
-						fanImages={[empty_frame, empty_frame, empty_frame]}
+						fanImages={Object.values($materialPacks.packs)
+							.slice(0, 3)
+							.map((pack) => pack.pack_icon || empty_frame)}
 					/>
 				</span>
 			</div>

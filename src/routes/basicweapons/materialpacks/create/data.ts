@@ -9,3 +9,9 @@ const PACK_FORMAT_VERSIONS = {
 		'1.21-1.21.1': 34
 	}
 } as const;
+
+export const getVersionRanges = () => {
+	return Object.keys(PACK_FORMAT_VERSIONS.data);
+};
+
+export { PACK_FORMAT_VERSIONS };

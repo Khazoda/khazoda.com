@@ -2,38 +2,6 @@ import { writable } from 'svelte/store';
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
 
-// Types
-type Material = {
-	name: string;
-	durability: number;
-	attack_damage_bonus: number;
-	attack_speed_bonus: number;
-	reach_bonus: number;
-	enchantability: number;
-	repair_ingredient: string;
-	textures: {
-		dagger: string | null;
-		hammer: string | null;
-		club: string | null;
-		spear: string | null;
-		spear_held: string | null;
-		quarterstaff: string | null;
-		quarterstaff_held: string | null;
-		glaive: string | null;
-		glaive_held: string | null;
-	};
-};
-
-type MaterialPack = {
-	id: string;
-	pack_name: string;
-	mod_dependency_name: string;
-	mod_dependency_id: string;
-	minecraft_version: string;
-	materials: Material[];
-	pack_icon: string | null;
-};
-
 // Add new types for managing multiple packs
 type MaterialPackList = {
 	packs: { [key: string]: MaterialPack }; // Using pack_name as key
@@ -42,10 +10,10 @@ type MaterialPackList = {
 
 // Initial state
 const initialState: MaterialPack = {
-	id: '',
+	localstorage_id: '',
 	pack_name: '',
 	mod_dependency_name: '',
-	mod_dependency_id: '',
+	mod_dependency_modid: '',
 	minecraft_version: '',
 	materials: [],
 	pack_icon: null
@@ -80,19 +48,19 @@ export const createNewPack = () => {
 		throw new Error('Maximum number of packs (10) reached');
 	}
 
-	const id = generateUniqueId();
+	const localstorage_id = generateUniqueId();
 	const newPack = {
 		...initialState,
-		id,
+		localstorage_id,
 		pack_name: `New Pack ${Object.keys(get(materialPacks).packs).length + 1}`,
 		pack_icon:
-			'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kbtLA0EQh78kimKUCFGwsAiSWBnRCEEbi4hGQS1iBF9NcnkJeRx3CRJsBVtBQbTxVehfoK1gLQiKIoi1too2KudcEkgQM8vOfvvbmWF3FqzhtJLRGwYgk81roWDAtbC45Gp6xYITOx46I4quzsxNhKlrn/cSLXbrNWvVj/vX7LG4roClWXhUUbW88KTw9FpeNXlHuENJRWLCZ8J9mlxQ+M7Uo2V+MTlZ5m+TtXBoDKztwq5kDUdrWElpGWF5Oe5MuqBU7mO+pDWenZ+TtUdmNzohggRwMcU4Y/gZZES8Hy8++mVHnfyBUv4sOclVxKsU0VglSYo8faIWpHpc1oTocRlpimb///ZVTwz5ytVbA9D4bBjvHmjahp8tw/g6MoyfY7A9wWW2mp87hOEP0beqmvsAHBtwflXVortwsQldj2pEi5Qkm0xrIgFvp9C2CM4baFku96xyzskDhNflq65hbx96Jd6x8gtehWfiZr0+nQAAAAlwSFlzAAALEwAACxMBAJqcGAAAACFQTFRFAAAANzc3VlZWek4/i4uLqWJKrmVMvX5pw4p3y8vL////0LzRUAAAAAF0Uk5TAEDm2GYAAACNSURBVGje7dkxEcNADERRUxCFUFgKR+EoiIIpHIVQOJQpkiJ2c7In1eb/WvOq7bRtRJ/iZl7Afkral/kB45A0FrkC9Qm5AhGPUq1FjNG7K/AsNGdEJgAAgCsgSVeA970XwA4AAAAAAAAADIHeAQAAfgRkAmRGtDZLOQP1XIHvpFzkCByT+jI3gF8b/X0vLsbm3MuQutQAAAAASUVORK5CYII='
+			'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kbtLA0EQh78kimKUCFGwsAiSWBnRCEEbi4hGQS1iBF9NcnkJeRx3CRJsBVtBQbTxVehfoK1gLQiKIoi1too2KudcEkgQM8vOfvvbmWF3FqzhtJLRGwYgk81roWDAtbC45Gp6xYITOx46I4quzsxNhKlrn/cSLXbrNWvVj/vX7LG4roClWXhUUbW88KTw9FpeNXlHuENJRWLCZ8J9mlxQ+M7Uo2V+MTlZ5m+TtXBoDKztwq5kDUdrWElpGWF5Oe5MuqBU7mO+pDWenZ+TtUdmNzohggRwMcU4Y/gZZES8Hy8++mVHnfyBUv4sOclVxKsU0VglSYo8faIWpHpc1oTocRlpimb///ZVTwz5ytVbA9D4bBjvHmjahp8tw/g6MoyfY7A9wWW2mp87hOEP0beqmvsAHBtwflXVortwsQldj2pEi5Qkm0xrIgFvp9C2CM4baFku96xyzskDhNflq65hbx96Jd6x8gtehWfiZr0+nQAAAAlwSFlzAAALEwAACxMBAJqcGAAAACFQTFRFAAAANzc3VlZWek4/i4uLqWJKrmVMvX5pw4p3y8vL////0LzRUAAAAAF0Uk5TAEDm2GYAAABnSURBVCjPY2AgDARRAFBAvLy8vLgcCgpBAh0dHc0dUAARQGiQAAs0KsGAikQgWEBzJhTMEiNTQNgQISBsSCVDaSIgSoZAIoaA1yoYgAogAhkikJaWlpwGBWCB0NDQ4FAoCMQWlYQAALdlmknY+BjuAAAAAElFTkSuQmCC'
 	};
 
 	materialPacks.update((state) => ({
 		...state,
-		packs: { ...state.packs, [id]: newPack },
-		currentPack: id
+		packs: { ...state.packs, [localstorage_id]: newPack },
+		currentPack: localstorage_id
 	}));
 };
 

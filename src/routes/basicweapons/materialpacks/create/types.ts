@@ -1,4 +1,4 @@
-// Material properties
+// Types
 type Material = {
 	name: string;
 	durability: number;
@@ -18,4 +18,14 @@ type Material = {
 		glaive: string | null;
 		glaive_held: string | null;
 	};
+};
+
+type MaterialPack = {
+	localstorage_id: string;
+	pack_name: string;
+	mod_dependency_name: string;
+	mod_dependency_modid: string;
+	minecraft_version: string;
+	materials: Material[];
+	pack_icon: string | null;
 };

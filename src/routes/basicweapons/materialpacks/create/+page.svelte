@@ -279,7 +279,16 @@
 								<div class="pack-settings-header">
 									<span>
 										<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
-										<span class="pack-name-container">
+										<span
+											class="pack-name-container"
+											title={'bwmp_' +
+												$materialPack.pack_name +
+												'_' +
+												($materialPack.mod_dependency_name
+													? $materialPack.mod_dependency_name
+													: 'minecraft') +
+												'.zip'}
+										>
 											{'bwmp_' +
 												$materialPack.pack_name +
 												'_' +
@@ -751,9 +760,10 @@
 			align-items: center;
 			gap: 0.5rem;
 			.pack-name-container {
-				max-width: 450px;
+				max-width: 475px;
 				overflow: hidden;
 				text-overflow: ellipsis;
+				font-size: 1.1rem;
 			}
 		}
 		.form-element {

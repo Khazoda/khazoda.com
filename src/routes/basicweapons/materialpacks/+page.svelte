@@ -55,7 +55,7 @@
 						color="blue"
 						href="/basicweapons/materialpacks/list"
 						icon={HugeiconsLibrary}
-						label="Public Material Packs"
+						label="Published Material Packs"
 						fanImages={[empty_frame, empty_frame, copper_dagger]}
 					/>
 				</span>

@@ -109,6 +109,7 @@
 		cursor: pointer;
 		transition: all 0.1s ease;
 		width: fit-content;
+		text-wrap: nowrap;
 
 		&:hover {
 			background: rgb(77, 77, 77);

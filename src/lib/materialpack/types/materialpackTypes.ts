@@ -1,6 +1,6 @@
 // Types
 type Material = {
-	name: string;
+	material_name: string;
 	durability: number;
 	attack_damage_bonus: number;
 	attack_speed_bonus: number;
@@ -28,3 +28,6 @@ type MaterialPack = {
 	materials: Material[];
 	pack_icon: string | null;
 };
+
+// Export the types
+export type { Material, MaterialPack };

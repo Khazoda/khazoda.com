@@ -3,13 +3,15 @@
 	import HugeiconsAbacus from 'virtual:icons/hugeicons/abacus';
 	import HugeiconsPlusSignSquare from 'virtual:icons/hugeicons/plus-sign-square';
 
-	export let tabs: Array<{
-		id: string;
-		label: string;
-		type: 'settings' | 'material';
-		materialIndex?: number;
-		icon?: any;
-	}>;
+	export let tabs:
+		| Array<{
+				id: string;
+				label: string;
+				type: 'settings' | 'material';
+				materialIndex?: number;
+				icon?: any;
+		  }>
+		| any;
 	export let activeTab: string;
 	export let onTabChange: (tabId: string, subType?: string) => void;
 	export let onAddMaterial: () => void;
@@ -30,7 +32,7 @@
 	function handleAddMaterialClick() {
 		onAddMaterial();
 		// Get the new material's index (will be the length of current tabs minus 1, which excludes the "Add Material" button)
-		const newMaterialIndex = tabs.filter((tab) => tab.type === 'material').length;
+		const newMaterialIndex = tabs.filter((tab: { type: string }) => tab.type === 'material').length;
 		// Switch to newly created material tab
 		handleMaterialSubTabClick(newMaterialIndex, 'stats');
 	}

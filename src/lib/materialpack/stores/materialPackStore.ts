@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
+import type { MaterialPack } from '../types/materialpackTypes';
 
 // Add new types for managing multiple packs
 type MaterialPackList = {

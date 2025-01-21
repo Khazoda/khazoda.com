@@ -36,6 +36,10 @@
 
 	import { z } from 'zod';
 
+	import MaterialCreatorStats from 'src/components/materialpack/MaterialCreatorStatsForm.svelte';
+	import MaterialCreatorAssets from 'src/components/materialpack/MaterialCreatorAssetsForm.svelte';
+	import type { Material, MaterialPack } from 'src/lib/materialpack/types/materialpackTypes';
+
 	// Basic pack information
 	let pack_name = '';
 	let mod_dependency_name = '';
@@ -59,10 +63,10 @@
 	let activeTab = 'settings';
 	$: tabs = [
 		{ id: 'settings', type: 'settings' as const, label: 'Pack Settings' },
-		...$materialPack.materials.map((_, index) => ({
+		...$materialPack.materials.map((material: Material, index: number) => ({
 			id: `material-${index}`,
-			type: 'material' as const,
-			label: `Material ${index + 1}`,
+			label: material.material_name || `Material ${index + 1}`,
+			type: 'material',
 			materialIndex: index
 		}))
 	];
@@ -376,15 +380,14 @@
 									{#each $materialPack.materials as material, index}
 										{#if activeTab.startsWith(`material-${index}`)}
 											{#if activeTab.endsWith('-stats')}
-												<!-- Stats content for material {index} -->
-												<form class="material-stats-form">
-													Stats content for Material {index + 1}
-												</form>
+												<MaterialCreatorStats
+													{material}
+													{index}
+													bind:activeTab
+													onTabChange={(newTab) => (activeTab = newTab)}
+												/>
 											{:else if activeTab.endsWith('-assets')}
-												<!-- Assets content for material {index} -->
-												<form class="material-assets-form">
-													Assets content for Material {index + 1}
-												</form>
+												<MaterialCreatorAssets {material} {index} />
 											{/if}
 										{/if}
 									{/each}

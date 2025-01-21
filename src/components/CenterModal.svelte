@@ -101,7 +101,6 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0 0 1rem auto;
-		padding: 0;
 		width: 40px;
 		height: 40px;
 		border: none;

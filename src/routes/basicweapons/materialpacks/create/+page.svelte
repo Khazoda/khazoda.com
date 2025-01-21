@@ -176,215 +176,225 @@
 <div class="page-container flex-col">
 	<span class="absolute-top-left"><HomeButton /></span>
 	{#if isLoaded}
-		<div transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}>
-			<!-- Select Materialpack to work on -->
-			{#if !show_pack_creator}
-				<div class="flex-row justify-between">
-					<span>
-						<ImportantButton
-							icon={HugeiconsArrowLeft02}
-							label="Back"
-							onClick={handleBackTransition}
-							color="grey"
-							backdropCorner="center"
-						/>
-					</span>
-					<button class="info-btn" on:click={showBrowserStorageInfoModal}>
-						<HugeiconsInformationSquare width="42" height="42" />
-					</button>
-				</div>
-				<div class="pack-list">
-					{#each Object.entries($materialPacks.packs) as [packId, pack]}
-						<div class="pack-item">
-							<div class="pack-inner">
-								<div class="actions-container">
-									<button
-										class="export-pack-btn"
-										on:click={() => alert('exporting')}
-										title="Download as ZIP"
-									>
-										<HugeiconsZip01 width="32" height="32" />
-									</button>
-									<button
-										class="edit-pack-btn"
-										title="Edit Material Pack"
-										on:click={() => handlePackSelect(packId)}
-									>
-										<HugeiconsEdit02 width="32" height="32" />
-									</button>
-									<button
-										class="delete-pack-btn"
-										on:click={() => handleDeleteClick(packId)}
-										title="Delete Material Pack"
-									>
-										<HugeiconsDelete02 width="32" height="32" />
-									</button>
-								</div>
-								<img src={pack.pack_icon || ''} alt="material pack icon" class="no-resample" />
-								{#if pack.pack_name}
-									<span class="pack-label">{pack.pack_name}</span>
-								{/if}
-							</div>
+		<div
+			class="transition-wrapper"
+			transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}
+		>
+			{#key show_pack_creator}
+				<div
+					class="view-container"
+					transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}
+				>
+					<!-- Materialpack Selector View -->
+					{#if !show_pack_creator}
+						<div class="flex-row justify-between">
+							<span>
+								<ImportantButton
+									icon={HugeiconsArrowLeft02}
+									label="Back"
+									onClick={handleBackTransition}
+									color="grey"
+									backdropCorner="center"
+								/>
+							</span>
+							<button class="info-btn" on:click={showBrowserStorageInfoModal}>
+								<HugeiconsInformationSquare width="42" height="42" />
+							</button>
 						</div>
-					{/each}
-				</div>
-				{#if Object.keys($materialPacks.packs).length < 10}
-					<span class="create-pack-btn-container">
-						<ImportantButton
-							icon={HugeiconsPlusSignSquare}
-							label="Create New Pack"
-							onClick={handleCreateNew}
-							color="green"
-							backdropCorner="bottom-left"
-						/>
-						<h1>
-							{Object.keys($materialPacks.packs).length} / 10 Material Packs Created
-						</h1>
-					</span>
-				{/if}
-
-				<!-- Materialpack Creator -->
-			{:else}
-				<span class="back-btn-container">
-					<ImportantButton
-						icon={HugeiconsArrowLeft02}
-						label="Back to Packs"
-						onClick={() => {
-							show_pack_creator = false;
-							activeTab = 'settings';
-						}}
-						color="grey"
-						backdropCorner="center"
-					/>
-				</span>
-
-				<!-- #region Material Pack Settings -->
-				<!-- Add content sections that respond to the selected tabs -->
-				<div class="form-wrapper">
-					<TabBookmarks
-						{tabs}
-						{activeTab}
-						onTabChange={handleTabChange}
-						onAddMaterial={() => addMaterial()}
-					/>
-
-					<!-- Content area -->
-					{#if activeTab}
-						{#if getContentType(activeTab) === 'settings'}
-							<button on:click={showMaterialPackSettingsInfoModal} class="tab-info-btn"
-								><HugeiconsInformationSquare width="32" height="32" /></button
-							>
-							<!-- Settings form content -->
-							<form class="pack-settings-form">
-								<div class="pack-settings-header">
-									<span>
-										<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
-										<span
-											class="pack-name-container"
-											title={'bwmp_' +
-												$materialPack.pack_name +
-												'_' +
-												($materialPack.mod_dependency_name
-													? $materialPack.mod_dependency_name
-													: 'minecraft') +
-												'.zip'}
-										>
-											{'bwmp_' +
-												$materialPack.pack_name +
-												'_' +
-												($materialPack.mod_dependency_name
-													? $materialPack.mod_dependency_name
-													: 'minecraft') +
-												'.zip'}
-										</span>
-									</span>
-								</div>
-
-								<div class="form-element imagepicker">
-									<ImagePicker
-										currentImage={$materialPack.pack_icon}
-										accept="image/png"
-										onImageSelect={(base64String) => {
-											materialPack.update((pack) => ({
-												...pack,
-												pack_icon: base64String
-											}));
-											materialPacks.update((state) => ({
-												...state,
-												packs: {
-													...state.packs,
-													[$materialPack.localstorage_id]: {
-														...state.packs[$materialPack.localstorage_id],
-														pack_icon: base64String
-													}
-												}
-											}));
-										}}
-									/>
-								</div>
-								<div class="grid-section-general flex-col">
-									<div class="form-element text">
-										<input
-											type="text"
-											id="pack_name"
-											placeholder=" "
-											bind:value={$materialPack.pack_name}
-											on:input={(e) =>
-												validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-											required
-										/>
-										<label for="pack_name">Material Pack Name</label>
+						<div class="pack-list">
+							{#each Object.entries($materialPacks.packs) as [packId, pack]}
+								<div class="pack-item">
+									<div class="pack-inner">
+										<div class="actions-container">
+											<button
+												class="export-pack-btn"
+												on:click={() => alert('exporting')}
+												title="Download as ZIP"
+											>
+												<HugeiconsZip01 width="32" height="32" />
+											</button>
+											<button
+												class="edit-pack-btn"
+												title="Edit Material Pack"
+												on:click={() => handlePackSelect(packId)}
+											>
+												<HugeiconsEdit02 width="32" height="32" />
+											</button>
+											<button
+												class="delete-pack-btn"
+												on:click={() => handleDeleteClick(packId)}
+												title="Delete Material Pack"
+											>
+												<HugeiconsDelete02 width="32" height="32" />
+											</button>
+										</div>
+										<img src={pack.pack_icon || ''} alt="material pack icon" class="no-resample" />
+										{#if pack.pack_name}
+											<span class="pack-label">{pack.pack_name}</span>
+										{/if}
 									</div>
 								</div>
-
-								<div class="grid-section-mod-dependency flex-col">
-									<h3>Mod Dependency (Optional)</h3>
-									<div class="form-element text" style="margin-bottom:0.75rem;">
-										<input
-											type="text"
-											id="mod_dependency_name"
-											placeholder=" "
-											bind:value={$materialPack.mod_dependency_name}
-											on:input={(e) =>
-												validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
-										/>
-										<label for="mod_dependency_name">Mod Name</label>
-									</div>
-
-									<div class="form-element text">
-										<input
-											type="text"
-											id="mod_dependency_modid"
-											placeholder=" "
-											bind:value={$materialPack.mod_dependency_modid}
-											on:input={(e) =>
-												validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
-										/>
-										<label for="mod_dependency_modid"> Mod ID </label>
-									</div>
-								</div>
-							</form>
-						{:else}
-							<!-- Material content -->
-							{#each $materialPack.materials as material, index}
-								{#if activeTab.startsWith(`material-${index}`)}
-									{#if activeTab.endsWith('-stats')}
-										<!-- Stats content for material {index} -->
-										<form class="material-stats-form">
-											Stats content for Material {index + 1}
-										</form>
-									{:else if activeTab.endsWith('-assets')}
-										<!-- Assets content for material {index} -->
-										<form class="material-assets-form">
-											Assets content for Material {index + 1}
-										</form>
-									{/if}
-								{/if}
 							{/each}
+						</div>
+						{#if Object.keys($materialPacks.packs).length < 10}
+							<span class="create-pack-btn-container">
+								<ImportantButton
+									icon={HugeiconsPlusSignSquare}
+									label="Create New Pack"
+									onClick={handleCreateNew}
+									color="green"
+									backdropCorner="bottom-left"
+								/>
+								<h1>
+									{Object.keys($materialPacks.packs).length} / 10 Material Packs Created
+								</h1>
+							</span>
 						{/if}
+
+						<!-- Materialpack Creator -->
+					{:else}
+						<span class="back-btn-container">
+							<ImportantButton
+								icon={HugeiconsArrowLeft02}
+								label="Back to Packs"
+								onClick={() => {
+									show_pack_creator = false;
+									activeTab = 'settings';
+								}}
+								color="grey"
+								backdropCorner="center"
+							/>
+						</span>
+
+						<!-- #region Material Pack Settings -->
+						<!-- Add content sections that respond to the selected tabs -->
+						<div class="form-wrapper">
+							<TabBookmarks
+								{tabs}
+								{activeTab}
+								onTabChange={handleTabChange}
+								onAddMaterial={() => addMaterial()}
+							/>
+
+							<!-- Content area -->
+							{#if activeTab}
+								{#if getContentType(activeTab) === 'settings'}
+									<button on:click={showMaterialPackSettingsInfoModal} class="tab-info-btn"
+										><HugeiconsInformationSquare width="32" height="32" /></button
+									>
+									<!-- Settings form content -->
+									<form class="pack-settings-form">
+										<div class="pack-settings-header">
+											<span>
+												<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
+												<span
+													class="pack-name-container"
+													title={'bwmp_' +
+														$materialPack.pack_name +
+														'_' +
+														($materialPack.mod_dependency_name
+															? $materialPack.mod_dependency_name
+															: 'minecraft') +
+														'.zip'}
+												>
+													{'bwmp_' +
+														$materialPack.pack_name +
+														'_' +
+														($materialPack.mod_dependency_name
+															? $materialPack.mod_dependency_name
+															: 'minecraft') +
+														'.zip'}
+												</span>
+											</span>
+										</div>
+
+										<div class="form-element imagepicker">
+											<ImagePicker
+												currentImage={$materialPack.pack_icon}
+												accept="image/png"
+												onImageSelect={(base64String) => {
+													materialPack.update((pack) => ({
+														...pack,
+														pack_icon: base64String
+													}));
+													materialPacks.update((state) => ({
+														...state,
+														packs: {
+															...state.packs,
+															[$materialPack.localstorage_id]: {
+																...state.packs[$materialPack.localstorage_id],
+																pack_icon: base64String
+															}
+														}
+													}));
+												}}
+											/>
+										</div>
+										<div class="grid-section-general flex-col">
+											<div class="form-element text">
+												<input
+													type="text"
+													id="pack_name"
+													placeholder=" "
+													bind:value={$materialPack.pack_name}
+													on:input={(e) =>
+														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
+													required
+												/>
+												<label for="pack_name">Material Pack Name</label>
+											</div>
+										</div>
+
+										<div class="grid-section-mod-dependency flex-col">
+											<h3>Mod Dependency (Optional)</h3>
+											<div class="form-element text" style="margin-bottom:0.75rem;">
+												<input
+													type="text"
+													id="mod_dependency_name"
+													placeholder=" "
+													bind:value={$materialPack.mod_dependency_name}
+													on:input={(e) =>
+														validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
+												/>
+												<label for="mod_dependency_name">Mod Name</label>
+											</div>
+
+											<div class="form-element text">
+												<input
+													type="text"
+													id="mod_dependency_modid"
+													placeholder=" "
+													bind:value={$materialPack.mod_dependency_modid}
+													on:input={(e) =>
+														validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
+												/>
+												<label for="mod_dependency_modid"> Mod ID </label>
+											</div>
+										</div>
+									</form>
+								{:else}
+									<!-- Material content -->
+									{#each $materialPack.materials as material, index}
+										{#if activeTab.startsWith(`material-${index}`)}
+											{#if activeTab.endsWith('-stats')}
+												<!-- Stats content for material {index} -->
+												<form class="material-stats-form">
+													Stats content for Material {index + 1}
+												</form>
+											{:else if activeTab.endsWith('-assets')}
+												<!-- Assets content for material {index} -->
+												<form class="material-assets-form">
+													Assets content for Material {index + 1}
+												</form>
+											{/if}
+										{/if}
+									{/each}
+								{/if}
+							{/if}
+						</div>
 					{/if}
 				</div>
-			{/if}
+			{/key}
 		</div>
 	{/if}
 </div>
@@ -484,41 +494,35 @@
 		display: block;
 		margin-bottom: 1rem;
 	}
-	.icon {
-		display: inline-flex;
-		align-items: center;
+
+	.page-container {
+		font-family: 'Quicksand', 'sans-serif';
+		width: calc(100dvw - 16px);
+		height: calc(100dvh - 16px);
+		display: flex;
 		justify-content: center;
-		padding: 0;
-		width: fit-content;
-		height: fit-content;
-		color: currentColor;
+		align-items: center;
 	}
 
-	.icon-btn {
-		display: inline-flex;
-		align-items: center;
+	.transition-wrapper {
+		position: relative;
+		display: flex;
 		justify-content: center;
-		padding: 0.25rem;
-		width: fit-content;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		max-width: 600px;
+	}
+
+	.view-container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
 		height: fit-content;
-		background: #2a2a2a;
-		border: 1px solid #3a3a3a;
-		border-radius: 16px;
-		cursor: pointer;
-		transform: scale(1);
-		transition: all 0.1s ease-out;
-
-		&:hover {
-			transform: scale(1.05);
-			background: #3a3a3a;
-			border-color: #5bd9ff;
-			color: #5bd9ff;
-		}
-
-		&:active {
-			transform: scale(0.95);
-			background: #1a1a1a;
-		}
+		display: flex;
+		flex-direction: column;
 	}
 
 	.info-btn {
@@ -550,15 +554,6 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-	}
-
-	.page-container {
-		font-family: 'Quicksand', 'sans-serif';
-		width: calc(100dvw - 16px);
-		height: calc(100dvh - 16px);
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 
 	.pack-list {

@@ -275,7 +275,6 @@
 								onTabChange={handleTabChange}
 								onAddMaterial={() => addMaterial()}
 							/>
-
 							<!-- Content area -->
 							{#if activeTab}
 								{#if getContentType(activeTab) === 'settings'}

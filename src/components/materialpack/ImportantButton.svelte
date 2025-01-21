@@ -1,6 +1,8 @@
 <script lang="ts">
 	// Props for button styling
 	export let color: 'blue' | 'green' | 'grey' = 'blue';
+	export let backdropCorner: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center' =
+		'bottom-right';
 
 	// Props for content
 	export let icon: any; // Svelte component type for the icon
@@ -11,7 +13,21 @@
 	export let type: 'button' | 'submit' = 'button';
 </script>
 
-<button {type} class="important-btn {color}" on:click={onClick}>
+<button
+	{type}
+	class="important-btn {color} {backdropCorner}"
+	style="--button-color: {color === 'green'
+		? '#2ac444'
+		: color === 'blue'
+			? '#0099ff'
+			: '#a3a3a3'}; 
+	       --button-hover-color: {color === 'green'
+		? '#24aa2f'
+		: color === 'blue'
+			? '#0066ff'
+			: '#6b6b6b'};"
+	on:click={onClick}
+>
 	<span class="flex-row align-center">
 		<svelte:component this={icon} />
 		{label}
@@ -31,41 +47,51 @@
 		border-radius: 6px;
 		cursor: pointer;
 		transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		border: 2px solid var(--button-color);
 
-		&.green {
-			border: 2px solid #2ac444;
-			box-shadow: 3px 3px 0px #2ac444;
-			&:hover {
-				box-shadow: 2px 2px 0px #24aa2f;
-				border-color: #24aa2f;
-				span {
-					transform: scale(1.05);
-				}
+		&.top-left {
+			box-shadow: -3px -3px 0px var(--button-color);
+		}
+		&.top-right {
+			box-shadow: 3px -3px 0px var(--button-color);
+		}
+		&.bottom-left {
+			box-shadow: -3px 3px 0px var(--button-color);
+		}
+		&.bottom-right {
+			box-shadow: 3px 3px 0px var(--button-color);
+		}
+		&.center {
+			box-shadow: 0px 0px 0px var(--button-color);
+			transform: translate(-3px, -3px);
+		}
+
+		&:hover {
+			border-color: var(--button-hover-color);
+			&.top-left {
+				box-shadow: -2px -2px 0px var(--button-hover-color);
+			}
+			&.top-right {
+				box-shadow: 2px -2px 0px var(--button-hover-color);
+			}
+			&.bottom-left {
+				box-shadow: -2px 2px 0px var(--button-hover-color);
+			}
+			&.bottom-right {
+				box-shadow: 2px 2px 0px var(--button-hover-color);
+			}
+			&.center {
+				box-shadow: 0px 0px 0px var(--button-hover-color);
+				transform: translate(-2px, -2px);
+			}
+
+			span {
+				transform: scale(1.05);
 			}
 		}
 
-		&.blue {
-			border: 2px solid #0099ff;
-			box-shadow: 3px 3px 0px #0099ff;
-			&:hover {
-				box-shadow: 2px 2px 0px #0066ff;
-				border-color: #0066ff;
-				span {
-					transform: scale(1.05);
-				}
-			}
-		}
-
-		&.grey {
-			border: 2px solid #a3a3a3;
-			box-shadow: 3px 3px 0px #a3a3a3;
-			&:hover {
-				box-shadow: 2px 2px 0px #6b6b6b;
-				border-color: #6b6b6b;
-				span {
-					transform: scale(0.95);
-				}
-			}
+		&.grey:hover span {
+			transform: scale(0.95);
 		}
 
 		span {

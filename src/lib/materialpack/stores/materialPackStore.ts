@@ -14,7 +14,6 @@ const initialState: MaterialPack = {
 	pack_name: '',
 	mod_dependency_name: '',
 	mod_dependency_modid: '',
-	minecraft_version: '',
 	materials: [],
 	pack_icon: null
 };
@@ -140,7 +139,7 @@ export const addMaterial = () => {
 			...state,
 			packs: {
 				...state.packs,
-				[pack.pack_name]: updatedPack
+				[pack.localstorage_id]: updatedPack
 			}
 		}));
 

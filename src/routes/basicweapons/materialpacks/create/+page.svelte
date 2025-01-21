@@ -21,8 +21,8 @@
 	import ImportantButton from 'src/components/materialpack/ImportantButton.svelte';
 	import ImagePicker from 'src/components/materialpack/ImagePicker.svelte';
 	import CenterModal from 'src/components/CenterModal.svelte';
+	import TabBookmarks from 'src/components/materialpack/TabBookmarks.svelte';
 	import { closeDialog } from 'src/components/CenterModal.svelte';
-	import VersionPicker from 'src/components/materialpack/VersionPicker.svelte';
 
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -31,12 +31,10 @@
 
 	import {
 		materialPackNameSchema,
-		modDependencySchema,
-		minecraftVersionSchema
+		modDependencySchema
 	} from '$lib/materialpack/validation/materialPackValidation';
 
 	import { z } from 'zod';
-	import { getVersionRanges } from './data';
 
 	// Basic pack information
 	let pack_name = '';
@@ -54,7 +52,39 @@
 	let isLoaded = false;
 	let isTransitioning = false;
 
-	const versionRanges = getVersionRanges();
+	// Track selected tabs
+	let selectedMainTab = 'settings';
+	let selectedSubTabs: Record<string, string> = {};
+
+	let activeTab = 'settings';
+	$: tabs = [
+		{ id: 'settings', type: 'settings' as const, label: 'Pack Settings' },
+		...$materialPack.materials.map((_, index) => ({
+			id: `material-${index}`,
+			type: 'material' as const,
+			label: `Material ${index + 1}`,
+			materialIndex: index
+		}))
+	];
+
+	function handleTabChange(tabId: string, subType?: string) {
+		if (subType) {
+			activeTab = `${tabId}-${subType}`;
+			const [type, indexStr] = tabId.split('-');
+			const materialIndex = parseInt(indexStr);
+			selectedMainTab = `material-${materialIndex}`;
+			selectedSubTabs[selectedMainTab] = subType;
+		} else {
+			activeTab = tabId;
+			selectedMainTab = 'settings';
+		}
+	}
+
+	function getContentType(tabId: string) {
+		if (tabId === 'settings') return 'settings';
+		const [_, __, subtype] = tabId.split('-');
+		return subtype;
+	}
 
 	onMount(() => {
 		const unsubscribe = materialPacks.subscribe((state) => {
@@ -90,41 +120,6 @@
 		// Wait for the transition to complete before navigating
 		await new Promise((resolve) => setTimeout(resolve, 300)); // Match transition duration
 		goto('/basicweapons/materialpacks');
-	}
-
-	async function handleIconUpload(event: Event) {
-		const input = event.target as HTMLInputElement;
-		const file = input.files?.[0];
-
-		if (file) {
-			if (file.size > 1024 * 1024) {
-				// 1MB limit
-				alert('Image size must be less than 1MB');
-				return;
-			}
-
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				const base64String = e.target?.result as string;
-				materialPack.update((pack) => ({
-					...pack,
-					pack_icon: base64String
-				}));
-
-				// Update in packs store
-				materialPacks.update((state) => ({
-					...state,
-					packs: {
-						...state.packs,
-						[state.currentPack!]: {
-							...state.packs[state.currentPack!],
-							pack_icon: base64String
-						}
-					}
-				}));
-			};
-			reader.readAsDataURL(file);
-		}
 	}
 
 	function handleDeleteClick(packId: string) {
@@ -191,6 +186,7 @@
 							label="Back"
 							onClick={handleBackTransition}
 							color="grey"
+							backdropCorner="center"
 						/>
 					</span>
 					<button class="info-btn" on:click={showBrowserStorageInfoModal}>
@@ -239,6 +235,7 @@
 							label="Create New Pack"
 							onClick={handleCreateNew}
 							color="green"
+							backdropCorner="bottom-left"
 						/>
 						<h1>
 							{Object.keys($materialPacks.packs).length} / 10 Material Packs Created
@@ -252,125 +249,131 @@
 					<ImportantButton
 						icon={HugeiconsArrowLeft02}
 						label="Back to Packs"
-						onClick={() => (show_pack_creator = false)}
+						onClick={() => {
+							show_pack_creator = false;
+							activeTab = 'settings';
+						}}
 						color="grey"
+						backdropCorner="center"
 					/>
 				</span>
-				<!-- #region Material Tabs -->
-				<div class="tabs-container flex-col">
-					<button class="pack-settings-tab">Pack Settings</button>
-					<div class="material-tabs flex-row">
-						<div class="material-tab flex-col">
-							<button>Material 1</button>
-							<div class="flex-row">
-								<button class="stats-tab">Stats</button>
-								<button class="assets-tab">Assets</button>
-							</div>
-						</div>
-						<!--  -->
-						<div class="material-tab flex-col">
-							<button>Material 2</button>
-							<div class="flex-row">
-								<button class="stats-tab">Stats</button>
-								<button class="assets-tab">Assets</button>
-							</div>
-						</div>
-						<!--  -->
-						<div class="add-material-tab">
-							<button on:click={addMaterial}>
-								<HugeiconsAdd02 width="48" height="48" />
-							</button>
-						</div>
-					</div>
-				</div>
-				<!-- #endregion Material Tabs -->
+
 				<!-- #region Material Pack Settings -->
+				<!-- Add content sections that respond to the selected tabs -->
 				<div class="form-wrapper">
-					<button class="icon-btn form-info-btn" on:click={showMaterialPackSettingsInfoModal}>
-						<HugeiconsInformationSquare width="42" height="42" />
-					</button>
-					<form class="pack-settings-form">
-						<div class="pack-settings-header">
-							<span>
-								<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
-								<span class="pack-name-container">
-									{'bwmp_' +
-										$materialPack.pack_name +
-										'_' +
-										($materialPack.mod_dependency_name
-											? $materialPack.mod_dependency_name
-											: 'minecraft') +
-										'.zip'}
-								</span>
-							</span>
-						</div>
+					<TabBookmarks
+						{tabs}
+						{activeTab}
+						onTabChange={handleTabChange}
+						onAddMaterial={() => addMaterial()}
+					/>
 
-						<div class="form-element imagepicker">
-							<ImagePicker
-								currentImage={$materialPack.pack_icon}
-								accept="image/png"
-								onImageSelect={(base64String) => {
-									materialPack.update((pack) => ({
-										...pack,
-										pack_icon: base64String
-									}));
-									materialPacks.update((state) => ({
-										...state,
-										packs: {
-											...state.packs,
-											[$materialPack.localstorage_id]: {
-												...state.packs[$materialPack.localstorage_id],
+					<!-- Content area -->
+					{#if activeTab}
+						{#if getContentType(activeTab) === 'settings'}
+							<button on:click={showMaterialPackSettingsInfoModal} class="tab-info-btn"
+								><HugeiconsInformationSquare width="32" height="32" /></button
+							>
+							<!-- Settings form content -->
+							<form class="pack-settings-form">
+								<div class="pack-settings-header">
+									<span>
+										<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
+										<span class="pack-name-container">
+											{'bwmp_' +
+												$materialPack.pack_name +
+												'_' +
+												($materialPack.mod_dependency_name
+													? $materialPack.mod_dependency_name
+													: 'minecraft') +
+												'.zip'}
+										</span>
+									</span>
+								</div>
+
+								<div class="form-element imagepicker">
+									<ImagePicker
+										currentImage={$materialPack.pack_icon}
+										accept="image/png"
+										onImageSelect={(base64String) => {
+											materialPack.update((pack) => ({
+												...pack,
 												pack_icon: base64String
-											}
-										}
-									}));
-								}}
-							/>
-						</div>
-						<div class="grid-section-general flex-col">
-							<div class="form-element text">
-								<input
-									type="text"
-									id="pack_name"
-									placeholder=" "
-									bind:value={$materialPack.pack_name}
-									on:input={(e) => validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-									required
-								/>
-								<label for="pack_name">Material Pack Name</label>
-							</div>
-							<div class="grid-section-minecraft-version flex-col">
-								<VersionPicker />
-							</div>
-						</div>
+											}));
+											materialPacks.update((state) => ({
+												...state,
+												packs: {
+													...state.packs,
+													[$materialPack.localstorage_id]: {
+														...state.packs[$materialPack.localstorage_id],
+														pack_icon: base64String
+													}
+												}
+											}));
+										}}
+									/>
+								</div>
+								<div class="grid-section-general flex-col">
+									<div class="form-element text">
+										<input
+											type="text"
+											id="pack_name"
+											placeholder=" "
+											bind:value={$materialPack.pack_name}
+											on:input={(e) =>
+												validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
+											required
+										/>
+										<label for="pack_name">Material Pack Name</label>
+									</div>
+								</div>
 
-						<div class="grid-section-mod-dependency flex-col">
-							<h3>Mod Dependency (Optional)</h3>
-							<div class="form-element text" style="margin-bottom:0.75rem;">
-								<input
-									type="text"
-									id="mod_dependency_name"
-									placeholder=" "
-									bind:value={$materialPack.mod_dependency_name}
-									on:input={(e) =>
-										validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
-								/>
-								<label for="mod_dependency_name">Mod Name</label>
-							</div>
+								<div class="grid-section-mod-dependency flex-col">
+									<h3>Mod Dependency (Optional)</h3>
+									<div class="form-element text" style="margin-bottom:0.75rem;">
+										<input
+											type="text"
+											id="mod_dependency_name"
+											placeholder=" "
+											bind:value={$materialPack.mod_dependency_name}
+											on:input={(e) =>
+												validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
+										/>
+										<label for="mod_dependency_name">Mod Name</label>
+									</div>
 
-							<div class="form-element text">
-								<input
-									type="text"
-									id="mod_dependency_modid"
-									placeholder=" "
-									bind:value={$materialPack.mod_dependency_modid}
-									on:input={(e) =>
-										validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
-								/>
-								<label for="mod_dependency_modid"> Mod ID </label>
-							</div>
-						</div>
-					</form>
+									<div class="form-element text">
+										<input
+											type="text"
+											id="mod_dependency_modid"
+											placeholder=" "
+											bind:value={$materialPack.mod_dependency_modid}
+											on:input={(e) =>
+												validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
+										/>
+										<label for="mod_dependency_modid"> Mod ID </label>
+									</div>
+								</div>
+							</form>
+						{:else}
+							<!-- Material content -->
+							{#each $materialPack.materials as material, index}
+								{#if activeTab.startsWith(`material-${index}`)}
+									{#if activeTab.endsWith('-stats')}
+										<!-- Stats content for material {index} -->
+										<form class="material-stats-form">
+											Stats content for Material {index + 1}
+										</form>
+									{:else if activeTab.endsWith('-assets')}
+										<!-- Assets content for material {index} -->
+										<form class="material-assets-form">
+											Assets content for Material {index + 1}
+										</form>
+									{/if}
+								{/if}
+							{/each}
+						{/if}
+					{/if}
 				</div>
 			{/if}
 		</div>
@@ -430,12 +433,6 @@
 				The material pack name should be either the name of your main material (e.g. 'copper',
 				'unobtainium'), or in the case of a materialpack with multiple materials, a name that is
 				short and makes sense (e.g. 'gems', 'tech-mats', 'all-mats').
-			</p>
-			<h4>Target Minecraft Version</h4>
-			<p>
-				The target Minecraft version informs the materialpack generator what pack format to use for
-				assets and data. Mojang changes how resources and data are structured from version to
-				version.
 			</p>
 			<h4>Mod Dependency</h4>
 			<p>
@@ -665,7 +662,7 @@
 		flex-direction: column;
 		gap: 1rem;
 		width: fit-content;
-		margin-top: 3rem;
+		margin: 3rem 0 0 auto;
 	}
 
 	.icon-upload {
@@ -688,71 +685,23 @@
 			border-radius: 4px;
 		}
 	}
-	//#region Material Pack Creator Styles
-	.tabs-container {
-		gap: 1rem;
-		margin-bottom: 0.5rem;
-		.pack-settings-tab {
-			text-decoration: none;
-			width: fit-content;
-			padding: 0.75rem 1.5rem;
-			background: rgb(235, 235, 235);
-			color: rgb(31, 31, 31);
-			border-radius: 4px;
-			font-weight: 600;
-			cursor: pointer;
-			transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-			&:hover {
-				background: rgb(255, 255, 255);
-			}
-		}
 
-		.material-tabs {
-		}
-
-		.add-material-tab {
-			padding-top: 4px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 64px;
-			height: 64px;
-			button {
-				background: none;
-				border: none;
-				cursor: pointer;
-				&:hover {
-					transform: scale(1.05);
-				}
-			}
-		}
-
-		.material-tab {
-			width: 128px;
-			height: 100px;
-			padding: 4px;
-		}
-
-		.material-tab > button {
-			width: 100%;
-			height: 64px;
-			background: rgb(235, 235, 235);
-			color: black;
-			border-radius: 4px;
-		}
-		.material-tab > div > button {
-			width: 100%;
-			height: 32px;
-			background: rgb(235, 235, 235);
-			color: black;
-			border-radius: 4px;
-		}
-	}
-	// #region Form Sections
+	//#region Form Sections
 	.form-wrapper {
 		position: relative;
-
+		width: 600px;
+		height: 600px;
+		.tab-info-btn {
+			position: absolute;
+			right: 1.25rem;
+			top: -3rem;
+			padding: 0.5rem;
+			border: none;
+			border-radius: 8px 8px 0 0;
+		}
 		form {
+			width: 100%;
+			height: 100%;
 			position: relative;
 			padding: 2rem;
 			background: #2c2c2c;
@@ -760,13 +709,12 @@
 			border-radius: 8px;
 			display: grid;
 			grid-template-columns: 1fr 2fr;
-			grid-template-rows: min(fit-content, 1fr) 1fr 1fr;
 			gap: 1rem;
 		}
 		.form-info-btn {
 			position: absolute;
 			right: -3.5rem;
-			top: 1.5rem;
+			top: 20.5rem;
 			padding: 0.5rem 0.5rem 0.5rem 1.5rem;
 			background: #333333;
 			border: 2px solid #1c1c1c;
@@ -878,7 +826,7 @@
 	//#region Modal Styles
 	.modal-content {
 		p {
-			opacity: 0.9;
+			opacity: 0.8;
 			font-size: 0.9rem;
 		}
 	}
@@ -927,6 +875,7 @@
 		}
 	}
 
+	//#region Pack Creation Modal Creation
 	.creation-options {
 		display: flex;
 		flex-direction: column;

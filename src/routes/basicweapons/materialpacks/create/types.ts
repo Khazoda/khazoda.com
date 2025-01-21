@@ -25,7 +25,6 @@ type MaterialPack = {
 	pack_name: string;
 	mod_dependency_name: string;
 	mod_dependency_modid: string;
-	minecraft_version: string;
 	materials: Material[];
 	pack_icon: string | null;
 };

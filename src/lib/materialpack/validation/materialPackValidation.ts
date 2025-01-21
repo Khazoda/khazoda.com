@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { PACK_FORMAT_VERSIONS } from '../../../routes/basicweapons/materialpacks/create/data';
 
 export const materialPackNameSchema = z
 	.string()
@@ -15,9 +14,3 @@ export const modDependencySchema = z
 	.transform((val) => val.toLowerCase())
 	.transform((val) => val.replace(/\s+/g, '-'))
 	.transform((val) => val.replace(/[^a-z0-9-]/g, ''));
-
-export const minecraftVersionSchema = z
-	.string()
-	.refine((val) => Object.keys(PACK_FORMAT_VERSIONS.data).includes(val), {
-		message: 'Please select a valid Minecraft version range'
-	});

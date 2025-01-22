@@ -1060,8 +1060,8 @@
 		}
 
 		.template-preview {
-			width: 48px;
-			height: 48px;
+			width: 64px;
+			height: 64px;
 			img {
 				width: 100%;
 				height: 100%;
@@ -1073,6 +1073,7 @@
 			display: flex;
 			flex-direction: column;
 			gap: 0.25rem;
+			text-transform: capitalize;
 		}
 
 		.template-title {

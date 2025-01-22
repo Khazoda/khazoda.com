@@ -1,5 +1,5 @@
 {
-  "name": "Deeper and Darker Pack",
+  "name": "warden",
   "description": "Single material pack with mod dependency",
   "pack_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVFhH7c4xDQAwDMCw4h9wMvr2AQFI7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJPQ8fB04DOg+Y/wAAAABJRU5ErkJggg==",
   "materials": [
@@ -24,6 +24,6 @@
       }
     }
   ],
-  "mod_dependency_name": "Deeper and Darker",
+  "mod_dependency_name": "deeper-and-darker",
   "mod_dependency_modid": "deeperdarker"
 } 

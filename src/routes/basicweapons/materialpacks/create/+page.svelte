@@ -49,7 +49,7 @@
 	let materials: Material[] = [];
 	let pack_icon: string | null = null; // For pack.png
 
-	let showModal: boolean[] = Array(3).fill(false);
+	let showModal: boolean[] = Array(4).fill(false);
 	let packToDelete: string | null = null;
 
 	let show_pack_creator = true;
@@ -174,6 +174,16 @@
 		}
 		input.reportValidity();
 	}
+
+	function handleAddMaterial() {
+		showModal[4] = true;
+	}
+
+	function handleAddEmptyMaterial() {
+		addMaterial();
+		handleTabChange(`material-${$materialPack.materials.length - 1}`, 'stats');
+		closeDialog();
+	}
 </script>
 
 <!-- #region HTML -->
@@ -277,7 +287,7 @@
 								{tabs}
 								{activeTab}
 								onTabChange={handleTabChange}
-								onAddMaterial={() => addMaterial()}
+								onAddMaterial={handleAddMaterial}
 							/>
 							<!-- Content area -->
 							{#if activeTab}
@@ -481,6 +491,23 @@
 			<button class="option-btn" on:click={handleStartFresh}>
 				<span class="option-title">Start Fresh</span>
 				<span class="option-desc">Begin with a blank material pack</span>
+			</button>
+			<button class="option-btn disabled" title="Coming soon!">
+				<span class="option-title">From Template</span>
+				<span class="option-desc">Start from a pre-made template</span>
+			</button>
+		</div>
+	</div>
+</CenterModal>
+<!-- Material Creation Options Modal -->
+<CenterModal bind:showModal modalID={4}>
+	<div slot="description" class="modal-content">
+		<h2>Create New Material Pack</h2>
+		<p>Choose how you'd like to start your new material pack:</p>
+		<div class="creation-options">
+			<button class="option-btn" on:click={handleAddEmptyMaterial}>
+				<span class="option-title">Empty Material</span>
+				<span class="option-desc">Begin with a blank material</span>
 			</button>
 			<button class="option-btn disabled" title="Coming soon!">
 				<span class="option-title">From Template</span>

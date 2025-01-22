@@ -31,10 +31,6 @@
 
 	function handleAddMaterialClick() {
 		onAddMaterial();
-		// Get the new material's index (will be the length of current tabs minus 1, which excludes the "Add Material" button)
-		const newMaterialIndex = tabs.filter((tab: { type: string }) => tab.type === 'material').length;
-		// Switch to newly created material tab
-		handleMaterialSubTabClick(newMaterialIndex, 'stats');
 	}
 </script>
 
@@ -90,12 +86,9 @@
 	<button
 		class="bookmark-tab add-material-btn"
 		on:click={handleAddMaterialClick}
-		title="Add Material"
+		title="Add New Material"
 	>
-		<span class="icon">
-			<HugeiconsPlusSignSquare width="24" height="24" />
-		</span>
-		<span class="label">Add Material</span>
+		<HugeiconsPlusSignSquare width="24" height="24" />
 	</button>
 </div>
 
@@ -201,6 +194,7 @@
 
 	.add-material-btn {
 		margin-top: 0.5rem;
+		padding: 0.5rem 0.5rem 0.5rem 2rem;
 		opacity: 0.7;
 
 		&:hover {

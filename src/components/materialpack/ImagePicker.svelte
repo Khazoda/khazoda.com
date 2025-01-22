@@ -6,6 +6,7 @@
 	export let maxUploadSize: number = 1024 * 1024;
 	export let padding: string = '0rem';
 	export let backgroundImage: string = '';
+	export let placeholderBackground: string = '';
 
 	let inputRef: HTMLInputElement;
 
@@ -55,9 +56,17 @@
 			<img src={currentImage} alt="Selected image" class="preview-image no-resample" />
 		{:else}
 			<div class="placeholder">
-				<svg viewBox="0 0 24 24" width="32" height="32">
-					<path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-				</svg>
+				{#if placeholderBackground}
+					<img
+						src={placeholderBackground}
+						alt="Placeholder outline"
+						class="placeholder-background"
+					/>
+				{:else}
+					<svg viewBox="0 0 24 24" width="32" height="32">
+						<path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+					</svg>
+				{/if}
 			</div>
 		{/if}
 	</button>
@@ -117,5 +126,14 @@
 		height: 100%;
 		image-rendering: pixelated;
 		filter: blur(0px);
+	}
+
+	.placeholder-background {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		opacity: 0.4;
+		filter: brightness(0.5);
+		image-rendering: pixelated;
 	}
 </style>

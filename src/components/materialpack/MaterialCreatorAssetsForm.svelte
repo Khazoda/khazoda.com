@@ -6,6 +6,16 @@
 	import CenterModal from 'src/components/CenterModal.svelte';
 	import { closeDialog } from 'src/components/CenterModal.svelte';
 	import minecraft_gui from '$lib/materialpack/media/minecraft_gui.png';
+	import club from '$lib/materialpack/media/weapon_outlines/club.png';
+	import dagger from '$lib/materialpack/media/weapon_outlines/dagger.png';
+	import hammer from '$lib/materialpack/media/weapon_outlines/hammer.png';
+	import glaive from '$lib/materialpack/media/weapon_outlines/glaive.png';
+	import quarterstaff from '$lib/materialpack/media/weapon_outlines/quarterstaff.png';
+	import spear from '$lib/materialpack/media/weapon_outlines/spear.png';
+	import spear_held from '$lib/materialpack/media/weapon_outlines/spear_held.png';
+	import quarterstaff_held from '$lib/materialpack/media/weapon_outlines/quarterstaff_held.png';
+	import glaive_held from '$lib/materialpack/media/weapon_outlines/glaive_held.png';
+
 	import { z } from 'zod';
 
 	export let material: Material;
@@ -15,16 +25,24 @@
 
 	const VALID_SIZES = [8, 16, 32, 64, 128, 256, 512, 1024] as const;
 	type ValidSize = (typeof VALID_SIZES)[number];
-	const WEAPON_TEXTURES: Array<{ id: keyof Material['textures']; label: string }> = [
-		{ id: 'dagger', label: 'dagger.png' },
-		{ id: 'hammer', label: 'hammer.png' },
-		{ id: 'club', label: 'club.png' },
-		{ id: 'spear', label: 'spear.png' },
-		{ id: 'quarterstaff', label: 'quarterstaff.png' },
-		{ id: 'glaive', label: 'glaive.png' },
-		{ id: 'spear_held', label: 'spear_held.png' },
-		{ id: 'quarterstaff_held', label: 'quarterstaff_held.png' },
-		{ id: 'glaive_held', label: 'glaive_held.png' }
+	const WEAPON_TEXTURES: Array<{
+		id: keyof Material['textures'];
+		label: string;
+		placeholderBackground: string;
+	}> = [
+		{ id: 'dagger', label: 'dagger.png', placeholderBackground: dagger },
+		{ id: 'hammer', label: 'hammer.png', placeholderBackground: hammer },
+		{ id: 'club', label: 'club.png', placeholderBackground: club },
+		{ id: 'spear', label: 'spear.png', placeholderBackground: spear },
+		{ id: 'quarterstaff', label: 'quarterstaff.png', placeholderBackground: quarterstaff },
+		{ id: 'glaive', label: 'glaive.png', placeholderBackground: glaive },
+		{ id: 'spear_held', label: 'spear_held.png', placeholderBackground: spear_held },
+		{
+			id: 'quarterstaff_held',
+			label: 'quarterstaff_held.png',
+			placeholderBackground: quarterstaff_held
+		},
+		{ id: 'glaive_held', label: 'glaive_held.png', placeholderBackground: glaive_held }
 	];
 
 	let showModal: boolean[] = Array(1).fill(false);
@@ -159,6 +177,7 @@
 					accept="image/png"
 					imgSize="96px"
 					padding="0.5rem"
+					placeholderBackground={texture.placeholderBackground}
 					backgroundImage={minecraft_gui}
 					onImageSelect={(base64String) => handleTextureUpdate(texture.id, base64String)}
 				/>

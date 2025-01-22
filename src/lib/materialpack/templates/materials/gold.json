@@ -1,0 +1,20 @@
+{
+    "material_name": "golden",
+    "durability": 32,
+    "attack_damage_bonus": 0,
+    "attack_speed_bonus": 0.5,
+    "reach_bonus": 0,
+    "enchantability": 22,
+    "repair_ingredient": "minecraft:gold_ingot",
+    "textures": {
+        "dagger": null,
+        "hammer": null,
+        "club": null,
+        "spear": null,
+        "spear_held": null,
+        "quarterstaff": null,
+        "quarterstaff_held": null,
+        "glaive": null,
+        "glaive_held": null
+    }
+} 

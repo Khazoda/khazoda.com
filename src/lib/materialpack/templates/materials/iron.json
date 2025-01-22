@@ -1,0 +1,20 @@
+{
+    "material_name": "iron",
+    "durability": 250,
+    "attack_damage_bonus": 2,
+    "attack_speed_bonus": 0,
+    "reach_bonus": 0,
+    "enchantability": 14,
+    "repair_ingredient": "minecraft:iron_ingot",
+    "textures": {
+        "dagger": null,
+        "hammer": null,
+        "club": null,
+        "spear": null,
+        "spear_held": null,
+        "quarterstaff": null,
+        "quarterstaff_held": null,
+        "glaive": null,
+        "glaive_held": null
+    }
+} 

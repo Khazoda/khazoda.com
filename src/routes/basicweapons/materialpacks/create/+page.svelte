@@ -45,6 +45,10 @@
 		createPackFromTemplate,
 		type MaterialPackTemplate
 	} from '$lib/materialpack/stores/templateStore';
+	import {
+		materialTemplates,
+		type MaterialTemplate
+	} from '$lib/materialpack/stores/materialTemplateStore';
 
 	// Basic pack information
 	let pack_name = '';
@@ -55,7 +59,7 @@
 	let materials: Material[] = [];
 	let pack_icon: string | null = null; // For pack.png
 
-	let showModal: boolean[] = Array(5).fill(false);
+	let showModal: boolean[] = Array(7).fill(false);
 	let packToDelete: string | null = null;
 
 	let show_pack_creator = true;
@@ -210,6 +214,21 @@
 			}));
 		}, 0);
 		show_pack_creator = true;
+		closeDialog();
+	}
+
+	function handleMaterialTemplateSelect(template: MaterialTemplate) {
+		addMaterial();
+		// Update the last added material with the template data
+		materialPack.update((pack) => {
+			const materials = [...pack.materials];
+			materials[materials.length - 1] = {
+				...template,
+				textures: { ...template.textures }
+			};
+			return { ...pack, materials };
+		});
+		handleTabChange(`material-${$materialPack.materials.length - 1}`, 'stats');
 		closeDialog();
 	}
 </script>
@@ -554,9 +573,26 @@
 				<span class="option-desc">Begin with a blank material</span>
 			</button>
 			<button class="option-btn" on:click={() => (showModal[6] = true)}>
-				<span class="option-title">From Example</span>
-				<span class="option-desc">Start from a pre-made material</span>
+				<span class="option-title">From Template</span>
+				<span class="option-desc">Start from a vanilla material template</span>
 			</button>
+		</div>
+	</div>
+</CenterModal>
+
+<!-- Add Material Template Selection Modal -->
+<CenterModal bind:showModal modalID={6}>
+	<div slot="description" class="modal-content">
+		<h2>Choose a Template</h2>
+		<div class="template-options">
+			{#each $materialTemplates as template}
+				<button class="template-btn" on:click={() => handleMaterialTemplateSelect(template)}>
+					<div class="template-info">
+						<span class="template-title">{template.name}</span>
+						<span class="template-desc">{template.description}</span>
+					</div>
+				</button>
+			{/each}
 		</div>
 	</div>
 </CenterModal>

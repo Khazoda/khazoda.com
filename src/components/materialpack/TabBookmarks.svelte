@@ -184,7 +184,9 @@
 			border: 1px solid #1c1c1c;
 			border-radius: 4px;
 			transition: all 0.1s ease;
-
+			img {
+				filter: drop-shadow(2.5px 2.5px 0px rgba(25, 25, 25, 0.5));
+			}
 			&:hover {
 				background: #505050;
 				color: #71b3ff;

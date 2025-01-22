@@ -2,6 +2,10 @@
 	export let currentImage: string | null = null;
 	export let accept: string = 'image/png';
 	export let onImageSelect: (base64: string) => void;
+	export let imgSize: string = '128px';
+	export let maxUploadSize: number = 1024 * 1024;
+	export let padding: string = '0rem';
+	export let backgroundImage: string = '';
 
 	let inputRef: HTMLInputElement;
 
@@ -14,8 +18,8 @@
 		const file = input.files?.[0];
 
 		if (file) {
-			if (file.size > 256 * 256) {
-				alert('Image dimensions must be 256 x 256 pixels or less (32x32 is recommended)');
+			if (file.size > maxUploadSize) {
+				alert('Image must be less than 1024 x 1024 pixels');
 				return;
 			}
 
@@ -29,7 +33,7 @@
 	}
 </script>
 
-<div class="image-picker">
+<div class="image-picker" style={`padding: ${padding};`}>
 	<input
 		type="file"
 		{accept}
@@ -38,9 +42,17 @@
 		style="display: none;"
 	/>
 
-	<button class="picker-button" on:click={handleClick} title="Click to change image">
+	<button
+		class="picker-button"
+		on:click={handleClick}
+		title="Click to change image"
+		style={`width: ${imgSize}; height: ${imgSize}; padding: ${padding};`}
+	>
 		{#if currentImage}
-			<img src={currentImage} alt="Selected image" class="preview no-resample" />
+			{#if backgroundImage}
+				<img src={backgroundImage} alt="Background image" class="background-image" />
+			{/if}
+			<img src={currentImage} alt="Selected image" class="preview-image no-resample" />
 		{:else}
 			<div class="placeholder">
 				<svg viewBox="0 0 24 24" width="32" height="32">
@@ -57,13 +69,17 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		width: fit-content;
+		border: 2px dashed #ccc;
+		&:hover {
+			border: 2px dashed #fff;
+		}
 	}
 
 	.picker-button {
 		width: 128px;
 		height: 128px;
-		padding: 0;
-		border: 2px dashed #ccc;
+		position: relative;
+		border: none;
 		border-radius: 4px;
 		background: none;
 		cursor: pointer;
@@ -77,10 +93,11 @@
 		}
 	}
 
-	.preview {
+	.preview-image {
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
+		filter: drop-shadow(3.5px 3.5px 0px rgba(25, 25, 25, 0.3));
 	}
 
 	.placeholder {
@@ -90,5 +107,15 @@
 		align-items: center;
 		justify-content: center;
 		color: #ccc;
+	}
+
+	.background-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		image-rendering: pixelated;
+		filter: blur(0px);
 	}
 </style>

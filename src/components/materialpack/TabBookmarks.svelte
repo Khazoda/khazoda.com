@@ -2,22 +2,22 @@
 	import HugeiconsImage01 from 'virtual:icons/hugeicons/image-01';
 	import HugeiconsAbacus from 'virtual:icons/hugeicons/abacus';
 	import HugeiconsPlusSignSquare from 'virtual:icons/hugeicons/plus-sign-square';
+	import type { Material } from '$lib/materialpack/types/materialpackTypes';
 
-	export let tabs:
-		| Array<{
-				id: string;
-				label: string;
-				type: 'settings' | 'material';
-				materialIndex?: number;
-				icon?: any;
-		  }>
-		| any;
+	export let tabs: any;
 	export let activeTab: string;
 	export let onTabChange: (tabId: string, subType?: string) => void;
 	export let onAddMaterial: () => void;
 
 	// Keep track of last selected subtab for each material
 	let materialLastSubTabs: Record<number, 'stats' | 'assets'> = {};
+
+	function getFirstTexture(material: Material): string | null {
+		const textureKeys = Object.keys(material.textures) as Array<keyof Material['textures']>;
+		return textureKeys.reduce((first, key) => {
+			return first || material.textures[key];
+		}, null);
+	}
 
 	function handleMaterialSubTabClick(materialIndex: number, subType: 'stats' | 'assets') {
 		materialLastSubTabs[materialIndex] = subType;
@@ -35,25 +35,29 @@
 </script>
 
 <div class="bookmark-container">
-	{#each tabs as tab}
-		{#if tab.type === 'settings'}
-			<button
-				class="bookmark-tab"
-				class:active={activeTab === tab.id}
-				on:click={() => onTabChange(tab.id)}
-				title={tab.label}
-			>
-				{#if tab.icon}
-					<span class="icon">
-						<svelte:component this={tab.icon} width="24" height="24" />
-					</span>
-				{/if}
-				<span class="label">{tab.label}</span>
-			</button>
-		{:else}
+	<!-- Settings tab at the top -->
+	{#each tabs.filter((tab) => tab.type === 'settings') as tab}
+		<button
+			class="bookmark-tab"
+			class:active={activeTab === tab.id}
+			on:click={() => onTabChange(tab.id)}
+			title={tab.label}
+		>
+			{#if tab.icon}
+				<span class="icon">
+					<svelte:component this={tab.icon} width="24" height="24" />
+				</span>
+			{/if}
+			<span class="label">{tab.label}</span>
+		</button>
+	{/each}
+
+	<!-- Scrollable material tabs container -->
+	<div class="material-tabs-container">
+		{#each tabs.filter((tab) => tab.type === 'material') as tab}
 			<button
 				class="material-bookmark-tab"
-				class:active={activeTab.startsWith(`material-${tab.materialIndex}`)}
+				class:active={activeTab.startsWith(`material-${tab.materialIndex}-`)}
 				on:click={() =>
 					tab.materialIndex !== undefined && handleMaterialTabClick(tab.materialIndex)}
 				type="button"
@@ -76,13 +80,23 @@
 						handleMaterialSubTabClick(tab.materialIndex, 'assets')}
 					title="Assets"
 				>
-					<HugeiconsImage01 width="24" height="24" />
+					{#if tab.material && getFirstTexture(tab.material)}
+						<img
+							src={getFirstTexture(tab.material)}
+							alt="Material Texture"
+							width="24"
+							height="24"
+						/>
+					{:else}
+						<HugeiconsImage01 width="24" height="24" />
+					{/if}
 				</button>
 				<span class="material-label">{tab.label}</span>
 			</button>
-		{/if}
-	{/each}
+		{/each}
+	</div>
 
+	<!-- Add material button at the bottom -->
 	<button
 		class="bookmark-tab add-material-btn"
 		on:click={handleAddMaterialClick}
@@ -202,5 +216,43 @@
 			background: #404040;
 			color: #5bd9ff;
 		}
+	}
+
+	.material-tabs-container {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		gap: 0.5rem;
+		max-height: 450px;
+		overflow-y: auto;
+		overflow-x: visible;
+		padding-right: 0.5rem;
+		margin-right: -0.5rem;
+
+		// Scrollbar styling
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: #1c1c1c;
+			border-radius: 3px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #404040;
+			border-radius: 3px;
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: #505050;
+		}
+	}
+
+	/* Add style for the texture image */
+	.sub-tab img {
+		object-fit: contain;
+		width: 24px;
+		height: 24px;
 	}
 </style>

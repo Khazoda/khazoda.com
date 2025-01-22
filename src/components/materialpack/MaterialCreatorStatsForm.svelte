@@ -12,6 +12,7 @@
 	import HugeiconsDelete02 from 'virtual:icons/hugeicons/delete-02';
 	import CenterModal from 'src/components/CenterModal.svelte';
 	import { closeDialog } from 'src/components/CenterModal.svelte';
+	import { onMount } from 'svelte';
 
 	export let material: Material;
 	export let index: number;
@@ -37,6 +38,31 @@
 		repair_ingredient: repairIngredientSchema
 	};
 
+	// Function to validate a field without an event
+	function validateField<K extends ValidFields>(
+		field: K,
+		value: any,
+		inputElement: HTMLInputElement
+	) {
+		try {
+			const schema = schemas[field];
+			const parsedValue =
+				field.includes('bonus') || field.includes('durability') || field.includes('enchantability')
+					? parseFloat(value)
+					: value;
+
+			const validatedValue = schema.parse(parsedValue) as Material[K];
+			material[field] = validatedValue;
+			inputElement.setCustomValidity('');
+		} catch (error) {
+			if (error instanceof z.ZodError) {
+				inputElement.setCustomValidity(error.errors[0].message);
+			}
+		}
+		inputElement.reportValidity();
+	}
+
+	// Existing validateAndUpdate function remains the same
 	function validateAndUpdate<K extends ValidFields>(event: Event, schema: z.ZodSchema, field: K) {
 		const input = event.target as HTMLInputElement;
 		try {
@@ -75,23 +101,31 @@
 		input.reportValidity();
 	}
 
+	// Add onMount to validate all number fields on initial render
+	onMount(() => {
+		const numberFields: ValidFields[] = [
+			'durability',
+			'attack_damage_bonus',
+			'attack_speed_bonus',
+			'reach_bonus',
+			'enchantability'
+		];
+
+		numberFields.forEach((field) => {
+			const input = document.getElementById(`${field}_${index}`) as HTMLInputElement;
+			if (input) {
+				validateField(field, material[field], input);
+			}
+		});
+	});
+
 	function deleteMaterial() {
-		console.log('Deleting material at index:', index); // Debug log
-
-		// Get the current materials array
 		const currentMaterials = $materialPack.materials;
-		console.log('Current materials:', currentMaterials); // Debug log
-
-		// Create new materials array with the deleted material filtered out
 		const newMaterials = currentMaterials.filter((_, i) => i !== index);
-		console.log('New materials:', newMaterials); // Debug log
-
-		// Update both stores with the same new materials array
 		materialPack.update((pack) => ({
 			...pack,
 			materials: newMaterials
 		}));
-
 		materialPacks.update((state) => ({
 			...state,
 			packs: {
@@ -102,7 +136,6 @@
 				}
 			}
 		}));
-
 		const remainingMaterials = newMaterials.length;
 		if (remainingMaterials === 0) {
 			onTabChange('settings');
@@ -110,7 +143,6 @@
 			const newIndex = index === 0 ? 0 : index - 1;
 			onTabChange(`material-${newIndex}-stats`);
 		}
-
 		closeDialog();
 	}
 </script>

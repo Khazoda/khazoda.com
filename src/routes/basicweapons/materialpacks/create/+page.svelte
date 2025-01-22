@@ -67,7 +67,8 @@
 			id: `material-${index}`,
 			label: material.material_name || `Material ${index + 1}`,
 			type: 'material',
-			materialIndex: index
+			materialIndex: index,
+			material
 		}))
 	];
 
@@ -320,7 +321,20 @@
 												</span>
 											</span>
 										</div>
-
+										<div class="grid-section-general flex-col">
+											<div class="form-element text">
+												<input
+													type="text"
+													id="pack_name"
+													placeholder=" "
+													bind:value={$materialPack.pack_name}
+													on:input={(e) =>
+														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
+													required
+												/>
+												<label for="pack_name">Material Pack Name</label>
+											</div>
+										</div>
 										<div class="form-element imagepicker">
 											<ImagePicker
 												currentImage={$materialPack.pack_icon}
@@ -342,20 +356,6 @@
 													}));
 												}}
 											/>
-										</div>
-										<div class="grid-section-general flex-col">
-											<div class="form-element text">
-												<input
-													type="text"
-													id="pack_name"
-													placeholder=" "
-													bind:value={$materialPack.pack_name}
-													on:input={(e) =>
-														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-													required
-												/>
-												<label for="pack_name">Material Pack Name</label>
-											</div>
 										</div>
 
 										<div class="grid-section-mod-dependency flex-col">
@@ -388,7 +388,7 @@
 								{:else}
 									<!-- Material content -->
 									{#each $materialPack.materials as material, index}
-										{#if activeTab.startsWith(`material-${index}`)}
+										{#if activeTab.startsWith(`material-${index}-`)}
 											{#if activeTab.endsWith('-stats')}
 												<MaterialCreatorStats
 													{material}
@@ -397,7 +397,12 @@
 													onTabChange={(newTab) => (activeTab = newTab)}
 												/>
 											{:else if activeTab.endsWith('-assets')}
-												<MaterialCreatorAssets {material} {index} />
+												<MaterialCreatorAssets
+													{material}
+													{index}
+													bind:activeTab
+													onTabChange={(newTab) => (activeTab = newTab)}
+												/>
 											{/if}
 										{/if}
 									{/each}
@@ -741,7 +746,7 @@
 			border: 2px solid #1c1c1c;
 			border-radius: 8px;
 			display: grid;
-			grid-template-columns: 1fr 2fr;
+			grid-template-columns: 2fr 1fr;
 			gap: 1rem;
 		}
 		.form-info-btn {
@@ -770,7 +775,7 @@
 		.pack-settings-header {
 			grid-column: 1 / 3;
 			grid-row: 1 / 2;
-			margin: 0 0 2rem 0;
+			margin: 0 0 0.5rem 0;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -788,6 +793,7 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 				font-size: 1.1rem;
+				margin-top: auto;
 			}
 		}
 		.form-element {
@@ -835,10 +841,13 @@
 			}
 			&.imagepicker {
 				width: fit-content;
+				height: fit-content;
+				margin: auto 0 1rem auto;
 			}
 		}
 		.grid-section-general {
 			max-height: 124px;
+			margin: auto 0 1rem 0;
 			gap: 1rem;
 			justify-content: space-between;
 			div {

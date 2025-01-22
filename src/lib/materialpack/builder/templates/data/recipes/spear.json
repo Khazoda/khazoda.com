@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  ^",
+    " / ",
+    "/  "
+  ],
+  "key": {
+    "^": {
+      "item": "{{repair_ingredient}}"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "basicweapons:{{material_name}}_spear",
+    "count": 1
+  }
+} 

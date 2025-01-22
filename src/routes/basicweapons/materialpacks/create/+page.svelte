@@ -39,6 +39,7 @@
 	import MaterialCreatorStats from 'src/components/materialpack/MaterialCreatorStatsForm.svelte';
 	import MaterialCreatorAssets from 'src/components/materialpack/MaterialCreatorAssetsForm.svelte';
 	import type { Material, MaterialPack } from 'src/lib/materialpack/types/materialpackTypes';
+	import ZipMaterialPackDownloader from 'src/components/materialpack/ZipMaterialPackDownloader.svelte';
 
 	// Basic pack information
 	let pack_name = '';
@@ -221,13 +222,7 @@
 								<div class="pack-item">
 									<div class="pack-inner">
 										<div class="actions-container">
-											<button
-												class="export-pack-btn"
-												on:click={() => alert('exporting')}
-												title="Download as ZIP"
-											>
-												<HugeiconsZip01 width="32" height="32" />
-											</button>
+											<ZipMaterialPackDownloader materialPack={pack} />
 											<button
 												class="edit-pack-btn"
 												title="Edit Material Pack"

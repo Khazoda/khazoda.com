@@ -44,7 +44,7 @@ interface RecipeTemplate {
 	type: 'minecraft:crafting_shaped';
 	group?: string;
 	pattern: string[];
-	key: Record<string, { item: string }>;
+	key: Record<string, any>;
 	result: { id: string; count: number };
 	'fabric:load_conditions'?: (FabricLoadCondition | FabricNotModCondition)[];
 	'neoforge:conditions'?: (NeoForgeLoadCondition | NeoForgeNotModCondition)[];

@@ -793,7 +793,6 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 				font-size: 1.1rem;
-				margin-top: auto;
 			}
 		}
 		.form-element {

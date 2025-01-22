@@ -62,7 +62,7 @@
 	let showModal: boolean[] = Array(7).fill(false);
 	let packToDelete: string | null = null;
 
-	let show_pack_creator = true;
+	let show_pack_creator = false;
 	let isLoaded = false;
 	let isTransitioning = false;
 
@@ -722,7 +722,7 @@
 			.actions-container {
 				position: absolute;
 				top: 0;
-				right: -3rem;
+				right: -3.25rem;
 				width: 48px;
 				height: 100%;
 				display: flex;

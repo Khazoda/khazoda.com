@@ -40,6 +40,11 @@
 	import MaterialCreatorAssets from 'src/components/materialpack/MaterialCreatorAssetsForm.svelte';
 	import type { Material, MaterialPack } from 'src/lib/materialpack/types/materialpackTypes';
 	import ZipMaterialPackDownloader from 'src/components/materialpack/ZipMaterialPackDownloader.svelte';
+	import {
+		templates,
+		createPackFromTemplate,
+		type MaterialPackTemplate
+	} from '$lib/materialpack/stores/templateStore';
 
 	// Basic pack information
 	let pack_name = '';
@@ -50,7 +55,7 @@
 	let materials: Material[] = [];
 	let pack_icon: string | null = null; // For pack.png
 
-	let showModal: boolean[] = Array(4).fill(false);
+	let showModal: boolean[] = Array(5).fill(false);
 	let packToDelete: string | null = null;
 
 	let show_pack_creator = true;
@@ -178,12 +183,33 @@
 	}
 
 	function handleAddMaterial() {
-		showModal[4] = true;
+		showModal[5] = true;
 	}
 
 	function handleAddEmptyMaterial() {
 		addMaterial();
 		handleTabChange(`material-${$materialPack.materials.length - 1}`, 'stats');
+		closeDialog();
+	}
+
+	function handleTemplateSelect(template: MaterialPackTemplate) {
+		const newPack = createPackFromTemplate(template);
+		createNewPack();
+		// Update after a small delay to ensure the new pack is created
+		setTimeout(() => {
+			materialPack.update((pack) => ({ ...pack, ...newPack }));
+			materialPacks.update((state) => ({
+				...state,
+				packs: {
+					...state.packs,
+					[$materialPack.localstorage_id]: {
+						...state.packs[$materialPack.localstorage_id],
+						...newPack
+					}
+				}
+			}));
+		}, 0);
+		show_pack_creator = true;
 		closeDialog();
 	}
 </script>
@@ -482,7 +508,7 @@
 	</div>
 </CenterModal>
 
-<!-- Pack Creation Options Modal -->
+<!-- Material Pack Creation Options Modal -->
 <CenterModal bind:showModal modalID={3}>
 	<div slot="description" class="modal-content">
 		<h2>Create New Material Pack</h2>
@@ -492,26 +518,44 @@
 				<span class="option-title">Start Fresh</span>
 				<span class="option-desc">Begin with a blank material pack</span>
 			</button>
-			<button class="option-btn disabled" title="Coming soon!">
+			<button class="option-btn" on:click={() => (showModal[4] = true)}>
 				<span class="option-title">From Template</span>
 				<span class="option-desc">Start from a pre-made template</span>
 			</button>
 		</div>
 	</div>
 </CenterModal>
-<!-- Material Creation Options Modal -->
+<!-- Material Pack Template Selection Modal -->
 <CenterModal bind:showModal modalID={4}>
 	<div slot="description" class="modal-content">
-		<h2>Create New Material Pack</h2>
-		<p>Choose how you'd like to start your new material pack:</p>
+		<h2>Choose a Template</h2>
+		<div class="template-options">
+			{#each $templates as template}
+				<button class="template-btn" on:click={() => handleTemplateSelect(template)}>
+					<div class="template-preview">
+						<img src={template.pack_icon} alt="{template.name} icon" class="no-resample" />
+					</div>
+					<div class="template-info">
+						<span class="template-title">{template.name}</span>
+						<span class="template-desc">{template.description}</span>
+					</div>
+				</button>
+			{/each}
+		</div>
+	</div>
+</CenterModal>
+<!-- Material Creation Options Modal -->
+<CenterModal bind:showModal modalID={5}>
+	<div slot="description" class="modal-content">
+		<h2>Create New Material</h2>
 		<div class="creation-options">
 			<button class="option-btn" on:click={handleAddEmptyMaterial}>
 				<span class="option-title">Empty Material</span>
 				<span class="option-desc">Begin with a blank material</span>
 			</button>
-			<button class="option-btn disabled" title="Coming soon!">
-				<span class="option-title">From Template</span>
-				<span class="option-desc">Start from a pre-made template</span>
+			<button class="option-btn" on:click={() => (showModal[6] = true)}>
+				<span class="option-title">From Example</span>
+				<span class="option-desc">Start from a pre-made material</span>
 			</button>
 		</div>
 	</div>
@@ -949,6 +993,58 @@
 
 		.option-desc {
 			display: block;
+			font-size: 0.9rem;
+			opacity: 0.8;
+		}
+	}
+
+	.template-options {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.template-btn {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+		padding: 1rem;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 8px;
+		cursor: pointer;
+		text-align: left;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: #3a3a3a;
+			border-color: #5bd9ff;
+		}
+
+		.template-preview {
+			width: 48px;
+			height: 48px;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		.template-info {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+
+		.template-title {
+			font-size: 1.1rem;
+			font-weight: 600;
+		}
+
+		.template-desc {
 			font-size: 0.9rem;
 			opacity: 0.8;
 		}

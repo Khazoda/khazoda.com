@@ -1,0 +1,49 @@
+{
+  "name": "Nether Materials Pack",
+  "description": "Multi-material pack with no mod dependency",
+  "pack_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVFhH7c4xDQAwDMCw4h9wMvr2AQFI7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJPQ8fB04DOg+Y/wAAAABJRU5ErkJggg==",
+  "materials": [
+    {
+      "material_name": "nether_quartz",
+      "durability": 131,
+      "attack_damage_bonus": 2.5,
+      "attack_speed_bonus": 0.5,
+      "reach_bonus": 0,
+      "enchantability": 10,
+      "repair_ingredient": "minecraft:quartz",
+      "textures": {
+        "dagger": null,
+        "hammer": null,
+        "club": null,
+        "spear": null,
+        "spear_held": null,
+        "quarterstaff": null,
+        "quarterstaff_held": null,
+        "glaive": null,
+        "glaive_held": null
+      }
+    },
+    {
+      "material_name": "netherrack",
+      "durability": 59,
+      "attack_damage_bonus": 1,
+      "attack_speed_bonus": 0,
+      "reach_bonus": 0,
+      "enchantability": 5,
+      "repair_ingredient": "minecraft:netherrack",
+      "textures": {
+        "dagger": null,
+        "hammer": null,
+        "club": null,
+        "spear": null,
+        "spear_held": null,
+        "quarterstaff": null,
+        "quarterstaff_held": null,
+        "glaive": null,
+        "glaive_held": null
+      }
+    }
+  ],
+  "mod_dependency_name": "",
+  "mod_dependency_modid": ""
+} 

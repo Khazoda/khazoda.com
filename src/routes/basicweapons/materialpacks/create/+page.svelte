@@ -217,17 +217,36 @@
 		closeDialog();
 	}
 
-	function handleMaterialTemplateSelect(template: MaterialTemplate) {
+	async function handleMaterialTemplateSelect(template: MaterialTemplate) {
 		addMaterial();
-		// Update the last added material with the template data
+
+		// Create a new material with the template data
+		const newMaterial = {
+			...template,
+			textures: { ...template.textures }
+		};
+
+		// Update both stores with validated data
 		materialPack.update((pack) => {
 			const materials = [...pack.materials];
-			materials[materials.length - 1] = {
-				...template,
-				textures: { ...template.textures }
-			};
+			materials[materials.length - 1] = newMaterial;
 			return { ...pack, materials };
 		});
+
+		materialPacks.update((state) => ({
+			...state,
+			packs: {
+				...state.packs,
+				[$materialPack.localstorage_id]: {
+					...state.packs[$materialPack.localstorage_id],
+					materials: $materialPack.materials.map((m, i) =>
+						i === $materialPack.materials.length - 1 ? newMaterial : m
+					)
+				}
+			}
+		}));
+
+		// Navigate to the new material's stats tab
 		handleTabChange(`material-${$materialPack.materials.length - 1}`, 'stats');
 		closeDialog();
 	}
@@ -574,7 +593,7 @@
 			</button>
 			<button class="option-btn" on:click={() => (showModal[6] = true)}>
 				<span class="option-title">From Template</span>
-				<span class="option-desc">Start from a vanilla material template</span>
+				<span class="option-desc">Use a vanilla material's stats as a starting point</span>
 			</button>
 		</div>
 	</div>

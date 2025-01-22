@@ -1,6 +1,6 @@
 {
   "name": "nether-materials",
-  "description": "Multi-material pack with no mod dependency",
+  "description": "Pack with multiple vanilla materials",
   "pack_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVFhH7c4xDQAwDMCw4h9wMvr2AQFI7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJ7WYnSe1mJ0ntZidJPQ8fB04DOg+Y/wAAAABJRU5ErkJggg==",
   "materials": [
     {

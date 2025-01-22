@@ -46,6 +46,7 @@
 <CenterModal bind:showModal modalID={0}>
 	<div slot="description" class="modal-content">
 		<h2>Download Material Pack</h2>
+		<p>Place the downloaded zip file in the <b>basicweapons_materialpacks</b> folder.</p>
 		<div class="version-select">
 			{#each getVersionRanges() as version}
 				<label class="radio-label">

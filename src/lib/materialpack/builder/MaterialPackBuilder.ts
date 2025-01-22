@@ -66,14 +66,20 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 			type: 'minecraft:crafting_shaped',
 			group: '{{material_name}}_club',
 			pattern: [' #', '# ', '/ '],
-			key: { '#': { item: '{{repair_ingredient}}' }, '/': { item: 'minecraft:stick' } },
+			key: {
+				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
+				'/': { item: 'minecraft:stick' }
+			},
 			result: { id: 'basicweapons:{{material_name}}_club', count: 1 }
 		},
 		alt: {
 			type: 'minecraft:crafting_shaped',
 			group: '{{material_name}}_club',
 			pattern: ['# ', ' #', ' /'],
-			key: { '#': { item: '{{repair_ingredient}}' }, '/': { item: 'minecraft:stick' } },
+			key: {
+				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
+				'/': { item: 'minecraft:stick' }
+			},
 			result: { id: 'basicweapons:{{material_name}}_club', count: 1 }
 		}
 	},
@@ -81,7 +87,10 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 		main: {
 			type: 'minecraft:crafting_shaped',
 			pattern: ['#', '/'],
-			key: { '#': { item: '{{repair_ingredient}}' }, '/': { item: 'minecraft:stick' } },
+			key: {
+				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
+				'/': { item: 'minecraft:stick' }
+			},
 			result: { id: 'basicweapons:{{material_name}}_dagger', count: 1 },
 			'fabric:load_conditions': [
 				{
@@ -99,7 +108,10 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 		compat: {
 			type: 'minecraft:crafting_shaped',
 			pattern: [' #', '/ '],
-			key: { '#': { item: '{{repair_ingredient}}' }, '/': { item: 'minecraft:stick' } },
+			key: {
+				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
+				'/': { item: 'minecraft:stick' }
+			},
 			result: { id: 'basicweapons:{{material_name}}_dagger', count: 1 },
 			'fabric:load_conditions': [
 				{
@@ -118,25 +130,37 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 	hammer: {
 		type: 'minecraft:crafting_shaped',
 		pattern: ['###', '#/#', ' / '],
-		key: { '#': { item: '{{repair_ingredient}}' }, '/': { item: 'minecraft:stick' } },
+		key: {
+			'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
+			'/': { item: 'minecraft:stick' }
+		},
 		result: { id: 'basicweapons:{{material_name}}_hammer', count: 1 }
 	},
 	quarterstaff: {
 		type: 'minecraft:crafting_shaped',
 		pattern: ['  /', ' O ', '/  '],
-		key: { '/': { item: 'minecraft:stick' }, O: { item: '{{repair_ingredient}}' } },
+		key: {
+			'/': { item: 'minecraft:stick' },
+			O: { '{{ingredient_type}}': '{{repair_ingredient}}' }
+		},
 		result: { id: 'basicweapons:{{material_name}}_quarterstaff', count: 1 }
 	},
 	spear: {
 		type: 'minecraft:crafting_shaped',
 		pattern: ['  ^', ' / ', '/  '],
-		key: { '^': { item: '{{repair_ingredient}}' }, '/': { item: 'minecraft:stick' } },
+		key: {
+			'^': { '{{ingredient_type}}': '{{repair_ingredient}}' },
+			'/': { item: 'minecraft:stick' }
+		},
 		result: { id: 'basicweapons:{{material_name}}_spear', count: 1 }
 	},
 	glaive: {
 		type: 'minecraft:crafting_shaped',
 		pattern: [' OO', 'O/ ', '/  '],
-		key: { '/': { item: 'minecraft:stick' }, O: { item: '{{repair_ingredient}}' } },
+		key: {
+			'/': { item: 'minecraft:stick' },
+			O: { '{{ingredient_type}}': '{{repair_ingredient}}' }
+		},
 		result: { id: 'basicweapons:{{material_name}}_glaive', count: 1 }
 	}
 } as const;
@@ -237,9 +261,11 @@ export class MaterialPackBuilder {
 		if (!recipesFolder || !compatFolder) throw new Error('Failed to create recipe folders');
 
 		for (const material of this.materialPack.materials) {
+			const isTag = material.repair_ingredient.startsWith('#');
 			const variables = {
 				material_name: material.material_name,
-				repair_ingredient: material.repair_ingredient
+				repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
+				ingredient_type: isTag ? 'tag' : 'item'
 			};
 
 			for (const weaponType of WEAPON_TYPES) {

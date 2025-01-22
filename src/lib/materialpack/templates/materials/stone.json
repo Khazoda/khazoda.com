@@ -5,7 +5,7 @@
     "attack_speed_bonus": 0,
     "reach_bonus": 0,
     "enchantability": 5,
-    "repair_ingredient": "minecraft:cobblestone",
+    "repair_ingredient": "#minecraft:stone_tool_materials",
     "textures": {
         "dagger": null,
         "hammer": null,

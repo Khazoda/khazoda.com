@@ -13,7 +13,7 @@
 		| 'center' = 'bottom-right';
 
 	// Props for content
-	export let icon: any; // Svelte component type for the icon
+	export let icon: any;
 	export let label: string;
 
 	// Optional props

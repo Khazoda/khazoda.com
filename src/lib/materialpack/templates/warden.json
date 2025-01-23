@@ -1,0 +1,29 @@
+{
+  "name": "warden",
+  "description": "Pack with One Modded Material",
+  "pack_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz8GkR8Rs7CwmITVjPyoiY3FyK/CYjxlsHnzZt6Mmjfzem8k2SpbRYmNXwv+ArbKWikiJWu2xAY953lTI5lzuvd+7veec7r3XPApGc2wK7rByOat6GgkMBubC1Q9U4afJgYIqZptTk6PKJS091uJFrsOubVKx/1rtYmkrUFZtfCgZlp54THhieW86fKWsF9LqwnhE+GgJRcUvnH1uMdPLqc8/nTZUqJD4GsUDqR+cfwXa2nLEJaX025klrTCfdyX1CWzM9OytsloxSbKKBECjDPMEGF6pC9h8RC9dMmOEvndP/lT5CRXk9lkBYtFUqTJExR1SaonZdVFT4pnWHH7/7evtt7X61Wvi0Dlo+O8dkDVJnxtOM7HgeN8HUL5A5xni/m5feh/E32jqLXvQcManF4Utfg2nK1Dy72pWuqPVC7Dp+vwcgz1MWi+gpp5r2eFc47uQFmVr7qEnV3olPiGhW/Qw2gWbAE7NAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAhlJREFUWIXtljtIW1Ecxj/jA6GJUKhoCyU41BZpVeTcpoNDQIw0SxA3cVGwS1sEMZQo2SQBkYLgVDo5ypEiQSHKhTtpU0TiYAqmiyBIULkQI4QWjUO5F5P7yj0nxkG/6bz+fL//YzjAfVeNsvB4PIVqGicSiRoAqLt5GBnoMQ0Skyn0dXdwm0/Hd9V1Xellg7PJNNjq3kp/c9mivQZA0dSKpHsuGpyXo/khr+ZMF2BqRYLb7WY2KpUgCKCUAgBOjw6tARQFg8GKABBCQCnFSXpfc+eoiAOH7hzAtAV25fMH1PXG+qp9ADGZ4jJv/bUHAPjz4iUkSYLX6y16s5M518QVtaCvuwPve98xm/+OLZu+Iy0udD15ZAzAIp8/ADk8g4OxcQD/s49EQ2XH2wbw+QNqr5XMa39s4nKwH/WTYdW8tPxGYhpCOTyjZp4dG4ejzQUHgznA2IL65E9kX79Fw/clONpcwNIakzkTwMb6KpwxEbVnxyiQdi5zJoCR0REsfPuEQioNZ0yE83EjpkNRJnNbAMrwDX8excSHRUSiIeTkPHJyHgAgSRITgK0hvHj6HLMf59SSb23Hucw1AKdHh3j26o3uw5ycB+S0ur9ZctbyawDMtLUd58qUGwDgy9RImiHU+zTcpgwrIAgCCCF3B0ApVf9xVQf40tms+3gncw7S4rpdgH+XV6YBVvdcAF/3zywDxEy+ogAPugZb16jm9ptWvAAAAABJRU5ErkJggg==",
+  "materials": [
+    {
+      "material_name": "warden",
+      "durability": 2500,
+      "attack_damage_bonus": 4,
+      "attack_speed_bonus": 0.5,
+      "reach_bonus": 1.5,
+      "enchantability": 15,
+      "repair_ingredient": "deeperdarker:reinforced_echo_shard",
+      "textures": {
+        "dagger": null,
+        "hammer": null,
+        "club": null,
+        "spear": null,
+        "spear_held": null,
+        "quarterstaff": null,
+        "quarterstaff_held": null,
+        "glaive": null,
+        "glaive_held": null
+      }
+    }
+  ],
+  "mod_dependency_name": "deeper-and-darker",
+  "mod_dependency_modid": "deeperdarker"
+} 

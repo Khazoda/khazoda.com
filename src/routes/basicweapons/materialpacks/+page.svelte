@@ -44,9 +44,7 @@
 			<div class="flex-col description">
 				<span transition:fade={{ duration: 500, delay: 100 }}>
 					Use this tool to create
-					<a href="/basicweapons/materialpacks/help">
-						material packs<span>?</span>
-					</a> for Basic Weapons
+					<a href="/basicweapons/materialpacks/help"> material packs </a> for Basic Weapons
 				</span>
 				<span transition:fade={{ duration: 500, delay: 200 }}>
 					Define your own weapon stats and textures
@@ -123,15 +121,6 @@
 	.description {
 		margin-bottom: 2rem;
 		padding-left: 0.25rem;
-		span a span {
-			opacity: 0;
-			display: inline-block;
-			width: 0;
-		}
-		span a:hover span {
-			opacity: 1;
-			width: 0.5rem;
-		}
 	}
 	.button-container {
 		display: flex;

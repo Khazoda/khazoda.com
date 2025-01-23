@@ -1,7 +1,7 @@
 import type { MaterialPack } from '../types/materialpackTypes';
 import { writable } from 'svelte/store';
 import copperTemplate from '../templates/copper.json';
-import deeperdarkerTemplate from '../templates/deeperdarker.json';
+import wardenTemplate from '../templates/warden.json';
 import netherTemplate from '../templates/nether.json';
 
 export type MaterialPackTemplate = {
@@ -16,7 +16,7 @@ export type MaterialPackTemplate = {
 // Create a store for available templates
 export const templates = writable<MaterialPackTemplate[]>([
 	copperTemplate,
-	deeperdarkerTemplate,
+	wardenTemplate,
 	netherTemplate
 ]);
 

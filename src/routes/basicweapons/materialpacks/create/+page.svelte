@@ -9,6 +9,7 @@
 	} from 'src/lib/materialpack/stores/materialPackStore';
 	import HugeiconsPlusSignSquare from 'virtual:icons/hugeicons/plus-sign-square';
 	import HugeiconsArrowLeft02 from 'virtual:icons/hugeicons/arrow-left-02';
+	import empty_spot from '$lib/materialpack/media/empty_spot.png';
 
 	import HugeiconsZip01 from 'virtual:icons/hugeicons/zip-01';
 	import HugeiconsEdit02 from 'virtual:icons/hugeicons/edit-02';
@@ -29,6 +30,7 @@
 	import { goto } from '$app/navigation';
 
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
+	import { flip } from 'svelte/animate';
 
 	import {
 		materialPackNameSchema,
@@ -53,6 +55,7 @@
 	import { isApproachingStorageLimit, checkStorageQuota } from 'src/lib/utils/storageUtils';
 
 	import InfoTab from 'src/components/materialpack/InfoTab.svelte';
+	import { packOrder } from '$lib/materialpack/stores/packOrderStore';
 
 	// Basic pack information
 	let pack_name = '';
@@ -284,6 +287,68 @@
 		handleTabChange(`material-${$materialPack.materials.length - 1}`, 'stats');
 		closeDialog();
 	}
+
+	// Update pack order when packs change
+	$: {
+		const currentIds = Object.keys($materialPacks.packs);
+		// Add any new packs that aren't in the order
+		const newIds = currentIds.filter((id) => !$packOrder.includes(id));
+		if (newIds.length > 0) {
+			packOrder.update((order) => [...order, ...newIds]);
+		}
+		// Remove any deleted packs from the order
+		packOrder.update((order) => order.filter((id) => currentIds.includes(id)));
+	}
+
+	function handleDragStart(e: DragEvent, id: string) {
+		if (!(e.target instanceof HTMLImageElement)) {
+			e.preventDefault();
+			return;
+		}
+		e.dataTransfer?.setData('text/plain', id);
+		if (e.target instanceof HTMLElement) {
+			// Create a custom drag image
+			const dragImage = e.target.cloneNode(true) as HTMLElement;
+			dragImage.style.width = '96px';
+			dragImage.style.height = '96px';
+			dragImage.style.opacity = '1';
+			dragImage.style.position = 'absolute';
+			dragImage.style.top = '-1000px'; // Hide to prevent flicker
+			document.body.appendChild(dragImage);
+
+			e.dataTransfer?.setDragImage(dragImage, 48, 48);
+
+			// Clean up the drag image after drag ends
+			setTimeout(() => document.body.removeChild(dragImage), 0);
+
+			e.target.classList.add('dragging');
+		}
+	}
+
+	function handleDrop(e: DragEvent, targetId: string) {
+		const draggedId = e.dataTransfer?.getData('text/plain');
+		if (!draggedId || draggedId === targetId) return;
+
+		packOrder.update((order) => {
+			const newOrder = [...order];
+			const draggedIndex = newOrder.indexOf(draggedId);
+			const targetIndex = newOrder.indexOf(targetId);
+
+			// Swap the positions
+			[newOrder[draggedIndex], newOrder[targetIndex]] = [
+				newOrder[targetIndex],
+				newOrder[draggedIndex]
+			];
+
+			return newOrder;
+		});
+	}
+
+	function handleDragEnd(e: DragEvent) {
+		if (e.target instanceof HTMLElement) {
+			e.target.classList.remove('dragging');
+		}
+	}
 </script>
 
 <!-- #region HTML -->
@@ -324,8 +389,6 @@
 								{:else}
 									<span class="number-of-packs-created">
 										{Object.keys($materialPacks.packs).length} / 9 Material Packs Created.
-										<br />
-										Please delete a material pack to create a new one.
 									</span>
 								{/if}
 							</span>
@@ -337,34 +400,62 @@
 								backdropCorner="top-right"
 							/>
 						</div>
-						<div class="pack-list">
-							{#each Object.entries($materialPacks.packs) as [packId, pack]}
-								<div class="pack-item">
-									<div class="pack-inner">
-										<div class="actions-container">
-											<ZipMaterialPackDownloader materialPack={pack} />
-											<button
-												class="edit-pack-btn"
-												title="Edit Material Pack"
-												on:click={() => handlePackSelect(packId)}
-											>
-												<HugeiconsEdit02 width="32" height="32" />
-											</button>
-											<button
-												class="delete-pack-btn"
-												on:click={() => handleDeleteClick(packId)}
-												title="Delete Material Pack"
-											>
-												<HugeiconsDelete02 width="32" height="32" />
-											</button>
+						<div class="pack-list-container">
+							<div class="pack-list">
+								{#each $packOrder as packId (packId)}
+									<div
+										class="pack-item"
+										draggable="true"
+										role="button"
+										tabindex="0"
+										aria-label="Draggable material pack"
+										on:dragstart={(e) => handleDragStart(e, packId)}
+										on:dragend={handleDragEnd}
+										on:dragover|preventDefault
+										on:drop|preventDefault={(e) => handleDrop(e, packId)}
+										animate:flip={{ duration: 300 }}
+									>
+										<div class="pack-inner">
+											<div class="actions-container">
+												<ZipMaterialPackDownloader materialPack={$materialPacks.packs[packId]} />
+												<button
+													class="edit-pack-btn"
+													title="Edit Material Pack"
+													on:click={() => handlePackSelect(packId)}
+												>
+													<HugeiconsEdit02 width="32" height="32" />
+												</button>
+												<button
+													class="delete-pack-btn"
+													on:click={() => handleDeleteClick(packId)}
+													title="Delete Material Pack"
+												>
+													<HugeiconsDelete02 width="32" height="32" />
+												</button>
+											</div>
+											<img
+												src={$materialPacks.packs[packId].pack_icon || ''}
+												alt="material pack icon"
+												class="no-resample"
+											/>
+											{#if $materialPacks.packs[packId].pack_name}
+												<span class="pack-label">{$materialPacks.packs[packId].pack_name}</span>
+											{/if}
 										</div>
-										<img src={pack.pack_icon || ''} alt="material pack icon" class="no-resample" />
-										{#if pack.pack_name}
-											<span class="pack-label">{pack.pack_name}</span>
-										{/if}
 									</div>
-								</div>
-							{/each}
+								{/each}
+								{#each Array(9 - $packOrder.length).fill(null) as _ (Math.random())}
+									<div
+										class="pack-item placeholder"
+										animate:flip={{ duration: 300 }}
+										role="gridcell"
+									>
+										<div class="pack-inner">
+											<img src={empty_spot} alt="empty pack slot" class="no-resample" />
+										</div>
+									</div>
+								{/each}
+							</div>
 						</div>
 						<!-- Materialpack Creator -->
 					{:else}
@@ -737,34 +828,79 @@
 		gap: 0.5rem;
 	}
 
-	.pack-list {
-		width: 100%;
-		margin-top: 2rem;
+	.pack-list-container {
+		margin: 2rem auto 0 auto;
 		padding: 2rem;
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		gap: 1rem;
-		justify-items: center;
-		align-items: flex-start;
-		max-width: 50dvw;
-		aspect-ratio: 1/1;
-
+		width: fit-content;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		background: rgba(40, 40, 40, 1);
 		box-shadow: inset 0px 0px 10px 0px #1c1c1c;
 		border: 10px solid #353535;
 		border-radius: 8px;
 	}
 
+	.pack-list {
+		display: grid;
+		grid-template-columns: repeat(3, 128px);
+		grid-template-rows: repeat(3, 128px);
+		gap: 4rem;
+		width: calc(3 * 128px + 2 * 4rem); // 3 items + 2 gaps
+		height: fit-content;
+		max-height: calc(3 * 128px + 2 * 4rem); // 3 rows + 2 gaps
+		justify-content: center;
+		& > * {
+			transition:
+				transform 0.2s ease,
+				opacity 0.2s ease;
+		}
+	}
+
 	.pack-item {
-		position: relative;
-		display: flex;
 		width: 128px;
 		height: 128px;
+		position: relative;
+		display: flex;
 		gap: 1rem;
-		align-items: center;
-		color: var(--pack-item-color);
-		&:hover {
-			background: var(--pack-item-bg-hover);
+
+		&:not(.dragging):not(.placeholder) {
+			transition: all 0.2s ease;
+
+			img {
+				cursor: grab;
+				transition: all 0.2s ease;
+
+				&:hover {
+					opacity: 0.9;
+				}
+
+				&:active {
+					cursor: grabbing;
+					transform: scale(0.75);
+					opacity: 0.5;
+				}
+			}
+		}
+
+		// Add drop target indicator
+		&:not(.dragging):not(.placeholder)[data-dragging-over='true'] {
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: -8px;
+				border: 2px dashed rgba(91, 217, 255, 0.5);
+				border-radius: 12px;
+				pointer-events: none;
+			}
+		}
+
+		&.placeholder {
+			opacity: 0.5;
+			pointer-events: none;
+			user-select: none;
 		}
 
 		.pack-inner {
@@ -794,25 +930,26 @@
 				font-size: 1rem;
 				letter-spacing: 0.05em;
 				line-height: 1;
-				transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			}
 
 			&:hover .pack-label {
 				transform: scale(0.9);
+				opacity: 0;
 			}
 			.actions-container {
 				position: absolute;
-				top: 0;
-				right: -3.25rem;
-				width: 48px;
-				height: 100%;
+				bottom: -3.25rem;
+				left: 0;
+				width: 100%;
+				height: 48px;
 				display: flex;
-				flex-direction: column;
+				flex-direction: row;
 				justify-content: space-evenly;
 				align-items: flex-start;
 				opacity: 0;
 				transform: translateY(-1.5rem);
-				transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 				button {
 					padding: 0;
@@ -850,12 +987,16 @@
 				transform: translateY(0rem);
 			}
 		}
+		.pack-inner:has(img:active) .actions-container {
+			visibility: hidden;
+		}
 	}
 	.create-pack-btn-container {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 		width: fit-content;
+		justify-content: center;
 	}
 	.number-of-packs-created {
 		color: #7e7e7e;

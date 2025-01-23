@@ -37,7 +37,6 @@
 	.btn-important {
 		text-decoration: none;
 		width: fit-content;
-		margin-right: 2rem;
 		padding: 1rem 2rem;
 		font-family: 'Quicksand', 'sans-serif';
 		font-size: 1.2rem;

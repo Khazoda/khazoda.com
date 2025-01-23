@@ -50,8 +50,8 @@
 		<p>Place the downloaded zip file in the <b>basicweapons_materialpacks</b> folder:</p>
 		<img src={materialpack_location_example} alt="Download Pack Example" />
 		<div class="version-select">
+			<span>Choose a Minecraft Version</span>
 			<select value={selectedVersion} on:change={handleVersionChange} class="version-dropdown">
-				<option value="" disabled selected>Choose a Minecraft Version</option>
 				{#each getVersionRanges() as version}
 					<option value={version}>{version}</option>
 				{/each}
@@ -125,6 +125,7 @@
 	.version-dropdown {
 		width: 100%;
 		padding: 0.75rem;
+		padding-right: 2.5rem;
 		background: #2a2a2a;
 		border: 1px solid #3a3a3a;
 		border-radius: 8px;
@@ -132,9 +133,15 @@
 		font-size: 1rem;
 		cursor: pointer;
 		transition: all 0.2s ease;
+		appearance: none;
+		// Fake dropdown arrow
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		background-size: 1em;
 
 		&:hover {
-			background: #3a3a3a;
+			background-color: #3a3a3a;
 			border-color: #5bd9ff;
 		}
 

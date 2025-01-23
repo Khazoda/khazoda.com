@@ -18,6 +18,7 @@
 	import HugeiconsFolder01 from 'virtual:icons/hugeicons/folder-01';
 
 	import HomeButton from 'src/components/HomeButton.svelte';
+	import FeedbackButton from 'src/components/materialpack/FeedbackButton.svelte';
 	import ImportantButton from 'src/components/materialpack/ImportantButton.svelte';
 	import ImagePicker from 'src/components/materialpack/ImagePicker.svelte';
 	import CenterModal from 'src/components/CenterModal.svelte';
@@ -50,6 +51,8 @@
 		type MaterialTemplate
 	} from '$lib/materialpack/stores/materialTemplateStore';
 	import { isApproachingStorageLimit, checkStorageQuota } from 'src/lib/utils/storageUtils';
+
+	import InfoTab from 'src/components/materialpack/InfoTab.svelte';
 
 	// Basic pack information
 	let pack_name = '';
@@ -286,6 +289,7 @@
 <!-- #region HTML -->
 <div class="page-container flex-col">
 	<span class="absolute-top-left"><HomeButton /></span>
+	<span class="absolute-top-right"><FeedbackButton /></span>
 	{#if isLoaded}
 		<div
 			class="transition-wrapper"
@@ -305,12 +309,33 @@
 									label="Back"
 									onClick={handleBackTransition}
 									color="grey"
-									backdropCorner="center"
+									backdropCorner="top-left"
 								/>
 							</span>
-							<button class="info-btn" on:click={showBrowserStorageInfoModal}>
-								<HugeiconsInformationSquare width="42" height="42" />
-							</button>
+							<span class="create-pack-btn-container">
+								{#if Object.keys($materialPacks.packs).length < 9}
+									<ImportantButton
+										icon={HugeiconsPlusSignSquare}
+										label="Create New Pack"
+										onClick={handleCreateNew}
+										color="green"
+										backdropCorner="top-center"
+									/>
+								{:else}
+									<span class="number-of-packs-created">
+										{Object.keys($materialPacks.packs).length} / 9 Material Packs Created.
+										<br />
+										Please delete a material pack to create a new one.
+									</span>
+								{/if}
+							</span>
+							<ImportantButton
+								icon={HugeiconsInformationSquare}
+								label="Storage"
+								onClick={showBrowserStorageInfoModal}
+								color="blue"
+								backdropCorner="top-right"
+							/>
 						</div>
 						<div class="pack-list">
 							{#each Object.entries($materialPacks.packs) as [packId, pack]}
@@ -341,20 +366,6 @@
 								</div>
 							{/each}
 						</div>
-						<span class="create-pack-btn-container">
-							{#if Object.keys($materialPacks.packs).length < 10}
-								<ImportantButton
-									icon={HugeiconsPlusSignSquare}
-									label="Create New Pack"
-									onClick={handleCreateNew}
-									color="green"
-									backdropCorner="bottom-right"
-								/>
-							{/if}
-							<span class="number-of-packs-created">
-								{Object.keys($materialPacks.packs).length} / 10 Material Packs Created
-							</span>
-						</span>
 						<!-- Materialpack Creator -->
 					{:else}
 						<span class="back-btn-container">
@@ -382,9 +393,35 @@
 							<!-- Content area -->
 							{#if activeTab}
 								{#if getContentType(activeTab) === 'settings'}
-									<button on:click={showMaterialPackSettingsInfoModal} class="tab-info-btn"
-										><HugeiconsInformationSquare width="32" height="32" /></button
-									>
+									<InfoTab title="Material Pack Settings" modalID={2}>
+										<h4>Change the main settings for your material pack here.</h4>
+										<div class="modal-content">
+											<h4>Pack Icon</h4>
+											<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
+											<p>
+												Feel free to download the template image (right click and save) and edit it
+												to display one of your weapon textures in.
+											</p>
+											<h4>Pack Name</h4>
+											<p>
+												The material pack name should be either the name of your main material (e.g.
+												'copper', 'unobtainium'), or in the case of a materialpack with multiple
+												materials, a name that is short and makes sense (e.g. 'gems', 'tech-mats',
+												'all-mats').
+											</p>
+											<h4>Mod Dependency</h4>
+											<p>
+												If your material pack uses materials from another mod rather than vanilla,
+												include that mod's name (e.g. 'mekanism', 'mythic-metals',
+												'applied-energistics-2').
+											</p>
+											<p>
+												The mod dependency ID <b>must</b> be the actual id (namespace) of the mod you're
+												depending on (e.g. 'mekanism', 'mythicmetals', 'appeng'). Basic Weapons will
+												only load your pack if it detects a mod with that id being loaded.
+											</p>
+										</div>
+									</InfoTab>
 									<!-- Settings form content -->
 									<form class="pack-settings-form">
 										<div class="pack-settings-header">
@@ -503,6 +540,21 @@
 			{/key}
 		</div>
 	{/if}
+	<!-- Mobile Warning -->
+	{#if typeof window !== 'undefined' && window.innerWidth < 1000}
+		<div class="mobile-warning">
+			<p>
+				To use the Material Pack Creator, please use a device with a screen width of at least
+				1000px.
+			</p>
+			<span class="flex-row">
+				<button on:click={() => window.location.reload()}>Refresh Page</button>
+				<button on:click={() => (window.location.href = '/basicweapons/materialpacks')}
+					>Exit Creator</button
+				>
+			</span>
+		</div>
+	{/if}
 </div>
 
 <!-- LocalStorage Info Modal -->
@@ -515,7 +567,13 @@
 			<li>Packs are only available on this device and browser</li>
 			<li>Clearing browser data will delete your saved packs</li>
 			<li>
-				If you've hit the limit of 10 material packs, you can delete some to make room for new ones
+				If you've hit the limit of 9 material packs, you can delete some to make room for new ones
+			</li>
+			<br />
+			<li>
+				Local Storage is limited to 5MB on most browsers. If you're making a materialpack with many
+				materials that have high resolution textures I would recommend generating only the materials
+				with their stats and then adding textures manually.
 			</li>
 			<br />
 			<li style="font-weight: bold">
@@ -537,41 +595,6 @@
 		<div class="modal-actions">
 			<button class="cancel-btn" on:click={closeDialog}>Cancel</button>
 			<button class="delete-btn" on:click={confirmDelete}>Delete</button>
-		</div>
-	</div>
-</CenterModal>
-
-<!-- Material Pack Settings Info Modal -->
-<CenterModal bind:showModal modalID={2}>
-	<div slot="description" class="info-modal">
-		<h2>Material Pack Settings</h2>
-		<h4>Change the main settings for your material pack here.</h4>
-		<div class="modal-content">
-			<h4>Pack Icon</h4>
-			<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
-			<p>
-				Feel free to download the template image and edit it to display one of your weapon textures
-				in.
-			</p>
-			<h4>Pack Name</h4>
-			<p>
-				The material pack name should be either the name of your main material (e.g. 'copper',
-				'unobtainium'), or in the case of a materialpack with multiple materials, a name that is
-				short and makes sense (e.g. 'gems', 'tech-mats', 'all-mats').
-			</p>
-			<h4>Mod Dependency</h4>
-			<p>
-				If your material pack uses materials from another mod rather than vanilla, include that
-				mod's name (e.g. 'mekanism', 'mythic-metals', 'applied-energistics-2').
-			</p>
-			<p>
-				The mod dependency ID <b>must</b> be the actual id (namespace) of the mod you're depending on
-				(e.g. 'mekanism', 'mythicmetals', 'appeng'). Basic Weapons will only load your pack if it detects
-				a mod with that id being loaded.
-			</p>
-		</div>
-		<div class="modal-actions">
-			<button class="ok-btn" on:click={closeDialog}>Ok 👍</button>
 		</div>
 	</div>
 </CenterModal>
@@ -717,11 +740,19 @@
 	.pack-list {
 		width: 100%;
 		margin-top: 2rem;
+		padding: 2rem;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 1rem;
+		justify-items: center;
+		align-items: flex-start;
 		max-width: 50dvw;
-		gap: 2.5rem;
-		justify-items: flex-start;
+		aspect-ratio: 1/1;
+
+		background: rgba(40, 40, 40, 1);
+		box-shadow: inset 0px 0px 10px 0px #1c1c1c;
+		border: 10px solid #353535;
+		border-radius: 8px;
 	}
 
 	.pack-item {
@@ -765,6 +796,7 @@
 				line-height: 1;
 				transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			}
+
 			&:hover .pack-label {
 				transform: scale(0.9);
 			}
@@ -824,7 +856,6 @@
 		flex-direction: column;
 		gap: 1rem;
 		width: fit-content;
-		margin: 3rem 0 0 auto;
 	}
 	.number-of-packs-created {
 		color: #7e7e7e;
@@ -1137,6 +1168,36 @@
 		.template-desc {
 			font-size: 0.9rem;
 			opacity: 0.8;
+		}
+	}
+
+	//#region Mobile Warning
+	.mobile-warning {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: 1rem 0.5rem;
+		background-color: rgba(14, 14, 14, 0.95);
+		z-index: 1000;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		p {
+			max-width: 500px;
+			text-align: center;
+		}
+
+		button {
+			margin: 0.5rem;
+			padding: 0.5rem 1rem;
+			font-size: 1rem;
+			font-weight: 700;
+			border: none;
+			border-radius: 8px;
 		}
 	}
 </style>

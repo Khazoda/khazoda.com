@@ -1,8 +1,16 @@
 <script lang="ts">
 	// Props for button styling
 	export let color: 'blue' | 'green' | 'grey' = 'blue';
-	export let backdropCorner: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center' =
-		'bottom-right';
+	export let backdropCorner:
+		| 'top-left'
+		| 'top-right'
+		| 'bottom-left'
+		| 'bottom-right'
+		| 'top-center'
+		| 'bottom-center'
+		| 'left-center'
+		| 'right-center'
+		| 'center' = 'bottom-right';
 
 	// Props for content
 	export let icon: any; // Svelte component type for the icon
@@ -61,6 +69,18 @@
 		&.bottom-right {
 			box-shadow: 3px 3px 0px var(--button-color);
 		}
+		&.top-center {
+			box-shadow: 0 -3px 0px var(--button-color);
+		}
+		&.bottom-center {
+			box-shadow: 0 3px 0px var(--button-color);
+		}
+		&.left-center {
+			box-shadow: -3px 0 0px var(--button-color);
+		}
+		&.right-center {
+			box-shadow: 3px 0 0px var(--button-color);
+		}
 		&.center {
 			transform: translate(0px, 0px);
 		}
@@ -78,6 +98,18 @@
 			}
 			&.bottom-right {
 				box-shadow: 2px 2px 0px var(--button-hover-color);
+			}
+			&.top-center {
+				box-shadow: 0 -2px 0px var(--button-hover-color);
+			}
+			&.bottom-center {
+				box-shadow: 0 2px 0px var(--button-hover-color);
+			}
+			&.left-center {
+				box-shadow: -2px 0 0px var(--button-hover-color);
+			}
+			&.right-center {
+				box-shadow: 2px 0 0px var(--button-hover-color);
 			}
 			&.center {
 				transform: translate(1px, 1px);

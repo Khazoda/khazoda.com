@@ -12,6 +12,7 @@
 	import { onMount, tick } from 'svelte';
 	import FanButton from 'src/components/materialpack/FanButton.svelte';
 	import { materialPacks } from 'src/lib/materialpack/stores/materialPackStore';
+	import FeedbackButton from 'src/components/materialpack/FeedbackButton.svelte';
 
 	let pageReady = false;
 
@@ -31,6 +32,8 @@
 
 <!-- #region HTML-->
 <div class="page-container">
+	<span class="absolute-top-right"><FeedbackButton /></span>
+
 	{#if pageReady}
 		<span class="absolute-top-left">
 			<HomeButton />
@@ -49,13 +52,13 @@
 					Define your own weapon stats and textures
 				</span>
 			</div>
-			<div class="flex-row align-center">
+			<div class="button-container align-center">
 				<span transition:fly={{ y: 50, duration: 500, delay: 250 }}>
 					<FanButton
 						color="blue"
 						href="/basicweapons/materialpacks/list"
 						icon={HugeiconsLibrary}
-						label="Published Material Packs"
+						label="Public Material Packs"
 						fanImages={[empty_frame, empty_frame, copper_dagger]}
 					/>
 				</span>
@@ -130,11 +133,20 @@
 			width: 0.5rem;
 		}
 	}
+	.button-container {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+		@media screen and (max-width: 1000px) {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+		}
+	}
 
 	.btn-important {
 		text-decoration: none;
 		width: fit-content;
-		margin-right: 2rem;
 		padding: 1rem 2rem;
 		font-family: 'Quicksand', 'sans-serif';
 		font-size: 1.2rem;

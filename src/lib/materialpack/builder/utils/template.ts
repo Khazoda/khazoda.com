@@ -12,10 +12,10 @@ export function loadTemplate(templatePath: string): string {
 // https://minecraft.wiki/w/Pack_format
 const PACK_FORMAT_VERSIONS = {
 	data: {
-		'1.21-1.21.1': 48
+		'1.21 - 1.21.1': 48
 	},
 	resource: {
-		'1.21-1.21.1': 34
+		'1.21 - 1.21.1': 34
 	}
 } as const;
 

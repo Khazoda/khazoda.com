@@ -62,8 +62,7 @@
 			box-shadow: 3px 3px 0px var(--button-color);
 		}
 		&.center {
-			box-shadow: 0px 0px 0px var(--button-color);
-			transform: translate(-3px, -3px);
+			transform: translate(0px, 0px);
 		}
 
 		&:hover {
@@ -81,8 +80,7 @@
 				box-shadow: 2px 2px 0px var(--button-hover-color);
 			}
 			&.center {
-				box-shadow: 0px 0px 0px var(--button-hover-color);
-				transform: translate(-2px, -2px);
+				transform: translate(1px, 1px);
 			}
 
 			span {

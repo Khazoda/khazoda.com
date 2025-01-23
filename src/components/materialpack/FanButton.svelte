@@ -26,7 +26,7 @@
 
 	{#if fanImages.length > 0 && isHovered}
 		<div class="fan-overlay">
-			{#each fanImages.slice(0, 3) as image, i}
+			{#each [...fanImages].sort(() => Math.random() - 0.5).slice(0, 3) as image, i}
 				<img src={image} alt="" class="fan-image fan-{i + 1} no-resample" />
 			{/each}
 		</div>

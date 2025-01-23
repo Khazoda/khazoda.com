@@ -69,9 +69,9 @@
 						label={Object.keys($materialPacks.packs).length > 0
 							? 'Your Material Packs'
 							: 'Create Material Pack'}
-						fanImages={Object.values($materialPacks.packs)
-							.slice(0, 3)
-							.map((pack) => pack.pack_icon || empty_frame)}
+						fanImages={Object.values($materialPacks.packs).map(
+							(pack) => pack.pack_icon || empty_frame
+						)}
 					/>
 				</span>
 			</div>

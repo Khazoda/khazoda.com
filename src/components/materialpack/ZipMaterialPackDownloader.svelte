@@ -2,13 +2,14 @@
 	import type { MaterialPack } from '$lib/materialpack/types/materialpackTypes';
 	import { MaterialPackBuilder } from '$lib/materialpack/builder/MaterialPackBuilder';
 	import { PACK_FORMAT_VERSIONS, getVersionRanges } from '$lib/materialpack/builder/utils/template';
+	import materialpack_location_example from '$lib/materialpack/media/materialpack_location_example.png';
 	import HugeiconsZip01 from 'virtual:icons/hugeicons/zip-01';
 	import CenterModal from 'src/components/CenterModal.svelte';
 	import { closeDialog } from 'src/components/CenterModal.svelte';
 
 	export let materialPack: MaterialPack;
 
-	let selectedVersion: keyof typeof PACK_FORMAT_VERSIONS.data = '1.21-1.21.1';
+	let selectedVersion: keyof typeof PACK_FORMAT_VERSIONS.data = '1.21 - 1.21.1';
 	let showModal = [false];
 
 	async function downloadMaterialPack() {
@@ -46,24 +47,19 @@
 <CenterModal bind:showModal modalID={0}>
 	<div slot="description" class="modal-content">
 		<h2>Download Material Pack</h2>
-		<p>Place the downloaded zip file in the <b>basicweapons_materialpacks</b> folder.</p>
+		<p>Place the downloaded zip file in the <b>basicweapons_materialpacks</b> folder:</p>
+		<img src={materialpack_location_example} alt="Download Pack Example" />
 		<div class="version-select">
-			{#each getVersionRanges() as version}
-				<label class="radio-label">
-					<input
-						type="radio"
-						name="version"
-						value={version}
-						checked={selectedVersion === version}
-						on:change={handleVersionChange}
-					/>
-					{version}
-				</label>
-			{/each}
+			<select value={selectedVersion} on:change={handleVersionChange} class="version-dropdown">
+				<option value="" disabled selected>Choose a Minecraft Version</option>
+				{#each getVersionRanges() as version}
+					<option value={version}>{version}</option>
+				{/each}
+			</select>
 		</div>
 		<div class="modal-actions">
-			<button class="ok-btn" on:click={downloadMaterialPack}>
-				Download for {selectedVersion}
+			<button class="ok-btn" on:click={downloadMaterialPack} disabled={!selectedVersion}>
+				Download for Minecraft {selectedVersion || '...'}
 			</button>
 		</div>
 	</div>
@@ -95,18 +91,6 @@
 		margin: 1rem 0;
 	}
 
-	.radio-label {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		cursor: pointer;
-		color: var(--color-text);
-
-		input {
-			cursor: pointer;
-		}
-	}
-
 	.modal-actions {
 		display: flex;
 		justify-content: center;
@@ -127,5 +111,46 @@
 				background: #3b8de6;
 			}
 		}
+	}
+	h2 {
+		margin: 0;
+	}
+
+	img {
+		border-radius: 8px;
+		margin-top: 1rem;
+		border: 2px solid #3a3a3a;
+	}
+
+	.version-dropdown {
+		width: 100%;
+		padding: 0.75rem;
+		background: #2a2a2a;
+		border: 1px solid #3a3a3a;
+		border-radius: 8px;
+		color: white;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: #3a3a3a;
+			border-color: #5bd9ff;
+		}
+
+		&:focus {
+			outline: none;
+			border-color: #5bd9ff;
+		}
+
+		option {
+			background: #2a2a2a;
+			color: white;
+			padding: 0.5rem;
+		}
+	}
+
+	.version-select {
+		margin: 1.5rem 0;
 	}
 </style>

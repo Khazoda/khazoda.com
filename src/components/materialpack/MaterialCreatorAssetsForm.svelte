@@ -24,7 +24,7 @@
 	export let activeTab: string;
 	export let onTabChange: (newTab: string) => void;
 
-	const VALID_SIZES = [8, 16, 32, 64, 128, 256, 512] as const;
+	const VALID_SIZES = [8, 16, 32, 64, 128, 256] as const;
 	type ValidSize = (typeof VALID_SIZES)[number];
 	const WEAPON_TEXTURES: Array<{
 		id: keyof Material['textures'];

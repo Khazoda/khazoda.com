@@ -341,21 +341,20 @@
 								</div>
 							{/each}
 						</div>
-						{#if Object.keys($materialPacks.packs).length < 10}
-							<span class="create-pack-btn-container">
+						<span class="create-pack-btn-container">
+							{#if Object.keys($materialPacks.packs).length < 10}
 								<ImportantButton
 									icon={HugeiconsPlusSignSquare}
 									label="Create New Pack"
 									onClick={handleCreateNew}
 									color="green"
-									backdropCorner="bottom-left"
+									backdropCorner="bottom-right"
 								/>
-								<h1>
-									{Object.keys($materialPacks.packs).length} / 10 Material Packs Created
-								</h1>
+							{/if}
+							<span class="number-of-packs-created">
+								{Object.keys($materialPacks.packs).length} / 10 Material Packs Created
 							</span>
-						{/if}
-
+						</span>
 						<!-- Materialpack Creator -->
 					{:else}
 						<span class="back-btn-container">
@@ -826,6 +825,10 @@
 		gap: 1rem;
 		width: fit-content;
 		margin: 3rem 0 0 auto;
+	}
+	.number-of-packs-created {
+		color: #7e7e7e;
+		font-weight: 600;
 	}
 
 	.icon-upload {

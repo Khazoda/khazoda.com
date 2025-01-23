@@ -3,7 +3,7 @@
 	export let accept: string = 'image/png';
 	export let onImageSelect: (base64: string) => void;
 	export let imgSize: string = '128px';
-	export let maxUploadSize: number = 1024 * 1024;
+	export let maxUploadSize: number = 512 * 512;
 	export let padding: string = '0rem';
 	export let backgroundImage: string = '';
 	export let placeholderBackground: string = '';
@@ -20,7 +20,7 @@
 
 		if (file) {
 			if (file.size > maxUploadSize) {
-				alert('Image must be less than 1024 x 1024 pixels');
+				alert('Image dimensions must be less than or equal to 512 x 512 pixels');
 				return;
 			}
 

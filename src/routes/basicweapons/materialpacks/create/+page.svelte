@@ -49,6 +49,7 @@
 		materialTemplates,
 		type MaterialTemplate
 	} from '$lib/materialpack/stores/materialTemplateStore';
+	import { isApproachingStorageLimit, checkStorageQuota } from 'src/lib/utils/storageUtils';
 
 	// Basic pack information
 	let pack_name = '';
@@ -71,16 +72,25 @@
 	let selectedSubTabs: Record<string, string> = {};
 
 	let activeTab = 'settings';
+
+	interface Tab {
+		id: string;
+		type: 'settings' | 'material';
+		label: string;
+		materialIndex?: number;
+		material?: Material;
+	}
+
 	$: tabs = [
 		{ id: 'settings', type: 'settings' as const, label: 'Pack Settings' },
 		...$materialPack.materials.map((material: Material, index: number) => ({
 			id: `material-${index}`,
 			label: material.material_name || `Material ${index + 1}`,
-			type: 'material',
+			type: 'material' as const,
 			materialIndex: index,
 			material
 		}))
-	];
+	] satisfies Tab[];
 
 	function handleTabChange(tabId: string, subType?: string) {
 		if (subType) {
@@ -116,6 +126,21 @@
 	}
 
 	function handleCreateNew() {
+		// Check if there's enough storage space for a new pack
+		const { hasSpace, error } = checkStorageQuota();
+		if (!hasSpace) {
+			alert(error);
+			return;
+		}
+
+		if (isApproachingStorageLimit()) {
+			const proceed = confirm(
+				"Warning: You're approaching the browser's storage limit. " +
+					'Consider exporting and removing some material packs to free up space. ' +
+					'Continue anyway?'
+			);
+			if (!proceed) return;
+		}
 		showModal[3] = true;
 	}
 
@@ -125,7 +150,13 @@
 			show_pack_creator = true;
 			closeDialog();
 		} catch (error: any) {
-			alert(error?.message || 'Failed to create new pack');
+			if (error instanceof Error && error.name === 'QuotaExceededError') {
+				alert(
+					'Storage quota exceeded. Please export and remove some material packs to free up space. Consider using lower resolution textures also.'
+				);
+			} else {
+				alert(error?.message || 'Failed to create new pack');
+			}
 		}
 	}
 
@@ -133,7 +164,7 @@
 		isTransitioning = true;
 		isLoaded = false;
 		// Wait for the transition to complete before navigating
-		await new Promise((resolve) => setTimeout(resolve, 300)); // Match transition duration
+		await new Promise((resolve) => setTimeout(resolve, 300)); // Should match transition duration
 		goto('/basicweapons/materialpacks');
 	}
 

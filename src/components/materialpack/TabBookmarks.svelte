@@ -4,17 +4,26 @@
 	import HugeiconsPlusSignSquare from 'virtual:icons/hugeicons/plus-sign-square';
 	import type { Material } from '$lib/materialpack/types/materialpackTypes';
 
-	export let tabs: any;
+	export let tabs: Tab[];
 	export let activeTab: string;
 	export let onTabChange: (tabId: string, subType?: string) => void;
 	export let onAddMaterial: () => void;
 
-	// Keep track of last selected subtab for each material
+	// Keep track of last selected subtab for each material to switch back to easily for users
 	let materialLastSubTabs: Record<number, 'stats' | 'assets'> = {};
+
+	interface Tab {
+		id: string;
+		type: 'settings' | 'material';
+		label: string;
+		icon?: any;
+		materialIndex?: number;
+		material?: Material;
+	}
 
 	function getFirstTexture(material: Material): string | null {
 		const textureKeys = Object.keys(material.textures) as Array<keyof Material['textures']>;
-		return textureKeys.reduce((first, key) => {
+		return textureKeys.reduce<string | null>((first, key) => {
 			return first || material.textures[key];
 		}, null);
 	}

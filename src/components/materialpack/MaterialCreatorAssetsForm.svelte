@@ -17,13 +17,14 @@
 	import glaive_held from '$lib/materialpack/media/weapon_outlines/glaive_held.png';
 
 	import { z } from 'zod';
+	import { isApproachingStorageLimit, checkStorageQuota } from '$lib/utils/storageUtils';
 
 	export let material: Material;
 	export let index: number;
 	export let activeTab: string;
 	export let onTabChange: (newTab: string) => void;
 
-	const VALID_SIZES = [8, 16, 32, 64, 128, 256, 512, 1024] as const;
+	const VALID_SIZES = [8, 16, 32, 64, 128, 256, 512] as const;
 	type ValidSize = (typeof VALID_SIZES)[number];
 	const WEAPON_TEXTURES: Array<{
 		id: keyof Material['textures'];
@@ -107,28 +108,53 @@
 				alert(validation.message);
 				return;
 			}
+
+			// Check if there's enough storage space
+			const { hasSpace, error } = checkStorageQuota(base64);
+			if (!hasSpace) {
+				alert(error);
+				return;
+			}
+
+			// Show warning if approaching limit
+			if (isApproachingStorageLimit()) {
+				const proceed = confirm(
+					"Warning: You're approaching the browser's storage limit. " +
+						'Consider exporting and removing some material packs to free up space. ' +
+						'Continue anyway?'
+				);
+				if (!proceed) return;
+			}
 		}
 
 		// Only update if validation passed or we're removing the texture
 		material.textures[textureId] = base64;
 
-		// Update both stores
-		materialPack.update((pack) => {
-			const updatedMaterials = [...pack.materials];
-			updatedMaterials[index] = { ...material };
-			return { ...pack, materials: updatedMaterials };
-		});
+		try {
+			// Update both stores
+			materialPack.update((pack) => {
+				const updatedMaterials = [...pack.materials];
+				updatedMaterials[index] = { ...material };
+				return { ...pack, materials: updatedMaterials };
+			});
 
-		materialPacks.update((state) => ({
-			...state,
-			packs: {
-				...state.packs,
-				[$materialPack.localstorage_id]: {
-					...state.packs[$materialPack.localstorage_id],
-					materials: $materialPack.materials.map((m, i) => (i === index ? material : m))
+			materialPacks.update((state) => ({
+				...state,
+				packs: {
+					...state.packs,
+					[$materialPack.localstorage_id]: {
+						...state.packs[$materialPack.localstorage_id],
+						materials: $materialPack.materials.map((m, i) => (i === index ? material : m))
+					}
 				}
-			}
-		}));
+			}));
+		} catch (e) {
+			alert(
+				'Failed to save changes: Storage quota exceeded. Please export and remove some material packs to free up space.'
+			);
+			// Revert the change
+			material.textures[textureId] = null;
+		}
 	}
 
 	function deleteMaterial() {

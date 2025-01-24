@@ -53,7 +53,12 @@
 		materialTemplates,
 		type MaterialTemplate
 	} from '$lib/materialpack/stores/materialTemplateStore';
-	import { isApproachingStorageLimit, checkStorageQuota } from 'src/lib/utils/storageUtils';
+	import {
+		isApproachingStorageLimit,
+		checkStorageQuota,
+		getLocalStorageSize,
+		getRemainingStorage
+	} from 'src/lib/utils/storageUtils';
 
 	import InfoTab from 'src/components/materialpack/InfoTab.svelte';
 	import { packOrder } from '$lib/materialpack/stores/packOrderStore';
@@ -765,26 +770,48 @@
 <CenterModal bind:showModal modalID={1}>
 	<div slot="description" class="modal-content info-modal">
 		<h2>Browser Storage Information</h2>
-		<p>Material packs are stored locally in your browser using LocalStorage. This means:</p>
-		<ul>
-			<li>Your packs are saved even when you close your browser</li>
-			<li>Packs are only available on this device and browser</li>
-			<li>Clearing browser data will delete your saved packs</li>
-			<li>
-				If you've hit the limit of 9 material packs, you can delete some to make room for new ones
-			</li>
-			<br />
-			<li>
-				Local Storage is limited to 5MB on most browsers. If you're making a materialpack with many
-				materials that have high resolution textures I would recommend generating only the materials
-				with their stats and then adding textures manually.
-			</li>
-			<br />
-			<li style="font-weight: bold">
+		<!-- Storage usage meter -->
+		<div class="storage-meter">
+			<h3>Storage Usage</h3>
+			{#if typeof window !== 'undefined'}
+				{@const usedStorage = getLocalStorageSize()}
+				{@const totalStorage = 5 * 1024 * 1024}
+				<!-- 5MB -->
+				{@const usagePercentage = (usedStorage / totalStorage) * 100}
+				<div class="meter-bar">
+					<div
+						class="meter-fill"
+						style="width: {usagePercentage}%; background-color: {usagePercentage > 80
+							? '#ff4444'
+							: '#4a9eff'}"
+					/>
+				</div>
+				<div class="meter-labels">
+					<span>Used: {(usedStorage / 1024 / 1024).toFixed(2)}MB</span>
+					<span>Available: {(getRemainingStorage() / 1024 / 1024).toFixed(2)}MB</span>
+				</div>
+			{/if}
+		</div>
+		<p>Material packs are stored locally in your browser using LocalStorage.</p>
+
+		<h4>Persistent</h4>
+		<p>Your packs are saved even when you close your browser</p>
+		<h4>Local</h4>
+		<p>Packs are only available on this device and browser</p>
+		<h4>Fragile</h4>
+		<p>Clearing browser data will delete your saved packs</p>
+		<span style="display:block;width:100%; height:1px; background: #3a3a3a; margin: 1rem 0;"></span>
+		<p>
+			Local Storage is limited to 5MB on most browsers. If you're making a materialpack with many
+			materials that have high resolution textures I would recommend generating only the materials
+			with their stats and then adding textures manually.
+		</p>
+		<p>
+			<b>
 				Always export your material packs to ZIP to avoid losing them! <i>Always</i> back up your hard
 				work!
-			</li>
-		</ul>
+			</b>
+		</p>
 		<div class="modal-actions">
 			<button class="ok-btn" on:click={closeDialog}>Understood!</button>
 		</div>
@@ -1460,6 +1487,41 @@
 			font-weight: 700;
 			border: none;
 			border-radius: 8px;
+		}
+	}
+
+	.storage-meter {
+		margin: 1rem 0 1rem 0;
+		padding: 1rem;
+		background: rgba(92, 92, 92, 0.2);
+		border: 1px solid #3a3a3a;
+		border-radius: 8px;
+
+		h3 {
+			margin-bottom: 1rem;
+		}
+
+		.meter-bar {
+			width: 100%;
+			height: 24px;
+			background: rgba(0, 0, 0, 0.5);
+			border-radius: 12px;
+			overflow: hidden;
+			margin-bottom: 0.5rem;
+		}
+
+		.meter-fill {
+			height: 100%;
+			transition:
+				width 0.3s ease,
+				background-color 0.3s ease;
+		}
+
+		.meter-labels {
+			display: flex;
+			justify-content: space-between;
+			font-size: 0.9rem;
+			opacity: 0.8;
 		}
 	}
 </style>

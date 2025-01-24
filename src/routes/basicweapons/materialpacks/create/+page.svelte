@@ -56,6 +56,8 @@
 
 	import InfoTab from 'src/components/materialpack/InfoTab.svelte';
 	import { packOrder } from '$lib/materialpack/stores/packOrderStore';
+	import assets_tab_example from '$lib/materialpack/media/assets_tab_example.png';
+	import stats_tab_example from '$lib/materialpack/media/stats_tab_example.png';
 
 	// Basic pack information
 	let pack_name = '';
@@ -484,7 +486,8 @@
 							<!-- Content area -->
 							{#if activeTab}
 								{#if getContentType(activeTab) === 'settings'}
-									<InfoTab title="Material Pack Settings" modalID={2}>
+									<!-- Use indices of 100+ for InfoTabs, just incase :) -->
+									<InfoTab title="Material Pack Settings" modalID={100}>
 										<h4>Change the main settings for your material pack here.</h4>
 										<div class="modal-content">
 											<h4>Pack Icon</h4>
@@ -607,6 +610,19 @@
 									{#each $materialPack.materials as material, index}
 										{#if activeTab.startsWith(`material-${index}-`)}
 											{#if activeTab.endsWith('-stats')}
+												<InfoTab title="Weapon Stats" modalID={100} offset={4}>
+													<h4>Change the main settings for your material pack here.</h4>
+													<br />
+													<div class="modal-content">
+														To set the weapon textures for your material, navigate to the assets
+														tab:
+													</div>
+													<img
+														class="image-example"
+														src={assets_tab_example}
+														alt="assets tab example"
+													/>
+												</InfoTab>
 												<MaterialCreatorStats
 													{material}
 													{index}
@@ -614,6 +630,19 @@
 													onTabChange={(newTab) => (activeTab = newTab)}
 												/>
 											{:else if activeTab.endsWith('-assets')}
+												<InfoTab title="Weapon Textures" modalID={100} offset={7}>
+													<h4>Change the main settings for your material pack here.</h4>
+													<br />
+													<div class="modal-content">
+														To set the weapon textures for your material, navigate to the assets
+														tab:
+													</div>
+													<img
+														class="image-example"
+														src={stats_tab_example}
+														alt="assets tab example"
+													/>
+												</InfoTab>
 												<MaterialCreatorAssets
 													{material}
 													{index}
@@ -1215,6 +1244,11 @@
 				}
 			}
 		}
+	}
+	.image-example {
+		border-radius: 8px;
+		margin-top: 1rem;
+		border: 2px solid #3a3a3a;
 	}
 
 	//#region Pack Creation Modal Creation

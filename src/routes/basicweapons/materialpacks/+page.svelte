@@ -27,7 +27,6 @@
 
 <svelte:head>
 	<title>Material Pack Creator</title>
-	<script src="/src/lib/scripts/redirectMobileUsers.js"></script>
 </svelte:head>
 
 <!-- #region HTML-->

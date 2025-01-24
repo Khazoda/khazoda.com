@@ -7,14 +7,21 @@
 	export let showModal: boolean[] = Array(9).fill(false);
 	export let modalID: number;
 	export let offset: number = 1;
-	// Content is passed through the slot
+	export let disabled: boolean = false;
 </script>
 
-<button class="info-tab" on:click={() => (showModal[modalID] = true)} style="right: {offset}rem;">
-	<HugeiconsInformationSquare width="32" height="32" />
-</button>
+{#if !disabled}
+	<button class="info-tab" on:click={() => (showModal[modalID] = true)} style="right: {offset}rem;">
+		<HugeiconsInformationSquare width="32" height="32" />
+	</button>
+{:else}
+	<button class="info-tab disabled" style="right: {offset}rem;">
+		<HugeiconsInformationSquare width="32" height="32" />
+	</button>
+{/if}
 
 <CenterModal bind:showModal {modalID}>
+	// Content is passed through the slot
 	<div slot="description" class="modal-content info-modal">
 		<h2>{title}</h2>
 		<slot />
@@ -45,6 +52,12 @@
 			background: rgb(77, 77, 77);
 			color: #71b3ff;
 		}
+	}
+
+	.info-tab.disabled {
+		cursor: not-allowed;
+		background: #333333;
+		color: #555555;
 	}
 
 	.modal-actions {

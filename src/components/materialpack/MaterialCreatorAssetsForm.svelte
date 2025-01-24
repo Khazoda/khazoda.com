@@ -3,6 +3,7 @@
 	import ImagePicker from 'src/components/materialpack/ImagePicker.svelte';
 	import { materialPack, materialPacks } from '$lib/materialpack/stores/materialPackStore';
 	import HugeiconsDelete02 from 'virtual:icons/hugeicons/delete-02';
+	import HugeiconsArchive02 from '~icons/hugeicons/archive-02';
 	import CenterModal from 'src/components/CenterModal.svelte';
 	import { closeDialog } from 'src/components/CenterModal.svelte';
 	import minecraft_gui from '$lib/materialpack/media/minecraft_gui.png';
@@ -46,7 +47,7 @@
 		{ id: 'glaive_held', label: 'glaive_held.png', placeholderBackground: glaive_held }
 	];
 
-	let showModal: boolean[] = Array(1).fill(false);
+	let showModal: boolean[] = Array(2).fill(false);
 
 	// Zod schema for texture validation
 	const textureSchema = z
@@ -183,11 +184,29 @@
 		}
 		closeDialog();
 	}
+
+	function downloadExampleTextures(type: 'metallic' | 'non-metallic') {
+		// This is a placeholder - you'll need to provide the actual zip file URLs
+		const files = {
+			metallic: '/files/texture_examples_metal.zip',
+			'non-metallic': '/files/texture_examples_nonmetal.zip'
+		};
+
+		const link = document.createElement('a');
+		link.href = files[type];
+		link.download = `${type}-weapon-textures.zip`;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	}
 </script>
 
 <form class="material-assets-form">
 	<button class="delete-material-btn" on:click={() => (showModal[0] = true)} type="button">
 		<HugeiconsDelete02 width="24" height="24" />
+	</button>
+	<button class="download-examples-btn" on:click={() => (showModal[1] = true)} type="button">
+		<HugeiconsArchive02 width="24" height="24" />
 	</button>
 	<h2 class="grid-wide">
 		{material.material_name
@@ -224,6 +243,32 @@
 		<div class="modal-actions">
 			<button class="cancel-btn" on:click={closeDialog}>Cancel</button>
 			<button class="delete-btn" on:click={deleteMaterial}>Delete</button>
+		</div>
+	</div>
+</CenterModal>
+
+<!-- Download Examples Modal -->
+<CenterModal modalID={1} bind:showModal>
+	<div slot="description" class="modal-content">
+		<h2>Download Example Textures</h2>
+		<p>
+			Feel free to use these as a starting point for your own weapon textures. Other good examples
+			can be found on the <a
+				target="_blank"
+				href="https://github.com/Khazoda/basic-weapons/tree/latest-stable/common/src/main/resources/assets/basicweapons/textures/item"
+				>GitHub repository</a
+			>.
+		</p>
+		<div class="modal-actions left-aligned">
+			<button class="download-btn metallic" on:click={() => downloadExampleTextures('metallic')}>
+				Metallic Weapons
+			</button>
+			<button
+				class="download-btn non-metallic"
+				on:click={() => downloadExampleTextures('non-metallic')}
+			>
+				Non-Metallic Weapons
+			</button>
 		</div>
 	</div>
 </CenterModal>
@@ -289,11 +334,38 @@
 		}
 	}
 
+	.download-examples-btn {
+		position: absolute;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		top: 1rem;
+		right: 4rem;
+		background: none;
+		border: none;
+		color: #ffffff;
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 8px;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+	}
+
+	.modal-content h2 {
+		margin: 0;
+	}
 	.modal-actions {
 		display: flex;
 		justify-content: center;
 		margin-top: 2rem;
 		gap: 1rem;
+
+		&.left-aligned {
+			justify-content: flex-start;
+		}
 
 		button {
 			padding: 0.5rem 1.5rem;
@@ -320,6 +392,35 @@
 				&:hover {
 					background: #ff2222;
 				}
+			}
+		}
+	}
+
+	.download-btn {
+		padding: 0.5rem 1.5rem;
+		border-radius: 4px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		border: none;
+		background: #4444ff;
+		color: white;
+
+		&:hover {
+			background: #2222ff;
+		}
+
+		&.metallic {
+			background: #3d6469;
+			&:hover {
+				background: #2c828d;
+			}
+		}
+
+		&.non-metallic {
+			background: #617744;
+			&:hover {
+				background: #679629;
 			}
 		}
 	}

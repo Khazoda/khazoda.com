@@ -609,20 +609,41 @@
 									<!-- Material content -->
 									{#each $materialPack.materials as material, index}
 										{#if activeTab.startsWith(`material-${index}-`)}
+											<InfoTab
+												title="Weapon Stats"
+												modalID={100}
+												offset={5}
+												disabled={!activeTab.endsWith('-stats')}
+											>
+												<h4>Change the main settings for your material pack here.</h4>
+												<br />
+												<div class="modal-content">
+													To set the weapon textures for your material, navigate to the assets tab:
+												</div>
+												<img
+													class="image-example"
+													src={assets_tab_example}
+													alt="assets tab example"
+												/>
+											</InfoTab>
+											<InfoTab
+												title="Weapon Textures"
+												modalID={101}
+												offset={1}
+												disabled={!activeTab.endsWith('-assets')}
+											>
+												<h4>Change the main settings for your material pack here.</h4>
+												<br />
+												<div class="modal-content">
+													To set the weapon textures for your material, navigate to the assets tab:
+												</div>
+												<img
+													class="image-example"
+													src={stats_tab_example}
+													alt="assets tab example"
+												/>
+											</InfoTab>
 											{#if activeTab.endsWith('-stats')}
-												<InfoTab title="Weapon Stats" modalID={100} offset={4}>
-													<h4>Change the main settings for your material pack here.</h4>
-													<br />
-													<div class="modal-content">
-														To set the weapon textures for your material, navigate to the assets
-														tab:
-													</div>
-													<img
-														class="image-example"
-														src={assets_tab_example}
-														alt="assets tab example"
-													/>
-												</InfoTab>
 												<MaterialCreatorStats
 													{material}
 													{index}
@@ -630,19 +651,6 @@
 													onTabChange={(newTab) => (activeTab = newTab)}
 												/>
 											{:else if activeTab.endsWith('-assets')}
-												<InfoTab title="Weapon Textures" modalID={100} offset={7}>
-													<h4>Change the main settings for your material pack here.</h4>
-													<br />
-													<div class="modal-content">
-														To set the weapon textures for your material, navigate to the assets
-														tab:
-													</div>
-													<img
-														class="image-example"
-														src={stats_tab_example}
-														alt="assets tab example"
-													/>
-												</InfoTab>
 												<MaterialCreatorAssets
 													{material}
 													{index}

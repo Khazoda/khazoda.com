@@ -19,11 +19,6 @@
 		const file = input.files?.[0];
 
 		if (file) {
-			if (file.size > maxUploadSize) {
-				alert('Image dimensions must be less than or equal to 256 x 256 pixels');
-				return;
-			}
-
 			const reader = new FileReader();
 			reader.onload = (e) => {
 				const base64String = e.target?.result as string;

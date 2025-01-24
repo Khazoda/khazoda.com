@@ -116,16 +116,6 @@
 				alert(error);
 				return;
 			}
-
-			// Show warning if approaching limit
-			if (isApproachingStorageLimit()) {
-				const proceed = confirm(
-					"Warning: You're approaching the browser's storage limit. " +
-						'Consider exporting and removing some material packs to free up space. ' +
-						'Continue anyway?'
-				);
-				if (!proceed) return;
-			}
 		}
 
 		// Only update if validation passed or we're removing the texture
@@ -151,7 +141,7 @@
 			}));
 		} catch (e) {
 			alert(
-				'Failed to save changes: Storage quota exceeded. Please export and remove some material packs to free up space.'
+				'Failed to save changes: Available storage space exceeded. Please export and remove some material packs or textures to free up space.'
 			);
 			// Revert the change
 			material.textures[textureId] = null;

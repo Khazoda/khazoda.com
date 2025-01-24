@@ -33,7 +33,7 @@ export function checkStorageQuota(dataToAdd: string = ''): { hasSpace: boolean; 
 		return {
 			hasSpace: false,
 			error:
-				'Storage quota exceeded. Please export and remove some material packs to free up space before continuing.'
+				'Available storage space exceeded. Please export and remove some material packs or textures to free up space.'
 		};
 	}
 }

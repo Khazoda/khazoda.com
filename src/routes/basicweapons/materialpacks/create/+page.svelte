@@ -166,7 +166,7 @@
 		} catch (error: any) {
 			if (error instanceof Error && error.name === 'QuotaExceededError') {
 				alert(
-					'Storage quota exceeded. Please export and remove some material packs to free up space. Consider using lower resolution textures also.'
+					'Available storage space exceeded. Please export and remove some material packs or textures to free up space.'
 				);
 			} else {
 				alert(error?.message || 'Failed to create new pack');
@@ -494,7 +494,7 @@
 								{#if getContentType(activeTab) === 'settings'}
 									<!-- Use indices of 100+ for InfoTabs, just incase :) -->
 									<InfoTab title="Material Pack Settings" modalID={100}>
-										<h4>Change the main settings for your material pack here.</h4>
+										<h4 class="blurb">Change the main settings for your material pack</h4>
 										<div class="modal-content">
 											<h4>Pack Icon</h4>
 											<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
@@ -561,20 +561,6 @@
 												</span>
 											</span>
 										</div>
-										<div class="grid-section-general flex-col">
-											<div class="form-element text">
-												<input
-													type="text"
-													id="pack_name"
-													placeholder=" "
-													bind:value={$materialPack.pack_name}
-													on:input={(e) =>
-														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-													required
-												/>
-												<label for="pack_name">Material Pack Name</label>
-											</div>
-										</div>
 										<div class="form-element imagepicker">
 											<ImagePicker
 												currentImage={$materialPack.pack_icon}
@@ -596,6 +582,20 @@
 													}));
 												}}
 											/>
+										</div>
+										<div class="grid-section-general flex-col">
+											<div class="form-element text">
+												<input
+													type="text"
+													id="pack_name"
+													placeholder=" "
+													bind:value={$materialPack.pack_name}
+													on:input={(e) =>
+														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
+													required
+												/>
+												<label for="pack_name">Material Pack Name</label>
+											</div>
 										</div>
 
 										<div class="grid-section-mod-dependency flex-col">
@@ -773,24 +773,29 @@
 		<!-- Storage usage meter -->
 		<div class="storage-meter">
 			<h3>Storage Usage</h3>
-			{#if typeof window !== 'undefined'}
-				{@const usedStorage = getLocalStorageSize()}
-				{@const totalStorage = 5 * 1024 * 1024}
-				<!-- 5MB -->
-				{@const usagePercentage = (usedStorage / totalStorage) * 100}
-				<div class="meter-bar">
-					<div
-						class="meter-fill"
-						style="width: {usagePercentage}%; background-color: {usagePercentage > 80
-							? '#ff4444'
-							: '#4a9eff'}"
-					/>
-				</div>
-				<div class="meter-labels">
-					<span>Used: {(usedStorage / 1024 / 1024).toFixed(2)}MB</span>
-					<span>Available: {(getRemainingStorage() / 1024 / 1024).toFixed(2)}MB</span>
-				</div>
-			{/if}
+			<span class="storage-disclaimer"
+				>5MB is a pessimistic guess. Your browser may allow more.</span
+			>
+			{#key showModal[1]}
+				{#if typeof window !== 'undefined'}
+					{@const usedStorage = getLocalStorageSize()}
+					{@const totalStorage = 5 * 1024 * 1024}
+					<!-- 5MB -->
+					{@const usagePercentage = (usedStorage / totalStorage) * 100}
+					<div class="meter-bar">
+						<div
+							class="meter-fill"
+							style="width: {usagePercentage}%; background-color: {usagePercentage > 80
+								? '#ff4444'
+								: '#4a9eff'}"
+						/>
+					</div>
+					<div class="meter-labels">
+						<span>Used: {(usedStorage / 1024 / 1024).toFixed(2)}MB</span>
+						<span>Available: {(getRemainingStorage() / 1024 / 1024).toFixed(2)}MB</span>
+					</div>
+				{/if}
+			{/key}
 		</div>
 		<p>Material packs are stored locally in your browser using LocalStorage.</p>
 
@@ -890,6 +895,13 @@
 		<div class="template-options">
 			{#each $materialTemplates as template}
 				<button class="template-btn" on:click={() => handleMaterialTemplateSelect(template)}>
+					<div class="template-preview">
+						<img
+							src={template.exampleTexture || empty_spot}
+							alt="{template.name} sword"
+							class="no-resample"
+						/>
+					</div>
 					<div class="template-info">
 						<span class="template-title">{template.name}</span>
 						<span class="template-desc">{template.description}</span>
@@ -1186,30 +1198,8 @@
 			border: 2px solid #1c1c1c;
 			border-radius: 8px;
 			display: grid;
-			grid-template-columns: 2fr 1fr;
+			grid-template-columns: 1fr 2fr;
 			gap: 1rem;
-		}
-		.form-info-btn {
-			position: absolute;
-			right: -3.5rem;
-			top: 20.5rem;
-			padding: 0.5rem 0.5rem 0.5rem 1.5rem;
-			background: #333333;
-			border: 2px solid #1c1c1c;
-			border-left: none;
-			border-radius: 0 6px 6px 0;
-
-			&:hover {
-				transform: translateX(4px);
-				background: rgb(77, 77, 77);
-				color: #71b3ff;
-				border: 2px solid #1c1c1c;
-			}
-
-			&:active {
-				transform: translateX(2px);
-				background: #1a1a1a;
-			}
 		}
 
 		.pack-settings-header {
@@ -1281,7 +1271,7 @@
 			&.imagepicker {
 				width: fit-content;
 				height: fit-content;
-				margin: auto 0 1rem auto;
+				margin: auto auto 1rem 0;
 			}
 		}
 		.grid-section-general {
@@ -1491,12 +1481,23 @@
 	}
 
 	.storage-meter {
+		position: relative;
 		margin: 1rem 0 1rem 0;
 		padding: 1rem;
 		background: rgba(92, 92, 92, 0.2);
 		border: 1px solid #3a3a3a;
 		border-radius: 8px;
 
+		.storage-disclaimer {
+			color: #a7a7a7;
+			font-size: 0.6rem;
+			position: absolute;
+			top: 4px;
+			width: 100%;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+		}
 		h3 {
 			margin-bottom: 1rem;
 		}

@@ -246,7 +246,7 @@
 			placeholder=" "
 		/>
 		<label for="repair_ingredient_{index}">Repair Ingredient</label>
-		<small>Format: namespace:itemname or namespace:#tagname</small>
+		<small>Format: namespace:itemname or #namespace:tagname</small>
 	</div>
 </form>
 

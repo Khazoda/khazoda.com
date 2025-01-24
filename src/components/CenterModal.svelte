@@ -14,6 +14,7 @@
 	export let showModal: boolean[];
 	export let modalID: number;
 	export let returnToURL: string | undefined = undefined;
+	export let closeButtonOffset: number = 1;
 
 	let dialog: HTMLDialogElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
@@ -29,7 +30,13 @@
 <dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="dialog-inner" on:click|stopPropagation>
-		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button">
+		<button
+			autofocus
+			on:click={() => dialog.close()}
+			class="modal-close-button"
+			type="button"
+			style="right: {closeButtonOffset}rem;"
+		>
 			<MingcuteCloseFill />
 		</button>
 		<slot name="header" />
@@ -94,6 +101,7 @@
 	}
 
 	.modal-close-button {
+		z-index: 1000;
 		position: absolute;
 		right: 1rem;
 		top: 1rem;

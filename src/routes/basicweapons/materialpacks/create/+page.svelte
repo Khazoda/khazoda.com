@@ -17,6 +17,7 @@
 	import HugeiconsInformationSquare from 'virtual:icons/hugeicons/information-square';
 	import HugeiconsAdd02 from 'virtual:icons/hugeicons/add-02';
 	import HugeiconsFolder01 from 'virtual:icons/hugeicons/folder-01';
+	import HugeiconsArchive02 from '~icons/hugeicons/archive-02';
 
 	import HomeButton from 'src/components/HomeButton.svelte';
 	import FeedbackButton from 'src/components/materialpack/FeedbackButton.svelte';
@@ -514,6 +515,20 @@
 												depending on (e.g. 'mekanism', 'mythicmetals', 'appeng'). Basic Weapons will
 												only load your pack if it detects a mod with that id being loaded.
 											</p>
+											<h4>Adding materials</h4>
+											<p>
+												Materials are added via the little '+' tab sticking out the right of the
+												main view. You can choose to start fresh, or pick from a template material
+												based on Basic Weapon's vanilla material weapons.
+											</p>
+											<h4>Exporting your Material Pack</h4>
+											<p>
+												You can export your material pack to any Minecraft version that the
+												materialpack system supports. Look for this icon:
+											</p>
+											<div style="margin-top: 1rem;">
+												<HugeiconsZip01 width="48" height="48" />
+											</div>
 										</div>
 									</InfoTab>
 									<!-- Settings form content -->
@@ -610,15 +625,48 @@
 									{#each $materialPack.materials as material, index}
 										{#if activeTab.startsWith(`material-${index}-`)}
 											<InfoTab
-												title="Weapon Stats"
-												modalID={100}
+												title="Edit Weapon Data"
+												modalID={101}
 												offset={5}
 												disabled={!activeTab.endsWith('-stats')}
 											>
-												<h4>Change the main settings for your material pack here.</h4>
-												<br />
+												<h4 class="blurb">Set a material's weapon stats and repair ingredient</h4>
 												<div class="modal-content">
-													To set the weapon textures for your material, navigate to the assets tab:
+													<h4>Foreword</h4>
+													<p>
+														If you're unsure what values to set, try adding a template material.
+														They show you the values for weapons with vanilla materials.
+													</p>
+													<h4>Material Name</h4>
+													<p>
+														A material's name dictates what it'll be registered as and what its
+														default translation will be. For example, a 'copper' hammer will be
+														registered as 'basicweapons:copper_hammer' with the name 'Copper Hammer'
+													</p>
+													<h4>Durability</h4>
+													<p>Denotes how much you can use a weapon for before it breaks.</p>
+													<h4>Attack Damage, Speed & Reach bonuses</h4>
+													<p>
+														These values are added to a weapon's base stats. If you want a material
+														to make a weapon weaker than its base stats, enter negative values (e.g.
+														-1, -5.5)
+													</p>
+													<h4>Enchantability</h4>
+													<p>
+														Enchantability affects the level and quantity of enchantments that are
+														randomly applied in an enchanting table. Higher values mean the item
+														will receive a greater quantity of high tier enchantments.
+													</p>
+													<h4>Repair Ingredient</h4>
+													<p>
+														This field can take either an item identifier (minecraft:cobblestone) or
+														an item tag (#minecraft:stone_tool_materials)
+													</p>
+													<h4>Weapon Textures</h4>
+													<p>
+														To set the weapon textures for your material, navigate to the assets
+														tab:
+													</p>
 												</div>
 												<img
 													class="image-example"
@@ -628,14 +676,42 @@
 											</InfoTab>
 											<InfoTab
 												title="Weapon Textures"
-												modalID={101}
+												modalID={102}
 												offset={1}
 												disabled={!activeTab.endsWith('-assets')}
 											>
-												<h4>Change the main settings for your material pack here.</h4>
-												<br />
+												<h4 class="blurb">Set the weapon textures for your material</h4>
 												<div class="modal-content">
-													To set the weapon textures for your material, navigate to the assets tab:
+													<h4>Downloading Examples</h4>
+													<p>
+														How you make your textures is totally up to you, but if you want a
+														template to follow, feel free to download and use the example textures
+														using the button that looks like this:
+													</p>
+													<span><HugeiconsArchive02 width="24" height="24" /></span>
+													<h4>Recommended Software</h4>
+													<p>
+														You can use any method you like for creating textures, but my
+														recommendation is <a href="https://www.aseprite.org/">Aseprite</a>.
+													</p>
+													<h4>Held vs. Standard</h4>
+													<p>
+														You might wonder why the spear, quarterstaff and glaive have _held
+														textures. Simply put, non-held textures are shown in GUIs like the
+														player's inventory, containers, item frames, and _held textures are
+														shown when the weapons are held.
+													</p>
+													<h4>Modifying item model files / 3D weapons</h4>
+													<p>
+														This materialpack generator only supports 2d textures, but you are more
+														than welcome to modify the item models for weapons manually. They're
+														located in '/assets/basicweapons/models/item'.
+													</p>
+													<h4>Weapon Data</h4>
+													<p>
+														To set the weapon stats and repair ingredient for your material,
+														navigate to the stats tab:
+													</p>
 												</div>
 												<img
 													class="image-example"
@@ -1257,6 +1333,9 @@
 		border-radius: 8px;
 		margin-top: 1rem;
 		border: 2px solid #3a3a3a;
+	}
+	.blurb {
+		color: #85c0ff;
 	}
 
 	//#region Pack Creation Modal Creation

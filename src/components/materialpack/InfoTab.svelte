@@ -19,9 +19,8 @@
 		<HugeiconsInformationSquare width="32" height="32" />
 	</button>
 {/if}
-
-<CenterModal bind:showModal {modalID}>
-	// Content is passed through the slot
+<!-- Content is passed through the slot -->
+<CenterModal bind:showModal {modalID} closeButtonOffset={3.5}>
 	<div slot="description" class="modal-content info-modal">
 		<h2>{title}</h2>
 		<slot />
@@ -59,13 +58,15 @@
 		background: #333333;
 		color: #555555;
 	}
+	h2 {
+		margin: 0;
+	}
 
 	.modal-actions {
 		display: flex;
 		justify-content: center;
 		margin-top: 1rem;
 		gap: 1rem;
-
 		.ok-btn {
 			background: #4a9eff;
 			color: white;
@@ -80,5 +81,49 @@
 				background: #3b8de6;
 			}
 		}
+	}
+
+	.info-modal {
+		max-height: 80vh;
+		overflow-y: auto;
+		padding-right: 1rem;
+		h2 {
+			padding-bottom: 1rem;
+			position: sticky;
+			top: 0;
+			background: #141414;
+			z-index: 100;
+		}
+		.modal-actions {
+			padding-top: 1rem;
+			position: sticky;
+			bottom: 0;
+			background: #141414;
+			z-index: 100;
+		}
+
+		/* Custom Scrollbar Styling */
+		&::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: #1c1c1c;
+			border-radius: 4px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #4a9eff;
+			border-radius: 4px;
+
+			&:hover {
+				background: #3b8de6;
+			}
+		}
+
+		/* Firefox */
+		scrollbar-width: thin;
+		scrollbar-color: #4a9eff #1c1c1c;
 	}
 </style>

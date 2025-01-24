@@ -1,29 +1,30 @@
 {
-  "name": "warden",
-  "description": "Pack with One Modded Material",
-  "pack_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz8GkR8Rs7CwmITVjPyoiY3FyK/CYjxlsHnzZt6Mmjfzem8k2SpbRYmNXwv+ArbKWikiJWu2xAY953lTI5lzuvd+7veec7r3XPApGc2wK7rByOat6GgkMBubC1Q9U4afJgYIqZptTk6PKJS091uJFrsOubVKx/1rtYmkrUFZtfCgZlp54THhieW86fKWsF9LqwnhE+GgJRcUvnH1uMdPLqc8/nTZUqJD4GsUDqR+cfwXa2nLEJaX025klrTCfdyX1CWzM9OytsloxSbKKBECjDPMEGF6pC9h8RC9dMmOEvndP/lT5CRXk9lkBYtFUqTJExR1SaonZdVFT4pnWHH7/7evtt7X61Wvi0Dlo+O8dkDVJnxtOM7HgeN8HUL5A5xni/m5feh/E32jqLXvQcManF4Utfg2nK1Dy72pWuqPVC7Dp+vwcgz1MWi+gpp5r2eFc47uQFmVr7qEnV3olPiGhW/Qw2gWbAE7NAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAhlJREFUWIXtljtIW1Ecxj/jA6GJUKhoCyU41BZpVeTcpoNDQIw0SxA3cVGwS1sEMZQo2SQBkYLgVDo5ypEiQSHKhTtpU0TiYAqmiyBIULkQI4QWjUO5F5P7yj0nxkG/6bz+fL//YzjAfVeNsvB4PIVqGicSiRoAqLt5GBnoMQ0Skyn0dXdwm0/Hd9V1Xellg7PJNNjq3kp/c9mivQZA0dSKpHsuGpyXo/khr+ZMF2BqRYLb7WY2KpUgCKCUAgBOjw6tARQFg8GKABBCQCnFSXpfc+eoiAOH7hzAtAV25fMH1PXG+qp9ADGZ4jJv/bUHAPjz4iUkSYLX6y16s5M518QVtaCvuwPve98xm/+OLZu+Iy0udD15ZAzAIp8/ADk8g4OxcQD/s49EQ2XH2wbw+QNqr5XMa39s4nKwH/WTYdW8tPxGYhpCOTyjZp4dG4ejzQUHgznA2IL65E9kX79Fw/clONpcwNIakzkTwMb6KpwxEbVnxyiQdi5zJoCR0REsfPuEQioNZ0yE83EjpkNRJnNbAMrwDX8excSHRUSiIeTkPHJyHgAgSRITgK0hvHj6HLMf59SSb23Hucw1AKdHh3j26o3uw5ycB+S0ur9ZctbyawDMtLUd58qUGwDgy9RImiHU+zTcpgwrIAgCCCF3B0ApVf9xVQf40tms+3gncw7S4rpdgH+XV6YBVvdcAF/3zywDxEy+ogAPugZb16jm9ptWvAAAAABJRU5ErkJggg==",
-  "materials": [
-    {
-      "material_name": "warden",
-      "durability": 2500,
-      "attack_damage_bonus": 4,
-      "attack_speed_bonus": 0.5,
-      "reach_bonus": 1.5,
-      "enchantability": 15,
-      "repair_ingredient": "deeperdarker:reinforced_echo_shard",
-      "textures": {
-        "dagger": null,
-        "hammer": null,
-        "club": null,
-        "spear": null,
-        "spear_held": null,
-        "quarterstaff": null,
-        "quarterstaff_held": null,
-        "glaive": null,
-        "glaive_held": null
-      }
-    }
-  ],
-  "mod_dependency_name": "deeper-and-darker",
-  "mod_dependency_modid": "deeperdarker"
-} 
+	"name": "warden",
+	"description": "Pack with One Modded Material",
+	"pack_icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz8GkR8Rs7CwmITVjPyoiY3FyK/CYjxlsHnzZt6Mmjfzem8k2SpbRYmNXwv+ArbKWikiJWu2xAY953lTI5lzuvd+7veec7r3XPApGc2wK7rByOat6GgkMBubC1Q9U4afJgYIqZptTk6PKJS091uJFrsOubVKx/1rtYmkrUFZtfCgZlp54THhieW86fKWsF9LqwnhE+GgJRcUvnH1uMdPLqc8/nTZUqJD4GsUDqR+cfwXa2nLEJaX025klrTCfdyX1CWzM9OytsloxSbKKBECjDPMEGF6pC9h8RC9dMmOEvndP/lT5CRXk9lkBYtFUqTJExR1SaonZdVFT4pnWHH7/7evtt7X61Wvi0Dlo+O8dkDVJnxtOM7HgeN8HUL5A5xni/m5feh/E32jqLXvQcManF4Utfg2nK1Dy72pWuqPVC7Dp+vwcgz1MWi+gpp5r2eFc47uQFmVr7qEnV3olPiGhW/Qw2gWbAE7NAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAhlJREFUWIXtljtIW1Ecxj/jA6GJUKhoCyU41BZpVeTcpoNDQIw0SxA3cVGwS1sEMZQo2SQBkYLgVDo5ypEiQSHKhTtpU0TiYAqmiyBIULkQI4QWjUO5F5P7yj0nxkG/6bz+fL//YzjAfVeNsvB4PIVqGicSiRoAqLt5GBnoMQ0Skyn0dXdwm0/Hd9V1Xellg7PJNNjq3kp/c9mivQZA0dSKpHsuGpyXo/khr+ZMF2BqRYLb7WY2KpUgCKCUAgBOjw6tARQFg8GKABBCQCnFSXpfc+eoiAOH7hzAtAV25fMH1PXG+qp9ADGZ4jJv/bUHAPjz4iUkSYLX6y16s5M518QVtaCvuwPve98xm/+OLZu+Iy0udD15ZAzAIp8/ADk8g4OxcQD/s49EQ2XH2wbw+QNqr5XMa39s4nKwH/WTYdW8tPxGYhpCOTyjZp4dG4ejzQUHgznA2IL65E9kX79Fw/clONpcwNIakzkTwMb6KpwxEbVnxyiQdi5zJoCR0REsfPuEQioNZ0yE83EjpkNRJnNbAMrwDX8excSHRUSiIeTkPHJyHgAgSRITgK0hvHj6HLMf59SSb23Hucw1AKdHh3j26o3uw5ycB+S0ur9ZctbyawDMtLUd58qUGwDgy9RImiHU+zTcpgwrIAgCCCF3B0ApVf9xVQf40tms+3gncw7S4rpdgH+XV6YBVvdcAF/3zywDxEy+ogAPugZb16jm9ptWvAAAAABJRU5ErkJggg==",
+	"materials": [
+		{
+			"material_name": "warden",
+			"durability": 2519,
+			"attack_damage_bonus": 5,
+			"attack_speed_bonus": 0,
+			"reach_bonus": 0,
+			"enchantability": 18,
+			"repair_ingredient": "deeperdarker:reinforced_echo_shard",
+			"textures": {
+				"dagger": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA40lEQVQ4T2NkoBAwUqifgX4GCIpK/Ye59v3rZ3CLiXIBSLPEqYtg/XdU1Rl+/3lHvAEwzdc3r2LQ9A0jzQCQ5ve11QzM63cz/A10ZWAtqkWxHeQiFC/A/AnyI8zmW0mpODVjNQBko2BzKwPMZiZFXgaGRVsxbIYFKIYLvvg6M/y7/5mB+e1zhv8mang1Y7gAJABy+ldJWaI0YxigrqP+v7o5niE5tIeBR5AD7Mov73/gdD7cAFjgFbTkMUyomcQACkRWFiF4wkGOd/SkDw4DuLOv3cZrG7Z8AzaAWNtwGkBJjgQAB/ZvEXL0MrcAAAAASUVORK5CYIIA",
+				"hammer": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABEElEQVQ4T2NkoBAwEtIvKCr1H6Tm/etnWNXiNQCkWeLURbAdL8z0sRqC0wCY5uubVzGwXjjBoFLbh9UQrAaga/53/zPD30BXBk3fMAxD8Bpwp7mIAVkzyDXohuD1wldJWYZfKXFgTTCv/DawAPPvqKoz/P7zjpFgIMIMAYUDSDPz+t0MzG+fM/y/dhu/AaBwmDgrhyE5tIeBUUsV7BJ0zaDYwRkG72urGViLasG2sLII/QcZAgIwm2HpB8MAkM1ffJ0ZGBZtBWuGKQQZAmIji2G4ABZ9sAAilEpRDFDXUf8flZvI0JLdhWELPoMYYWm9oCWPYULNJJxpHpchYANAUYUeOMQ4H+wFWOBgCyBiDAEAyl6gEbyxl60AAAAASUVORK5CYIIA",
+				"club": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA7ElEQVQ4T2NkoBAwEqtfUFTqP0zt+9fP4PqIMgCkWeLURbhdL8z0GWCGEDQApvn65lVgA1gvnGD4d/8zA9PhQwy//7xjxGsAumaGRw8ZWN89J84AfJqZ3z5n+H/tNn4XoBiAZDOyZpCXsHoBWTPIzyAA8je6ZsIGTO2G+xmbZqwGgGxXvLye4XLVFLw2w+IUwwsgA97XVjMwr98NdzJIMSjKsCU6FEF1HfX/1c3xDMmhPXC1uDRiuACkOSo3kWFCzSR4KiMmmYNdALM5P20KSZrBgQjy81dJWQbu549J1gw2gJVFCJzLCPkVl3cAb42sEbMD/RAAAAAASUVORK5CYIIA",
+				"spear": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAI1JREFUOI1jYBgIICgq9V9QVOo/AwMDAxM5Gr/4OjN8ef+DdI2a91//Z5g09T8ri9B/mBxRLnj/+hkjAwMDw/XNqxhYL5wgxdEIF8BsRradaM2a91/DNZJkgLqO+n/WpFjSbYXZvGh9Gzy6SNZMkc3oUUWSZuQAIwmo66j/b5zZQZlmsgKMgQE1c9AdAADoCEk7V7YP2QAAAABJRU5ErkJggg==",
+				"spear_held": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAANNJREFUWIVjYBiJQFBU6r+gqNR/BgYGBqaBsPh9fAzDl/c/6G+x5v3X/xk2bPnPyiL0HyZHlxB4//oZIwMDA8P1iycZGI4cooeVqEBQVOo/Q0nZf1YWIRTf081y1qRYuMV0dYC6jvp/ZscA+vsaZvmi9W3w7DayLG+c2THCLIcVNANmueb91/8ZJk0lK7VTVBIKikr9lzh1keH65lUMrBdOUGIUeZbDfY5U0IxaPnwthzlgwCyHFTIDUqUOePGaVJU5avmo5aOWD2PLGRhQO4sjDgAAJQmzXCEjPh0AAAAASUVORK5CYII=",
+				"quarterstaff": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvklEQVQ4T2NkoBAwkqNfUFTqP0jf+9fPGEk2QF1H/T/T5iMMd1TVGX7/eUeaASDN1c3xDPlpU8C2g1xBtAtAmqNyExkm1EyCaybaAJCfC1ryMDQTZQBIs8Spi3A/owc6Xi+ANL+vrWZgLaoFBxi2GMNpAEjzF19nBoZFW3FqxukFQs5GdgmGC2Ch3ZLdhddmmCEoBuCKKnypFW4AtkRCTDIHGwALbcHmVpREQrQBrCxC4MyBK6qI8gIxtmFTAwD4I1wRaca8XAAAAABJRU5ErkJgggAA",
+				"quarterstaff_held": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAKRJREFUWIVjYBiJQFBU6r+gqNT/AbPc9fG7/6wsQvR3gKCo1H/N+68HznKGSVMHznLWpNiBsVxdR/3/ovVtA2v5gKT4kW1548yOUcvpB2Dl+oBZrnn/NUUlHBMllkucushwffMqBtYLJ8g1hnzL4T4fiCIWXrEMhOXIZfuAWT4yi9fRsn1kWT5gZTvM8gFrQA5403lAOw0D1l1iYGBgGJByfbAAAPD8odo/Dti0AAAAAElFTkSuQmCC",
+				"glaive": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABGklEQVQ4T2NkoBAwEtIvKCr1H6Tm/etnWNXiNQCk+X1tNYOmbxjDCzN9sCHqOupgA29euQnWi9MAmGaGRw/BjmR995yBZ/NehoKWPIYJNZPgLsJqAEizxKmLDHeaixgYFm0FG/C7IIUBZBjrut0Mv/+8g+vDMABdM0gxyNn3brxm+Gdrx8B0+BBuA8DOjo9hYD57C64QpDkqNxHs7C/vf6BoRgkDXJqrm+MZ8tOm4I8FkOZPOmYMzG+fM/y/dpth7uoShtbahQwwm3FFIdwFIAO+SsqCNcP8TMhmWPoBByIrixA4bmGaibEZxQAYBxRgxNqMYQByaOPzM3rSB3sBpDm33JehtmgZztDGlWfAiYQUP2O4gFBuI5RbAeTSrBFE9gXDAAAAAElFTkSuQmCC",
+				"glaive_held": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB2ElEQVRYR2NkGGDASAv7BUWl/sPMff/6GV47qO4AkOUSpy4yXL94koHh0UMGweZWBnyOoKoDUCw/cggcCKzvnjPwbN4LdoS6jjo4ZG5euQm3l2oOAFn+fvYsBoYjh8CWwsC/+58ZmBR5wY4oaMljaMmtZ/j96yd1HQDz+Z3mIrC9YEsPQ0IABBi1VBn+CkuCxX7/eYfiaYpDAJflMItAwX7vxmuwI/5fu01dB8CCnXXTSrCvmd8+R7EEZHl1czxDcmgPOCTQfQ8OHXKzIS7LlTREwYkMZnl+2hTq5wKw5fExDMxnb4HdD/O5gYUyg09sMMOEmkkME2flMBCynKwQQLYcZDH388cMX97/YAD5PCo3kWHZ5PlgGuQIQoUQ2Q74pGMG9jXMcljcghwHymrEWk62A75KymJYDopzUnwOz6KkJkJYOQ8KduSsRo7lZIUAuHhlEfqPbDkoqxGT4LB5luxsCDKM2KyGL5TJdgA1LCc7CqhlOVkOIDe144oGkqKA2paTFAK0sJxoB9DKcqIcALLc2s+JYf3sjUSV7aQWbHjTAK0txxsC9LAcpwPoZTlWB9DTcgwH0NtyFAcMhOVwBwyU5XAHwBoZxLThSM3nhNSTVBcQMowceQAWv1Iw+zNciAAAAABJRU5ErkJgggAA"
+			}
+		}
+	],
+
+	"mod_dependency_name": "deeper-and-darker",
+	"mod_dependency_modid": "deeperdarker"
+}

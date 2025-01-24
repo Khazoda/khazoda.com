@@ -147,14 +147,6 @@
 			return;
 		}
 
-		if (isApproachingStorageLimit()) {
-			const proceed = confirm(
-				"Warning: You're approaching the browser's storage limit. " +
-					'Consider exporting and removing some material packs to free up space. ' +
-					'Continue anyway?'
-			);
-			if (!proceed) return;
-		}
 		showModal[3] = true;
 	}
 
@@ -982,7 +974,7 @@
 
 	.pack-list-container {
 		margin: 2rem auto 0 auto;
-		padding: 2rem;
+		padding: 3rem;
 		width: fit-content;
 		display: flex;
 		flex-direction: column;
@@ -997,10 +989,10 @@
 		display: grid;
 		grid-template-columns: repeat(3, 128px);
 		grid-template-rows: repeat(3, 128px);
-		gap: 4rem;
-		width: calc(3 * 128px + 2 * 4rem); // 3 items + 2 gaps
+		gap: 3rem;
+		width: calc(3 * 128px + 2 * 3rem); // 3 items + 2 gaps
 		height: fit-content;
-		max-height: calc(3 * 128px + 2 * 4rem); // 3 rows + 2 gaps
+		max-height: calc(3 * 128px + 2 * 3rem); // 3 rows + 2 gaps
 		justify-content: center;
 		& > * {
 			transition:

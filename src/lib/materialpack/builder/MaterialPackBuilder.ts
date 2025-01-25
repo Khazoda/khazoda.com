@@ -181,6 +181,15 @@ const MODEL_TEMPLATES = {
 	}
 } as const;
 
+const BASE_WEAPON_REACH = {
+	dagger: 2.25,
+	hammer: 2.5,
+	club: 2.5,
+	spear: 4.0,
+	quarterstaff: 3.25,
+	glaive: 3.25
+} as const;
+
 export class MaterialPackBuilder {
 	private materialPack: MaterialPack;
 	private zip: JSZip;
@@ -356,21 +365,23 @@ export class MaterialPackBuilder {
 		const weaponAttributesFolder = dataFolder.folder('basicweapons/weapon_attributes');
 		if (!weaponAttributesFolder) throw new Error('Failed to create weapon_attributes folder');
 
-		const weaponAttributeTemplate = { parent: 'basicweapons:basic_{{weapon_type}}' };
-
 		for (const material of this.materialPack.materials) {
 			for (const weaponType of WEAPON_TYPES) {
 				// Only generate attribute file if the material has a texture for this weapon type
 				if (material.textures[weaponType] !== null) {
 					const fileName = `${material.material_name}_${weaponType}.json`;
-					const content = JSON.stringify(
-						JSON.parse(
-							applyTemplate(JSON.stringify(weaponAttributeTemplate), { weapon_type: weaponType })
-						),
-						null,
-						2
-					);
-					weaponAttributesFolder.file(fileName, content);
+
+					// Calculate total reach by adding base reach and material bonus
+					const totalReach = BASE_WEAPON_REACH[weaponType] + material.reach_bonus;
+
+					const content = {
+						parent: `basicweapons:basic_${weaponType}`,
+						attributes: {
+							attack_range: Number(totalReach.toFixed(2))
+						}
+					};
+
+					weaponAttributesFolder.file(fileName, JSON.stringify(content, null, 2));
 				}
 			}
 		}

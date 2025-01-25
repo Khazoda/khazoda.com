@@ -29,8 +29,8 @@ export const repairIngredientSchema = z
 	.string()
 	.min(1, "Repair ingredient can't be empty")
 	.regex(
-		/^#[a-z0-9_.-]+:[a-z0-9_.-]+$/,
-		'Must be in format: #namespace:itemname or #namespace:tagname'
+		/^#?[a-z0-9_.-]+:[a-z0-9_.-]+$/,
+		'Must be in format: namespace:itemname or #namespace:tagname'
 	);
 
 export const numberSchema = z

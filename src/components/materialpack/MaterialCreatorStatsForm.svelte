@@ -189,7 +189,7 @@
 			id="attack_damage_bonus_{index}"
 			name="attack_damage_bonus"
 			bind:value={material.attack_damage_bonus}
-			step="0.1"
+			step="0.01"
 			on:input={(e) => validateAndUpdate(e, schemas.attack_damage_bonus, 'attack_damage_bonus')}
 			placeholder=" "
 		/>
@@ -202,7 +202,7 @@
 			id="attack_speed_bonus_{index}"
 			name="attack_speed_bonus"
 			bind:value={material.attack_speed_bonus}
-			step="0.1"
+			step="0.01"
 			on:input={(e) => validateAndUpdate(e, schemas.attack_speed_bonus, 'attack_speed_bonus')}
 			placeholder=" "
 		/>
@@ -215,7 +215,7 @@
 			id="reach_bonus_{index}"
 			name="reach_bonus"
 			bind:value={material.reach_bonus}
-			step="0.1"
+			step="0.01"
 			on:input={(e) => validateAndUpdate(e, schemas.reach_bonus, 'reach_bonus')}
 			placeholder=" "
 		/>

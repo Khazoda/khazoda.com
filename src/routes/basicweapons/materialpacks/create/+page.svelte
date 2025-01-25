@@ -460,16 +460,23 @@
 						<!-- Materialpack Creator -->
 					{:else}
 						<span class="back-btn-container">
-							<ImportantButton
-								icon={HugeiconsArrowLeft02}
-								label="Back to Packs"
-								onClick={() => {
-									show_pack_creator = false;
-									activeTab = 'settings';
-								}}
-								color="grey"
-								backdropCorner="center"
-							/>
+							<div class="flex-row gap-2">
+								<ImportantButton
+									icon={HugeiconsArrowLeft02}
+									label="Back to Packs"
+									onClick={() => {
+										show_pack_creator = false;
+										activeTab = 'settings';
+									}}
+									color="grey"
+									backdropCorner="center"
+								/>
+								{#if $materialPack}
+									<button class="export-pack-btn big">
+										<HugeiconsZip01 width="32" height="32" />
+									</button>
+								{/if}
+							</div>
 						</span>
 
 						<!-- #region Material Pack Settings -->
@@ -909,6 +916,10 @@
 	.back-btn-container {
 		display: block;
 		margin-bottom: 1rem;
+		height: 50px;
+		div {
+			height: 100%;
+		}
 	}
 
 	.page-container {
@@ -1516,5 +1527,48 @@
 			font-size: 0.9rem;
 			opacity: 0.8;
 		}
+	}
+
+	.back-btn-container {
+		.flex-row {
+			display: flex;
+			align-items: center;
+
+			.export-pack-btn {
+				width: 42px;
+				height: 42px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				color: whitesmoke;
+				background: #333333;
+				border: 2px solid #1c1c1c;
+				border-radius: 8px;
+				box-shadow: 2px -2px 0px 0px #222222;
+				transition: all 0.2s ease;
+
+				&:hover {
+					background: rgb(77, 77, 77);
+					color: rgb(65, 245, 125);
+					border: 2px solid #1c1c1c;
+					box-shadow: 1px -1px 0px 0px #222222;
+				}
+
+				&:active {
+					background: #1a1a1a;
+					box-shadow: 0px 0px 0px 0px #222222;
+				}
+
+				&.big {
+					width: 50px;
+					height: 50px;
+					padding: 0;
+				}
+			}
+		}
+	}
+
+	.gap-2 {
+		gap: 0.5rem;
 	}
 </style>

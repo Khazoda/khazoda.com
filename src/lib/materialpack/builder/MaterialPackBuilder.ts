@@ -182,12 +182,12 @@ const MODEL_TEMPLATES = {
 } as const;
 
 const BASE_WEAPON_REACH = {
-	dagger: 2.25,
-	hammer: 2.5,
-	club: 2.5,
-	spear: 4.0,
-	quarterstaff: 3.25,
-	glaive: 3.25
+	dagger: 2.75,
+	hammer: 3.0,
+	club: 3.0,
+	spear: 4.5,
+	quarterstaff: 3.75,
+	glaive: 3.75
 } as const;
 
 export class MaterialPackBuilder {

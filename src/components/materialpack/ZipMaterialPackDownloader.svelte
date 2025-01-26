@@ -17,8 +17,8 @@
 		const blob = await builder.build();
 
 		const packName = materialPack.pack_name.toLowerCase().replace(/\s+/g, '_');
-		const modName = materialPack.mod_dependency_modid
-			? materialPack.mod_dependency_modid.toLowerCase()
+		const modName = materialPack.mod_dependency_name
+			? materialPack.mod_dependency_name.toLowerCase().replace(/\s+/g, '-')
 			: 'minecraft';
 		const zipFileName = `bwmp_${packName}_${modName}.zip`;
 

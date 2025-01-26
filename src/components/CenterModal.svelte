@@ -15,6 +15,7 @@
 	export let modalID: number;
 	export let returnToURL: string | undefined = undefined;
 	export let closeButtonOffset: number = 1;
+	export let style: string = '';
 
 	let dialog: HTMLDialogElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
@@ -27,7 +28,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog}>
+<dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog} {style}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="dialog-inner" on:click|stopPropagation>
 		<button

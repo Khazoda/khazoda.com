@@ -471,11 +471,6 @@
 									color="grey"
 									backdropCorner="center"
 								/>
-								{#if $materialPack}
-									<button class="export-pack-btn big">
-										<HugeiconsZip01 width="32" height="32" />
-									</button>
-								{/if}
 							</div>
 						</span>
 
@@ -539,7 +534,11 @@
 									<form class="pack-settings-form">
 										<div class="pack-settings-header">
 											<span>
-												<span class="icon"><HugeiconsFolder01 width="32" height="32" /></span>
+												<span class="icon">
+													{#if $materialPack}
+														<ZipMaterialPackDownloader materialPack={$materialPack} />
+													{/if}</span
+												>
 												<span
 													class="pack-name-container"
 													title={'bwmp_' +
@@ -1560,9 +1559,23 @@
 				}
 
 				&.big {
-					width: 50px;
+					width: 100px;
 					height: 50px;
 					padding: 0;
+
+					display: flex;
+					gap: 0.5rem;
+
+					text-decoration: none;
+					width: fit-content;
+					padding: 0.75rem 1.5rem;
+					font-family: 'Quicksand', 'sans-serif';
+					font-size: 1.1rem;
+					font-weight: 600;
+					border-radius: 6px;
+					cursor: pointer;
+					transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+					border: 2px solid rgb(145, 145, 145);
 				}
 			}
 		}

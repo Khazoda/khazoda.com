@@ -17,9 +17,9 @@
 		<h2>Feedback & Support</h2>
 		<ul>
 			<li>Get help with material pack creation</li>
-			<li>Report bugs</li>
-			<li>Share your material packs</li>
+			<li>Submit material packs for the public list</li>
 			<li>Suggest new features</li>
+			<li>Report bugs</li>
 		</ul>
 		<div class="modal-actions">
 			<a

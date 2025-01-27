@@ -6,7 +6,9 @@
 	import HugeiconsBubbleChatQuestion from 'virtual:icons/hugeicons/bubble-chat-question';
 
 	import empty_frame from '$lib/materialpack/media/empty_frame.png';
-	import copper_dagger from '$lib/materialpack/media/bwmp_copper_minecraft.png';
+	import copper_dagger from '$lib/materialpack/media/framed_dagger.png';
+	import copper_hammer from '$lib/materialpack/media/framed_hammer.png';
+	import copper_spear from '$lib/materialpack/media/framed_spear.png';
 
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
@@ -56,8 +58,7 @@
 						href="/basicweapons/materialpacks/list"
 						icon={HugeiconsLibrary}
 						label="Public Material Packs"
-						fanImages={[empty_frame, empty_frame, copper_dagger]}
-					/>
+						fanImages={[copper_hammer, copper_spear, copper_dagger]} />
 				</span>
 				<span transition:fly={{ y: 50, duration: 500, delay: 350 }}>
 					<FanButton
@@ -70,9 +71,8 @@
 							? 'Your Material Packs'
 							: 'Create Material Pack'}
 						fanImages={Object.values($materialPacks.packs).map(
-							(pack) => pack.pack_icon || empty_frame
-						)}
-					/>
+							pack => pack.pack_icon || empty_frame
+						)} />
 				</span>
 			</div>
 		</div>

@@ -134,6 +134,16 @@ button:hover {
 	top: 1.5rem;
 	right: 1.5rem;
 }
+.fixed-top-right {
+	position: fixed;
+	top: 1.5rem;
+	right: 1.5rem;
+}
+.fixed-top-left {
+	position: fixed;
+	top: 1.5rem;
+	left: 1.5rem;
+}
 
 .flex {
 	display: flex;
@@ -151,6 +161,15 @@ button:hover {
 }
 .align-center {
 	align-items: center;
+}
+.gap-2 {
+	gap: 0.5rem;
+}
+.gap-4 {
+	gap: 1rem;
+}
+.gap-8 {
+	gap: 2rem;
 }
 
 /* Stops filtering for pixel art */

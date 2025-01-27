@@ -1,4 +1,4 @@
-export type MaterialPackCategory = 'mod-compatibility' | 'vanilla-like' | 'other';
+export type MaterialPackCategory = 'mod compatibility' | 'vanilla-like' | 'other';
 
 export interface MaterialPackMetadata {
 	slug: string;
@@ -15,13 +15,13 @@ export const MATERIAL_PACKS: MaterialPackMetadata[] = [
 	},
 	{
 		slug: 'create',
-		category: 'mod-compatibility',
+		category: 'mod compatibility',
 		required_mod_slug: 'fabric-api',
 		official: false
 	},
 	{
 		slug: 'bwmp_warden_deeper-and-darker',
-		category: 'mod-compatibility',
+		category: 'mod compatibility',
 		required_mod_slug: 'deeperdarker',
 		official: true
 	},

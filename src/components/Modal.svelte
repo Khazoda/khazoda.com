@@ -63,8 +63,7 @@
 		on:click|stopPropagation
 		on:touchstart|capture={swipeStart}
 		on:touchmove={swipeMove}
-		on:touchend={swipeEnd}
-	>
+		on:touchend={swipeEnd}>
 		<!-- svelte-ignore a11y-autofocus -->
 		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
 			><MingcuteCloseFill />

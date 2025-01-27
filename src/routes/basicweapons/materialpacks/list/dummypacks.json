@@ -1,0 +1,130 @@
+{
+	"packs": [
+		{
+			"name": "Vanilla Plus",
+			"author": "Khazoda",
+			"downloads": 1234,
+			"category": "vanilla-like",
+			"created": "2024-03-15",
+			"description": "Adds new materials based on vanilla items",
+			"icon": "https://placehold.co/32"
+		},
+		{
+			"name": "Create Metals",
+			"author": "CreatorUser",
+			"downloads": 567,
+			"category": "mod-compatibility",
+			"created": "2024-03-10",
+			"description": "Materials for Create mod metals",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Mythic Metals Integration",
+			"author": "MetalMaster",
+			"downloads": 892,
+			"category": "mod-compatibility",
+			"created": "2024-03-08",
+			"description": "Weapon materials for all Mythic Metals",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Zonkus Compat",
+			"author": "MetalMaster",
+			"downloads": 892,
+			"category": "mod-compatibility",
+			"created": "2024-03-08",
+			"description": "Weapon materials for all Mythic Metals",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Bleebus",
+			"author": "MetalMaster",
+			"downloads": 892,
+			"category": "mod-compatibility",
+			"created": "2024-03-08",
+			"description": "Weapon materials for all Mythic Metals",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Fantasy Materials",
+			"author": "LoreKeeper",
+			"downloads": 445,
+			"category": "other",
+			"created": "2024-03-12",
+			"description": "Magical and mystical material types",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Enhanced Stone Types",
+			"author": "StoneCarver",
+			"downloads": 789,
+			"category": "vanilla-like",
+			"created": "2024-03-01",
+			"description": "Expanded vanilla stone material variants",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Mekanism Metals",
+			"author": "TechGuru",
+			"downloads": 1567,
+			"category": "mod-compatibility",
+			"created": "2024-02-28",
+			"description": "Weapon materials for Mekanism metals",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Gem Weapons",
+			"author": "CrystalCrafter",
+			"downloads": 923,
+			"category": "vanilla-like",
+			"created": "2024-03-05",
+			"description": "New gem-based materials",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Elemental Arsenal",
+			"author": "ElementMaster",
+			"downloads": 678,
+			"category": "other",
+			"created": "2024-03-07",
+			"description": "Fire, Ice, and Lightning materials",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Tech Metals",
+			"author": "FutureForge",
+			"downloads": 345,
+			"category": "other",
+			"created": "2024-03-14",
+			"description": "Futuristic material types",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "AE2 Materials",
+			"author": "NetworkNinja",
+			"downloads": 234,
+			"category": "mod-compatibility",
+			"created": "2024-03-09",
+			"description": "Applied Energistics 2 material integration",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Wood Variants",
+			"author": "TreeHugger",
+			"downloads": 890,
+			"category": "vanilla-like",
+			"created": "2024-03-11",
+			"description": "Extended wooden material types",
+			"icon": "https://placehold.co/64"
+		},
+		{
+			"name": "Thermal Series Metals",
+			"author": "ThermalExpert",
+			"downloads": 456,
+			"category": "mod-compatibility",
+			"created": "2024-03-13",
+			"description": "Materials for Thermal Series metals",
+			"icon": "https://placehold.co/64"
+		}
+	]
+}

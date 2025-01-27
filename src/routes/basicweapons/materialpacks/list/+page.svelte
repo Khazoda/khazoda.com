@@ -1,7 +1,7 @@
 <script lang="ts">
 	import HomeButton from 'src/components/HomeButton.svelte';
 	import HugeiconsSearch01 from 'virtual:icons/hugeicons/search-01';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { fly, fade, scale } from 'svelte/transition';
 	import type { PageData } from './$types';
 
@@ -28,6 +28,17 @@
 
 	// Sorting and filtering states
 	let searchQuery: string = '';
+	let debouncedSearchQuery: string = '';
+
+	// Debounce the search query to prevent excessive re-renders
+	let searchTimeout: number;
+	$: {
+		clearTimeout(searchTimeout);
+		searchTimeout = setTimeout(() => {
+			debouncedSearchQuery = searchQuery;
+		}, 250);
+	}
+
 	type SortMethod = 'alphabetical' | 'downloads' | 'recent';
 	type SortDirection = 'asc' | 'desc';
 	type MaterialPackCategory = 'mod-compatibility' | 'vanilla-like' | 'other';
@@ -48,9 +59,9 @@
 		recent: (a: any, b: any) => new Date(b.created).getTime() - new Date(a.created).getTime()
 	};
 
-	// First filter by search
+	// Use the debounced query for filtering
 	$: searchFilteredPacks = rawMaterialPacks.filter((pack) =>
-		pack.name.toLowerCase().includes(searchQuery.toLowerCase())
+		pack.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
 	);
 
 	// Then sort based on method and direction
@@ -98,6 +109,11 @@
 				content: pack
 			}));
 
+	// Cleanup on component destroy
+	onDestroy(() => {
+		clearTimeout(searchTimeout);
+	});
+
 	function flyAndScale(node: HTMLElement, { y = 0, delay = 0, duration = 200 }) {
 		return {
 			duration,
@@ -121,7 +137,7 @@
 
 	{#if pageReady}
 		<div class="content" transition:fly={{ y: -20, duration: 500, delay: 0 }}>
-			<h1>Material Packs</h1>
+			<h1>Public Material Packs</h1>
 			<div class="controls">
 				<div class="search-bar">
 					<HugeiconsSearch01 width="20" height="20" />
@@ -260,12 +276,14 @@
 
 	.content {
 		margin-top: 3rem;
+		h1 {
+			margin-bottom: 2rem;
+		}
 	}
 
 	.controls {
 		display: flex;
 		gap: 1rem;
-		margin-bottom: 2rem;
 		flex-wrap: wrap;
 
 		.search-bar {

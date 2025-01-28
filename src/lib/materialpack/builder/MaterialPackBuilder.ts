@@ -282,6 +282,7 @@ export class MaterialPackBuilder {
 		await this.generateRecipes(dataFolder);
 		await this.generateTags(dataFolder);
 		await this.generateWeaponAttributes(dataFolder);
+		await this.generateRecipeAdvancements(dataFolder);
 	}
 
 	private async generateResourcePack() {
@@ -704,6 +705,56 @@ export class MaterialPackBuilder {
 
 			const fileName = `${material.material_name}.json`;
 			customMaterialsFolder.file(fileName, JSON.stringify(materialData, null, 2));
+		}
+	}
+
+	private async generateRecipeAdvancements(dataFolder: JSZip) {
+		const advancementsFolder = dataFolder.folder('basicweapons/advancements/recipes');
+		if (!advancementsFolder) throw new Error('Failed to create advancements folder');
+
+		for (const material of this.materialPack.materials) {
+			const isTag = material.repair_ingredient.startsWith('#');
+			const criteriaId = `got_${material.material_name}_material`;
+
+			// Build the list of recipes to reward
+			const recipes: string[] = [];
+			for (const weaponType of WEAPON_TYPES) {
+				if (material.textures[weaponType] === null) continue;
+
+				// Add recipe
+				recipes.push(`basicweapons:${material.material_name}_${weaponType}`);
+
+				// Add variant recipes if they exist
+				if (weaponType === 'club') {
+					recipes.push(`basicweapons:${material.material_name}_${weaponType}_alt`);
+				}
+			}
+
+			// Skip if no recipes left to give
+			if (recipes.length === 0) continue;
+
+			const advancement = {
+				parent: 'minecraft:recipes/root',
+				criteria: {
+					[criteriaId]: {
+						conditions: {
+							items: [
+								{
+									items: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient
+								}
+							]
+						},
+						trigger: 'minecraft:inventory_changed'
+					}
+				},
+				requirements: [[criteriaId]],
+				rewards: {
+					recipes: recipes
+				}
+			};
+
+			const fileName = `got_${material.material_name}_material.json`;
+			advancementsFolder.file(fileName, JSON.stringify(advancement, null, 2));
 		}
 	}
 

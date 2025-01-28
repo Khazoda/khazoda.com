@@ -254,6 +254,15 @@ export class MaterialPackBuilder {
 		}
 	}
 
+	private async generateLoadingRequirements() {
+		if (this.materialPack.mod_dependency_modid) {
+			const requirements = {
+				requires_mod: this.materialPack.mod_dependency_modid
+			};
+			this.zip.file('loading_requirements.json', JSON.stringify(requirements, null, 2));
+		}
+	}
+
 	private async generateDataPack() {
 		const dataFolder = this.zip.folder('data');
 		if (!dataFolder) throw new Error('Failed to create data folder');
@@ -701,6 +710,7 @@ export class MaterialPackBuilder {
 	async build(): Promise<Blob> {
 		await this.generateRootPackMcmeta();
 		await this.generateMaterialPackIcon();
+		await this.generateLoadingRequirements();
 		await this.generateDataPack();
 		await this.generateResourcePack();
 		await this.generateCustomMaterials();

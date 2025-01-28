@@ -180,3 +180,28 @@ img.no-resample {
 	object-fit: cover;
 	image-rendering: pixelated;
 }
+
+/* Scrollbar */
+html {
+	scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #1a1a1a;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #3a3a3a;
+	border-radius: 5px;
+	border: 2px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #4a4a4a;
+}

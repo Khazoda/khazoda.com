@@ -143,8 +143,6 @@
 
 <div class="page-container">
 	{#if pageReady}
-		<span class="fixed-top-right"><FeedbackButton /></span>
-		<span class="fixed-top-left"><HomeButton /></span>
 		<div class="content" transition:fly={{ y: -20, duration: 500, delay: 0 }}>
 			<div class="flex-row gap-4 align-center above-header">
 				<a class="flex-row gap-2" href="/basicweapons/materialpacks">
@@ -330,34 +328,6 @@
 </CenterModal>
 
 <style lang="scss">
-	:global(html) {
-		scrollbar-gutter: stable;
-	}
-
-	:global(body) {
-		overflow-y: scroll;
-	}
-
-	:global(::-webkit-scrollbar) {
-		width: 10px;
-		height: 10px;
-	}
-
-	:global(::-webkit-scrollbar-track) {
-		background: #1a1a1a;
-		border-radius: 5px;
-	}
-
-	:global(::-webkit-scrollbar-thumb) {
-		background: #3a3a3a;
-		border-radius: 5px;
-		border: 2px solid #1a1a1a;
-
-		&:hover {
-			background: #4a4a4a;
-		}
-	}
-
 	.page-container {
 		width: 100%;
 		max-width: 1200px;

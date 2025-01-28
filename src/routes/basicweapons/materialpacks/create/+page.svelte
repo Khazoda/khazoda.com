@@ -126,7 +126,7 @@
 	}
 
 	onMount(() => {
-		const unsubscribe = materialPacks.subscribe((state) => {
+		const unsubscribe = materialPacks.subscribe(state => {
 			if (state && state.packs) {
 				isLoaded = true;
 			}
@@ -170,7 +170,7 @@
 		isTransitioning = true;
 		isLoaded = false;
 		// Wait for the transition to complete before navigating
-		await new Promise((resolve) => setTimeout(resolve, 300)); // Should match transition duration
+		await new Promise(resolve => setTimeout(resolve, 300)); // Should match transition duration
 		goto('/basicweapons/materialpacks');
 	}
 
@@ -199,12 +199,12 @@
 		const input = event.target as HTMLInputElement;
 		try {
 			const validatedValue = schema.parse(input.value);
-			materialPack.update((pack) => ({
+			materialPack.update(pack => ({
 				...pack,
 				[field]: validatedValue
 			}));
 
-			materialPacks.update((state) => ({
+			materialPacks.update(state => ({
 				...state,
 				packs: {
 					...state.packs,
@@ -238,8 +238,8 @@
 		createNewPack();
 		// Update after a small delay to ensure the new pack is created
 		setTimeout(() => {
-			materialPack.update((pack) => ({ ...pack, ...newPack }));
-			materialPacks.update((state) => ({
+			materialPack.update(pack => ({ ...pack, ...newPack }));
+			materialPacks.update(state => ({
 				...state,
 				packs: {
 					...state.packs,
@@ -264,13 +264,13 @@
 		};
 
 		// Update both stores with validated data
-		materialPack.update((pack) => {
+		materialPack.update(pack => {
 			const materials = [...pack.materials];
 			materials[materials.length - 1] = newMaterial;
 			return { ...pack, materials };
 		});
 
-		materialPacks.update((state) => ({
+		materialPacks.update(state => ({
 			...state,
 			packs: {
 				...state.packs,
@@ -292,12 +292,12 @@
 	$: {
 		const currentIds = Object.keys($materialPacks.packs);
 		// Add any new packs that aren't in the order
-		const newIds = currentIds.filter((id) => !$packOrder.includes(id));
+		const newIds = currentIds.filter(id => !$packOrder.includes(id));
 		if (newIds.length > 0) {
-			packOrder.update((order) => [...order, ...newIds]);
+			packOrder.update(order => [...order, ...newIds]);
 		}
 		// Remove any deleted packs from the order
-		packOrder.update((order) => order.filter((id) => currentIds.includes(id)));
+		packOrder.update(order => order.filter(id => currentIds.includes(id)));
 	}
 
 	function handleDragStart(e: DragEvent, id: string) {
@@ -329,7 +329,7 @@
 		const draggedId = e.dataTransfer?.getData('text/plain');
 		if (!draggedId || draggedId === targetId) return;
 
-		packOrder.update((order) => {
+		packOrder.update(order => {
 			const newOrder = [...order];
 			const draggedIndex = newOrder.indexOf(draggedId);
 			const targetIndex = newOrder.indexOf(targetId);
@@ -353,18 +353,14 @@
 
 <!-- #region HTML -->
 <div class="page-container flex-col">
-	<span class="absolute-top-left"><HomeButton /></span>
-	<span class="absolute-top-right"><FeedbackButton /></span>
 	{#if isLoaded}
 		<div
 			class="transition-wrapper"
-			transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}
-		>
+			transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}>
 			{#key show_pack_creator}
 				<div
 					class="view-container"
-					transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}
-				>
+					transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}>
 					<!-- Materialpack Selector View -->
 					{#if !show_pack_creator}
 						<div class="flex-row justify-between">
@@ -374,8 +370,7 @@
 									label="Back"
 									onClick={handleBackTransition}
 									color="grey"
-									backdropCorner="top-left"
-								/>
+									backdropCorner="top-left" />
 							</span>
 							<span class="create-pack-btn-container">
 								{#if Object.keys($materialPacks.packs).length < 9}
@@ -384,8 +379,7 @@
 										label="Create New Pack"
 										onClick={handleCreateNew}
 										color="green"
-										backdropCorner="top-center"
-									/>
+										backdropCorner="top-center" />
 								{:else}
 									<span class="number-of-packs-created">
 										{Object.keys($materialPacks.packs).length} / 9 Material Packs Created.
@@ -397,8 +391,7 @@
 								label="Storage"
 								onClick={showBrowserStorageInfoModal}
 								color="blue"
-								backdropCorner="top-right"
-							/>
+								backdropCorner="top-right" />
 						</div>
 						<div class="pack-list-container">
 							<div class="pack-list">
@@ -409,35 +402,31 @@
 										role="button"
 										tabindex="0"
 										aria-label="Draggable material pack"
-										on:dragstart={(e) => handleDragStart(e, packId)}
+										on:dragstart={e => handleDragStart(e, packId)}
 										on:dragend={handleDragEnd}
 										on:dragover|preventDefault
-										on:drop|preventDefault={(e) => handleDrop(e, packId)}
-										animate:flip={{ duration: 300 }}
-									>
+										on:drop|preventDefault={e => handleDrop(e, packId)}
+										animate:flip={{ duration: 300 }}>
 										<div class="pack-inner">
 											<div class="actions-container">
 												<ZipMaterialPackDownloader materialPack={$materialPacks.packs[packId]} />
 												<button
 													class="edit-pack-btn"
 													title="Edit Material Pack"
-													on:click={() => handlePackSelect(packId)}
-												>
+													on:click={() => handlePackSelect(packId)}>
 													<HugeiconsEdit02 width="32" height="32" />
 												</button>
 												<button
 													class="delete-pack-btn"
 													on:click={() => handleDeleteClick(packId)}
-													title="Delete Material Pack"
-												>
+													title="Delete Material Pack">
 													<HugeiconsDelete02 width="32" height="32" />
 												</button>
 											</div>
 											<img
 												src={$materialPacks.packs[packId].pack_icon || ''}
 												alt="material pack icon"
-												class="no-resample"
-											/>
+												class="no-resample" />
 											{#if $materialPacks.packs[packId].pack_name}
 												<span class="pack-label">{$materialPacks.packs[packId].pack_name}</span>
 											{/if}
@@ -448,8 +437,7 @@
 									<div
 										class="pack-item placeholder"
 										animate:flip={{ duration: 300 }}
-										role="gridcell"
-									>
+										role="gridcell">
 										<div class="pack-inner">
 											<img src={empty_spot} alt="empty pack slot" class="no-resample" />
 										</div>
@@ -469,8 +457,7 @@
 										activeTab = 'settings';
 									}}
 									color="grey"
-									backdropCorner="center"
-								/>
+									backdropCorner="center" />
 							</div>
 						</span>
 
@@ -481,8 +468,7 @@
 								{tabs}
 								{activeTab}
 								onTabChange={handleTabChange}
-								onAddMaterial={handleAddMaterial}
-							/>
+								onAddMaterial={handleAddMaterial} />
 							<!-- Content area -->
 							{#if activeTab}
 								{#if getContentType(activeTab) === 'settings'}
@@ -537,8 +523,7 @@
 												<span class="icon">
 													{#if $materialPack}
 														<ZipMaterialPackDownloader materialPack={$materialPack} />
-													{/if}</span
-												>
+													{/if}</span>
 												<span
 													class="pack-name-container"
 													title={'bwmp_' +
@@ -547,8 +532,7 @@
 														($materialPack.mod_dependency_name
 															? $materialPack.mod_dependency_name
 															: 'minecraft') +
-														'.zip'}
-												>
+														'.zip'}>
 													{'bwmp_' +
 														$materialPack.pack_name +
 														'_' +
@@ -563,12 +547,12 @@
 											<ImagePicker
 												currentImage={$materialPack.pack_icon}
 												accept="image/png"
-												onImageSelect={(base64String) => {
-													materialPack.update((pack) => ({
+												onImageSelect={base64String => {
+													materialPack.update(pack => ({
 														...pack,
 														pack_icon: base64String
 													}));
-													materialPacks.update((state) => ({
+													materialPacks.update(state => ({
 														...state,
 														packs: {
 															...state.packs,
@@ -578,8 +562,7 @@
 															}
 														}
 													}));
-												}}
-											/>
+												}} />
 										</div>
 										<div class="grid-section-general flex-col">
 											<div class="form-element text">
@@ -588,10 +571,9 @@
 													id="pack_name"
 													placeholder=" "
 													bind:value={$materialPack.pack_name}
-													on:input={(e) =>
+													on:input={e =>
 														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-													required
-												/>
+													required />
 												<label for="pack_name">Material Pack Name</label>
 											</div>
 										</div>
@@ -604,9 +586,12 @@
 													id="mod_dependency_name"
 													placeholder=" "
 													bind:value={$materialPack.mod_dependency_name}
-													on:input={(e) =>
-														validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_name')}
-												/>
+													on:input={e =>
+														validateAndUpdateStore(
+															e,
+															modDependencySchema,
+															'mod_dependency_name'
+														)} />
 												<label for="mod_dependency_name">Mod Name</label>
 											</div>
 
@@ -616,9 +601,12 @@
 													id="mod_dependency_modid"
 													placeholder=" "
 													bind:value={$materialPack.mod_dependency_modid}
-													on:input={(e) =>
-														validateAndUpdateStore(e, modDependencySchema, 'mod_dependency_modid')}
-												/>
+													on:input={e =>
+														validateAndUpdateStore(
+															e,
+															modDependencySchema,
+															'mod_dependency_modid'
+														)} />
 												<label for="mod_dependency_modid"> Mod ID </label>
 											</div>
 										</div>
@@ -631,8 +619,7 @@
 												title="Edit Weapon Data"
 												modalID={101}
 												offset={5}
-												disabled={!activeTab.endsWith('-stats')}
-											>
+												disabled={!activeTab.endsWith('-stats')}>
 												<h4 class="blurb">Set a material's weapon stats and repair ingredient</h4>
 												<div class="modal-content">
 													<h4>Foreword</h4>
@@ -674,15 +661,13 @@
 												<img
 													class="image-example"
 													src={assets_tab_example}
-													alt="assets tab example"
-												/>
+													alt="assets tab example" />
 											</InfoTab>
 											<InfoTab
 												title="Weapon Textures"
 												modalID={102}
 												offset={1}
-												disabled={!activeTab.endsWith('-assets')}
-											>
+												disabled={!activeTab.endsWith('-assets')}>
 												<h4 class="blurb">Set the weapon textures for your material</h4>
 												<div class="modal-content">
 													<h4>Downloading Examples</h4>
@@ -719,23 +704,20 @@
 												<img
 													class="image-example"
 													src={stats_tab_example}
-													alt="assets tab example"
-												/>
+													alt="assets tab example" />
 											</InfoTab>
 											{#if activeTab.endsWith('-stats')}
 												<MaterialCreatorStats
 													{material}
 													{index}
 													bind:activeTab
-													onTabChange={(newTab) => (activeTab = newTab)}
-												/>
+													onTabChange={newTab => (activeTab = newTab)} />
 											{:else if activeTab.endsWith('-assets')}
 												<MaterialCreatorAssets
 													{material}
 													{index}
 													bind:activeTab
-													onTabChange={(newTab) => (activeTab = newTab)}
-												/>
+													onTabChange={newTab => (activeTab = newTab)} />
 											{/if}
 										{/if}
 									{/each}
@@ -757,8 +739,7 @@
 			<span class="flex-row">
 				<button on:click={() => window.location.reload()}>Refresh Page</button>
 				<button on:click={() => (window.location.href = '/basicweapons/materialpacks')}
-					>Exit Creator</button
-				>
+					>Exit Creator</button>
 			</span>
 		</div>
 	{/if}
@@ -772,8 +753,7 @@
 		<div class="storage-meter">
 			<h3>Storage Usage</h3>
 			<span class="storage-disclaimer"
-				>5MB is a pessimistic guess. Your browser may allow more.</span
-			>
+				>5MB is a pessimistic guess. Your browser may allow more.</span>
 			{#key showModal[1]}
 				{#if typeof window !== 'undefined'}
 					{@const usedStorage = getLocalStorageSize()}
@@ -785,8 +765,7 @@
 							class="meter-fill"
 							style="width: {usagePercentage}%; background-color: {usagePercentage > 80
 								? '#ff4444'
-								: '#4a9eff'}"
-						/>
+								: '#4a9eff'}" />
 					</div>
 					<div class="meter-labels">
 						<span>Used: {(usedStorage / 1024 / 1024).toFixed(2)}MB</span>
@@ -897,8 +876,7 @@
 						<img
 							src={template.exampleTexture || empty_spot}
 							alt="{template.name} sword"
-							class="no-resample"
-						/>
+							class="no-resample" />
 					</div>
 					<div class="template-info">
 						<span class="template-title">{template.name}</span>

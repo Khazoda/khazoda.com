@@ -33,12 +33,7 @@
 
 <!-- #region HTML-->
 <div class="page-container">
-	<span class="absolute-top-right"><FeedbackButton /></span>
-
 	{#if pageReady}
-		<span class="absolute-top-left">
-			<HomeButton />
-		</span>
 		<div class="center-container">
 			<h1>Basic Weapons</h1>
 			<h2 transition:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>

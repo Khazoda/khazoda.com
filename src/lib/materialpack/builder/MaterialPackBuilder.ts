@@ -45,18 +45,41 @@ interface RecipeTemplate {
 	group?: string;
 	pattern: string[];
 	key: Record<string, any>;
-	result: { id: string; count: number };
-	'fabric:load_conditions'?: (FabricLoadCondition | FabricNotModCondition)[];
-	'neoforge:conditions'?: (NeoForgeLoadCondition | NeoForgeNotModCondition)[];
+	result: {
+		id: string;
+		count: number;
+		required?: boolean;
+	};
+	'fabric:load_conditions'?: (FabricLoadCondition | FabricNotModCondition | FabricAndCondition)[];
+	'neoforge:conditions'?: (
+		| NeoForgeLoadCondition
+		| NeoForgeNotModCondition
+		| NeoForgeAndCondition
+	)[];
 }
 
-interface VariantRecipeTemplate {
+// For dagger recipes with main/compat variants targeting farmersdelight
+interface DaggerRecipeTemplate {
 	main: RecipeTemplate;
-	[key: string]: RecipeTemplate;
+	compat: RecipeTemplate;
 }
+
+// For club recipes with main/alt variants
+interface ClubRecipeTemplate {
+	main: RecipeTemplate;
+	alt: RecipeTemplate;
+}
+
+// Union type for all variant possibilities
+type VariantRecipeTemplate = DaggerRecipeTemplate | ClubRecipeTemplate;
 
 type RecipeTemplates = {
-	[K in WeaponType]: RecipeTemplate | VariantRecipeTemplate;
+	dagger: DaggerRecipeTemplate;
+	club: ClubRecipeTemplate;
+	hammer: RecipeTemplate;
+	spear: RecipeTemplate;
+	quarterstaff: RecipeTemplate;
+	glaive: RecipeTemplate;
 };
 
 // Recipe templates
@@ -189,6 +212,15 @@ const BASE_WEAPON_REACH = {
 	quarterstaff: 3.75,
 	glaive: 3.75
 } as const;
+interface FabricAndCondition {
+	condition: 'fabric:and';
+	values: (FabricLoadCondition | FabricNotModCondition)[];
+}
+
+interface NeoForgeAndCondition {
+	type: 'neoforge:and';
+	values: (NeoForgeLoadCondition | NeoForgeNotModCondition)[];
+}
 
 export class MaterialPackBuilder {
 	private materialPack: MaterialPack;
@@ -277,33 +309,101 @@ export class MaterialPackBuilder {
 				ingredient_type: isTag ? 'tag' : 'item'
 			};
 
+			// Create mod dependency conditions if a mod dependency exists
+			let fabricCondition: FabricLoadCondition | undefined;
+			let neoforgeCondition: NeoForgeLoadCondition | undefined;
+
+			if (this.materialPack.mod_dependency_modid) {
+				fabricCondition = {
+					condition: 'fabric:all_mods_loaded',
+					values: [this.materialPack.mod_dependency_modid]
+				};
+				neoforgeCondition = {
+					type: 'neoforge:mod_loaded',
+					modid: this.materialPack.mod_dependency_modid
+				};
+			}
+
 			for (const weaponType of WEAPON_TYPES) {
 				if (material.textures[weaponType] === null) continue;
 
 				const template = RECIPE_TEMPLATES[weaponType];
-				if ('main' in template) {
-					if (weaponType === 'club') {
-						recipesFolder.file(
-							`${material.material_name}_club.json`,
-							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(template.main), variables)),
-								null,
-								2
-							)
-						);
-						recipesFolder.file(
-							`${material.material_name}_club_alt.json`,
-							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(template.alt), variables)),
-								null,
-								2
-							)
-						);
-					} else if (weaponType === 'dagger') {
+
+				if (weaponType === 'dagger') {
+					// Handle dagger recipes
+					const daggerTemplate = template as DaggerRecipeTemplate;
+
+					if (fabricCondition && neoforgeCondition) {
+						// Main dagger recipe
+						const mainRecipe: RecipeTemplate = {
+							...daggerTemplate.main,
+							result: {
+								...daggerTemplate.main.result,
+								required: this.materialPack.mod_dependency_modid ? false : undefined
+							}
+						};
+
+						// Add load conditions
+						mainRecipe['fabric:load_conditions'] = [
+							{
+								condition: 'fabric:and',
+								values: [
+									fabricCondition,
+									{
+										condition: 'fabric:not',
+										value: { condition: 'fabric:all_mods_loaded', values: ['farmersdelight'] }
+									}
+								]
+							}
+						];
+
+						mainRecipe['neoforge:conditions'] = [
+							{
+								type: 'neoforge:and',
+								values: [
+									neoforgeCondition,
+									{
+										type: 'neoforge:not',
+										value: { type: 'neoforge:mod_loaded', modid: 'farmersdelight' }
+									}
+								]
+							}
+						];
+
+						// Compat dagger recipe
+						const compatRecipe: RecipeTemplate = {
+							...daggerTemplate.compat,
+							result: {
+								...daggerTemplate.compat.result,
+								required: this.materialPack.mod_dependency_modid ? false : undefined
+							}
+						};
+
+						compatRecipe['fabric:load_conditions'] = [
+							{
+								condition: 'fabric:and',
+								values: [
+									fabricCondition,
+									{ condition: 'fabric:all_mods_loaded', values: ['farmersdelight'] }
+								]
+							}
+						];
+
+						compatRecipe['neoforge:conditions'] = [
+							{
+								type: 'neoforge:and',
+								values: [
+									neoforgeCondition,
+									{ type: 'neoforge:mod_loaded', modid: 'farmersdelight' }
+								]
+							}
+						];
+
+						// Generate both recipes
 						recipesFolder.file(
 							`${material.material_name}_dagger.json`,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(template.main), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(mainRecipe), variables)),
 								null,
 								2
 							)
@@ -311,16 +411,89 @@ export class MaterialPackBuilder {
 						compatFolder.file(
 							`${material.material_name}_dagger.json`,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(template.compat), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(compatRecipe), variables)),
+								null,
+								2
+							)
+						);
+					} else {
+						// No mod dependency, use original dagger recipe generation logic
+						recipesFolder.file(
+							`${material.material_name}_dagger.json`,
+							JSON.stringify(
+								JSON.parse(applyTemplate(JSON.stringify(daggerTemplate.main), variables)),
+								null,
+								2
+							)
+						);
+						compatFolder.file(
+							`${material.material_name}_dagger.json`,
+							JSON.stringify(
+								JSON.parse(applyTemplate(JSON.stringify(daggerTemplate.compat), variables)),
 								null,
 								2
 							)
 						);
 					}
+				} else if (weaponType === 'club') {
+					// Handle club recipes
+					const clubTemplate = template as ClubRecipeTemplate;
+					const mainRecipe: RecipeTemplate = {
+						...clubTemplate.main,
+						result: {
+							...clubTemplate.main.result,
+							required: this.materialPack.mod_dependency_modid ? false : undefined
+						}
+					};
+					const altRecipe: RecipeTemplate = {
+						...clubTemplate.alt,
+						result: {
+							...clubTemplate.alt.result,
+							required: this.materialPack.mod_dependency_modid ? false : undefined
+						}
+					};
+
+					if (fabricCondition && neoforgeCondition) {
+						mainRecipe['fabric:load_conditions'] = [fabricCondition];
+						mainRecipe['neoforge:conditions'] = [neoforgeCondition];
+						altRecipe['fabric:load_conditions'] = [fabricCondition];
+						altRecipe['neoforge:conditions'] = [neoforgeCondition];
+					}
+
+					recipesFolder.file(
+						`${material.material_name}_club.json`,
+						JSON.stringify(
+							JSON.parse(applyTemplate(JSON.stringify(mainRecipe), variables)),
+							null,
+							2
+						)
+					);
+					recipesFolder.file(
+						`${material.material_name}_club_alt.json`,
+						JSON.stringify(JSON.parse(applyTemplate(JSON.stringify(altRecipe), variables)), null, 2)
+					);
 				} else {
+					// Handle non-dagger recipes
+					const baseRecipe: RecipeTemplate = {
+						...(template as RecipeTemplate),
+						result: {
+							...(template as RecipeTemplate).result,
+							required: this.materialPack.mod_dependency_modid ? false : undefined
+						}
+					};
+
+					if (fabricCondition && neoforgeCondition) {
+						baseRecipe['fabric:load_conditions'] = [fabricCondition];
+						baseRecipe['neoforge:conditions'] = [neoforgeCondition];
+					}
+
 					recipesFolder.file(
 						`${material.material_name}_${weaponType}.json`,
-						JSON.stringify(JSON.parse(applyTemplate(JSON.stringify(template), variables)), null, 2)
+						JSON.stringify(
+							JSON.parse(applyTemplate(JSON.stringify(baseRecipe), variables)),
+							null,
+							2
+						)
 					);
 				}
 			}
@@ -336,7 +509,7 @@ export class MaterialPackBuilder {
 			values: [] as string[]
 		};
 
-		const weaponsByType = new Map(WEAPON_TYPES.map((type) => [type, [] as string[]]));
+		const weaponsByType = new Map(WEAPON_TYPES.map(type => [type, [] as string[]]));
 
 		for (const material of this.materialPack.materials) {
 			for (const weaponType of WEAPON_TYPES) {

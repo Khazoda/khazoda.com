@@ -14,12 +14,6 @@ export const MATERIAL_PACKS: MaterialPackMetadata[] = [
 		official: true
 	},
 	{
-		slug: 'create',
-		category: 'mod compatibility',
-		required_mod_slug: 'fabric-api',
-		official: false
-	},
-	{
 		slug: 'bwmp_warden_deeper-and-darker',
 		category: 'mod compatibility',
 		required_mod_slug: 'deeperdarker',
@@ -28,12 +22,6 @@ export const MATERIAL_PACKS: MaterialPackMetadata[] = [
 	{
 		slug: 'bwmp_nether-materials_minecraft',
 		category: 'vanilla-like',
-		official: true
-	},
-	{
-		slug: 'plushables',
-		category: 'vanilla-like',
-		required_mod_slug: 'plushables',
 		official: true
 	}
 ];

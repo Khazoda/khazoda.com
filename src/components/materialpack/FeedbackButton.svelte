@@ -26,8 +26,7 @@
 				href="https://discord.com/invite/vEZUkSxwR9"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="discord-btn"
-			>
+				class="discord-btn">
 				<SimpleIconsDiscord width="1.5rem" height="1.5rem" />
 				Join Discord Server
 			</a>

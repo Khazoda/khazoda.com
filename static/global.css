@@ -105,11 +105,13 @@ body::after {
 }
 
 a {
-	color: #c1e1f1;
+	color: #4ae4ff;
+	text-decoration: none;
 }
 
 a:hover {
-	color: #ffffff;
+	text-decoration: underline;
+	color: #4a9eff;
 }
 
 button {

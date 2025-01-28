@@ -4,6 +4,8 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { fly, fade, scale } from 'svelte/transition';
 	import type { PageData } from './$types';
+	import { navigating } from '$app/stores';
+	import LoadingSpinner from 'src/components/LoadingSpinner.svelte';
 
 	import HugeiconsBookDownload from 'virtual:icons/hugeicons/book-download';
 	import HugeiconsLinkSquare02 from 'virtual:icons/hugeicons/link-square-02';
@@ -26,13 +28,11 @@
 	export let data: PageData;
 	const rawMaterialPacks = data.materialPacks;
 
-	// Trigger page load transition
 	let pageReady = false;
+
 	onMount(() => {
 		requestAnimationFrame(() => {
-			setTimeout(() => {
-				pageReady = true;
-			}, 0);
+			pageReady = true;
 		});
 	});
 
@@ -193,65 +193,69 @@
 				</div>
 			</div>
 
-			<div class="packs-grid">
-				{#each displayItems as item, index (item)}
-					<div
-						class={item.type === 'header' ? 'category-heading' : 'pack-card'}
-						in:flyAndScale={item.type === 'pack'
-							? { y: 5, delay: index * 25, duration: 100 }
-							: { y: 0, delay: 0, duration: 0 }}>
-						{#if item.type === 'header'}
-							<h2>{item.content}</h2>
-						{:else}
-							<span class="external-link-popup">
-								<HugeiconsLinkSquare02 width="16" height="16" />
-							</span>
-							<div class="pack-header">
-								<img src={item.content.icon} alt={item.content.name} />
-								<span>
-									<h3>{item.content.name}</h3>
-									<p class="author">by {item.content.author}</p>
+			{#if $navigating}
+				<LoadingSpinner />
+			{:else}
+				<div class="packs-grid">
+					{#each displayItems as item, index (item)}
+						<div
+							class={item.type === 'header' ? 'category-heading' : 'pack-card'}
+							in:flyAndScale={item.type === 'pack'
+								? { y: 5, delay: index * 25, duration: 100 }
+								: { y: 0, delay: 0, duration: 0 }}>
+							{#if item.type === 'header'}
+								<h2>{item.content}</h2>
+							{:else}
+								<span class="external-link-popup">
+									<HugeiconsLinkSquare02 width="16" height="16" />
 								</span>
-							</div>
-							<div class="pack-info">
-								<div class="stats">
-									<span
-										><HugeiconsDownloadSquare02
-											width="16"
-											height="16" />{item.content.downloads.toLocaleString('en-US')} Downloads</span>
-									<span class="category"
-										><HugeiconsBriefcase08 width="16" height="16" />{item.content.category}</span>
+								<div class="pack-header">
+									<img src={item.content.icon} alt={item.content.name} />
+									<span>
+										<h3>{item.content.name}</h3>
+										<p class="author">by {item.content.author}</p>
+									</span>
 								</div>
-							</div>
-							<a
-								class="materialpack-modrinth-link-overlay"
-								href={item.content.url}
-								target="_blank"
-								rel="noopener noreferrer">
-							</a>
-							<div class="bottom-badges">
-								{#if item.content.official}
-									<span class="project-badge official"
-										><DiamondIcon width="16" height="16" />Official</span>
-								{:else}
-									<span class="project-badge unofficial"
-										><HexagonIcon width="16" height="16" />Community</span>
-								{/if}
-								{#if item.content.required_mod}
-									<a
-										href={item.content.required_mod.url}
-										class="required-mod"
-										target="_blank"
-										rel="noopener noreferrer">
-										<HugeiconsBookDownload width="16" height="16" />
-										Requires {item.content.required_mod.name}
-									</a>
-								{/if}
-							</div>
-						{/if}
-					</div>
-				{/each}
-			</div>
+								<div class="pack-info">
+									<div class="stats">
+										<span
+											><HugeiconsDownloadSquare02
+												width="16"
+												height="16" />{item.content.downloads.toLocaleString('en-US')} Downloads</span>
+										<span class="category"
+											><HugeiconsBriefcase08 width="16" height="16" />{item.content.category}</span>
+									</div>
+								</div>
+								<a
+									class="materialpack-modrinth-link-overlay"
+									href={item.content.url}
+									target="_blank"
+									rel="noopener noreferrer">
+								</a>
+								<div class="bottom-badges">
+									{#if item.content.official}
+										<span class="project-badge official"
+											><DiamondIcon width="16" height="16" />Official</span>
+									{:else}
+										<span class="project-badge unofficial"
+											><HexagonIcon width="16" height="16" />Community</span>
+									{/if}
+									{#if item.content.required_mod}
+										<a
+											href={item.content.required_mod.url}
+											class="required-mod"
+											target="_blank"
+											rel="noopener noreferrer">
+											<HugeiconsBookDownload width="16" height="16" />
+											Requires {item.content.required_mod.name}
+										</a>
+									{/if}
+								</div>
+							{/if}
+						</div>
+					{/each}
+				</div>
+			{/if}
 		</div>
 	{/if}
 </div>

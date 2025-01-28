@@ -15,6 +15,8 @@
 	import FanButton from 'src/components/materialpack/FanButton.svelte';
 	import { materialPacks } from 'src/lib/materialpack/stores/materialPackStore';
 	import FeedbackButton from 'src/components/materialpack/FeedbackButton.svelte';
+	import { navigating } from '$app/stores';
+	import LoadingSpinner from 'src/components/LoadingSpinner.svelte';
 
 	let pageReady = false;
 
@@ -33,21 +35,23 @@
 
 <!-- #region HTML-->
 <div class="page-container">
-	{#if pageReady}
+	{#if $navigating}
+		<LoadingSpinner />
+	{:else if pageReady}
 		<div class="center-container">
 			<h1>Basic Weapons</h1>
-			<h2 transition:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>
+			<h2 in:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>
 			<div class="flex-col description">
-				<span transition:fade={{ duration: 500, delay: 100 }}>
+				<span in:fade={{ duration: 500, delay: 100 }}>
 					Use this tool to create
 					<a href="/basicweapons/materialpacks/help"> material packs </a> for Basic Weapons
 				</span>
-				<span transition:fade={{ duration: 500, delay: 200 }}>
+				<span in:fade={{ duration: 500, delay: 200 }}>
 					Define your own weapon stats and textures
 				</span>
 			</div>
 			<div class="button-container align-center">
-				<span transition:fly={{ y: 50, duration: 500, delay: 250 }}>
+				<span in:fly={{ y: 50, duration: 500, delay: 250 }}>
 					<FanButton
 						color="blue"
 						href="/basicweapons/materialpacks/list"
@@ -55,7 +59,7 @@
 						label="Public Material Packs"
 						fanImages={[copper_hammer, copper_spear, copper_dagger]} />
 				</span>
-				<span transition:fly={{ y: 50, duration: 500, delay: 350 }}>
+				<span in:fly={{ y: 50, duration: 500, delay: 350 }}>
 					<FanButton
 						color="green"
 						href="/basicweapons/materialpacks/create"

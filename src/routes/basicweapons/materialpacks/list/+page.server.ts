@@ -15,28 +15,29 @@ interface ModrinthProject {
 }
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	const materialPacks = await Promise.allSettled(
+	// Fetch all projects in parallel
+	const materialPacks = await Promise.all(
 		MATERIAL_PACKS.map(async ({ slug, category, required_mod_slug }) => {
 			try {
-				// Fetch main project
-				const response = await fetch(`https://api.modrinth.com/v2/project/${slug}`);
-				if (!response.ok) {
-					console.error(`Failed to fetch project ${slug}: ${response.statusText}`);
-					return null;
-				}
-				const project = await response.json();
+				// Fetch project and team info in parallel
+				const [projectResponse, teamResponse] = await Promise.all([
+					fetch(`https://api.modrinth.com/v2/project/${slug}`),
+					fetch(`https://api.modrinth.com/v2/project/${slug}/members`)
+				]);
 
-				// Fetch team info
-				const teamResponse = await fetch(`https://api.modrinth.com/v2/project/${slug}/members`);
-				if (!teamResponse.ok) {
-					console.error(`Failed to fetch team for ${slug}: ${teamResponse.statusText}`);
+				if (!projectResponse.ok || !teamResponse.ok) {
 					return null;
 				}
-				const teamInfo = await teamResponse.json();
+
+				const [project, teamInfo] = await Promise.all([
+					projectResponse.json(),
+					teamResponse.json()
+				]);
+
 				const owner = teamInfo.find((member: { role: string }) => member.role === 'Owner');
 				const authorName = owner?.user.username || 'Unknown';
 
-				// Fetch required mod info if specified
+				// Fetch required mod if needed
 				let requiredMod = null;
 				if (required_mod_slug) {
 					const modResponse = await fetch(
@@ -49,10 +50,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 							slug: modData.slug,
 							url: `https://modrinth.com/mod/${modData.slug}`
 						};
-					} else {
-						console.error(
-							`Failed to fetch required mod ${required_mod_slug}: ${modResponse.statusText}`
-						);
 					}
 				}
 
@@ -66,16 +63,13 @@ export const load: PageServerLoad = async ({ fetch }) => {
 
 	return {
 		materialPacks: materialPacks
-			.filter(
-				(result): result is PromiseFulfilledResult<any> =>
-					result.status === 'fulfilled' && result.value !== null
-			)
-			.map(result => {
-				const { project, authorName, requiredMod } = result.value;
+			.filter((result): result is NonNullable<typeof result> => result !== null)
+			.map(({ project, authorName, requiredMod }) => {
 				const metadata = MATERIAL_PACKS.find(p => p.slug === project.slug);
 				const normalizedTitle = project.title.toLowerCase();
 				const capitalizedTitle = normalizedTitle.charAt(0).toUpperCase() + normalizedTitle.slice(1);
 				const trimmedTitle = capitalizedTitle.replace('material pack for basic weapons', '');
+
 				return {
 					name: trimmedTitle,
 					description: 'A material pack for Basic Weapons',

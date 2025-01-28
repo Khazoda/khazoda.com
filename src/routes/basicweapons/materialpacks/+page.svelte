@@ -9,6 +9,7 @@
 	import copper_dagger from '$lib/materialpack/media/framed_dagger.png';
 	import copper_hammer from '$lib/materialpack/media/framed_hammer.png';
 	import copper_spear from '$lib/materialpack/media/framed_spear.png';
+	import materialpack_logo from '$lib/materialpack/media/creator_logo.webp';
 
 	import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition';
 	import { onMount, tick } from 'svelte';
@@ -39,8 +40,18 @@
 		<LoadingSpinner />
 	{:else if pageReady}
 		<div class="center-container">
-			<h1>Basic Weapons</h1>
-			<h2 in:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>
+			<div class="flex-row">
+				<span
+					><img
+						class="materialpack-logo no-resample"
+						src={materialpack_logo}
+						alt="Material Pack Creator Logo" /></span>
+				<span class="flex-col">
+					<h1>Basic Weapons</h1>
+					<h2 in:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>
+				</span>
+			</div>
+
 			<div class="flex-col description">
 				<span in:fade={{ duration: 500, delay: 100 }}>
 					Use this tool to create
@@ -86,11 +97,20 @@
 		justify-content: center;
 		align-items: center;
 	}
+	.materialpack-logo {
+		width: 128px;
+		height: 128px;
+		position: relative;
+		left: -1rem;
+		top: -2rem;
+		filter: drop-shadow(6px 6px 1px rgba(0, 0, 0, 0.3));
+	}
 	.center-container {
 		h1,
 		h2 {
 			color: #51ebff;
 			margin-top: 0;
+			filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.3));
 		}
 		h1 {
 			font-size: 64px;

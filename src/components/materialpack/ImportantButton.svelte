@@ -13,7 +13,8 @@
 		| 'center' = 'bottom-right';
 
 	// Props for content
-	export let icon: any;
+	export let icon: any | string;
+	export let iconType: 'component' | 'svg' = 'component';
 	export let label: string;
 
 	// Optional props
@@ -34,10 +35,13 @@
 		: color === 'blue'
 			? '#0066ff'
 			: '#6b6b6b'};"
-	on:click={onClick}
->
+	on:click={onClick}>
 	<span class="flex-row align-center">
-		<svelte:component this={icon} />
+		{#if iconType === 'component'}
+			<svelte:component this={icon} />
+		{:else}
+			<img src={icon} alt="" />
+		{/if}
 		{label}
 	</span>
 </button>
@@ -47,7 +51,7 @@
 		text-decoration: none;
 		width: fit-content;
 		padding: 0.75rem 1.5rem;
-		font-family: 'Quicksand', 'sans-serif';
+		font-family: 'Quicksand', system-ui, sans-serif;
 		font-size: 1.1rem;
 		font-weight: 600;
 		background: rgb(235, 235, 235);
@@ -56,6 +60,10 @@
 		cursor: pointer;
 		transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		border: 2px solid var(--button-color);
+		letter-spacing: 0.01em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 
 		&.top-left {
 			box-shadow: -3px -3px 0px var(--button-color);
@@ -129,6 +137,8 @@
 			align-items: center;
 			gap: 0.5rem;
 			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			will-change: transform;
+			transform: translateZ(0);
 		}
 	}
 </style>

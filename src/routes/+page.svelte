@@ -51,6 +51,10 @@
 	import IconoirSoundOff from 'virtual:icons/iconoir/sound-off';
 	import PixelArticonsUsers from 'virtual:icons/pixelarticons/users';
 
+	import ImportantButton from 'src/components/materialpack/ImportantButton.svelte';
+	import FluentNew16Filled from '~icons/fluent/new-16-filled';
+	import { SHOW_NEW_FEATURE_BANNER } from 'src/config/general-config';
+
 	var showModal: boolean[] = Array(100).fill(false);
 	var isVersionSheetHovered = false;
 	$: currentlyHovered = 'Plushables';
@@ -126,6 +130,20 @@
 	<title>Khazoda's Mods</title>
 </svelte:head>
 <div class="page-container">
+	<div
+		class="top-left-container flex-col"
+		style={SHOW_NEW_FEATURE_BANNER ? 'display: flex' : 'display: none'}>
+		<ImportantButton
+			icon={FluentNew16Filled}
+			label="NEW"
+			onClick={() => {
+				document.location.href = '/basicweapons/materialpacks';
+			}}
+			color="green"
+			backdropCorner="top-left"
+			type="button" />
+		<span>Material Pack Creator</span>
+	</div>
 	<div class="top-right-container">
 		<audio id="click-sound">
 			<source src={btn_press_sound} type="audio/mpeg" />
@@ -145,8 +163,7 @@
 			on:mouseenter={() => (isVersionSheetHovered = true)}
 			on:mouseleave={() => (isVersionSheetHovered = false)}
 			on:focusin={() => (isVersionSheetHovered = true)}
-			on:focusout={() => (isVersionSheetHovered = false)}
-		>
+			on:focusout={() => (isVersionSheetHovered = false)}>
 			{#if isVersionSheetHovered}
 				<IconoirViewGrid />
 			{:else}
@@ -164,8 +181,7 @@
 				on:mouseover={() => (currentlyHovered = 'Plushables')}
 				on:focus={() => (currentlyHovered = 'Plushables')}
 				on:mouseenter={() => (currentlyHovered = 'Plushables')}
-				on:focus|capture={() => (currentlyHovered = 'Plushables')}
-			>
+				on:focus|capture={() => (currentlyHovered = 'Plushables')}>
 				<button
 					on:click={() => {
 						showDialog(0);
@@ -173,103 +189,89 @@
 					use:playClickSound
 					type="button"
 					title="Plushables"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={plushables_icon}
 						alt="Plushables"
 						width="512"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
 				on:mouseover={() => (currentlyHovered = 'Basic Weapons')}
 				on:focus={() => (currentlyHovered = 'Basic Weapons')}
 				on:mouseenter={() => (currentlyHovered = 'Basic Weapons')}
-				on:focus|capture={() => (currentlyHovered = 'Basic Weapons')}
-			>
+				on:focus|capture={() => (currentlyHovered = 'Basic Weapons')}>
 				<button
 					on:click={() => showDialog(1)}
 					use:playClickSound
 					type="button"
 					title="Basic Weapons"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={basicweapons_icon}
 						alt="Basic Weapons"
 						width="512"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
 				on:mouseover={() => (currentlyHovered = 'Bronze')}
 				on:focus={() => (currentlyHovered = 'Bronze')}
 				on:mouseenter={() => (currentlyHovered = 'Bronze')}
-				on:focus|capture={() => (currentlyHovered = 'Bronze')}
-			>
+				on:focus|capture={() => (currentlyHovered = 'Bronze')}>
 				<button
 					on:click={() => showDialog(2)}
 					use:playClickSound
 					type="button"
 					title="Bronze"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={bronze_icon}
 						alt="Bronze"
 						width="512"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
 				on:mouseover={() => (currentlyHovered = 'Block Breaker & Block Placer')}
 				on:focus={() => (currentlyHovered = 'Block Breaker & Block Placer')}
 				on:mouseenter={() => (currentlyHovered = 'Block Breaker & Block Placer')}
-				on:focus|capture={() => (currentlyHovered = 'Block Breaker & Block Placer')}
-			>
+				on:focus|capture={() => (currentlyHovered = 'Block Breaker & Block Placer')}>
 				<button
 					on:click={() => showDialog(3)}
 					use:playClickSound
 					type="button"
 					title="Block Breaker & Block Placer"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={breakerplacer_icon}
 						alt="Block Breaker & Block Placer"
 						width="512"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</li>
 			<li
 				on:mouseover={() => (currentlyHovered = 'Basic Storage')}
 				on:focus={() => (currentlyHovered = 'Basic Storage')}
 				on:mouseenter={() => (currentlyHovered = 'Basic Storage')}
-				on:focus|capture={() => (currentlyHovered = 'Basic Storage')}
-			>
+				on:focus|capture={() => (currentlyHovered = 'Basic Storage')}>
 				<button
 					on:click={() => showDialog(4)}
 					use:playClickSound
 					type="button"
 					title="Basic Storage"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={basicstorage_icon}
 						alt="Basic Storage"
 						width="512"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</li>
 		</ul>
@@ -288,15 +290,13 @@
 					use:playClickSound
 					type="button"
 					title="Mecha Soldier PLASTAR"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={plastar_icon}
 						alt="Mecha Soldier PLASTAR"
 						width="32"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 				<button
 					on:click={() => showDialog(97)}
@@ -307,15 +307,13 @@
 					use:playClickSound
 					type="button"
 					title="Hook a Duck"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={hookaduck_icon}
 						alt="Hook a Duck"
 						width="32"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</div>
 		</div>
@@ -331,15 +329,13 @@
 					use:playClickSound
 					type="button"
 					title="Kreebles"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={kreebles_icon}
 						alt="Kreebles"
 						width="32"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 				<button
 					on:click={() => showDialog(98)}
@@ -350,15 +346,13 @@
 					use:playClickSound
 					type="button"
 					title="Beef & Blade"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={beef_icon}
 						alt="Beef & Blade"
 						width="32"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 				<button
 					on:click={() => showDialog(99)}
@@ -369,15 +363,13 @@
 					use:playClickSound
 					type="button"
 					title="Dwayne 'The Block' Johnson"
-					tabindex="0"
-				>
+					tabindex="0">
 					<img
 						src={dwayne_icon}
 						alt="Dwayne 'The Block' Johnson"
 						width="32"
 						draggable="false"
-						class="ms-edge-imgfix"
-					/>
+						class="ms-edge-imgfix" />
 				</button>
 			</div>
 		</div>
@@ -387,14 +379,12 @@
 			<a
 				href="https://bsky.app/profile/khazoda.com"
 				aria-label="Khazoda on Bluesky"
-				title="Khazoda on Bluesky"><IconoirBluesky /></a
-			>
+				title="Khazoda on Bluesky"><IconoirBluesky /></a>
 			<a
 				href="https://discord.com/invite/vEZUkSxwR9"
 				aria-label="Get support on Discord"
 				title="Get support on Discord"
-				target="_blank"><IconoirDiscord /></a
-			>
+				target="_blank"><IconoirDiscord /></a>
 		</span>
 		<span class="copyright">&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span>
 	</footer>
@@ -408,14 +398,12 @@
 				src={plushables_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			<PlushablesColoured />
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -471,14 +459,12 @@
 				src={basicweapons_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Basic Weapons
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/basicweapons?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/basicweapons?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -527,14 +513,12 @@
 				src={bronze_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Bronze
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -583,14 +567,12 @@
 				src={breakerplacer_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Block Breaker & Block Placer
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -633,14 +615,12 @@
 				src={basicstorage_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Basic Storage
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/basic-storage?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/basic-storage?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -693,14 +673,12 @@
 				src={plastar_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Mecha Soldier PLASTAR
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/plastar?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/plastar?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -741,14 +719,12 @@
 				src={kreebles_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Kreebles
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -801,14 +777,12 @@
 				src={hookaduck_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Hook a Duck
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -818,8 +792,7 @@
 			<li>Hook them up with a fishing rod to receive tickets and prizes!</li>
 			<li>
 				For the best experience, try this mod out with the <a
-					href="https://modrinth.com/modpack/modfest-carnival">Modfest Carnival</a
-				> modpack
+					href="https://modrinth.com/modpack/modfest-carnival">Modfest Carnival</a> modpack
 			</li>
 			<p class="collabtext">
 				<PixelArticonsUsers />
@@ -850,14 +823,12 @@
 				src={beef_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Beef & Blade
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -898,14 +869,12 @@
 				src={dwayne_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
-				draggable="false"
-			/>
+				draggable="false" />
 			Dwayne 'The Block' Johnson
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=&color=%2311B848"
-		/>
+			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -1326,6 +1295,45 @@
 	}
 
 	//#region Other Styles
+	.top-left-container {
+		position: fixed;
+		top: 1rem;
+		left: 1rem;
+		z-index: 1000;
+		align-items: flex-start;
+		gap: 0.5rem;
+		padding: 0.5rem;
+		color: rgb(32, 222, 255);
+		font-size: 0.8rem;
+		font-weight: 800;
+		font-family: Quicksand, sans-serif;
+
+		img {
+			height: 3rem;
+			width: auto;
+			margin-bottom: auto;
+		}
+	}
+
+	@keyframes pulse {
+		0% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.7;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	// Mobile styles
+	@media screen and (max-width: 1000px) {
+		.top-left-container {
+			display: none;
+		}
+	}
+
 	.top-right-container {
 		position: fixed;
 		top: 1rem;

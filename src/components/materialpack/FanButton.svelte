@@ -17,8 +17,7 @@
 	{href}
 	class="btn-important {color}"
 	on:mouseenter={() => (isHovered = true)}
-	on:mouseleave={() => (isHovered = false)}
->
+	on:mouseleave={() => (isHovered = false)}>
 	<span class="flex-row align-center">
 		<svelte:component this={icon} />
 		{label}
@@ -38,9 +37,13 @@
 		text-decoration: none;
 		width: fit-content;
 		padding: 1rem 2rem;
-		font-family: 'Quicksand', 'sans-serif';
+		font-family: 'Quicksand', system-ui, sans-serif;
 		font-size: 1.2rem;
 		font-weight: 700;
+		letter-spacing: 0.01em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
@@ -62,6 +65,11 @@
 				cursor: pointer;
 				span {
 					transform: scale(1.1);
+					backface-visibility: hidden;
+					-webkit-backface-visibility: hidden;
+					transform-style: preserve-3d;
+					perspective: 1000;
+					filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
 				}
 			}
 		}
@@ -76,12 +84,21 @@
 				cursor: pointer;
 				span {
 					transform: scale(1.1);
+					backface-visibility: hidden;
+					-webkit-backface-visibility: hidden;
+					transform-style: preserve-3d;
+					perspective: 1000;
+					filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
 				}
 			}
 		}
 
 		span {
 			gap: 0.5rem;
+			transform: perspective(1px) translateZ(0);
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			transform-style: preserve-3d;
 			filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
 			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		}

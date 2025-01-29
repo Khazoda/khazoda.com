@@ -709,7 +709,7 @@ export class MaterialPackBuilder {
 	}
 
 	private async generateRecipeAdvancements(dataFolder: JSZip) {
-		const advancementsFolder = dataFolder.folder('basicweapons/advancements/recipes');
+		const advancementsFolder = dataFolder.folder('basicweapons/advancement/recipes');
 		if (!advancementsFolder) throw new Error('Failed to create advancements folder');
 
 		for (const material of this.materialPack.materials) {

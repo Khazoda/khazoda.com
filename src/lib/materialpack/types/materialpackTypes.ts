@@ -1,12 +1,18 @@
-// Types
+const RecipeTypes = {
+	crafting: 'crafting',
+	smithing: 'smithing'
+} as const;
+type RecipeType = (typeof RecipeTypes)[keyof typeof RecipeTypes];
+
 type Material = {
+	// Stats Section
 	material_name: string;
 	durability: number;
 	attack_damage_bonus: number;
 	attack_speed_bonus: number;
 	reach_bonus: number;
 	enchantability: number;
-	repair_ingredient: string;
+	// Assets Section
 	textures: {
 		dagger: string | null;
 		hammer: string | null;
@@ -18,6 +24,14 @@ type Material = {
 		glaive: string | null;
 		glaive_held: string | null;
 	};
+	// Recipes Section
+	recipe_type: RecipeType;
+	// Crafting
+	repair_ingredient: string; // e.g. Diamond, Iron Ingot
+	handle_ingredient: string; // e.g. Stick, End Rod
+	// Smithing
+	upgrade_smithing_template_ingredient: string; // Slot 1
+	smithing_weapon_ingredient: string; // Slot 2
 };
 
 type MaterialPack = {
@@ -29,5 +43,6 @@ type MaterialPack = {
 	pack_icon: string | null;
 };
 
-// Export the types
-export type { Material, MaterialPack };
+// Update exports
+export type { Material, MaterialPack, RecipeType };
+export { RecipeTypes };

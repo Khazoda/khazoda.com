@@ -40,8 +40,9 @@
 
 	import { z } from 'zod';
 
-	import MaterialCreatorStats from 'src/components/materialpack/MaterialCreatorStatsForm.svelte';
-	import MaterialCreatorAssets from 'src/components/materialpack/MaterialCreatorAssetsForm.svelte';
+	import MaterialCreatorStats from 'src/components/materialpack/form_views/MaterialCreatorStatsForm.svelte';
+	import MaterialCreatorAssets from 'src/components/materialpack/form_views/MaterialCreatorAssetsForm.svelte';
+	import MaterialCreatorRecipes from 'src/components/materialpack/form_views/MaterialCreatorRecipesForm.svelte';
 	import type { Material, MaterialPack } from 'src/lib/materialpack/types/materialpackTypes';
 	import ZipMaterialPackDownloader from 'src/components/materialpack/ZipMaterialPackDownloader.svelte';
 	import {
@@ -616,11 +617,11 @@
 									{#each $materialPack.materials as material, index}
 										{#if activeTab.startsWith(`material-${index}-`)}
 											<InfoTab
-												title="Edit Weapon Data"
+												title="Edit Weapon Stats"
 												modalID={101}
-												offset={5}
+												offset={9}
 												disabled={!activeTab.endsWith('-stats')}>
-												<h4 class="blurb">Set a material's weapon stats and repair ingredient</h4>
+												<h4 class="blurb">Set a material's various weapon stats</h4>
 												<div class="modal-content">
 													<h4>Foreword</h4>
 													<p>
@@ -647,17 +648,25 @@
 														randomly applied in an enchanting table. Higher values mean the item
 														will receive a greater quantity of high tier enchantments.
 													</p>
-													<h4>Repair Ingredient</h4>
-													<p>
-														This field can take either an item identifier (minecraft:cobblestone) or
-														an item tag (#minecraft:stone_tool_materials)
-													</p>
-													<h4>Weapon Textures</h4>
-													<p>
-														To set the weapon textures for your material, navigate to the assets
-														tab:
-													</p>
 												</div>
+											</InfoTab>
+											<InfoTab
+												title="Weapon Recipes"
+												modalID={102}
+												offset={5}
+												disabled={!activeTab.endsWith('-recipes')}>
+												<h4 class="blurb">Set a material's recipes</h4>
+
+												<h4>Repair Ingredient</h4>
+												<p>
+													This field can take either an item identifier (minecraft:cobblestone) or
+													an item tag (#minecraft:stone_tool_materials)
+												</p>
+												<h4>Weapon Textures</h4>
+												<p>
+													To set the weapon textures for your material, navigate to the assets tab:
+												</p>
+
 												<img
 													class="image-example"
 													src={assets_tab_example}
@@ -665,7 +674,7 @@
 											</InfoTab>
 											<InfoTab
 												title="Weapon Textures"
-												modalID={102}
+												modalID={103}
 												offset={1}
 												disabled={!activeTab.endsWith('-assets')}>
 												<h4 class="blurb">Set the weapon textures for your material</h4>
@@ -708,6 +717,12 @@
 											</InfoTab>
 											{#if activeTab.endsWith('-stats')}
 												<MaterialCreatorStats
+													{material}
+													{index}
+													bind:activeTab
+													onTabChange={newTab => (activeTab = newTab)} />
+											{:else if activeTab.endsWith('-recipes')}
+												<MaterialCreatorRecipes
 													{material}
 													{index}
 													bind:activeTab

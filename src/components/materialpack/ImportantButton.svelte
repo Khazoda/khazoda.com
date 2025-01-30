@@ -11,6 +11,7 @@
 		| 'left-center'
 		| 'right-center'
 		| 'center' = 'bottom-right';
+	export let faded: boolean = false;
 
 	// Props for content
 	export let icon: any | string;
@@ -24,7 +25,7 @@
 
 <button
 	{type}
-	class="important-btn {color} {backdropCorner}"
+	class="important-btn {color} {backdropCorner} {faded ? 'faded' : ''}"
 	style="--button-color: {color === 'green'
 		? '#2ac444'
 		: color === 'blue'
@@ -64,6 +65,10 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
 
 		&.top-left {
 			box-shadow: -3px -3px 0px var(--button-color);
@@ -130,6 +135,12 @@
 
 		&.grey:hover span {
 			transform: scale(0.95);
+		}
+
+		&.faded {
+			opacity: 0.5;
+			cursor: default;
+			pointer-events: none;
 		}
 
 		span {

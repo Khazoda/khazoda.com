@@ -1,16 +1,16 @@
 <script lang="ts">
 	import HugeiconsImage01 from 'virtual:icons/hugeicons/image-01';
-	import HugeiconsAbacus from 'virtual:icons/hugeicons/abacus';
 	import HugeiconsPlusSignSquare from 'virtual:icons/hugeicons/plus-sign-square';
+	import HugeiconsAnalytics01 from 'virtual:icons/hugeicons/analytics-01';
+	import HugeiconsGrid from 'virtual:icons/hugeicons/grid';
 	import type { Material } from '$lib/materialpack/types/materialpackTypes';
-
 	export let tabs: Tab[];
 	export let activeTab: string;
 	export let onTabChange: (tabId: string, subType?: string) => void;
 	export let onAddMaterial: () => void;
 
 	// Keep track of last selected subtab for each material to switch back to easily for users
-	let materialLastSubTabs: Record<number, 'stats' | 'assets'> = {};
+	let materialLastSubTabs: Record<number, 'stats' | 'recipes' | 'assets'> = {};
 
 	interface Tab {
 		id: string;
@@ -28,7 +28,10 @@
 		}, null);
 	}
 
-	function handleMaterialSubTabClick(materialIndex: number, subType: 'stats' | 'assets') {
+	function handleMaterialSubTabClick(
+		materialIndex: number,
+		subType: 'stats' | 'recipes' | 'assets'
+	) {
 		materialLastSubTabs[materialIndex] = subType;
 		onTabChange(`material-${materialIndex}`, subType);
 	}
@@ -45,13 +48,12 @@
 
 <div class="bookmark-container">
 	<!-- Settings tab at the top -->
-	{#each tabs.filter((tab) => tab.type === 'settings') as tab}
+	{#each tabs.filter(tab => tab.type === 'settings') as tab}
 		<button
 			class="bookmark-tab"
 			class:active={activeTab === tab.id}
 			on:click={() => onTabChange(tab.id)}
-			title={tab.label}
-		>
+			title={tab.label}>
 			{#if tab.icon}
 				<span class="icon">
 					<svelte:component this={tab.icon} width="24" height="24" />
@@ -63,23 +65,30 @@
 
 	<!-- Scrollable material tabs container -->
 	<div class="material-tabs-container">
-		{#each tabs.filter((tab) => tab.type === 'material') as tab}
+		{#each tabs.filter(tab => tab.type === 'material') as tab}
 			<button
 				class="material-bookmark-tab"
 				class:active={activeTab.startsWith(`material-${tab.materialIndex}-`)}
 				on:click={() =>
 					tab.materialIndex !== undefined && handleMaterialTabClick(tab.materialIndex)}
-				type="button"
-			>
+				type="button">
 				<button
 					class="sub-tab stats"
 					class:active={activeTab === `material-${tab.materialIndex}-stats`}
 					on:click|stopPropagation={() =>
 						tab.materialIndex !== undefined &&
 						handleMaterialSubTabClick(tab.materialIndex, 'stats')}
-					title="Stats"
-				>
-					<HugeiconsAbacus width="32" height="32" />
+					title="Stats">
+					<HugeiconsAnalytics01 width="24" height="24" />
+				</button>
+				<button
+					class="sub-tab recipes"
+					class:active={activeTab === `material-${tab.materialIndex}-recipes`}
+					on:click|stopPropagation={() =>
+						tab.materialIndex !== undefined &&
+						handleMaterialSubTabClick(tab.materialIndex, 'recipes')}
+					title="Recipes">
+					<HugeiconsGrid width="24" height="24" />
 				</button>
 				<button
 					class="sub-tab assets"
@@ -87,15 +96,13 @@
 					on:click|stopPropagation={() =>
 						tab.materialIndex !== undefined &&
 						handleMaterialSubTabClick(tab.materialIndex, 'assets')}
-					title="Assets"
-				>
+					title="Assets">
 					{#if tab.material && getFirstTexture(tab.material)}
 						<img
 							src={getFirstTexture(tab.material)}
 							alt="Material Texture"
 							width="24"
-							height="24"
-						/>
+							height="24" />
 					{:else}
 						<HugeiconsImage01 width="24" height="24" />
 					{/if}
@@ -109,8 +116,7 @@
 	<button
 		class="bookmark-tab add-material-btn"
 		on:click={handleAddMaterialClick}
-		title="Add New Material"
-	>
+		title="Add New Material">
 		<HugeiconsPlusSignSquare width="24" height="24" />
 	</button>
 </div>

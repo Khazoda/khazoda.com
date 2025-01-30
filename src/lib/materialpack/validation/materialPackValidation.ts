@@ -1,31 +1,32 @@
 import { z } from 'zod';
+import { RecipeTypes } from '$lib/materialpack/types/materialpackTypes';
 
 // Material Pack validation schema
 export const materialPackNameSchema = z
 	.string()
 	.min(1, "Pack name can't be empty")
 	.max(16, "Pack name can't be longer than 16 characters")
-	.transform((val) => val.toLowerCase()) // Convert to lowercase
-	.transform((val) => val.replace(/\s+/g, '-')) // Replace spaces with underscores
-	.transform((val) => val.replace(/[^a-z0-9-]/g, '')); // Remove any non-alphanumeric characters except underscores
+	.transform(val => val.toLowerCase()) // Convert to lowercase
+	.transform(val => val.replace(/\s+/g, '-')) // Replace spaces with underscores
+	.transform(val => val.replace(/[^a-z0-9-]/g, '')); // Remove any non-alphanumeric characters except underscores
 
 export const modDependencySchema = z
 	.string()
 	.max(24, "Mod dependency name can't be longer than 24 characters")
-	.transform((val) => val.toLowerCase())
-	.transform((val) => val.replace(/\s+/g, '-'))
-	.transform((val) => val.replace(/[^a-z0-9-]/g, ''));
+	.transform(val => val.toLowerCase())
+	.transform(val => val.replace(/\s+/g, '-'))
+	.transform(val => val.replace(/[^a-z0-9-]/g, ''));
 
 // Material validation schema
 export const materialNameSchema = z
 	.string()
 	.min(1, "Material name can't be empty")
 	.max(16, "Material name can't be longer than 16 characters")
-	.transform((val) => val.toLowerCase())
-	.transform((val) => val.replace(/\s+/g, '_'))
-	.transform((val) => val.replace(/[^a-z0-9_]/g, ''));
+	.transform(val => val.toLowerCase())
+	.transform(val => val.replace(/\s+/g, '_'))
+	.transform(val => val.replace(/[^a-z0-9_]/g, ''));
 
-export const repairIngredientSchema = z
+export const itemOrTagSchema = z
 	.string()
 	.min(1, "Repair ingredient can't be empty")
 	.regex(
@@ -49,3 +50,5 @@ export const enchantabilitySchema = z
 	.int()
 	.min(1, 'Enchantability must be at least 1')
 	.max(100, "Enchantability can't be more than 100");
+
+export const recipeTypeSchema = z.enum(Object.values(RecipeTypes) as [string, ...string[]]);

@@ -57,7 +57,6 @@
 		smithing_weapon_ingredient: itemOrTagSchema
 	};
 
-	// Existing validateAndUpdate function remains the same
 	function validateAndUpdate<K extends ValidFields>(event: Event, schema: z.ZodSchema, field: K) {
 		const input = event.target as HTMLInputElement;
 		try {
@@ -69,7 +68,6 @@
 			const validatedValue = schema.parse(value) as Material[K];
 			material[field] = validatedValue;
 
-			// Update both stores like in the page component
 			materialPack.update(pack => {
 				const updatedMaterials = [...pack.materials];
 				updatedMaterials[index] = { ...material };
@@ -218,6 +216,7 @@
 	</div>
 
 	{#if material.recipe_type === 'crafting'}
+		<!-- Main Ingredient -->
 		<div class="form-element element-repair-ingredient text grid-wide margin-top-16">
 			<input
 				type="text"
@@ -265,6 +264,7 @@
 		</div>
 	{/if}
 	{#if material.recipe_type === 'smithing'}
+		<!-- Main Ingredient but stylized as Upgrade Material -->
 		<div class="form-element element-repair-ingredient text grid-wide margin-top-16">
 			<input
 				type="text"

@@ -58,11 +58,11 @@
 			height: z.number().refine((val): val is ValidSize => VALID_SIZES.includes(val as ValidSize), {
 				message: `Texture height and width must be one of: ${VALID_SIZES.join(', ')}px`
 			}),
-			format: z.string().refine((val) => val === 'image/png', {
+			format: z.string().refine(val => val === 'image/png', {
 				message: 'Texture must be a PNG image'
 			})
 		})
-		.refine((data) => data.width === data.height, {
+		.refine(data => data.width === data.height, {
 			message: 'Texture must be square (equal width and height)'
 		});
 
@@ -92,7 +92,7 @@
 		} else {
 			// Validate the image before updating
 			const img = new Image();
-			const validationPromise = new Promise<{ isValid: boolean; message: string }>((resolve) => {
+			const validationPromise = new Promise<{ isValid: boolean; message: string }>(resolve => {
 				img.onload = () => {
 					const validation = validateTexture(img, 'image/png');
 					resolve(validation);
@@ -123,13 +123,13 @@
 
 		try {
 			// Update both stores
-			materialPack.update((pack) => {
+			materialPack.update(pack => {
 				const updatedMaterials = [...pack.materials];
 				updatedMaterials[index] = { ...material };
 				return { ...pack, materials: updatedMaterials };
 			});
 
-			materialPacks.update((state) => ({
+			materialPacks.update(state => ({
 				...state,
 				packs: {
 					...state.packs,
@@ -151,11 +151,11 @@
 	function deleteMaterial() {
 		const currentMaterials = $materialPack.materials;
 		const newMaterials = currentMaterials.filter((_, i) => i !== index);
-		materialPack.update((pack) => ({
+		materialPack.update(pack => ({
 			...pack,
 			materials: newMaterials
 		}));
-		materialPacks.update((state) => ({
+		materialPacks.update(state => ({
 			...state,
 			packs: {
 				...state.packs,
@@ -214,8 +214,7 @@
 					padding="0.5rem"
 					placeholderBackground={texture.placeholderBackground}
 					backgroundImage={minecraft_gui}
-					onImageSelect={(base64String) => handleTextureUpdate(texture.id, base64String)}
-				/>
+					onImageSelect={base64String => handleTextureUpdate(texture.id, base64String)} />
 				<label for="texture_{texture.id}_{index}">{texture.label}</label>
 			</div>
 		{/each}
@@ -255,8 +254,7 @@
 			</button>
 			<button
 				class="download-btn non-metallic"
-				on:click={() => downloadExampleTextures('non-metallic')}
-			>
+				on:click={() => downloadExampleTextures('non-metallic')}>
 				Non-Metallic Weapons
 			</button>
 		</div>

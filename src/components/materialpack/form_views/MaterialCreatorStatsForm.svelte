@@ -2,7 +2,6 @@
 	import { z } from 'zod';
 	import {
 		materialNameSchema,
-		repairIngredientSchema,
 		numberSchema,
 		durabilitySchema,
 		enchantabilitySchema
@@ -22,7 +21,16 @@
 	let showModal: boolean[] = Array(1).fill(false);
 
 	// Define valid field types to help TypeScript
-	type ValidFields = keyof Omit<Material, 'textures'>;
+	type ValidFields = keyof Omit<
+		Material,
+		| 'textures'
+		| 'repair_ingredient'
+		| 'recipe_type'
+		| 'handle_ingredient'
+		| 'upgrade_smithing_template_ingredient'
+		| 'smithing_weapon_ingredient'
+		| 'smithing_upgrade_material_ingredient'
+	>;
 	type SchemaMap = {
 		[K in ValidFields]: z.ZodSchema;
 	};
@@ -34,8 +42,7 @@
 		attack_damage_bonus: numberSchema,
 		attack_speed_bonus: numberSchema,
 		reach_bonus: numberSchema,
-		enchantability: enchantabilitySchema,
-		repair_ingredient: repairIngredientSchema
+		enchantability: enchantabilitySchema
 	};
 
 	// Function to validate a field without an event
@@ -75,13 +82,13 @@
 			material[field] = validatedValue;
 
 			// Update both stores like in the page component
-			materialPack.update((pack) => {
+			materialPack.update(pack => {
 				const updatedMaterials = [...pack.materials];
 				updatedMaterials[index] = { ...material };
 				return { ...pack, materials: updatedMaterials };
 			});
 
-			materialPacks.update((state) => ({
+			materialPacks.update(state => ({
 				...state,
 				packs: {
 					...state.packs,
@@ -111,7 +118,7 @@
 			'enchantability'
 		];
 
-		numberFields.forEach((field) => {
+		numberFields.forEach(field => {
 			const input = document.getElementById(`${field}_${index}`) as HTMLInputElement;
 			if (input) {
 				validateField(field, material[field], input);
@@ -122,11 +129,11 @@
 	function deleteMaterial() {
 		const currentMaterials = $materialPack.materials;
 		const newMaterials = currentMaterials.filter((_, i) => i !== index);
-		materialPack.update((pack) => ({
+		materialPack.update(pack => ({
 			...pack,
 			materials: newMaterials
 		}));
-		materialPacks.update((state) => ({
+		materialPacks.update(state => ({
 			...state,
 			packs: {
 				...state.packs,
@@ -153,8 +160,8 @@
 	</button>
 	<h2 class="grid-wide">
 		{material.material_name
-			? `${material.material_name} Material Data`
-			: `Data for Material ${index + 1}`}
+			? `${material.material_name} Material Stats`
+			: `Stats for Material ${index + 1}`}
 	</h2>
 
 	<div class="form-element text">
@@ -163,10 +170,9 @@
 			id="material_name_{index}"
 			name="material_name"
 			bind:value={material.material_name}
-			on:input={(e) => validateAndUpdate(e, schemas.material_name, 'material_name')}
+			on:input={e => validateAndUpdate(e, schemas.material_name, 'material_name')}
 			required
-			placeholder=" "
-		/>
+			placeholder=" " />
 		<label for="material_name_{index}">Material Name</label>
 	</div>
 
@@ -176,10 +182,9 @@
 			id="durability_{index}"
 			name="durability"
 			bind:value={material.durability}
-			on:input={(e) => validateAndUpdate(e, schemas.durability, 'durability')}
+			on:input={e => validateAndUpdate(e, schemas.durability, 'durability')}
 			required
-			placeholder=" "
-		/>
+			placeholder=" " />
 		<label for="durability_{index}">Durability</label>
 	</div>
 
@@ -190,9 +195,8 @@
 			name="attack_damage_bonus"
 			bind:value={material.attack_damage_bonus}
 			step="0.01"
-			on:input={(e) => validateAndUpdate(e, schemas.attack_damage_bonus, 'attack_damage_bonus')}
-			placeholder=" "
-		/>
+			on:input={e => validateAndUpdate(e, schemas.attack_damage_bonus, 'attack_damage_bonus')}
+			placeholder=" " />
 		<label for="attack_damage_bonus_{index}">Attack Damage Bonus</label>
 	</div>
 
@@ -203,9 +207,8 @@
 			name="attack_speed_bonus"
 			bind:value={material.attack_speed_bonus}
 			step="0.01"
-			on:input={(e) => validateAndUpdate(e, schemas.attack_speed_bonus, 'attack_speed_bonus')}
-			placeholder=" "
-		/>
+			on:input={e => validateAndUpdate(e, schemas.attack_speed_bonus, 'attack_speed_bonus')}
+			placeholder=" " />
 		<label for="attack_speed_bonus_{index}">Attack Speed Bonus</label>
 	</div>
 
@@ -216,9 +219,8 @@
 			name="reach_bonus"
 			bind:value={material.reach_bonus}
 			step="0.01"
-			on:input={(e) => validateAndUpdate(e, schemas.reach_bonus, 'reach_bonus')}
-			placeholder=" "
-		/>
+			on:input={e => validateAndUpdate(e, schemas.reach_bonus, 'reach_bonus')}
+			placeholder=" " />
 		<label for="reach_bonus_{index}">Reach Bonus</label>
 	</div>
 
@@ -228,25 +230,10 @@
 			id="enchantability_{index}"
 			name="enchantability"
 			bind:value={material.enchantability}
-			on:input={(e) => validateAndUpdate(e, schemas.enchantability, 'enchantability')}
+			on:input={e => validateAndUpdate(e, schemas.enchantability, 'enchantability')}
 			required
-			placeholder=" "
-		/>
+			placeholder=" " />
 		<label for="enchantability_{index}">Enchantability</label>
-	</div>
-
-	<div class="form-element text grid-wide">
-		<input
-			type="text"
-			id="repair_ingredient_{index}"
-			name="repair_ingredient"
-			bind:value={material.repair_ingredient}
-			on:input={(e) => validateAndUpdate(e, schemas.repair_ingredient, 'repair_ingredient')}
-			required
-			placeholder=" "
-		/>
-		<label for="repair_ingredient_{index}">Repair Ingredient</label>
-		<small>Format: namespace:itemname or #namespace:tagname</small>
 	</div>
 </form>
 

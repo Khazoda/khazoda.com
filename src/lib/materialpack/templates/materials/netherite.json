@@ -5,8 +5,8 @@
 	"attack_speed_bonus": 0,
 	"reach_bonus": 0,
 	"enchantability": 15,
-	"recipe_type": "smithing",
 	"repair_ingredient": "minecraft:netherite_ingot",
+	"recipe_type": "smithing",
 	"upgrade_smithing_template_ingredient": "minecraft:netherite_upgrade_smithing_template",
 	"smithing_weapon_material_ingredient": "minecraft:diamond",
 	"textures": {

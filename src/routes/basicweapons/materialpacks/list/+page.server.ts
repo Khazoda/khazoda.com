@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { MATERIAL_PACKS } from 'config/material-packs';
+import { MATERIAL_PACKS } from 'src/config/material-packs';
 
 interface ModrinthProject {
 	id: string;

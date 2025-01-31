@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store';
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
-import type { MaterialPack } from '../types/materialpackTypes';
+import type { Material, MaterialPack } from '../types/materialpackTypes';
+import { RecipeTypes } from '../types/materialpackTypes';
 
 // Add new types for managing multiple packs
 type MaterialPackList = {
@@ -57,7 +58,7 @@ export const createNewPack = () => {
 			'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kbtLA0EQh78kimKUCFGwsAiSWBnRCEEbi4hGQS1iBF9NcnkJeRx3CRJsBVtBQbTxVehfoK1gLQiKIoi1too2KudcEkgQM8vOfvvbmWF3FqzhtJLRGwYgk81roWDAtbC45Gp6xYITOx46I4quzsxNhKlrn/cSLXbrNWvVj/vX7LG4roClWXhUUbW88KTw9FpeNXlHuENJRWLCZ8J9mlxQ+M7Uo2V+MTlZ5m+TtXBoDKztwq5kDUdrWElpGWF5Oe5MuqBU7mO+pDWenZ+TtUdmNzohggRwMcU4Y/gZZES8Hy8++mVHnfyBUv4sOclVxKsU0VglSYo8faIWpHpc1oTocRlpimb///ZVTwz5ytVbA9D4bBjvHmjahp8tw/g6MoyfY7A9wWW2mp87hOEP0beqmvsAHBtwflXVortwsQldj2pEi5Qkm0xrIgFvp9C2CM4baFku96xyzskDhNflq65hbx96Jd6x8gtehWfiZr0+nQAAAAlwSFlzAAALEwAACxMBAJqcGAAAACFQTFRFAAAANzc3VlZWek4/i4uLqWJKrmVMvX5pw4p3y8vL////0LzRUAAAAAF0Uk5TAEDm2GYAAABnSURBVCjPY2AgDARRAFBAvLy8vLgcCgpBAh0dHc0dUAARQGiQAAs0KsGAikQgWEBzJhTMEiNTQNgQISBsSCVDaSIgSoZAIoaA1yoYgAogAhkikJaWlpwGBWCB0NDQ4FAoCMQWlYQAALdlmknY+BjuAAAAAElFTkSuQmCC'
 	};
 
-	materialPacks.update((state) => ({
+	materialPacks.update(state => ({
 		...state,
 		packs: { ...state.packs, [localstorage_id]: newPack },
 		currentPack: localstorage_id
@@ -65,7 +66,7 @@ export const createNewPack = () => {
 };
 
 export const selectPack = (packId: string | null) => {
-	materialPacks.update((state) => {
+	materialPacks.update(state => {
 		if (packId === null || state.packs[packId]) {
 			return {
 				...state,
@@ -77,7 +78,7 @@ export const selectPack = (packId: string | null) => {
 };
 
 export const deletePack = (packId: string) => {
-	materialPacks.update((state) => {
+	materialPacks.update(state => {
 		const { [packId]: removed, ...remainingPacks } = state.packs;
 		return {
 			packs: remainingPacks,
@@ -88,7 +89,7 @@ export const deletePack = (packId: string) => {
 
 // Update pack helper
 export const updatePack = (packId: string, updatedPack: Partial<MaterialPack>) => {
-	materialPacks.update((state) => {
+	materialPacks.update(state => {
 		if (state.packs[packId]) {
 			return {
 				...state,
@@ -107,19 +108,23 @@ export const updatePack = (packId: string, updatedPack: Partial<MaterialPack>) =
 
 // Update existing helper functions to work with the new structure
 export const addMaterial = () => {
-	materialPack.update((pack) => {
+	materialPack.update(pack => {
 		const updatedPack = {
 			...pack,
 			materials: [
 				...pack.materials,
 				{
-					name: '',
+					material_name: '',
 					durability: 0,
 					attack_damage_bonus: 0,
 					attack_speed_bonus: 0,
 					reach_bonus: 0,
 					enchantability: 0,
+					recipe_type: RecipeTypes.crafting,
 					repair_ingredient: '',
+					handle_ingredient: 'minecraft:stick',
+					upgrade_smithing_template_ingredient: '',
+					smithing_weapon_material_prefix: '',
 					textures: {
 						dagger: null,
 						hammer: null,
@@ -136,7 +141,7 @@ export const addMaterial = () => {
 		};
 
 		// Update the pack in the packs store
-		materialPacks.update((state) => ({
+		materialPacks.update(state => ({
 			...state,
 			packs: {
 				...state.packs,
@@ -149,14 +154,14 @@ export const addMaterial = () => {
 };
 
 export const removeMaterial = (index: number) => {
-	materialPack.update((pack) => ({
+	materialPack.update(pack => ({
 		...pack,
 		materials: pack.materials.filter((_, i) => i !== index)
 	}));
 };
 
 export const updateMaterial = (index: number, updatedMaterial: Material) => {
-	materialPack.update((pack) => ({
+	materialPack.update(pack => ({
 		...pack,
 		materials: pack.materials.map((material, i) => (i === index ? updatedMaterial : material))
 	}));

@@ -364,9 +364,12 @@
 		border-radius: 8px;
 
 		h2 {
+			height: 3rem;
 			margin: 0 0 1.5rem 0;
 			color: #ffffff;
 			text-transform: capitalize;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 	.grid {

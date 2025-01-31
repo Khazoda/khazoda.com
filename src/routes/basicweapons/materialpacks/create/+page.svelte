@@ -655,22 +655,46 @@
 												modalID={102}
 												offset={5}
 												disabled={!activeTab.endsWith('-recipes')}>
-												<h4 class="blurb">Set a material's recipes</h4>
+												<h4 class="blurb">Choose a recipe type and tweak weapons' recipes</h4>
 
-												<h4>Repair Ingredient</h4>
-												<p>
-													This field can take either an item identifier (minecraft:cobblestone) or
-													an item tag (#minecraft:stone_tool_materials)
-												</p>
-												<h4>Weapon Textures</h4>
-												<p>
-													To set the weapon textures for your material, navigate to the assets tab:
-												</p>
-
-												<img
-													class="image-example"
-													src={assets_tab_example}
-													alt="assets tab example" />
+												<div class="modal-content">
+													<h4>Crafting vs. Smithing Recipes</h4>
+													<p>
+														Crafting recipes are standard Minecraft crafting table recipes, and
+														smithing recipes use the smithing table. In vanilla Minecraft, only
+														Netherite uses smithing recipes for weapons.
+													</p>
+													<h4>Handle Ingredient</h4>
+													<p
+														>Only used in crafting recipes. This ingredient will usually be a
+														minecraft:stick, but you can set it to any item or item tag that you
+														like.</p>
+													<h4
+														>Main Ingredient / <span style="color: #00ff4f;">Upgrade Material</span
+														></h4>
+													<p>
+														This field can take either an item identifier (minecraft:cobblestone) or
+														an item tag (#minecraft:stone_tool_materials). <br /> In addition to being
+														used in recipes for your weapons, this item is used to repair them.
+													</p>
+													<h4 style="color: #00e5ff;">Smithing Template</h4>
+													<p>
+														Only used in smithing recipes. This ingredient can only be an item
+														identifier, and will usually be
+														minecraft:netherite_upgrade_smithing_template or a modded template. See
+														the warden materialpack template for an example of that.
+													</p>
+													<h4 style="color: #ff4444;">Weapon Material</h4>
+													<p>
+														Only used in smithing recipes. This ingredient can only be an item
+														identifier, and should reference <b
+															>the main ingredient for the weapon type you want to upgrade</b
+														>. <br /><br />
+														Using netherite weapons as an example, you would enter "minecraft:diamond",
+														as diamond weapons are the weapon target to be upgraded. It's important not
+														to enter e.g. "basicweapons:diamond_hammer", as this will not work.
+													</p>
+												</div>
 											</InfoTab>
 											<InfoTab
 												title="Weapon Textures"
@@ -704,17 +728,7 @@
 														than welcome to modify the item models for weapons manually. They're
 														located in '/assets/basicweapons/models/item'.
 													</p>
-													<h4>Weapon Data</h4>
-													<p>
-														To set the weapon stats and repair ingredient for your material,
-														navigate to the stats tab:
-													</p>
-												</div>
-												<img
-													class="image-example"
-													src={stats_tab_example}
-													alt="assets tab example" />
-											</InfoTab>
+												</div></InfoTab>
 											{#if activeTab.endsWith('-stats')}
 												<MaterialCreatorStats
 													{material}

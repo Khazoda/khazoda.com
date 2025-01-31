@@ -790,12 +790,15 @@ export class MaterialPackBuilder {
 			for (const weaponType of WEAPON_TYPES) {
 				if (material.textures[weaponType] === null) continue;
 
-				// Add recipe
-				recipes.push(`basicweapons:${material.material_name}_${weaponType}`);
-
-				// Add variant recipes if they exist
-				if (weaponType === 'club') {
-					recipes.push(`basicweapons:${material.material_name}_${weaponType}_alt`);
+				// Add recipe with appropriate suffix for smithing recipes
+				if (material.recipe_type === 'smithing') {
+					recipes.push(`basicweapons:${material.material_name}_${weaponType}_smithing`);
+				} else {
+					recipes.push(`basicweapons:${material.material_name}_${weaponType}`);
+					// Add variant recipes if they exist (only for crafting recipes)
+					if (weaponType === 'club') {
+						recipes.push(`basicweapons:${material.material_name}_${weaponType}_alt`);
+					}
 				}
 			}
 
@@ -809,7 +812,7 @@ export class MaterialPackBuilder {
 						conditions: {
 							items: [
 								{
-									items: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient
+									items: [isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient]
 								}
 							]
 						},

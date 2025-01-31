@@ -39,6 +39,11 @@ export const itemSchema = z
 	.min(1, "Item can't be empty")
 	.regex(/^[a-z0-9_.-]+:[a-z0-9_.-]+$/, 'Must be in format: namespace:itemname');
 
+export const itemMaterialInSmithingRecipeSchema = z
+	.string()
+	.min(1, "Material name can't be empty")
+	.regex(/^[a-z0-9_.-]+$/, 'Must be in format: weaponprefix (e.g. "diamond" or "iron")');
+
 export const numberSchema = z
 	.number()
 	.min(-100, "Value can't be less than -100")

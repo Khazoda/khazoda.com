@@ -23,6 +23,7 @@
 	import ingotRecipeExampleIngredient from '$lib/materialpack/media/recipe_examples/ingot_example.webp';
 
 	import {
+		itemMaterialInSmithingRecipeSchema,
 		itemOrTagSchema,
 		itemSchema,
 		recipeTypeSchema
@@ -55,7 +56,7 @@
 		recipe_type: recipeTypeSchema,
 		handle_ingredient: itemOrTagSchema,
 		upgrade_smithing_template_ingredient: itemSchema,
-		smithing_weapon_material_ingredient: itemSchema
+		smithing_weapon_material_prefix: itemMaterialInSmithingRecipeSchema
 	};
 
 	function validateAndUpdate<K extends ValidFields>(event: Event, schema: z.ZodSchema, field: K) {
@@ -314,13 +315,13 @@
 					title="namespace:itemname or #namespace:tagname"
 					type="text"
 					id="smithing_weapon_{index}"
-					name="smithing_weapon_ingredient"
-					bind:value={material.smithing_weapon_material_ingredient}
+					name="smithing_weapon_material_prefix"
+					bind:value={material.smithing_weapon_material_prefix}
 					on:input={e =>
 						validateAndUpdate(
 							e,
-							schemas.smithing_weapon_material_ingredient,
-							'smithing_weapon_material_ingredient'
+							schemas.smithing_weapon_material_prefix,
+							'smithing_weapon_material_prefix'
 						)}
 					required
 					placeholder=" " />

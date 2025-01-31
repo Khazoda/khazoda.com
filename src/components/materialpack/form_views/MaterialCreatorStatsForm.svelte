@@ -28,8 +28,7 @@
 		| 'recipe_type'
 		| 'handle_ingredient'
 		| 'upgrade_smithing_template_ingredient'
-		| 'smithing_weapon_material_ingredient'
-		| 'smithing_upgrade_material_ingredient'
+		| 'smithing_weapon_material_prefix'
 	>;
 	type SchemaMap = {
 		[K in ValidFields]: z.ZodSchema;

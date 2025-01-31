@@ -91,7 +91,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 			pattern: [' #', '# ', '/ '],
 			key: {
 				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
-				'/': { item: 'minecraft:stick' }
+				'/': { item: '{{handle_ingredient}}' }
 			},
 			result: { id: 'basicweapons:{{material_name}}_club', count: 1 }
 		},
@@ -101,7 +101,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 			pattern: ['# ', ' #', ' /'],
 			key: {
 				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
-				'/': { item: 'minecraft:stick' }
+				'/': { item: '{{handle_ingredient}}' }
 			},
 			result: { id: 'basicweapons:{{material_name}}_club', count: 1 }
 		}
@@ -112,7 +112,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 			pattern: ['#', '/'],
 			key: {
 				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
-				'/': { item: 'minecraft:stick' }
+				'/': { item: '{{handle_ingredient}}' }
 			},
 			result: { id: 'basicweapons:{{material_name}}_dagger', count: 1 },
 			'fabric:load_conditions': [
@@ -133,7 +133,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 			pattern: [' #', '/ '],
 			key: {
 				'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
-				'/': { item: 'minecraft:stick' }
+				'/': { item: '{{handle_ingredient}}' }
 			},
 			result: { id: 'basicweapons:{{material_name}}_dagger', count: 1 },
 			'fabric:load_conditions': [
@@ -155,7 +155,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 		pattern: ['###', '#/#', ' / '],
 		key: {
 			'#': { '{{ingredient_type}}': '{{repair_ingredient}}' },
-			'/': { item: 'minecraft:stick' }
+			'/': { item: '{{handle_ingredient}}' }
 		},
 		result: { id: 'basicweapons:{{material_name}}_hammer', count: 1 }
 	},
@@ -163,7 +163,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 		type: 'minecraft:crafting_shaped',
 		pattern: ['  /', ' O ', '/  '],
 		key: {
-			'/': { item: 'minecraft:stick' },
+			'/': { item: '{{handle_ingredient}}' },
 			O: { '{{ingredient_type}}': '{{repair_ingredient}}' }
 		},
 		result: { id: 'basicweapons:{{material_name}}_quarterstaff', count: 1 }
@@ -173,7 +173,7 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 		pattern: ['  ^', ' / ', '/  '],
 		key: {
 			'^': { '{{ingredient_type}}': '{{repair_ingredient}}' },
-			'/': { item: 'minecraft:stick' }
+			'/': { item: '{{handle_ingredient}}' }
 		},
 		result: { id: 'basicweapons:{{material_name}}_spear', count: 1 }
 	},
@@ -181,10 +181,46 @@ const RECIPE_TEMPLATES: RecipeTemplates = {
 		type: 'minecraft:crafting_shaped',
 		pattern: [' OO', 'O/ ', '/  '],
 		key: {
-			'/': { item: 'minecraft:stick' },
+			'/': { item: '{{handle_ingredient}}' },
 			O: { '{{ingredient_type}}': '{{repair_ingredient}}' }
 		},
 		result: { id: 'basicweapons:{{material_name}}_glaive', count: 1 }
+	}
+} as const;
+
+interface SmithingRecipeTemplate {
+	type: 'minecraft:smithing_transform';
+	template: {
+		item: string;
+	};
+	base: {
+		item: string;
+	};
+	addition: {
+		item: string;
+	};
+	result: {
+		id: string;
+		count: number;
+	};
+	'fabric:load_conditions'?: FabricLoadCondition[];
+	'neoforge:conditions'?: NeoForgeLoadCondition[];
+}
+
+const SMITHING_RECIPE_TEMPLATE: SmithingRecipeTemplate = {
+	type: 'minecraft:smithing_transform',
+	template: {
+		item: '{{upgrade_smithing_template_ingredient}}'
+	},
+	base: {
+		item: 'basicweapons:{{smithing_weapon_material_prefix}}_{{weapon_type}}'
+	},
+	addition: {
+		item: '{{repair_ingredient}}'
+	},
+	result: {
+		id: 'basicweapons:{{material_name}}_{{weapon_type}}',
+		count: 1
 	}
 } as const;
 
@@ -313,10 +349,11 @@ export class MaterialPackBuilder {
 
 		for (const material of this.materialPack.materials) {
 			const isTag = material.repair_ingredient.startsWith('#');
-			const variables = {
+			const baseVariables = {
 				material_name: material.material_name,
 				repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
-				ingredient_type: isTag ? 'tag' : 'item'
+				ingredient_type: isTag ? 'tag' : 'item',
+				handle_ingredient: material.handle_ingredient
 			};
 
 			// Create mod dependency conditions if a mod dependency exists
@@ -337,6 +374,34 @@ export class MaterialPackBuilder {
 			for (const weaponType of WEAPON_TYPES) {
 				if (material.textures[weaponType] === null) continue;
 
+				if (material.recipe_type === 'smithing') {
+					// Generate smithing recipe
+					const smithingVariables = {
+						...baseVariables,
+						weapon_type: weaponType,
+						upgrade_smithing_template_ingredient: material.upgrade_smithing_template_ingredient,
+						smithing_weapon_material_prefix: material.smithing_weapon_material_prefix
+					};
+
+					const smithingRecipe = { ...SMITHING_RECIPE_TEMPLATE };
+
+					if (fabricCondition && neoforgeCondition) {
+						smithingRecipe['fabric:load_conditions'] = [fabricCondition];
+						smithingRecipe['neoforge:conditions'] = [neoforgeCondition];
+					}
+
+					recipesFolder.file(
+						`${material.material_name}_${weaponType}_smithing.json`,
+						JSON.stringify(
+							JSON.parse(applyTemplate(JSON.stringify(smithingRecipe), smithingVariables)),
+							null,
+							2
+						)
+					);
+					continue;
+				}
+
+				// Handle crafting recipes
 				const template = RECIPE_TEMPLATES[weaponType];
 
 				if (weaponType === 'dagger') {
@@ -413,7 +478,7 @@ export class MaterialPackBuilder {
 						recipesFolder.file(
 							`${material.material_name}_dagger.json`,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(mainRecipe), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(mainRecipe), baseVariables)),
 								null,
 								2
 							)
@@ -421,7 +486,7 @@ export class MaterialPackBuilder {
 						compatFolder.file(
 							`${material.material_name}_dagger.json`,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(compatRecipe), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(compatRecipe), baseVariables)),
 								null,
 								2
 							)
@@ -431,7 +496,7 @@ export class MaterialPackBuilder {
 						recipesFolder.file(
 							`${material.material_name}_dagger.json`,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(daggerTemplate.main), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(daggerTemplate.main), baseVariables)),
 								null,
 								2
 							)
@@ -439,7 +504,7 @@ export class MaterialPackBuilder {
 						compatFolder.file(
 							`${material.material_name}_dagger.json`,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(daggerTemplate.compat), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(daggerTemplate.compat), baseVariables)),
 								null,
 								2
 							)
@@ -473,14 +538,18 @@ export class MaterialPackBuilder {
 					recipesFolder.file(
 						`${material.material_name}_club.json`,
 						JSON.stringify(
-							JSON.parse(applyTemplate(JSON.stringify(mainRecipe), variables)),
+							JSON.parse(applyTemplate(JSON.stringify(mainRecipe), baseVariables)),
 							null,
 							2
 						)
 					);
 					recipesFolder.file(
 						`${material.material_name}_club_alt.json`,
-						JSON.stringify(JSON.parse(applyTemplate(JSON.stringify(altRecipe), variables)), null, 2)
+						JSON.stringify(
+							JSON.parse(applyTemplate(JSON.stringify(altRecipe), baseVariables)),
+							null,
+							2
+						)
 					);
 				} else {
 					// Handle non-dagger recipes
@@ -500,7 +569,7 @@ export class MaterialPackBuilder {
 					recipesFolder.file(
 						`${material.material_name}_${weaponType}.json`,
 						JSON.stringify(
-							JSON.parse(applyTemplate(JSON.stringify(baseRecipe), variables)),
+							JSON.parse(applyTemplate(JSON.stringify(baseRecipe), baseVariables)),
 							null,
 							2
 						)

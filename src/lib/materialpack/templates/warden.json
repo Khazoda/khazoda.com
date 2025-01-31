@@ -10,10 +10,10 @@
 			"attack_speed_bonus": 0,
 			"reach_bonus": 0,
 			"enchantability": 18,
-			"repair_ingredient": "deeperdarker:reinforced_echo_shard",
 			"recipe_type": "smithing",
+			"repair_ingredient": "deeperdarker:reinforced_echo_shard",
 			"upgrade_smithing_template_ingredient": "deeperdarker:warden_upgrade_smithing_template",
-			"smithing_weapon_material_ingredient": "minecraft:netherite_ingot",
+			"smithing_weapon_material_prefix": "netherite",
 			"textures": {
 				"dagger": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA40lEQVQ4T2NkoBAwUqifgX4GCIpK/Ye59v3rZ3CLiXIBSLPEqYtg/XdU1Rl+/3lHvAEwzdc3r2LQ9A0jzQCQ5ve11QzM63cz/A10ZWAtqkWxHeQiFC/A/AnyI8zmW0mpODVjNQBko2BzKwPMZiZFXgaGRVsxbIYFKIYLvvg6M/y7/5mB+e1zhv8mang1Y7gAJABy+ldJWaI0YxigrqP+v7o5niE5tIeBR5AD7Mov73/gdD7cAFjgFbTkMUyomcQACkRWFiF4wkGOd/SkDw4DuLOv3cZrG7Z8AzaAWNtwGkBJjgQAB/ZvEXL0MrcAAAAASUVORK5CYIIA",
 				"hammer": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABEElEQVQ4T2NkoBAwEtIvKCr1H6Tm/etnWNXiNQCkWeLURbAdL8z0sRqC0wCY5uubVzGwXjjBoFLbh9UQrAaga/53/zPD30BXBk3fMAxD8Bpwp7mIAVkzyDXohuD1wldJWYZfKXFgTTCv/DawAPPvqKoz/P7zjpFgIMIMAYUDSDPz+t0MzG+fM/y/dhu/AaBwmDgrhyE5tIeBUUsV7BJ0zaDYwRkG72urGViLasG2sLII/QcZAgIwm2HpB8MAkM1ffJ0ZGBZtBWuGKQQZAmIji2G4ABZ9sAAilEpRDFDXUf8flZvI0JLdhWELPoMYYWm9oCWPYULNJJxpHpchYANAUYUeOMQ4H+wFWOBgCyBiDAEAyl6gEbyxl60AAAAASUVORK5CYIIA",

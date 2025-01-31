@@ -686,13 +686,11 @@
 													</p>
 													<h4 style="color: #ff4444;">Weapon Material</h4>
 													<p>
-														Only used in smithing recipes. This ingredient can only be an item
-														identifier, and should reference <b
-															>the main ingredient for the weapon type you want to upgrade</b
-														>. <br /><br />
-														Using netherite weapons as an example, you would enter "minecraft:diamond",
-														as diamond weapons are the weapon target to be upgraded. It's important not
-														to enter e.g. "basicweapons:diamond_hammer", as this will not work.
+														Only used in smithing recipes. This material must be a a string (not an
+														item identifier!). For example, if you want iron weapons to be upgraded,
+														you would enter "iron". <br /> <br /> It's important not to enter "iron_ingot"
+														or "minecraft:iron_ingot", or "minecraft:iron_sword". It must be the prefix
+														for the weapons.
 													</p>
 												</div>
 											</InfoTab>

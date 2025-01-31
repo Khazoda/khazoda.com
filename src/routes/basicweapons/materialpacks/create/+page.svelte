@@ -930,11 +930,15 @@
 <CenterModal bind:showModal modalID={7}>
 	<div slot="description" class="modal-content">
 		<h2>Invalid Fields Detected</h2>
-		<p
-			>Please fix any invalid fields before leaving the creator. Invalid fields will be highlighted
-			in red.</p>
+		<p>Are you sure you want to leave this page? Invalid fields may be saved.</p>
 		<div class="modal-actions">
-			<button class="ok-btn" on:click={closeDialog}>Got it</button>
+			<button class="ok-btn" on:click={closeDialog}>Fix Fields</button>
+			<button
+				on:click={() => {
+					show_pack_creator = false;
+					activeTab = 'settings';
+					closeDialog();
+				}}>Leave Page</button>
 		</div>
 	</div>
 </CenterModal>

@@ -201,7 +201,7 @@
 			: `Recipes for Material ${index + 1}`}
 	</h2>
 	<!--  -->
-	<div class="flex-row gap-4 align-center">
+	<div class="flex-row gap-4 align-center justify-between">
 		<ImportantButton
 			icon={HugeiconsGrid}
 			label="Crafting Recipe"
@@ -221,7 +221,7 @@
 
 	{#if material.recipe_type === 'crafting'}
 		<!-- Main Ingredient -->
-		<div class="form-element element-repair-ingredient text grid-wide margin-top-16">
+		<div class="form-element element-repair-ingredient text grid-wide margin-top-12">
 			<input
 				type="text"
 				id="repair_ingredient_{index}"
@@ -271,7 +271,7 @@
 	{/if}
 	{#if material.recipe_type === 'smithing'}
 		<!-- Main Ingredient but stylized as Upgrade Material -->
-		<div class="form-element element-repair-ingredient text grid-wide margin-top-16">
+		<div class="form-element element-repair-ingredient text grid-wide margin-top-12">
 			<input
 				type="text"
 				id="repair_ingredient_{index}"
@@ -364,11 +364,11 @@
 		border-radius: 8px;
 
 		h2 {
-			height: 3rem;
 			margin: 0 0 1.5rem 0;
 			color: #ffffff;
 			text-transform: capitalize;
 			overflow: hidden;
+			text-wrap: nowrap;
 			text-overflow: ellipsis;
 		}
 	}

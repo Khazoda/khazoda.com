@@ -15,18 +15,28 @@ interface ModrinthProject {
 }
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	// Fetch all projects in parallel
 	const materialPacks = await Promise.all(
-		MATERIAL_PACKS.map(async ({ slug, category, required_mod_slug }) => {
+		MATERIAL_PACKS.map(async ({ slug, category, required_mod_slug, official }) => {
 			try {
-				// Fetch project and team info in parallel
 				const [projectResponse, teamResponse] = await Promise.all([
 					fetch(`https://api.modrinth.com/v2/project/${slug}`),
 					fetch(`https://api.modrinth.com/v2/project/${slug}/members`)
 				]);
 
 				if (!projectResponse.ok || !teamResponse.ok) {
-					return null;
+					return {
+						name: null,
+						description: null,
+						author: null,
+						downloads: 0,
+						category,
+						icon: null,
+						created: new Date().toISOString(),
+						required_mod: null,
+						official,
+						url: `https://modrinth.com/mod/${slug}`,
+						slug: slug
+					};
 				}
 
 				const [project, teamInfo] = await Promise.all([
@@ -53,35 +63,43 @@ export const load: PageServerLoad = async ({ fetch }) => {
 					}
 				}
 
-				return { project, authorName, requiredMod };
+				const rawTitle = project.title
+					.toLowerCase()
+					.replace('material pack for basic weapons', '')
+					.trim();
+				const capitalizedTitle = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
+
+				return {
+					name: capitalizedTitle,
+					description: 'A material pack for Basic Weapons',
+					author: authorName,
+					downloads: project.downloads,
+					category,
+					icon: project.icon_url,
+					created: project.published,
+					required_mod: requiredMod,
+					official,
+					url: `https://modrinth.com/mod/${project.slug}`
+				};
 			} catch (error) {
 				console.error(`Failed to fetch pack ${slug}:`, error);
-				return null;
+				return {
+					name: null,
+					description: null,
+					author: null,
+					downloads: 0,
+					category,
+					icon: null,
+					created: new Date().toISOString(),
+					required_mod: null,
+					official,
+					url: null
+				};
 			}
 		})
 	);
 
 	return {
-		materialPacks: materialPacks
-			.filter((result): result is NonNullable<typeof result> => result !== null)
-			.map(({ project, authorName, requiredMod }) => {
-				const metadata = MATERIAL_PACKS.find(p => p.slug === project.slug);
-				const normalizedTitle = project.title.toLowerCase();
-				const capitalizedTitle = normalizedTitle.charAt(0).toUpperCase() + normalizedTitle.slice(1);
-				const trimmedTitle = capitalizedTitle.replace('material pack for basic weapons', '');
-
-				return {
-					name: trimmedTitle,
-					description: 'A material pack for Basic Weapons',
-					author: authorName,
-					downloads: project.downloads,
-					category: metadata!.category,
-					icon: project.icon_url,
-					created: project.published,
-					required_mod: requiredMod,
-					official: metadata!.official,
-					url: `https://modrinth.com/mod/${project.slug}`
-				};
-			})
+		materialPacks
 	};
 };

@@ -14,8 +14,10 @@
 	import HugeiconsSortByDown02 from 'virtual:icons/hugeicons/sort-by-down-02';
 	import HugeiconsSortByUp02 from 'virtual:icons/hugeicons/sort-by-up-02';
 	import HugeiconsArrowLeft02 from 'virtual:icons/hugeicons/arrow-left-02';
+	import SimpleIconsModrinth from 'virtual:icons/simple-icons/modrinth';
 	import HugeiconsMessageUpload01 from 'virtual:icons/hugeicons/message-upload-01';
 	import SimpleIconsDiscord from 'virtual:icons/simple-icons/discord';
+
 	import ModrinthBwDependencyExample from '$lib/materialpack/media/modrinth_bw_dependency_example.png';
 	import TriangleIcon from 'virtual:icons/codicon/debug-breakpoint-function-unverified';
 	import HexagonIcon from 'virtual:icons/codicon/debug-breakpoint-data-unverified';
@@ -63,14 +65,14 @@
 	let showCategories = true;
 
 	const sortFunctions = {
-		alphabetical: (a: any, b: any) => a.name.localeCompare(b.name),
+		alphabetical: (a: any, b: any) => (a.name ? a.name.localeCompare(b.name) : 0),
 		downloads: (a: any, b: any) => b.downloads - a.downloads,
 		recent: (a: any, b: any) => new Date(b.created).getTime() - new Date(a.created).getTime()
 	};
 
 	// Use the debounced query for filtering
 	$: searchFilteredPacks = rawMaterialPacks.filter(pack =>
-		pack.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
+		pack.name ? pack.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) : true
 	);
 
 	// Then sort based on method and direction
@@ -205,8 +207,9 @@
 								: { y: 0, delay: 0, duration: 0 }}>
 							{#if item.type === 'header'}
 								<h2>{item.content}</h2>
-							{:else}
+							{:else if item.content.name != null}
 								<span class="external-link-popup">
+									<SimpleIconsModrinth width="16" height="16" color="#1bd96a" />
 									<HugeiconsLinkSquare02 width="16" height="16" />
 								</span>
 								<div class="pack-header">
@@ -251,6 +254,14 @@
 										</a>
 									{/if}
 								</div>
+							{:else}
+								<div class="empty-pack"> Pending Modrinth Approval </div>
+								<a
+									class="materialpack-modrinth-link-overlay"
+									href={item.content.url}
+									target="_blank"
+									rel="noopener noreferrer">
+								</a>
 							{/if}
 						</div>
 					{/each}
@@ -649,6 +660,20 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
+		}
+
+		.empty-pack {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			background: #252525;
+			border: 2px solid #181818;
+			border-radius: 8px;
+			font-size: 1.25rem;
+			color: #aaa;
 		}
 	}
 

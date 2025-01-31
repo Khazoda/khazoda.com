@@ -41,6 +41,8 @@
 	import SimpleIconsBookstack from 'virtual:icons/simple-icons/bookstack';
 	import IconoirCollageFrame from 'virtual:icons/iconoir/collage-frame';
 	import IconoirViewGrid from 'virtual:icons/iconoir/view-grid';
+	import IconoirPlanetSat from 'virtual:icons/iconoir/planet-sat';
+	import IconoirLensPlus from 'virtual:icons/iconoir/lens-plus';
 
 	import PlushablesColoured from 'components/PlushablesColoured.svelte';
 
@@ -500,6 +502,27 @@
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />
 			<a href="https://basicweapons.khazoda.com/en/latest/">Visit the Wiki</a>
+		</span>
+	</div>
+	<div slot="feature">
+		<h3>Material Packs</h3>
+		<p>Your Basic Weapons experience can be evolved through material packs. </p>
+		<p>
+			These packs add new weapons to your game and are super easy to make! Explore the public list
+			or try your hand at making your own:
+		</p>
+		<br />
+		<span
+			class="modal-link info"
+			style="text-decoration: none; pointer-events: none; opacity: 0.5; cursor: not-allowed;">
+			<IconoirPlanetSat />
+			<a href="/basicweapons/materialpacks/list">View All Material Packs</a>
+		</span>
+		<span
+			class="modal-link info margin-top-2"
+			style="text-decoration: none; pointer-events: none; opacity: 0.5; cursor: not-allowed;">
+			<IconoirLensPlus />
+			<a href="/basicweapons/materialpacks/create">Create Your Own</a>
 		</span>
 	</div>
 </Modal>

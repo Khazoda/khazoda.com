@@ -75,7 +75,7 @@
 	let materials: Material[] = [];
 	let pack_icon: string | null = null; // For pack.png
 
-	let showModal: boolean[] = Array(7).fill(false);
+	let showModal: boolean[] = Array(8).fill(false);
 	let packToDelete: string | null = null;
 
 	let show_pack_creator = false;
@@ -350,6 +350,20 @@
 			e.target.classList.remove('dragging');
 		}
 	}
+
+	function handleBackToPacks() {
+		// Check if there are any invalid inputs
+		const invalidInputs = document.querySelectorAll('input:invalid');
+		if (invalidInputs.length > 0) {
+			// Show the validation error modal instead of an alert
+			showModal[7] = true;
+			return;
+		}
+
+		// If all inputs are valid, proceed with navigation
+		show_pack_creator = false;
+		activeTab = 'settings';
+	}
 </script>
 
 <!-- #region HTML -->
@@ -453,10 +467,7 @@
 								<ImportantButton
 									icon={HugeiconsArrowLeft02}
 									label="Back to Packs"
-									onClick={() => {
-										show_pack_creator = false;
-										activeTab = 'settings';
-									}}
+									onClick={handleBackToPacks}
 									color="grey"
 									backdropCorner="center" />
 							</div>
@@ -911,6 +922,19 @@
 					</div>
 				</button>
 			{/each}
+		</div>
+	</div>
+</CenterModal>
+
+<!-- Add this new modal at the bottom with the other modals -->
+<CenterModal bind:showModal modalID={7}>
+	<div slot="description" class="modal-content">
+		<h2>Invalid Fields Detected</h2>
+		<p
+			>Please fix any invalid fields before leaving the creator. Invalid fields will be highlighted
+			in red.</p>
+		<div class="modal-actions">
+			<button class="ok-btn" on:click={closeDialog}>Got it</button>
 		</div>
 	</div>
 </CenterModal>

@@ -24,6 +24,7 @@
 
 	import {
 		itemOrTagSchema,
+		itemSchema,
 		recipeTypeSchema
 	} from 'src/lib/materialpack/validation/materialPackValidation';
 	import { z } from 'zod';
@@ -53,8 +54,8 @@
 		repair_ingredient: itemOrTagSchema,
 		recipe_type: recipeTypeSchema,
 		handle_ingredient: itemOrTagSchema,
-		upgrade_smithing_template_ingredient: itemOrTagSchema,
-		smithing_weapon_ingredient: itemOrTagSchema
+		upgrade_smithing_template_ingredient: itemSchema,
+		smithing_weapon_material_ingredient: itemSchema
 	};
 
 	function validateAndUpdate<K extends ValidFields>(event: Event, schema: z.ZodSchema, field: K) {
@@ -247,6 +248,8 @@
 				<img src={stickRecipeExampleIngredient} alt="" width="16" height="16" />
 				Handle Ingredient
 			</label>
+			<small style="padding-left: 0.2rem; top:-1.75rem; right:0; pointer-events: none;">
+				namespace:itemname or #namespace:tagname</small>
 		</div>
 
 		<!-- Recipe Example Carousel -->
@@ -256,7 +259,7 @@
 				alt={craftingRecipes[currentRecipeIndex].label}
 				class="framed-image no-resample" />
 			<button class="next-recipe-btn" on:click={nextRecipe}>
-				Next Example
+				Next Recipe
 				<span class="recipe-counter">
 					{currentRecipeIndex + 1}/{craftingRecipes.length}
 				</span>
@@ -310,14 +313,18 @@
 					type="text"
 					id="smithing_weapon_{index}"
 					name="smithing_weapon_ingredient"
-					bind:value={material.smithing_weapon_ingredient}
+					bind:value={material.smithing_weapon_material_ingredient}
 					on:input={e =>
-						validateAndUpdate(e, schemas.smithing_weapon_ingredient, 'smithing_weapon_ingredient')}
+						validateAndUpdate(
+							e,
+							schemas.smithing_weapon_material_ingredient,
+							'smithing_weapon_material_ingredient'
+						)}
 					required
 					placeholder=" " />
 				<label for="smithing_weapon_{index}" class="triangle">
 					<HugeiconsTriangle width="16" height="16" />
-					Base Weapon
+					Weapon Material
 				</label>
 			</div>
 			<img

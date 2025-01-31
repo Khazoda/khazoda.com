@@ -31,7 +31,7 @@ type Material = {
 	handle_ingredient: string; // e.g. Stick, End Rod
 	// Smithing
 	upgrade_smithing_template_ingredient: string; // Slot 1
-	smithing_weapon_ingredient: string; // Slot 2
+	smithing_weapon_material_ingredient: string; // Slot 2
 };
 
 type MaterialPack = {

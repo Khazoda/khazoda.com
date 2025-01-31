@@ -34,6 +34,11 @@ export const itemOrTagSchema = z
 		'Must be in format: namespace:itemname or #namespace:tagname'
 	);
 
+export const itemSchema = z
+	.string()
+	.min(1, "Item can't be empty")
+	.regex(/^[a-z0-9_.-]+:[a-z0-9_.-]+$/, 'Must be in format: namespace:itemname');
+
 export const numberSchema = z
 	.number()
 	.min(-100, "Value can't be less than -100")

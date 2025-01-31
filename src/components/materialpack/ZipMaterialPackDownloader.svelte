@@ -11,6 +11,7 @@
 
 	let selectedVersion: keyof typeof PACK_FORMAT_VERSIONS.data = '1.21 - 1.21.1';
 	let showModal = [false];
+	let showPackwizInstructions = false;
 
 	async function downloadMaterialPack() {
 		const builder = new MaterialPackBuilder(materialPack, selectedVersion);
@@ -46,26 +47,60 @@
 
 <CenterModal bind:showModal modalID={0}>
 	<div slot="description" class="modal-content">
-		<h2>Download Material Pack</h2>
-		<p>Place the downloaded zip file in the <b>basicweapons_materialpacks</b> folder:</p>
-		<img src={materialpack_location_example} alt="Download Pack Example" />
-		<div class="version-select">
-			<span>Choose a Minecraft Version</span>
-			<select value={selectedVersion} on:change={handleVersionChange} class="version-dropdown">
-				{#each getVersionRanges() as version}
-					<option value={version}>{version}</option>
-				{/each}
-			</select>
-		</div>
-		<div class="modal-actions">
-			<button class="ok-btn" on:click={downloadMaterialPack} disabled={!selectedVersion}>
-				Download for Minecraft {selectedVersion || '...'}
+		{#if showPackwizInstructions}
+			<h2>Install Material Pack with Packwiz</h2>
+			<p
+				>1. Set the datapack-folder value in your pack.toml under the [options] heading as
+				"basicweapons_materialpacks/"</p>
+			<p>2. Run <code>packwiz refresh</code> in your terminal</p>
+			<p>3. Run the following command, replacing materialpack_url with the pack's modrinth URL:</p>
+			<code>packwiz mr add [materialpack_url]</code>
+			<br />
+			<p class="faded-text"
+				>Following those steps should make your modpack auto download materialpacks. If you don't
+				want to set the datapack-folder to "basicweapons_materialpacks", you can always move the
+				materialpacks's .pw.toml file to it and run <code>packwiz refresh</code>.
+			</p>
+			<p
+				>If you need more help, check out the <a
+					href="https://packwiz.infra.link/reference/additional-options/"
+					target="_blank">Packwiz docs</a
+				>.</p>
+			<button
+				on:click={() => (showPackwizInstructions = !showPackwizInstructions)}
+				class="packwiz-instructions-btn">
+				{showPackwizInstructions ? 'Not using Packwiz?' : 'Using Packwiz?'}
 			</button>
-		</div>
+		{:else}
+			<h2>Download Material Pack</h2>
+			<p>Place the downloaded zip file in the <b>basicweapons_materialpacks</b> folder:</p>
+			<img src={materialpack_location_example} alt="Download Pack Example" />
+			<div class="version-select">
+				<button
+					on:click={() => (showPackwizInstructions = !showPackwizInstructions)}
+					class="packwiz-instructions-btn">
+					{showPackwizInstructions ? 'Not using Packwiz?' : 'Using Packwiz?'}
+				</button>
+				<span>Choose a Minecraft Version</span>
+				<select value={selectedVersion} on:change={handleVersionChange} class="version-dropdown">
+					{#each getVersionRanges() as version}
+						<option value={version}>{version}</option>
+					{/each}
+				</select>
+			</div>
+			<div class="modal-actions">
+				<button class="ok-btn" on:click={downloadMaterialPack} disabled={!selectedVersion}>
+					Download for Minecraft {selectedVersion || '...'}
+				</button>
+			</div>
+		{/if}
 	</div>
 </CenterModal>
 
 <style lang="scss">
+	.faded-text {
+		color: #bbb;
+	}
 	.export-pack-btn {
 		padding: 0;
 		width: 32px;
@@ -85,10 +120,34 @@
 	}
 
 	.version-select {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 		margin: 1rem 0;
+		.packwiz-instructions-btn {
+			position: absolute;
+			top: -0.5rem;
+			right: 0;
+			margin-top: 0;
+		}
+	}
+	.packwiz-instructions-btn {
+		margin-top: 1rem;
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: white;
+		padding: 0.4rem 0.8rem;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 0.9rem;
+		transition: all 0.2s ease;
+		text-decoration: none;
+	}
+
+	.packwiz-instructions-btn:hover {
+		background: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.3);
 	}
 
 	.modal-actions {

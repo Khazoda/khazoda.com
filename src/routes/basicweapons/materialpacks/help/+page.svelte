@@ -64,7 +64,7 @@
 
 <style lang="scss">
 	.page-container {
-		width: calc(100dvw - 16px);
+		width: 100%;
 		height: calc(100dvh - 16px);
 		display: flex;
 		justify-content: center;

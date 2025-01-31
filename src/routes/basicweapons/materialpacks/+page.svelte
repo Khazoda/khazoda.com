@@ -91,14 +91,16 @@
 
 <style lang="scss">
 	.page-container {
-		width: calc(100dvw - 16px);
+		width: 100%;
 		height: calc(100dvh - 16px);
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		overflow-x: hidden;
 	}
 	.materialpack-logo {
 		width: 128px;
+
 		height: 128px;
 		position: relative;
 		left: -1rem;

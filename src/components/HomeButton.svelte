@@ -19,11 +19,11 @@
 		border-radius: 4px;
 
 		color: var(--v-color-text-primary);
-		background: #234066;
+		background: #0091d9;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	}
 	.home-btn:hover {
-		background: #2d527f;
+		background: #23a6e7;
 		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 	}
 </style>

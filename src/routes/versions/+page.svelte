@@ -19,7 +19,7 @@
 	// Filtering & Sorting
 	$: {
 		displayedVersions = minecraftVersions
-			.filter((v) => showSupercededVersions || v.type !== 'superceded')
+			.filter(v => showSupercededVersions || v.type !== 'superceded')
 			.sort((a, b) => {
 				if (sortOrder === 'major') {
 					// First sort by type (major > minor > superceded)
@@ -69,8 +69,7 @@
 					? 'Sort oldest first'
 					: sortOrder === 'oldest'
 						? 'Sort major versions first'
-						: 'Sort newest first'}
-			>
+						: 'Sort newest first'}>
 				{#if sortOrder === 'newest'}
 					<IconoirSortDown />
 				{:else if sortOrder === 'oldest'}
@@ -115,8 +114,8 @@
 				{#each displayedVersions as version, i}
 					<tr
 						class={version.type}
-						data-new-group={i > 0 && version.versionGroup !== displayedVersions[i - 1].versionGroup}
-					>
+						data-new-group={i > 0 &&
+							version.versionGroup !== displayedVersions[i - 1].versionGroup}>
 						<th>
 							<span class={version.type !== 'major' ? 'non-major-version-text' : ''}>
 								{version.version}
@@ -127,8 +126,7 @@
 								<div
 									class={`compatibility-indicator ${
 										mod.supportedVersions.includes(version.version) ? 'supported' : 'unsupported'
-									}`}
-								>
+									}`}>
 									{mod.supportedVersions.includes(version.version) ? '✓' : '✗'}
 								</div>
 							</td>
@@ -263,10 +261,10 @@
 		}
 
 		.help-btn {
-			background: #8f4422;
+			background: #bb4500;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 			&:hover {
-				background: #a54f28;
+				background: #df651e;
 				box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 			}
 		}

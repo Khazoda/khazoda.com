@@ -124,10 +124,12 @@
 	}
 
 	// When a new material is created, ensure recipe_type defaults to 'crafting'
+	// and handle_ingredient defaults to minecraft:stick
 	if (!material.recipe_type) {
 		material.recipe_type = RecipeTypes.crafting;
+		material.handle_ingredient = 'minecraft:stick';
 
-		// Update both stores with the default value
+		// Update both stores with the default values
 		materialPack.update(pack => {
 			const updatedMaterials = [...pack.materials];
 			updatedMaterials[index] = { ...material };

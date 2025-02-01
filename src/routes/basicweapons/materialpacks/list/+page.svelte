@@ -31,11 +31,15 @@
 	const rawMaterialPacks = data.materialPacks;
 
 	let pageReady = false;
+	let isMobile = false;
 
 	onMount(() => {
 		requestAnimationFrame(() => {
 			pageReady = true;
 		});
+		if (typeof window !== 'undefined' && window.innerWidth < 1000) {
+			isMobile = true;
+		}
 	});
 
 	// Sorting and filtering states
@@ -154,14 +158,16 @@
 						color="grey"
 						backdropCorner="center" />
 				</a>
-				<span style="filter: saturate(0.75)">
-					<ImportantButton
-						icon={HugeiconsMessageUpload01}
-						label="Submit Material Pack"
-						color="blue"
-						backdropCorner="top-right"
-						onClick={() => (showModal[0] = true)} />
-				</span>
+				{#if !isMobile}
+					<span style="filter: saturate(0.75)">
+						<ImportantButton
+							icon={HugeiconsMessageUpload01}
+							label="Submit Material Pack"
+							color="blue"
+							backdropCorner="top-right"
+							onClick={() => (showModal[0] = true)} />
+					</span>
+				{/if}
 			</div>
 
 			<div class="controls">
@@ -348,7 +354,10 @@
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 2rem;
-		padding-right: calc(2rem + 0.5rem);
+		@media screen and (max-width: 1000px) {
+			padding: 1rem;
+			padding-right: calc(1rem + 0.5rem);
+		}
 	}
 
 	.above-header {
@@ -371,7 +380,6 @@
 
 		.search-bar {
 			flex: 1;
-			min-width: 300px;
 			display: flex;
 			align-items: center;
 			background: #2a2a2a;
@@ -380,7 +388,6 @@
 			border: 2px solid #3a3a3a;
 
 			input {
-				flex: 1;
 				background: none;
 				border: none;
 				margin-left: 0.5rem;
@@ -394,6 +401,10 @@
 		.filters {
 			display: flex;
 			gap: 1rem;
+
+			@media screen and (max-width: 1000px) {
+				flex-direction: column;
+			}
 
 			select {
 				appearance: none;
@@ -521,6 +532,9 @@
 		justify-content: flex-start;
 		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 		gap: 0.5rem;
+		@media screen and (max-width: 1000px) {
+			justify-items: center;
+		}
 	}
 
 	.pack-card {

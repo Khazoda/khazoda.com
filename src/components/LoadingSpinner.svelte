@@ -1,6 +1,6 @@
 <div class="spinner-container">
 	<div class="spinner"></div>
-	<span class="loading-text">Loading material packs...</span>
+	<span class="loading-text">Loading...</span>
 </div>
 
 <style lang="scss">

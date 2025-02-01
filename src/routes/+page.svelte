@@ -22,6 +22,7 @@
 	import hookaduck_project_icon from '$lib/media/project_icons/hookaduck_project_icon.webp';
 	import kreebles_project_icon from '$lib/media/project_icons/kreebles_project_icon.webp';
 	import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.webp';
+	import creator_logo from '$lib/materialpack/media/creator_logo.webp';
 
 	// Project Feature Images
 	import plushables_feature from '$lib/media/animated/plushables_feature.webm';
@@ -56,6 +57,7 @@
 	import ImportantButton from 'src/components/materialpack/ImportantButton.svelte';
 	import FluentNew16Filled from '~icons/fluent/new-16-filled';
 	import { SHOW_NEW_FEATURE_BANNER } from 'src/config/general-config';
+	import NewFeatureWidget from 'src/components/NewFeatureWidget.svelte';
 
 	var showModal: boolean[] = Array(100).fill(false);
 	var isVersionSheetHovered = false;
@@ -132,20 +134,14 @@
 	<title>Khazoda's Mods</title>
 </svelte:head>
 <div class="page-container">
-	<div
-		class="top-left-container flex-col"
-		style={SHOW_NEW_FEATURE_BANNER ? 'display: flex' : 'display: none'}>
-		<ImportantButton
-			icon={FluentNew16Filled}
-			label="NEW"
-			onClick={() => {
-				document.location.href = '/basicweapons/materialpacks';
-			}}
-			color="green"
-			backdropCorner="top-left"
-			type="button" />
-		<span>Material Pack Creator</span>
-	</div>
+	<NewFeatureWidget
+		title="Material Pack Creator"
+		showBadge={true}
+		icon={creator_logo}
+		href="/basicweapons/materialpacks/create">
+		Build your own material packs for Basic Weapons!
+	</NewFeatureWidget>
+
 	<div class="top-right-container">
 		<audio id="click-sound">
 			<source src={btn_press_sound} type="audio/mpeg" />
@@ -512,15 +508,11 @@
 			or try your hand at making your own:
 		</p>
 		<br />
-		<span
-			class="modal-link info"
-			style="text-decoration: none; pointer-events: none; opacity: 0.5; cursor: not-allowed;">
+		<span class="modal-link info">
 			<IconoirPlanetSat />
 			<a href="/basicweapons/materialpacks/list">View All Material Packs</a>
 		</span>
-		<span
-			class="modal-link info margin-top-2"
-			style="text-decoration: none; pointer-events: none; opacity: 0.5; cursor: not-allowed;">
+		<span class="modal-link info margin-top-2">
 			<IconoirLensPlus />
 			<a href="/basicweapons/materialpacks/create">Create Your Own</a>
 		</span>

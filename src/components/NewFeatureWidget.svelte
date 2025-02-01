@@ -24,6 +24,7 @@
 			</div>
 		</div>
 		{#if href}
+			<!-- svelte-ignore a11y-missing-content -->
 			<a {href} class="link-overlay" />
 		{/if}
 	</div>

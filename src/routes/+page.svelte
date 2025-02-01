@@ -138,7 +138,7 @@
 		title="Material Pack Creator"
 		showBadge={true}
 		icon={creator_logo}
-		href="/basicweapons/materialpacks/create">
+		href="/basicweapons/materialpacks">
 		Build your own material packs for Basic Weapons!
 	</NewFeatureWidget>
 

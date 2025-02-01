@@ -40,7 +40,7 @@
 		<LoadingSpinner />
 	{:else if pageReady}
 		<div class="center-container">
-			<div class="flex-row">
+			<div class="title-container">
 				<span in:fade={{ duration: 500, delay: 0 }}
 					><img
 						class="materialpack-logo no-resample"
@@ -100,46 +100,74 @@
 		align-items: center;
 		overflow-x: hidden;
 	}
-	.materialpack-logo {
-		width: 128px;
 
-		height: 128px;
-		position: relative;
-		left: -1rem;
-		top: -2rem;
-		filter: drop-shadow(6px 6px 1px rgba(0, 0, 0, 0.3));
-	}
 	.center-container {
-		h1,
-		h2 {
-			color: #51ebff;
-			margin-top: 0;
-			filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.3));
-		}
-		h1 {
-			font-size: 64px;
-		}
-		h2 {
-			display: inline-flex;
-			opacity: 0.7;
-			padding-left: 0.2rem;
-			margin-top: 0.25rem;
-			margin-bottom: 1.5rem;
-			text-transform: uppercase;
-			font-weight: 800;
-			font-size: 20px;
-			&::after {
-				content: 'BETA';
-				color: #04ee04;
-				font-size: 12px;
+		.title-container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+
+			.materialpack-logo {
+				width: 128px;
+
+				height: 128px;
+				position: relative;
+				left: -1rem;
+				top: -2rem;
+				filter: drop-shadow(6px 6px 1px rgba(0, 0, 0, 0.3));
+			}
+			h1,
+			h2 {
+				color: #51ebff;
+				margin-top: 0;
+				filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.3));
+			}
+			h1 {
+				font-size: 64px;
+			}
+			h2 {
+				position: relative;
+				display: inline-flex;
+				opacity: 0.7;
+				padding-left: 0.2rem;
+				margin-top: 0.25rem;
+				margin-bottom: 1.5rem;
+				text-transform: uppercase;
 				font-weight: 800;
-				margin-left: 0.5rem;
-				border: 1px solid #04ee04;
-				border-radius: 4px;
-				padding: 0.2rem 0.5rem;
+				font-size: 20px;
+				&::after {
+					content: 'BETA';
+					color: #04ee04;
+					font-size: 12px;
+					font-weight: 800;
+					margin-left: 0.5rem;
+					border: 1px solid #04ee04;
+					border-radius: 4px;
+					padding: 0.2rem 0.5rem;
+				}
+			}
+			@media screen and (max-width: 1000px) {
+				flex-direction: column;
+				.materialpack-logo {
+					left: 0;
+					top: 0;
+				}
+
+				@media screen and (max-width: 360px) {
+					h2 {
+						margin-bottom: 3rem;
+					}
+					h2::after {
+						position: absolute;
+						left: -0.25rem;
+						bottom: -2rem;
+					}
+				}
 			}
 		}
 	}
+
 	.description {
 		margin-bottom: 2rem;
 		padding-left: 0.25rem;

@@ -69,7 +69,7 @@
 						color="blue"
 						href="/basicweapons/materialpacks/list"
 						icon={HugeiconsLibrary}
-						label="Public Material Packs"
+						label="Explore Material Packs"
 						fanImages={[copper_hammer, copper_spear, copper_dagger]} />
 				</span>
 				<span in:fly={{ y: 50, duration: 500, delay: 350 }}>

@@ -65,6 +65,7 @@
 	import { packOrder } from '$lib/materialpack/stores/packOrderStore';
 	import assets_tab_example from '$lib/materialpack/media/assets_tab_example.png';
 	import stats_tab_example from '$lib/materialpack/media/stats_tab_example.png';
+	import DownloadExamplesButton from 'src/components/materialpack/DownloadExamplesButton.svelte';
 
 	// Basic pack information
 	let pack_name = '';
@@ -622,6 +623,22 @@
 												<label for="mod_dependency_modid"> Mod ID </label>
 											</div>
 										</div>
+										<span class="download-frame-templates-container">
+											<DownloadExamplesButton
+												downloadOptions={{
+													frame: {
+														url: '/files/materialpack-frame-templates.zip',
+														displayName: 'Download Templates'
+													}
+												}}>
+												<h2>Download Frame Templates</h2>
+												<p>
+													You can use these frame backgrounds for your materialpack icons if you
+													wish. If you're not sure which one to use, check out the materialpack
+													templates when creating a new one.
+												</p>
+											</DownloadExamplesButton>
+										</span>
 									</form>
 								{:else}
 									<!-- Material content -->
@@ -1307,8 +1324,10 @@
 				width: fit-content;
 				height: fit-content;
 				margin: auto auto 1rem 0;
+				position: relative;
 			}
 		}
+
 		.grid-section-general {
 			max-height: 124px;
 			margin: auto 0 1rem 0;
@@ -1616,5 +1635,11 @@
 
 	.gap-2 {
 		gap: 0.5rem;
+	}
+
+	.download-frame-templates-container {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
 	}
 </style>

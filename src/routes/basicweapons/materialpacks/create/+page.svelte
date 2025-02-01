@@ -82,6 +82,7 @@
 	let show_pack_creator = false;
 	let isLoaded = false;
 	let isTransitioning = false;
+	let isMobile = false;
 
 	// Track selected tabs
 	let selectedMainTab = 'settings';
@@ -128,6 +129,9 @@
 	}
 
 	onMount(() => {
+		if (typeof window !== 'undefined' && window.innerWidth < 1000) {
+			isMobile = true;
+		}
 		const unsubscribe = materialPacks.subscribe(state => {
 			if (state && state.packs) {
 				isLoaded = true;
@@ -368,437 +372,441 @@
 </script>
 
 <!-- #region HTML -->
-<div class="page-container flex-col">
-	{#if isLoaded}
-		<div
-			class="transition-wrapper"
-			transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}>
-			{#key show_pack_creator}
-				<div
-					class="view-container"
-					transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}>
-					<!-- Materialpack Selector View -->
-					{#if !show_pack_creator}
-						<div class="flex-row justify-between">
-							<span>
-								<ImportantButton
-									icon={HugeiconsArrowLeft02}
-									label="Back"
-									onClick={handleBackTransition}
-									color="grey"
-									backdropCorner="top-left" />
-							</span>
-							<span class="create-pack-btn-container">
-								{#if Object.keys($materialPacks.packs).length < 9}
+{#if !isMobile}
+	<div class="page-container flex-col">
+		{#if isLoaded}
+			<div
+				class="transition-wrapper"
+				transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}>
+				{#key show_pack_creator}
+					<div
+						class="view-container"
+						transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}>
+						<!-- Materialpack Selector View -->
+						{#if !show_pack_creator}
+							<div class="flex-row justify-between">
+								<span>
 									<ImportantButton
-										icon={HugeiconsPlusSignSquare}
-										label="Create New Pack"
-										onClick={handleCreateNew}
-										color="green"
-										backdropCorner="top-center" />
-								{:else}
-									<span class="number-of-packs-created">
-										{Object.keys($materialPacks.packs).length} / 9 Material Packs Created.
-									</span>
-								{/if}
-							</span>
-							<ImportantButton
-								icon={HugeiconsInformationSquare}
-								label="Storage"
-								onClick={showBrowserStorageInfoModal}
-								color="blue"
-								backdropCorner="top-right" />
-						</div>
-						<div class="pack-list-container">
-							<div class="pack-list">
-								{#each $packOrder as packId (packId)}
-									<div
-										class="pack-item"
-										draggable="true"
-										role="button"
-										tabindex="0"
-										aria-label="Draggable material pack"
-										on:dragstart={e => handleDragStart(e, packId)}
-										on:dragend={handleDragEnd}
-										on:dragover|preventDefault
-										on:drop|preventDefault={e => handleDrop(e, packId)}
-										animate:flip={{ duration: 300 }}>
-										<div class="pack-inner">
-											<div class="actions-container">
-												<ZipMaterialPackDownloader materialPack={$materialPacks.packs[packId]} />
-												<button
-													class="edit-pack-btn"
-													title="Edit Material Pack"
-													on:click={() => handlePackSelect(packId)}>
-													<HugeiconsEdit02 width="32" height="32" />
-												</button>
-												<button
-													class="delete-pack-btn"
-													on:click={() => handleDeleteClick(packId)}
-													title="Delete Material Pack">
-													<HugeiconsDelete02 width="32" height="32" />
-												</button>
-											</div>
-											<img
-												src={$materialPacks.packs[packId].pack_icon || ''}
-												alt="material pack icon"
-												class="no-resample" />
-											{#if $materialPacks.packs[packId].pack_name}
-												<span class="pack-label">{$materialPacks.packs[packId].pack_name}</span>
-											{/if}
-										</div>
-									</div>
-								{/each}
-								{#each Array(9 - $packOrder.length).fill(null) as _ (Math.random())}
-									<div
-										class="pack-item placeholder"
-										animate:flip={{ duration: 300 }}
-										role="gridcell">
-										<div class="pack-inner">
-											<img src={empty_spot} alt="empty pack slot" class="no-resample" />
-										</div>
-									</div>
-								{/each}
-							</div>
-						</div>
-						<!-- Materialpack Creator -->
-					{:else}
-						<span class="back-btn-container">
-							<div class="flex-row gap-2">
-								<ImportantButton
-									icon={HugeiconsArrowLeft02}
-									label="Back to Packs"
-									onClick={handleBackToPacks}
-									color="grey"
-									backdropCorner="center" />
-							</div>
-						</span>
-
-						<!-- #region Material Pack Settings -->
-						<!-- Add content sections that respond to the selected tabs -->
-						<div class="form-wrapper">
-							<TabBookmarks
-								{tabs}
-								{activeTab}
-								onTabChange={handleTabChange}
-								onAddMaterial={handleAddMaterial} />
-							<!-- Content area -->
-							{#if activeTab}
-								{#if getContentType(activeTab) === 'settings'}
-									<!-- Use indices of 100+ for InfoTabs, just incase :) -->
-									<InfoTab title="Material Pack Settings" modalID={100}>
-										<h4 class="blurb">Change the main settings for your material pack</h4>
-										<div class="modal-content">
-											<h4>Pack Icon</h4>
-											<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
-											<p>
-												Feel free to download the template image (right click and save) and edit it
-												to display one of your weapon textures in.
-											</p>
-											<h4>Pack Name</h4>
-											<p>
-												The material pack name should be either the name of your main material (e.g.
-												'copper', 'unobtainium'), or in the case of a materialpack with multiple
-												materials, a name that is short and makes sense (e.g. 'gems', 'tech-mats',
-												'all-mats').
-											</p>
-											<h4>Mod Dependency</h4>
-											<p>
-												If your material pack uses materials from another mod rather than vanilla,
-												include that mod's name (e.g. 'mekanism', 'mythic-metals',
-												'applied-energistics-2').
-											</p>
-											<p>
-												The mod dependency ID <b>must</b> be the actual id (namespace) of the mod you're
-												depending on (e.g. 'mekanism', 'mythicmetals', 'appeng'). Basic Weapons will
-												only load your pack if it detects a mod with that id being loaded.
-											</p>
-											<h4>Adding materials</h4>
-											<p>
-												Materials are added via the little '+' tab sticking out the right of the
-												main view. You can choose to start fresh, or pick from a template material
-												based on Basic Weapon's vanilla material weapons.
-											</p>
-											<h4>Exporting your Material Pack</h4>
-											<p>
-												You can export your material pack to any Minecraft version that the
-												materialpack system supports. Look for this icon:
-											</p>
-											<div style="margin-top: 1rem;">
-												<HugeiconsZip01 width="48" height="48" />
-											</div>
-										</div>
-									</InfoTab>
-									<!-- Settings form content -->
-									<form class="pack-settings-form">
-										<div class="pack-settings-header">
-											<span>
-												<span class="icon">
-													{#if $materialPack}
-														<ZipMaterialPackDownloader materialPack={$materialPack} />
-													{/if}</span>
-												<span
-													class="pack-name-container"
-													title={'bwmp_' +
-														$materialPack.pack_name +
-														'_' +
-														($materialPack.mod_dependency_name
-															? $materialPack.mod_dependency_name
-															: 'minecraft') +
-														'.zip'}>
-													{'bwmp_' +
-														$materialPack.pack_name +
-														'_' +
-														($materialPack.mod_dependency_name
-															? $materialPack.mod_dependency_name
-															: 'minecraft') +
-														'.zip'}
-												</span>
-											</span>
-										</div>
-										<div class="form-element imagepicker">
-											<ImagePicker
-												currentImage={$materialPack.pack_icon}
-												accept="image/png"
-												onImageSelect={base64String => {
-													materialPack.update(pack => ({
-														...pack,
-														pack_icon: base64String
-													}));
-													materialPacks.update(state => ({
-														...state,
-														packs: {
-															...state.packs,
-															[$materialPack.localstorage_id]: {
-																...state.packs[$materialPack.localstorage_id],
-																pack_icon: base64String
-															}
-														}
-													}));
-												}} />
-										</div>
-										<div class="grid-section-general flex-col">
-											<div class="form-element text">
-												<input
-													type="text"
-													id="pack_name"
-													placeholder=" "
-													bind:value={$materialPack.pack_name}
-													on:input={e =>
-														validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
-													required />
-												<label for="pack_name">Material Pack Name</label>
-											</div>
-										</div>
-
-										<div class="grid-section-mod-dependency flex-col">
-											<h3>Mod Dependency (Optional)</h3>
-											<div class="form-element text" style="margin-bottom:0.75rem;">
-												<input
-													type="text"
-													id="mod_dependency_name"
-													placeholder=" "
-													bind:value={$materialPack.mod_dependency_name}
-													on:input={e =>
-														validateAndUpdateStore(
-															e,
-															modDependencySchema,
-															'mod_dependency_name'
-														)} />
-												<label for="mod_dependency_name">Mod Name</label>
-											</div>
-
-											<div class="form-element text">
-												<input
-													type="text"
-													id="mod_dependency_modid"
-													placeholder=" "
-													bind:value={$materialPack.mod_dependency_modid}
-													on:input={e =>
-														validateAndUpdateStore(
-															e,
-															modDependencySchema,
-															'mod_dependency_modid'
-														)} />
-												<label for="mod_dependency_modid"> Mod ID </label>
-											</div>
-										</div>
-										<span class="download-frame-templates-container">
-											<DownloadExamplesButton
-												downloadOptions={{
-													frame: {
-														url: '/files/materialpack-frame-templates.zip',
-														displayName: 'Download Templates'
-													}
-												}}>
-												<h2>Download Frame Templates</h2>
-												<p>
-													You can use these frame backgrounds for your materialpack icons if you
-													wish. If you're not sure which one to use, check out the materialpack
-													templates when creating a new one.
-												</p>
-											</DownloadExamplesButton>
+										icon={HugeiconsArrowLeft02}
+										label="Back"
+										onClick={handleBackTransition}
+										color="grey"
+										backdropCorner="top-left" />
+								</span>
+								<span class="create-pack-btn-container">
+									{#if Object.keys($materialPacks.packs).length < 9}
+										<ImportantButton
+											icon={HugeiconsPlusSignSquare}
+											label="Create New Pack"
+											onClick={handleCreateNew}
+											color="green"
+											backdropCorner="top-center" />
+									{:else}
+										<span class="number-of-packs-created">
+											{Object.keys($materialPacks.packs).length} / 9 Material Packs Created.
 										</span>
-									</form>
-								{:else}
-									<!-- Material content -->
-									{#each $materialPack.materials as material, index}
-										{#if activeTab.startsWith(`material-${index}-`)}
-											<InfoTab
-												title="Edit Weapon Stats"
-												modalID={101}
-												offset={9}
-												disabled={!activeTab.endsWith('-stats')}>
-												<h4 class="blurb">Set a material's various weapon stats</h4>
-												<div class="modal-content">
-													<h4>Foreword</h4>
-													<p>
-														If you're unsure what values to set, try adding a template material.
-														They show you the values for weapons with vanilla materials.
-													</p>
-													<h4>Material Name</h4>
-													<p>
-														A material's name dictates what it'll be registered as and what its
-														default translation will be. For example, a 'copper' hammer will be
-														registered as 'basicweapons:copper_hammer' with the name 'Copper Hammer'
-													</p>
-													<h4>Durability</h4>
-													<p>Denotes how much you can use a weapon for before it breaks.</p>
-													<h4>Attack Damage, Speed & Reach bonuses</h4>
-													<p>
-														These values are added to a weapon's base stats. If you want a material
-														to make a weapon weaker than its base stats, enter negative values (e.g.
-														-1, -5.5)
-													</p>
-													<h4>Enchantability</h4>
-													<p>
-														Enchantability affects the level and quantity of enchantments that are
-														randomly applied in an enchanting table. Higher values mean the item
-														will receive a greater quantity of high tier enchantments.
-													</p>
+									{/if}
+								</span>
+								<ImportantButton
+									icon={HugeiconsInformationSquare}
+									label="Storage"
+									onClick={showBrowserStorageInfoModal}
+									color="blue"
+									backdropCorner="top-right" />
+							</div>
+							<div class="pack-list-container">
+								<div class="pack-list">
+									{#each $packOrder as packId (packId)}
+										<div
+											class="pack-item"
+											draggable="true"
+											role="button"
+											tabindex="0"
+											aria-label="Draggable material pack"
+											on:dragstart={e => handleDragStart(e, packId)}
+											on:dragend={handleDragEnd}
+											on:dragover|preventDefault
+											on:drop|preventDefault={e => handleDrop(e, packId)}
+											animate:flip={{ duration: 300 }}>
+											<div class="pack-inner">
+												<div class="actions-container">
+													<ZipMaterialPackDownloader materialPack={$materialPacks.packs[packId]} />
+													<button
+														class="edit-pack-btn"
+														title="Edit Material Pack"
+														on:click={() => handlePackSelect(packId)}>
+														<HugeiconsEdit02 width="32" height="32" />
+													</button>
+													<button
+														class="delete-pack-btn"
+														on:click={() => handleDeleteClick(packId)}
+														title="Delete Material Pack">
+														<HugeiconsDelete02 width="32" height="32" />
+													</button>
 												</div>
-											</InfoTab>
-											<InfoTab
-												title="Weapon Recipes"
-												modalID={102}
-												offset={5}
-												disabled={!activeTab.endsWith('-recipes')}>
-												<h4 class="blurb">Choose a recipe type and tweak weapons' recipes</h4>
-
-												<div class="modal-content">
-													<h4>Crafting vs. Smithing Recipes</h4>
-													<p>
-														Crafting recipes are standard Minecraft crafting table recipes, and
-														smithing recipes use the smithing table. In vanilla Minecraft, only
-														Netherite uses smithing recipes for weapons.
-													</p>
-													<h4>Handle Ingredient</h4>
-													<p
-														>Only used in crafting recipes. This ingredient will usually be a
-														minecraft:stick, but you can set it to any item or item tag that you
-														like.</p>
-													<h4
-														>Main Ingredient / <span style="color: #00ff4f;">Upgrade Material</span
-														></h4>
-													<p>
-														This field can take either an item identifier (minecraft:cobblestone) or
-														an item tag (#minecraft:stone_tool_materials). <br /> In addition to being
-														used in recipes for your weapons, this item is used to repair them.
-													</p>
-													<h4 style="color: #00e5ff;">Smithing Template</h4>
-													<p>
-														Only used in smithing recipes. This ingredient can only be an item
-														identifier, and will usually be
-														minecraft:netherite_upgrade_smithing_template or a modded template. See
-														the warden materialpack template for an example of that.
-													</p>
-													<h4 style="color: #ff4444;">Weapon Material</h4>
-													<p>
-														Only used in smithing recipes. This material must be a a string (not an
-														item identifier!). For example, if you want iron weapons to be upgraded,
-														you would enter "iron". <br /> <br /> It's important not to enter "iron_ingot"
-														or "minecraft:iron_ingot", or "minecraft:iron_sword". It must be the prefix
-														for the weapons.
-													</p>
-												</div>
-											</InfoTab>
-											<InfoTab
-												title="Weapon Textures"
-												modalID={103}
-												offset={1}
-												disabled={!activeTab.endsWith('-assets')}>
-												<h4 class="blurb">Set the weapon textures for your material</h4>
-												<div class="modal-content">
-													<h4>Downloading Examples</h4>
-													<p>
-														How you make your textures is totally up to you, but if you want a
-														template to follow, feel free to download and use the example textures
-														using the button that looks like this:
-													</p>
-													<span><HugeiconsArchive02 width="24" height="24" /></span>
-													<h4>Recommended Software</h4>
-													<p>
-														You can use any method you like for creating textures, but my
-														recommendation is <a href="https://www.aseprite.org/">Aseprite</a>.
-													</p>
-													<h4>Held vs. Standard</h4>
-													<p>
-														You might wonder why the spear, quarterstaff and glaive have _held
-														textures. Simply put, non-held textures are shown in GUIs like the
-														player's inventory, containers, item frames, and _held textures are
-														shown when the weapons are held.
-													</p>
-													<h4>Modifying item model files / 3D weapons</h4>
-													<p>
-														This materialpack generator only supports 2d textures, but you are more
-														than welcome to modify the item models for weapons manually. They're
-														located in '/assets/basicweapons/models/item'.
-													</p>
-												</div></InfoTab>
-											{#if activeTab.endsWith('-stats')}
-												<MaterialCreatorStats
-													{material}
-													{index}
-													bind:activeTab
-													onTabChange={newTab => (activeTab = newTab)} />
-											{:else if activeTab.endsWith('-recipes')}
-												<MaterialCreatorRecipes
-													{material}
-													{index}
-													bind:activeTab
-													onTabChange={newTab => (activeTab = newTab)} />
-											{:else if activeTab.endsWith('-assets')}
-												<MaterialCreatorAssets
-													{material}
-													{index}
-													bind:activeTab
-													onTabChange={newTab => (activeTab = newTab)} />
-											{/if}
-										{/if}
+												<img
+													src={$materialPacks.packs[packId].pack_icon || ''}
+													alt="material pack icon"
+													class="no-resample" />
+												{#if $materialPacks.packs[packId].pack_name}
+													<span class="pack-label">{$materialPacks.packs[packId].pack_name}</span>
+												{/if}
+											</div>
+										</div>
 									{/each}
+									{#each Array(9 - $packOrder.length).fill(null) as _ (Math.random())}
+										<div
+											class="pack-item placeholder"
+											animate:flip={{ duration: 300 }}
+											role="gridcell">
+											<div class="pack-inner">
+												<img src={empty_spot} alt="empty pack slot" class="no-resample" />
+											</div>
+										</div>
+									{/each}
+								</div>
+							</div>
+							<!-- Materialpack Creator -->
+						{:else}
+							<span class="back-btn-container">
+								<div class="flex-row gap-2">
+									<ImportantButton
+										icon={HugeiconsArrowLeft02}
+										label="Back to Packs"
+										onClick={handleBackToPacks}
+										color="grey"
+										backdropCorner="center" />
+								</div>
+							</span>
+
+							<!-- #region Material Pack Settings -->
+							<!-- Add content sections that respond to the selected tabs -->
+							<div class="form-wrapper">
+								<TabBookmarks
+									{tabs}
+									{activeTab}
+									onTabChange={handleTabChange}
+									onAddMaterial={handleAddMaterial} />
+								<!-- Content area -->
+								{#if activeTab}
+									{#if getContentType(activeTab) === 'settings'}
+										<!-- Use indices of 100+ for InfoTabs, just incase :) -->
+										<InfoTab title="Material Pack Settings" modalID={100}>
+											<h4 class="blurb">Change the main settings for your material pack</h4>
+											<div class="modal-content">
+												<h4>Pack Icon</h4>
+												<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
+												<p>
+													Feel free to download the template image (right click and save) and edit
+													it to display one of your weapon textures in.
+												</p>
+												<h4>Pack Name</h4>
+												<p>
+													The material pack name should be either the name of your main material
+													(e.g. 'copper', 'unobtainium'), or in the case of a materialpack with
+													multiple materials, a name that is short and makes sense (e.g. 'gems',
+													'tech-mats', 'all-mats').
+												</p>
+												<h4>Mod Dependency</h4>
+												<p>
+													If your material pack uses materials from another mod rather than vanilla,
+													include that mod's name (e.g. 'mekanism', 'mythic-metals',
+													'applied-energistics-2').
+												</p>
+												<p>
+													The mod dependency ID <b>must</b> be the actual id (namespace) of the mod you're
+													depending on (e.g. 'mekanism', 'mythicmetals', 'appeng'). Basic Weapons will
+													only load your pack if it detects a mod with that id being loaded.
+												</p>
+												<h4>Adding materials</h4>
+												<p>
+													Materials are added via the little '+' tab sticking out the right of the
+													main view. You can choose to start fresh, or pick from a template material
+													based on Basic Weapon's vanilla material weapons.
+												</p>
+												<h4>Exporting your Material Pack</h4>
+												<p>
+													You can export your material pack to any Minecraft version that the
+													materialpack system supports. Look for this icon:
+												</p>
+												<div style="margin-top: 1rem;">
+													<HugeiconsZip01 width="48" height="48" />
+												</div>
+											</div>
+										</InfoTab>
+										<!-- Settings form content -->
+										<form class="pack-settings-form">
+											<div class="pack-settings-header">
+												<span>
+													<span class="icon">
+														{#if $materialPack}
+															<ZipMaterialPackDownloader materialPack={$materialPack} />
+														{/if}</span>
+													<span
+														class="pack-name-container"
+														title={'bwmp_' +
+															$materialPack.pack_name +
+															'_' +
+															($materialPack.mod_dependency_name
+																? $materialPack.mod_dependency_name
+																: 'minecraft') +
+															'.zip'}>
+														{'bwmp_' +
+															$materialPack.pack_name +
+															'_' +
+															($materialPack.mod_dependency_name
+																? $materialPack.mod_dependency_name
+																: 'minecraft') +
+															'.zip'}
+													</span>
+												</span>
+											</div>
+											<div class="form-element imagepicker">
+												<ImagePicker
+													currentImage={$materialPack.pack_icon}
+													accept="image/png"
+													onImageSelect={base64String => {
+														materialPack.update(pack => ({
+															...pack,
+															pack_icon: base64String
+														}));
+														materialPacks.update(state => ({
+															...state,
+															packs: {
+																...state.packs,
+																[$materialPack.localstorage_id]: {
+																	...state.packs[$materialPack.localstorage_id],
+																	pack_icon: base64String
+																}
+															}
+														}));
+													}} />
+											</div>
+											<div class="grid-section-general flex-col">
+												<div class="form-element text">
+													<input
+														type="text"
+														id="pack_name"
+														placeholder=" "
+														bind:value={$materialPack.pack_name}
+														on:input={e =>
+															validateAndUpdateStore(e, materialPackNameSchema, 'pack_name')}
+														required />
+													<label for="pack_name">Material Pack Name</label>
+												</div>
+											</div>
+
+											<div class="grid-section-mod-dependency flex-col">
+												<h3>Mod Dependency (Optional)</h3>
+												<div class="form-element text" style="margin-bottom:0.75rem;">
+													<input
+														type="text"
+														id="mod_dependency_name"
+														placeholder=" "
+														bind:value={$materialPack.mod_dependency_name}
+														on:input={e =>
+															validateAndUpdateStore(
+																e,
+																modDependencySchema,
+																'mod_dependency_name'
+															)} />
+													<label for="mod_dependency_name">Mod Name</label>
+												</div>
+
+												<div class="form-element text">
+													<input
+														type="text"
+														id="mod_dependency_modid"
+														placeholder=" "
+														bind:value={$materialPack.mod_dependency_modid}
+														on:input={e =>
+															validateAndUpdateStore(
+																e,
+																modDependencySchema,
+																'mod_dependency_modid'
+															)} />
+													<label for="mod_dependency_modid"> Mod ID </label>
+												</div>
+											</div>
+											<span class="download-frame-templates-container">
+												<DownloadExamplesButton
+													downloadOptions={{
+														frame: {
+															url: '/files/materialpack-frame-templates.zip',
+															displayName: 'Download Templates'
+														}
+													}}>
+													<h2>Download Frame Templates</h2>
+													<p>
+														You can use these frame backgrounds for your materialpack icons if you
+														wish. If you're not sure which one to use, check out the materialpack
+														templates when creating a new one.
+													</p>
+												</DownloadExamplesButton>
+											</span>
+										</form>
+									{:else}
+										<!-- Material content -->
+										{#each $materialPack.materials as material, index}
+											{#if activeTab.startsWith(`material-${index}-`)}
+												<InfoTab
+													title="Edit Weapon Stats"
+													modalID={101}
+													offset={9}
+													disabled={!activeTab.endsWith('-stats')}>
+													<h4 class="blurb">Set a material's various weapon stats</h4>
+													<div class="modal-content">
+														<h4>Foreword</h4>
+														<p>
+															If you're unsure what values to set, try adding a template material.
+															They show you the values for weapons with vanilla materials.
+														</p>
+														<h4>Material Name</h4>
+														<p>
+															A material's name dictates what it'll be registered as and what its
+															default translation will be. For example, a 'copper' hammer will be
+															registered as 'basicweapons:copper_hammer' with the name 'Copper
+															Hammer'
+														</p>
+														<h4>Durability</h4>
+														<p>Denotes how much you can use a weapon for before it breaks.</p>
+														<h4>Attack Damage, Speed & Reach bonuses</h4>
+														<p>
+															These values are added to a weapon's base stats. If you want a
+															material to make a weapon weaker than its base stats, enter negative
+															values (e.g. -1, -5.5)
+														</p>
+														<h4>Enchantability</h4>
+														<p>
+															Enchantability affects the level and quantity of enchantments that are
+															randomly applied in an enchanting table. Higher values mean the item
+															will receive a greater quantity of high tier enchantments.
+														</p>
+													</div>
+												</InfoTab>
+												<InfoTab
+													title="Weapon Recipes"
+													modalID={102}
+													offset={5}
+													disabled={!activeTab.endsWith('-recipes')}>
+													<h4 class="blurb">Choose a recipe type and tweak weapons' recipes</h4>
+
+													<div class="modal-content">
+														<h4>Crafting vs. Smithing Recipes</h4>
+														<p>
+															Crafting recipes are standard Minecraft crafting table recipes, and
+															smithing recipes use the smithing table. In vanilla Minecraft, only
+															Netherite uses smithing recipes for weapons.
+														</p>
+														<h4>Handle Ingredient</h4>
+														<p
+															>Only used in crafting recipes. This ingredient will usually be a
+															minecraft:stick, but you can set it to any item or item tag that you
+															like.</p>
+														<h4
+															>Main Ingredient / <span style="color: #00ff4f;"
+																>Upgrade Material</span
+															></h4>
+														<p>
+															This field can take either an item identifier (minecraft:cobblestone)
+															or an item tag (#minecraft:stone_tool_materials). <br /> In addition to
+															being used in recipes for your weapons, this item is used to repair them.
+														</p>
+														<h4 style="color: #00e5ff;">Smithing Template</h4>
+														<p>
+															Only used in smithing recipes. This ingredient can only be an item
+															identifier, and will usually be
+															minecraft:netherite_upgrade_smithing_template or a modded template.
+															See the warden materialpack template for an example of that.
+														</p>
+														<h4 style="color: #ff4444;">Weapon Material</h4>
+														<p>
+															Only used in smithing recipes. This material must be a a string (not
+															an item identifier!). For example, if you want iron weapons to be
+															upgraded, you would enter "iron". <br /> <br /> It's important not to enter
+															"iron_ingot" or "minecraft:iron_ingot", or "minecraft:iron_sword". It must
+															be the prefix for the weapons.
+														</p>
+													</div>
+												</InfoTab>
+												<InfoTab
+													title="Weapon Textures"
+													modalID={103}
+													offset={1}
+													disabled={!activeTab.endsWith('-assets')}>
+													<h4 class="blurb">Set the weapon textures for your material</h4>
+													<div class="modal-content">
+														<h4>Downloading Examples</h4>
+														<p>
+															How you make your textures is totally up to you, but if you want a
+															template to follow, feel free to download and use the example textures
+															using the button that looks like this:
+														</p>
+														<span><HugeiconsArchive02 width="24" height="24" /></span>
+														<h4>Recommended Software</h4>
+														<p>
+															You can use any method you like for creating textures, but my
+															recommendation is <a href="https://www.aseprite.org/">Aseprite</a>.
+														</p>
+														<h4>Held vs. Standard</h4>
+														<p>
+															You might wonder why the spear, quarterstaff and glaive have _held
+															textures. Simply put, non-held textures are shown in GUIs like the
+															player's inventory, containers, item frames, and _held textures are
+															shown when the weapons are held.
+														</p>
+														<h4>Modifying item model files / 3D weapons</h4>
+														<p>
+															This materialpack generator only supports 2d textures, but you are
+															more than welcome to modify the item models for weapons manually.
+															They're located in '/assets/basicweapons/models/item'.
+														</p>
+													</div></InfoTab>
+												{#if activeTab.endsWith('-stats')}
+													<MaterialCreatorStats
+														{material}
+														{index}
+														bind:activeTab
+														onTabChange={newTab => (activeTab = newTab)} />
+												{:else if activeTab.endsWith('-recipes')}
+													<MaterialCreatorRecipes
+														{material}
+														{index}
+														bind:activeTab
+														onTabChange={newTab => (activeTab = newTab)} />
+												{:else if activeTab.endsWith('-assets')}
+													<MaterialCreatorAssets
+														{material}
+														{index}
+														bind:activeTab
+														onTabChange={newTab => (activeTab = newTab)} />
+												{/if}
+											{/if}
+										{/each}
+									{/if}
 								{/if}
-							{/if}
-						</div>
-					{/if}
-				</div>
-			{/key}
-		</div>
-	{/if}
-	<!-- Mobile Warning -->
-	{#if typeof window !== 'undefined' && window.innerWidth < 1000}
-		<div class="mobile-warning">
-			<p>
-				To use the Material Pack Creator, please use a device with a screen width of at least
-				1000px.
-			</p>
-			<span class="flex-row">
-				<button on:click={() => window.location.reload()}>Refresh Page</button>
-				<button on:click={() => (window.location.href = '/basicweapons/materialpacks')}
-					>Exit Creator</button>
-			</span>
-		</div>
-	{/if}
-</div>
+							</div>
+						{/if}
+					</div>
+				{/key}
+			</div>
+		{/if}
+	</div>
+{/if}
+
+<!-- Mobile Warning -->
+{#if isMobile}
+	<div class="mobile-warning">
+		<p>
+			To use the Material Pack Creator, please use a device with a screen width of at least 1000px.
+		</p>
+		<span class="flex-row">
+			<button on:click={() => window.location.reload()}>Refresh Page</button>
+			<button on:click={() => (window.location.href = '/basicweapons/materialpacks')}
+				>Exit Pack Creator</button>
+		</span>
+	</div>
+{/if}
 
 <!-- LocalStorage Info Modal -->
 <CenterModal bind:showModal modalID={1}>
@@ -1504,36 +1512,6 @@
 		}
 	}
 
-	//#region Mobile Warning
-	.mobile-warning {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		padding: 1rem 0.5rem;
-		background-color: rgba(14, 14, 14, 0.95);
-		z-index: 1000;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 1rem;
-		p {
-			max-width: 500px;
-			text-align: center;
-		}
-
-		button {
-			margin: 0.5rem;
-			padding: 0.5rem 1rem;
-			font-size: 1rem;
-			font-weight: 700;
-			border: none;
-			border-radius: 8px;
-		}
-	}
-
 	.storage-meter {
 		position: relative;
 		margin: 1rem 0 1rem 0;
@@ -1641,5 +1619,37 @@
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
+	}
+
+	//#region Mobile Warning
+	.mobile-warning {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		padding: 1rem 0.5rem;
+		background-color: rgba(14, 14, 14, 0.95);
+		z-index: 1000;
+		display: flex;
+		flex-direction: column;
+
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		p {
+			max-width: 500px;
+			text-align: center;
+		}
+
+		button {
+			margin: 0.5rem;
+			padding: 0.5rem 1rem;
+			font-size: 1rem;
+			font-weight: 700;
+			border: none;
+			border-radius: 8px;
+		}
 	}
 </style>

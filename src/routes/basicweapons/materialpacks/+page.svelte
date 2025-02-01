@@ -41,14 +41,16 @@
 	{:else if pageReady}
 		<div class="center-container">
 			<div class="flex-row">
-				<span
+				<span in:fade={{ duration: 500, delay: 0 }}
 					><img
 						class="materialpack-logo no-resample"
 						src={materialpack_logo}
-						alt="Material Pack Creator Logo" /></span>
+						alt="Material Pack Creator Logo"
+						loading="eager" /></span>
 				<span class="flex-col">
-					<h1>Basic Weapons</h1>
-					<h2 in:fade={{ duration: 500, delay: 0 }}>Material Pack Creator</h2>
+					<h1 in:fade={{ duration: 500, delay: 0 }}>Basic Weapons</h1>
+
+					<h2 in:fade={{ duration: 500, delay: 50 }}>Material Pack Creator</h2>
 				</span>
 			</div>
 

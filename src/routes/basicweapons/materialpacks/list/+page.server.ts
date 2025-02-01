@@ -14,7 +14,17 @@ interface ModrinthProject {
 	categories: string[];
 }
 
-export const load: PageServerLoad = async ({ fetch }) => {
+export const config = {
+	isr: {
+		expiration: 3600 // 1 hour in seconds data expiry, will send another api call once this expires
+	}
+};
+
+export const load: PageServerLoad = async ({ fetch, setHeaders }) => {
+	setHeaders({
+		'cache-control': 'public, max-age=3600' // 1 hour in seconds
+	});
+
 	const materialPacks = await Promise.all(
 		MATERIAL_PACKS.map(async ({ slug, category, required_mod_slug, official }) => {
 			try {

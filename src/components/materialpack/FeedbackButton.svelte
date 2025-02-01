@@ -8,7 +8,7 @@
 	let showModal: boolean[] = Array(1).fill(false);
 </script>
 
-<button class="feedback-btn" on:click={() => (showModal[0] = true)}>
+<button class="feedback-btn fixed-top-right" on:click={() => (showModal[0] = true)}>
 	<HugeiconsMessageMultiple01 width="100%" height="100%" />
 </button>
 
@@ -50,9 +50,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		position: fixed;
-		top: 1rem;
-		right: 1rem;
+
 		border: 1px solid var(--v-color-border);
 		border-radius: 4px;
 		color: var(--v-color-text-primary);

@@ -370,6 +370,9 @@
 
 	.content {
 		margin-top: 3rem;
+		div a {
+			text-decoration: none;
+		}
 	}
 
 	.controls {

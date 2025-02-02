@@ -370,7 +370,8 @@
 
 	.content {
 		margin-top: 3rem;
-		div a {
+		div a,
+		div a:hover {
 			text-decoration: none;
 		}
 	}

@@ -77,6 +77,10 @@
 	}
 	.content {
 		max-width: 600px;
+		div a,
+		div a:hover {
+			text-decoration: none;
+		}
 	}
 
 	h3 {

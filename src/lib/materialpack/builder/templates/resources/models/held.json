@@ -1,6 +1,6 @@
 {
-  "parent": "basicweapons:item/handheld_big_{{weapon_type}}",
-  "textures": {
-    "layer0": "basicweapons:item/{{material_name}}_{{weapon_type}}_held"
-  }
-} 
+	"parent": "basicweapons:item/handheld_big_{{weapon_type}}",
+	"textures": {
+		"layer0": "basicweapons:item/{{material_name}}_{{weapon_type}}_held"
+	}
+}

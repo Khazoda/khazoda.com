@@ -1,9 +1,9 @@
 <script lang="ts">
-	import MingcuteCloseFill from 'virtual:icons/mingcute/close-fill';
-	import IcRoundSwipeLeft from 'virtual:icons/ic/round-swipe-left';
+	import MingcuteCloseFill from "virtual:icons/mingcute/close-fill";
+	import IcRoundSwipeLeft from "virtual:icons/ic/round-swipe-left";
 
-	import { replaceState } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { replaceState } from "$app/navigation";
+	import { page } from "$app/stores";
 
 	export let showModal: boolean[];
 	export let modalID: number;
@@ -34,16 +34,16 @@
 		// console.log(distance_swiped);
 
 		if (distance_swiped >= swipe_dist_required) {
-			dialog_inner.style.transform = 'translateX(-150%)';
-			dialog_inner.style.opacity = '0';
-			dialog.style.setProperty('--mobile-backdrop-opacity', '0');
+			dialog_inner.style.transform = "translateX(-150%)";
+			dialog_inner.style.opacity = "0";
+			dialog.style.setProperty("--mobile-backdrop-opacity", "0");
 
 			setTimeout(() => {
-				document.getElementsByTagName('body')[0].style.overscrollBehavior = 'unset';
+				document.getElementsByTagName("body")[0].style.overscrollBehavior = "unset";
 				dialog.close();
-				dialog_inner.style.transform = 'translateX(0%)';
-				dialog_inner.style.opacity = '1';
-				dialog.style.setProperty('--mobile-backdrop-opacity', '1');
+				dialog_inner.style.transform = "translateX(0%)";
+				dialog_inner.style.opacity = "1";
+				dialog.style.setProperty("--mobile-backdrop-opacity", "1");
 			}, 450);
 		}
 	};
@@ -82,20 +82,20 @@
 <style lang="scss">
 	dialog {
 		--mobile-backdrop-opacity: 1;
-
-		min-width: 25rem;
-		max-width: 30%;
-		min-height: 100dvh;
-		width: 100%;
-		height: 100%;
-		padding: 0.5rem 0 0.5rem 0.5rem;
 		background: none;
 		border: none;
 		color: #e9e9ec;
+		height: 100%;
 		margin: 0 auto 0 0;
+		max-width: 30%;
+		min-height: 100dvh;
+
+		min-width: 25rem;
+		padding: 0.5rem 0 0.5rem 0.5rem;
+		scrollbar-color: #383838 #141414;
 
 		scrollbar-width: thin;
-		scrollbar-color: #383838 #141414;
+		width: 100%;
 
 		&::backdrop {
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
@@ -113,8 +113,8 @@
 
 		&::-webkit-scrollbar-thumb {
 			background-color: #383838;
-			border-radius: 0.5rem;
 			border: 2px solid #141414;
+			border-radius: 0.5rem;
 		}
 
 		&::-webkit-scrollbar-thumb:hover {
@@ -124,8 +124,8 @@
 	@media screen and (max-width: 1000px) {
 		dialog {
 			min-width: 100%;
-			width: 100%;
 			padding: 0.5rem;
+			width: 100%;
 
 			&::backdrop {
 				opacity: var(--mobile-backdrop-opacity);
@@ -136,15 +136,15 @@
 		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 	.dialog-inner {
-		min-height: 100%;
-		width: 100%;
-		border-radius: 0.5rem;
-		padding: 1rem;
-		margin: 0;
 		background: #141414;
+		border-radius: 0.5rem;
+		margin: 0;
+		min-height: 100%;
+		padding: 1rem;
 		transition:
 			transform 0.5s ease,
 			opacity 0.5s ease;
+		width: 100%;
 	}
 	@keyframes zoom {
 		from {
@@ -155,22 +155,22 @@
 		}
 	}
 	.modal-close-button {
-		display: flex;
 		align-items: center;
-		justify-content: center;
-		margin: 0;
-		padding: 0;
-		margin-left: auto;
-		width: 40px;
-		height: 40px;
 		aspect-ratio: 1;
 		border: none;
-		font-size: x-large;
-		line-height: 1;
+		border-radius: 0.5rem;
 		box-sizing: content-box;
 
 		cursor: pointer;
-		border-radius: 0.5rem;
+		display: flex;
+		font-size: x-large;
+		height: 40px;
+		justify-content: center;
+		line-height: 1;
+		margin: 0;
+		margin-left: auto;
+		padding: 0;
+		width: 40px;
 	}
 	// Mobile
 	@media screen and (max-width: 1000px) {
@@ -184,30 +184,30 @@
 	}
 	@media screen and (max-width: 1000px) {
 		.mobile-swipe-indicator {
-			width: 100%;
-			display: inline-flex;
-			gap: 0.25rem;
-			position: relative;
-			justify-content: flex-start;
 			color: #868686;
+			display: inline-flex;
 			font-size: small;
+			gap: 0.25rem;
+			justify-content: flex-start;
+			position: relative;
+			width: 100%;
 
 			&::before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: -1rem;
-				width: 0.5rem;
-				height: 2rem;
 				background-color: rgba(134, 199, 108, 0.8);
 				border-radius: 0 0.25rem 0.25rem 0;
+				content: "";
+				height: 2rem;
+				left: -1rem;
+				position: absolute;
+				top: 50%;
 				transform: translateY(-50%);
+				width: 0.5rem;
 			}
 		}
 	}
 
 	hr {
-		border-style: solid;
 		border-color: #868686;
+		border-style: solid;
 	}
 </style>

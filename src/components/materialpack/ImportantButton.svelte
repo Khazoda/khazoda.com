@@ -1,44 +1,36 @@
 <script lang="ts">
 	// Props for button styling
-	export let color: 'blue' | 'green' | 'grey' = 'blue';
+	export let color: "blue" | "green" | "grey" = "blue";
 	export let backdropCorner:
-		| 'top-left'
-		| 'top-right'
-		| 'bottom-left'
-		| 'bottom-right'
-		| 'top-center'
-		| 'bottom-center'
-		| 'left-center'
-		| 'right-center'
-		| 'center' = 'bottom-right';
+		| "top-left"
+		| "top-right"
+		| "bottom-left"
+		| "bottom-right"
+		| "top-center"
+		| "bottom-center"
+		| "left-center"
+		| "right-center"
+		| "center" = "bottom-right";
 	export let faded: boolean = false;
 
 	// Props for content
 	export let icon: any | string;
-	export let iconType: 'component' | 'svg' = 'component';
+	export let iconType: "component" | "svg" = "component";
 	export let label: string;
 
 	// Optional props
 	export let onClick: () => void = () => {};
-	export let type: 'button' | 'submit' = 'button';
+	export let type: "button" | "submit" = "button";
 </script>
 
 <button
 	{type}
 	class="important-btn {color} {backdropCorner} {faded ? 'faded' : ''}"
-	style="--button-color: {color === 'green'
-		? '#2ac444'
-		: color === 'blue'
-			? '#0099ff'
-			: '#a3a3a3'}; 
-	       --button-hover-color: {color === 'green'
-		? '#24aa2f'
-		: color === 'blue'
-			? '#0066ff'
-			: '#6b6b6b'};"
+	style="--button-color: {color === 'green' ? '#2ac444' : color === 'blue' ? '#0099ff' : '#a3a3a3'}; 
+	       --button-hover-color: {color === 'green' ? '#24aa2f' : color === 'blue' ? '#0066ff' : '#6b6b6b'};"
 	on:click={onClick}>
 	<span class="flex-row align-center">
-		{#if iconType === 'component'}
+		{#if iconType === "component"}
 			<svelte:component this={icon} />
 		{:else}
 			<img src={icon} alt="" />
@@ -49,19 +41,19 @@
 
 <style lang="scss">
 	.important-btn {
-		text-decoration: none;
-		width: fit-content;
-		padding: 0.75rem 1.5rem;
-		font-family: 'Quicksand', system-ui, sans-serif;
+		background: rgb(235, 235, 235);
+		border: 2px solid var(--button-color);
+		border-radius: 6px;
+		color: rgb(31, 31, 31);
+		cursor: pointer;
+		font-family: "Quicksand", system-ui, sans-serif;
 		font-size: 1.1rem;
 		font-weight: 600;
-		background: rgb(235, 235, 235);
-		color: rgb(31, 31, 31);
-		border-radius: 6px;
-		cursor: pointer;
-		transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		border: 2px solid var(--button-color);
 		letter-spacing: 0.01em;
+		padding: 0.75rem 1.5rem;
+		text-decoration: none;
+		transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		width: fit-content;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
@@ -138,18 +130,18 @@
 		}
 
 		&.faded {
-			opacity: 0.5;
 			cursor: default;
+			opacity: 0.5;
 			pointer-events: none;
 		}
 
 		span {
-			display: flex;
 			align-items: center;
+			display: flex;
 			gap: 0.5rem;
+			transform: translateZ(0);
 			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			will-change: transform;
-			transform: translateZ(0);
 		}
 	}
 </style>

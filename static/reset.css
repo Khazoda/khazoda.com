@@ -27,17 +27,17 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
 	list-style: none;
 }
 
 /* Set core body defaults */
 body {
-	min-height: 100dvh;
-	margin: 0;
-	padding: 8px;
 	line-height: 1.5;
+	margin: 0;
+	min-height: 100dvh;
+	padding: 8px;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -63,8 +63,8 @@ h4 {
 /* Make images easier to work with */
 img,
 picture {
-	max-width: 100%;
 	display: block;
+	max-width: 100%;
 }
 
 /* Inherit fonts for inputs and buttons */

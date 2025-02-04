@@ -1,7 +1,7 @@
 <script lang="ts">
-	import HugeiconsInformationSquare from 'virtual:icons/hugeicons/information-square';
-	import CenterModal from '../CenterModal.svelte';
-	import { closeDialog } from '../CenterModal.svelte';
+	import HugeiconsInformationSquare from "virtual:icons/hugeicons/information-square";
+	import CenterModal from "../CenterModal.svelte";
+	import { closeDialog } from "../CenterModal.svelte";
 
 	export let title: string;
 	export let showModal: boolean[] = Array(9).fill(false);
@@ -32,18 +32,18 @@
 
 <style lang="scss">
 	.info-tab {
-		position: absolute;
-		right: 1rem;
-		top: -3rem;
-		display: inline-flex;
 		align-items: center;
-		justify-content: flex-start;
-		padding: 0.5rem;
 		background: #333333;
 		border: 2px solid #1c1c1c;
 		border-bottom: none;
 		border-radius: 6px 6px 0 0;
 		cursor: pointer;
+		display: inline-flex;
+		justify-content: flex-start;
+		padding: 0.5rem;
+		position: absolute;
+		right: 1rem;
+		top: -3rem;
 		transition: all 0.1s ease;
 		width: fit-content;
 
@@ -54,9 +54,9 @@
 	}
 
 	.info-tab.disabled {
-		cursor: not-allowed;
 		background: #333333;
 		color: #555555;
+		cursor: not-allowed;
 	}
 	h2 {
 		margin: 0;
@@ -64,17 +64,17 @@
 
 	.modal-actions {
 		display: flex;
+		gap: 1rem;
 		justify-content: center;
 		margin-top: 1rem;
-		gap: 1rem;
 		.ok-btn {
 			background: #4a9eff;
-			color: white;
-			padding: 0.5rem 2rem;
 			border: none;
 			border-radius: 4px;
-			font-weight: 600;
+			color: white;
 			cursor: pointer;
+			font-weight: 600;
+			padding: 0.5rem 2rem;
 			transition: all 0.2s ease;
 
 			&:hover {
@@ -87,25 +87,29 @@
 		max-height: 80vh;
 		overflow-y: auto;
 		padding-right: 1rem;
+		scrollbar-color: #4a9eff #1c1c1c;
+
+		/* Firefox */
+		scrollbar-width: thin;
 		h2 {
+			background: #141414;
 			padding-bottom: 1rem;
 			position: sticky;
 			top: 0;
-			background: #141414;
 			z-index: 100;
 		}
 		.modal-actions {
+			background: #141414;
+			bottom: 0;
 			padding-top: 1rem;
 			position: sticky;
-			bottom: 0;
-			background: #141414;
 			z-index: 100;
 		}
 
 		/* Custom Scrollbar Styling */
 		&::-webkit-scrollbar {
-			width: 8px;
 			height: 8px;
+			width: 8px;
 		}
 
 		&::-webkit-scrollbar-track {
@@ -121,9 +125,5 @@
 				background: #3b8de6;
 			}
 		}
-
-		/* Firefox */
-		scrollbar-width: thin;
-		scrollbar-color: #4a9eff #1c1c1c;
 	}
 </style>

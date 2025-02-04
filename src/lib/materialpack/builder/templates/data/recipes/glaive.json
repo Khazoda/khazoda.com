@@ -1,20 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " OO",
-    "O/ ",
-    "/  "
-  ],
-  "key": {
-    "/": {
-      "item": "minecraft:stick"
-    },
-    "O": {
-      "item": "{{repair_ingredient}}"
-    }
-  },
-  "result": {
-    "id": "basicweapons:{{material_name}}_glaive",
-    "count": 1
-  }
-} 
+	"type": "minecraft:crafting_shaped",
+	"pattern": [" OO", "O/ ", "/  "],
+	"key": {
+		"/": {
+			"item": "minecraft:stick"
+		},
+		"O": {
+			"item": "{{repair_ingredient}}"
+		}
+	},
+	"result": {
+		"id": "basicweapons:{{material_name}}_glaive",
+		"count": 1
+	}
+}

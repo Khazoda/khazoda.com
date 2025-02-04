@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 
-	import { page } from '$app/stores';
+	import { page } from "$app/stores";
 </script>
 
 <head>
@@ -16,20 +16,20 @@
 
 <style>
 	.center {
-		position: absolute;
-		margin: auto;
-		inset: 0;
-		width: fit-content;
-		height: fit-content;
+		align-items: center;
 		display: inline-flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		font-size: larger;
+		height: fit-content;
+		inset: 0;
+		justify-content: center;
+		margin: auto;
+		position: absolute;
+		width: fit-content;
 	}
 	a {
-		margin-top: 2rem;
 		color: rgb(133, 255, 255);
+		margin-top: 2rem;
 		text-decoration: none;
 		&:hover {
 			text-decoration: underline;

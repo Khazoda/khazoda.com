@@ -1,21 +1,21 @@
 <script lang="ts" context="module">
 	export const closeDialog = () => {
-		const dialogs = document.querySelectorAll('dialog');
-		dialogs.forEach((dialog) => {
+		const dialogs = document.querySelectorAll("dialog");
+		dialogs.forEach(dialog => {
 			if (dialog.open) dialog.close();
 		});
 	};
 </script>
 
 <script lang="ts">
-	import MingcuteCloseFill from 'virtual:icons/mingcute/close-fill';
-	import { replaceState } from '$app/navigation';
+	import MingcuteCloseFill from "virtual:icons/mingcute/close-fill";
+	import { replaceState } from "$app/navigation";
 
 	export let showModal: boolean[];
 	export let modalID: number;
 	export let returnToURL: string | undefined = undefined;
 	export let closeButtonOffset: number = 1;
-	export let style: string = '';
+	export let style: string = "";
 
 	let dialog: HTMLDialogElement;
 	$: if (dialog && showModal[modalID]) dialog.showModal();
@@ -36,8 +36,7 @@
 			on:click={() => dialog.close()}
 			class="modal-close-button"
 			type="button"
-			style="right: {closeButtonOffset}rem;"
-		>
+			style="right: {closeButtonOffset}rem;">
 			<MingcuteCloseFill />
 		</button>
 		<slot name="header" />
@@ -47,18 +46,18 @@
 
 <style lang="scss">
 	dialog {
-		position: fixed;
-		inset: 0;
-		margin: auto;
-		max-width: 500px;
-		width: 90%;
-		max-height: 90vh;
-		height: fit-content;
-		overflow-y: auto;
-		padding: 0;
 		background: none;
 		border: none;
 		color: #e9e9ec;
+		height: fit-content;
+		inset: 0;
+		margin: auto;
+		max-height: 90vh;
+		max-width: 500px;
+		overflow-y: auto;
+		padding: 0;
+		position: fixed;
+		width: 90%;
 
 		@media (max-width: 530px) {
 			margin: auto auto 5vh;
@@ -75,10 +74,10 @@
 	}
 
 	.dialog-inner {
-		width: 100%;
+		background: #141414;
 		border-radius: 0.5rem;
 		padding: 1.5rem;
-		background: #141414;
+		width: 100%;
 	}
 
 	@keyframes zoom {
@@ -102,20 +101,20 @@
 	}
 
 	.modal-close-button {
-		z-index: 1000;
+		align-items: center;
+		border: none;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		display: flex;
+
+		font-size: x-large;
+		height: 40px;
+		justify-content: center;
+		margin: 0 0 1rem auto;
 		position: absolute;
 		right: 1rem;
 		top: 1rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 0 1rem auto;
 		width: 40px;
-		height: 40px;
-		border: none;
-
-		font-size: x-large;
-		border-radius: 0.5rem;
-		cursor: pointer;
+		z-index: 1000;
 	}
 </style>

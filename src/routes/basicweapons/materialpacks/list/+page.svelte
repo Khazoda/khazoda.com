@@ -333,10 +333,10 @@
 
 <style lang="scss">
 	.page-container {
-		margin: 0 auto;
-		max-width: 1200px;
-		padding: 2rem;
 		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
 		@media screen and (max-width: 1000px) {
 			padding: 1rem;
 			padding-right: calc(1rem + 0.5rem);
@@ -344,9 +344,9 @@
 	}
 
 	.above-header {
-		align-items: center;
 		display: flex;
 		flex-direction: row;
+		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 1.5rem;
 	}
@@ -362,23 +362,23 @@
 	.controls {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
 		margin-bottom: 1rem;
+		gap: 1rem;
 
 		.search-bar {
-			align-items: center;
-			background: #2a2a2a;
-			border: 2px solid #3a3a3a;
-			border-radius: 8px;
 			display: flex;
 			flex: 1;
+			align-items: center;
 			padding: 0.5rem 1rem;
+			border: 2px solid #3a3a3a;
+			border-radius: 8px;
+			background: #2a2a2a;
 
 			input {
-				background: none;
-				border: none;
-				color: white;
 				margin-left: 0.5rem;
+				border: none;
+				background: none;
+				color: white;
 				&:focus {
 					outline: none;
 				}
@@ -389,56 +389,56 @@
 			display: flex;
 			gap: 1rem;
 
-			@media screen and (max-width: 1000px) {
+			@media screen and (max-width: 499px) {
 				flex-direction: column;
 			}
 
 			select {
 				appearance: none;
+				min-width: 140px;
+				padding: 0.5rem 2.5rem 0.5rem 1rem;
+				border: 2px solid #3a3a3a;
+				border-radius: 8px;
 				background: #2a2a2a
 					url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E")
 					no-repeat;
 				background-position: right 0.75rem center;
 				background-size: 16px;
-				border: 2px solid #3a3a3a;
-				border-radius: 8px;
 				color: white;
 				cursor: pointer;
-				min-width: 140px;
-				padding: 0.5rem 2.5rem 0.5rem 1rem;
 
 				&:hover {
-					background-color: #3a3a3a;
 					border-color: #4a4a4a;
+					background-color: #3a3a3a;
 				}
 
 				&:focus {
 					border-color: #4a9eff;
-					box-shadow: 0 0 0 1px #4a9eff33;
 					outline: none;
+					box-shadow: 0 0 0 1px #4a9eff33;
 				}
 
 				option {
+					padding: 0.5rem;
 					background: #2a2a2a;
 					color: white;
-					padding: 0.5rem;
 				}
 			}
 
 			.sort-direction {
+				display: inline-flex;
 				align-items: center;
-				background: #2a2a2a;
+				justify-content: center;
+				width: 42px;
+				min-width: 42px;
+				height: 42px;
 				border: 2px solid #3a3a3a;
 				border-radius: 8px;
+				background: #2a2a2a;
 				color: white;
-				cursor: pointer;
-				display: inline-flex;
 				font-size: 1.2rem;
-				height: 42px;
-				justify-content: center;
 				line-height: 1;
-				min-width: 42px;
-				width: 42px;
+				cursor: pointer;
 
 				&:hover {
 					background: #3a3a3a;
@@ -451,15 +451,15 @@
 			}
 
 			.category-toggle {
+				display: flex;
 				align-items: center;
-				background: #2a2a2a;
+				padding: 0.5rem 1rem;
+				gap: 0.75rem;
 				border: 2px solid #3a3a3a;
 				border-radius: 8px;
+				background: #2a2a2a;
 				color: white;
 				cursor: pointer;
-				display: flex;
-				gap: 0.75rem;
-				padding: 0.5rem 1rem;
 				user-select: none;
 
 				&:hover {
@@ -467,32 +467,32 @@
 				}
 
 				input[type="checkbox"] {
+					display: grid;
 					appearance: none;
 					-webkit-appearance: none;
+					place-content: center;
+					width: 18px;
+					height: 18px;
+					margin: 0;
 					border: 2px solid #3a3a3a;
 					border-radius: 4px;
 					cursor: pointer;
-					display: grid;
-					height: 18px;
-					margin: 0;
-					place-content: center;
 					transition: all 0.2s ease;
-					width: 18px;
 
 					&::before {
-						box-shadow: inset 1em 1em #4a9eff;
-						clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-						content: "";
+						width: 10px;
 						height: 10px;
 						transform: scale(0);
 						transform-origin: center;
+						box-shadow: inset 1em 1em #4a9eff;
+						content: "";
+						clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 						transition: transform 0.2s ease;
-						width: 10px;
 					}
 
 					&:checked {
-						background: #4a9eff33;
 						border-color: #4a9eff;
+						background: #4a9eff33;
 
 						&::before {
 							transform: scale(1);
@@ -501,14 +501,14 @@
 
 					&:focus {
 						border-color: #4a9eff;
-						box-shadow: 0 0 0 1px #4a9eff33;
 						outline: none;
+						box-shadow: 0 0 0 1px #4a9eff33;
 					}
 				}
 
 				span {
-					font-size: 0.9rem;
 					font-weight: 500;
+					font-size: 0.9rem;
 				}
 			}
 		}
@@ -516,63 +516,63 @@
 
 	.packs-grid {
 		display: grid;
-		gap: 0.5rem;
 		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 		justify-content: flex-start;
+		gap: 0.5rem;
 		@media screen and (max-width: 1000px) {
 			justify-items: center;
 		}
 	}
 
 	.pack-card {
-		background: #2a2a2a;
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 275px;
+		height: 275px;
+		margin-bottom: 0.5rem;
+		padding: 1rem;
+		overflow: hidden;
 		border: 2px solid #3a3a3a;
 		border-radius: 8px;
-		display: flex;
-		flex-direction: column;
-		height: 275px;
-		justify-content: space-between;
-		margin-bottom: 0.5rem;
-		overflow: hidden;
-		padding: 1rem;
-		position: relative;
+		background: #2a2a2a;
 		transition: all 0.2s ease;
-		width: 275px;
 		.external-link-popup {
-			opacity: 0;
 			position: absolute;
-			right: -0.5rem;
 			top: 0.5rem;
+			right: -0.5rem;
+			opacity: 0;
 			transition: all 0.2s ease;
 		}
 		&:hover .external-link-popup {
-			opacity: 1;
 			transform: translateX(-1rem);
+			opacity: 1;
 		}
 
 		&:hover {
+			transform: translateY(-2px);
 			border-color: #4a9eff;
 			cursor: pointer;
-			transform: translateY(-2px);
 		}
 		.pack-header {
 			display: flex;
 			flex-direction: row;
-			gap: 0.25rem;
 			margin: 0;
+			gap: 0.25rem;
 			img {
 				aspect-ratio: 1;
+				width: 96px;
 				height: auto;
 				object-fit: cover;
-				width: 96px;
 			}
 			span {
-				padding: 0.5rem 0.25rem;
 				width: 100%;
+				padding: 0.5rem 0.25rem;
 				h3,
 				p {
-					font-size: 1rem;
 					margin: 0;
+					font-size: 1rem;
 				}
 				p {
 					color: #aaa;
@@ -586,21 +586,21 @@
 			padding: 0.5rem 0;
 
 			.stats {
-				color: #aaa;
 				display: flex;
 				flex-direction: column;
-				font-size: 0.8rem;
-				gap: 0.1rem;
 				justify-content: space-between;
+				gap: 0.1rem;
+				color: #aaa;
+				font-size: 0.8rem;
 
 				.category {
 					text-transform: capitalize;
 				}
 
 				span {
-					align-items: flex-start;
 					display: flex;
 					flex-direction: row;
+					align-items: flex-start;
 					gap: 0.25rem;
 				}
 			}
@@ -609,81 +609,81 @@
 		.bottom-badges {
 			display: flex;
 			flex-direction: column;
-			font-size: 0.75rem;
-			gap: 0.25rem;
-			padding: 0.25rem 0;
 			width: 100%;
+			padding: 0.25rem 0;
+			gap: 0.25rem;
+			font-size: 0.75rem;
 
 			a.required-mod {
+				display: inline-flex;
+				z-index: 10;
 				align-items: center;
-				background: #2a2a2a;
+				width: auto;
+				padding: 0.25rem 0.5rem;
+				gap: 0.25rem;
 				border: 2px solid #3a3a3a;
 				border-radius: 4px;
+				background: #2a2a2a;
 				color: rgb(143, 238, 255);
-				display: inline-flex;
-				gap: 0.25rem;
-				padding: 0.25rem 0.5rem;
 				text-decoration: none;
-				width: auto;
-				z-index: 10;
 
 				&:hover {
-					background: #3a3a3a;
 					border-color: #4a9eff;
+					background: #3a3a3a;
 				}
 			}
 
 			.project-badge {
+				display: inline-flex;
 				align-items: center;
-				background: #2a2a2a;
+				width: auto;
+				padding: 0.25rem 0.5rem;
+				gap: 0.25rem;
 				border: 1px solid #3a3a3a;
 				border-radius: 4px;
-				display: inline-flex;
-				gap: 0.25rem;
-				padding: 0.25rem 0.5rem;
+				background: #2a2a2a;
 				text-decoration: none;
-				width: auto;
 
 				.official {
-					background: #2a2a2a;
 					border: 1px solid #3a3a3a;
+					background: #2a2a2a;
 				}
 				.unofficial {
-					background: #2a2a2a;
 					border: 1px solid #3a3a3a;
+					background: #2a2a2a;
 				}
 			}
 		}
 
 		.materialpack-modrinth-link-overlay {
-			height: 100%;
-			left: 0;
 			position: absolute;
 			top: 0;
+			left: 0;
 			width: 100%;
+			height: 100%;
 		}
 
 		.empty-pack {
+			display: flex;
 			align-items: center;
-			background: #252525;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
 			border: 2px solid #181818;
 			border-radius: 8px;
+			background: #252525;
 			color: #aaa;
-			display: flex;
 			font-size: 1.25rem;
-			height: 100%;
-			justify-content: center;
 			text-align: center;
-			width: 100%;
 		}
 	}
 
 	.category-heading {
-		border-bottom: 2px solid #3a3a3a;
-		color: #4a9eff;
 		grid-column: 1 / -1;
 		margin: 2rem 0 1rem;
 		padding-bottom: 0.5rem;
+		border-bottom: 2px solid #3a3a3a;
+		color: #4a9eff;
 		text-transform: capitalize;
 
 		&:first-of-type {
@@ -704,32 +704,32 @@
 		}
 
 		.requirements {
-			background: #2a2a2a;
-			border: 1px solid #3a3a3a;
-			border-radius: 8px;
 			margin-top: 1.5rem;
 			padding: 1rem;
+			border: 1px solid #3a3a3a;
+			border-radius: 8px;
+			background: #2a2a2a;
 
 			h3 {
+				margin: 0 0 0.5rem 0;
 				color: #85c0ff;
 				font-size: 1rem;
-				margin: 0 0 0.5rem 0;
 			}
 
 			ul {
-				list-style: inside;
 				padding-left: 0;
+				list-style: inside;
 
 				li {
-					font-size: 0.9rem;
 					margin-bottom: 0.25rem;
+					font-size: 0.9rem;
 				}
 				img {
-					border-radius: 12px;
+					width: 100%;
 					height: auto;
 					margin: 0.5rem 0;
 					object-fit: cover;
-					width: 100%;
+					border-radius: 12px;
 				}
 				h4 {
 					margin-bottom: 1rem;
@@ -754,18 +754,18 @@
 	}
 
 	.discord-btn {
-		align-items: center;
-		background: #5865f2;
-		border-radius: 4px;
-		color: white;
 		display: flex;
-		font-weight: 600;
+		align-items: center;
 		justify-content: space-around;
+		width: 250px;
 		margin: 0 0 0 auto;
 		padding: 0.75rem 1.5rem;
+		border-radius: 4px;
+		background: #5865f2;
+		color: white;
+		font-weight: 600;
 		text-decoration: none;
 		transition: background-color 0.2s ease;
-		width: 250px;
 	}
 
 	.discord-btn:hover {

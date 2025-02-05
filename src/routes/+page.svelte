@@ -47,6 +47,10 @@
 	import IconoirLensPlus from "virtual:icons/iconoir/lens-plus";
 	import HugeiconsMining01 from "virtual:icons/hugeicons/mining-01";
 	import HugeiconsBlockchain01 from "virtual:icons/hugeicons/blockchain-01";
+	import HugeiconsMonocle01 from "virtual:icons/hugeicons/monocle-01";
+	import PixelarticonsList from "virtual:icons/pixelarticons/list";
+	import PixelarticonsHumanHandsup from "virtual:icons/pixelarticons/human-handsup";
+	import PixelarticonsPaintBucket from "virtual:icons/pixelarticons/paint-bucket";
 
 	import PlushablesColoured from "components/PlushablesColoured.svelte";
 
@@ -66,7 +70,7 @@
 	import CenterModal from "src/components/CenterModal.svelte";
 
 	var showModal: boolean[] = Array(100).fill(false);
-	$: currentlyHovered = "Plushables";
+	$: currentlyHovered = "";
 	const hashToModalID: Record<string, number> = {
 		"#plushables": 0,
 		"#basicweapons": 1,
@@ -162,7 +166,6 @@
 <!-- #region HTML-->
 <svelte:head>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<link rel="stylesheet" href="index.css" />
 	<title>Khazoda's Mods</title>
 </svelte:head>
 <div class="page-container">
@@ -196,10 +199,14 @@
 		<div class="island">
 			<span class="island-content">
 				<div class="logo-links">
-					<span class="inert"><img src={profile_icon} alt="Khazoda" width="64" draggable="false" /></span>
+					<span class="circquare-left inert" use:handleHover={["Thanks for visiting! 😎", false]}>
+						<img src={profile_icon} alt="Khazoda" width="64" draggable="false" /></span>
 					<div class="vertical-spacer"></div>
-					<span>
-						<a href="/basicweapons/materialpacks" use:handleHover={["Material Pack Creator", false]}>
+					<span class="squircle">
+						<a
+							href="/basicweapons/materialpacks"
+							use:handleHover={["Material Pack Creator", false]}
+							aria-label="Material Pack Creator">
 							<img
 								src={materialpack_link_logo}
 								alt="Creator Logo"
@@ -209,16 +216,24 @@
 					</span>
 				</div>
 				<div class="icon-links">
-					<span>
-						<a href="/versions" use:handleHover={["Version Information Table for All Mods", false]}>
-							<HugeiconsBlockchain01 width="42" height="42" />
+					<span class="squircle">
+						<a
+							href="/versions"
+							use:handleHover={["Version Information Table", false]}
+							aria-label="Version Information Table">
+							<PixelarticonsList width="42" height="42" />
 						</a>
 					</span>
-					<span>
-						<button use:handleHover={["Collaborations & Mini Mods", true]} on:click={() => showDialog(999)}>
-							<HugeiconsMining01 width="42" height="42" />
+					<span class="squircle">
+						<button
+							use:handleHover={["Collaborations & Mini Mods", true]}
+							on:click={() => showDialog(999)}
+							aria-label="Collaborations & Mini Mods">
+							<PixelarticonsPaintBucket width="42" height="42" />
 						</button>
 					</span>
+					<div class="vertical-spacer"></div>
+					<span class="circquare-right inert" style="box-shadow: 0 0 0 2px transparent;"> </span>
 				</div>
 			</span>
 		</div>
@@ -283,15 +298,20 @@
 
 	<footer class="footer-section">
 		<span class="socials-container">
-			<a href="https://bsky.app/profile/khazoda.com" aria-label="Khazoda on Bluesky" title="Khazoda on Bluesky"
-				><IconoirBluesky /></a>
+			<a
+				href="https://bsky.app/profile/khazoda.com"
+				aria-label="Khazoda on Bluesky"
+				title="Khazoda on Bluesky"
+				class="bluesky"><IconoirBluesky width="24" height="24" /></a>
 			<a
 				href="https://discord.com/invite/vEZUkSxwR9"
 				aria-label="Get support on Discord"
 				title="Get support on Discord"
-				target="_blank"><IconoirDiscord /></a>
+				target="_blank"
+				class="discord"><IconoirDiscord width="24" height="24" /></a>
 		</span>
-		<span class="copyright">&copy; <a href="https://khazoda.com">khazoda.com</a> 2024</span>
+		<span class="copyright"
+			>&copy; <a href="https://khazoda.com">khazoda.com</a> {new Date().getFullYear() || 2025}</span>
 	</footer>
 </div>
 <!--#region Plushables Modal -->
@@ -303,6 +323,7 @@
 				src={plushables_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			<PlushablesColoured />
 		</span>
@@ -353,6 +374,7 @@
 				src={basicweapons_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Basic Weapons
 		</span>
@@ -419,6 +441,7 @@
 				src={bronze_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Bronze
 		</span>
@@ -465,6 +488,7 @@
 				src={breakerplacer_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Block Breaker & Block Placer
 		</span>
@@ -511,6 +535,7 @@
 				src={basicstorage_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Basic Storage
 		</span>
@@ -563,6 +588,7 @@
 				src={plastar_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Mecha Soldier PLASTAR
 		</span>
@@ -609,6 +635,7 @@
 				src={kreebles_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Kreebles
 		</span>
@@ -663,6 +690,7 @@
 				src={hookaduck_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Hook a Duck
 		</span>
@@ -709,6 +737,7 @@
 				src={beef_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Beef & Blade
 		</span>
@@ -750,6 +779,7 @@
 				src={dwayne_project_icon}
 				alt="logo for the currently opened project"
 				width="32"
+				height="32"
 				draggable="false" />
 			Dwayne 'The Block' Johnson
 		</span>
@@ -785,7 +815,7 @@
 <!-- #region Collaborations & Mini Mods Modal -->
 <CenterModal bind:showModal modalID={999}>
 	<h2 slot="header" class="header-slot">
-		<span>Collaborations & Mini Mods</span>
+		<span>Other Mods</span>
 	</h2>
 
 	<div slot="description">
@@ -829,8 +859,8 @@
 		--color-text-secondary: #aaaaaa;
 		--color-background-dark: #2c2c2c;
 		--color-background-darker: #141414;
-		--color-island-background-outer: #202020;
-		--color-island-background-inner: #151515;
+		--color-island-background-outer: #2b2b2b;
+		--color-island-background-inner: #454545;
 		--color-link: rgb(128, 215, 255);
 		--color-link-muted: rgb(149, 187, 204);
 		--color-link-modrinth: rgb(128, 255, 160);
@@ -850,13 +880,8 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
+		height: auto;
 		min-height: calc(100dvh - 16px);
-	}
-	// Mobile
-	@media screen and (max-width: 1000px) {
-		.page-container {
-			align-items: flex-start;
-		}
 	}
 
 	//#region Island
@@ -910,10 +935,19 @@
 
 				.logo-links {
 					justify-content: flex-start;
+					span:not(.inert) {
+						border: 2px solid rgb(35, 35, 35);
+					}
+					span::after {
+						background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), transparent 50%);
+					}
 				}
 
 				.icon-links {
 					justify-content: flex-end;
+					span::after {
+						background: linear-gradient(145deg, rgba(150, 150, 150, 0.5), transparent 50%);
+					}
 				}
 
 				span {
@@ -924,28 +958,56 @@
 					width: 52px;
 					height: 52px;
 					overflow: hidden;
-					border-radius: 100%;
-					background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
-					box-shadow: 0px 0px 0px 2px rgb(44, 44, 44);
+					background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(28, 28, 28, 0.9));
+					box-shadow:
+						0 2px 4px rgba(0, 0, 0, 0.2),
+						inset 0 1px 1px rgba(255, 255, 255, 0.1),
+						inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+					transition: all 0.2s ease;
+
 					&::after {
 						position: absolute;
 						width: 150%;
 						height: 150%;
 						inset: -25%;
 						transform: translateX(-100%);
-						background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
 						content: "";
 						pointer-events: none;
-						transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-					}
-					&:hover {
-						box-shadow: 0px 0px 0px 2px rgb(33, 33, 33);
-						cursor: pointer;
-					}
-					&:hover::after {
-						transform: translateX(100%);
+						transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 					}
 
+					&:hover {
+						transform: translateY(-1px);
+						background: linear-gradient(145deg, rgba(45, 45, 45, 0.9), rgba(32, 32, 32, 0.9));
+						box-shadow:
+							0 4px 8px rgba(0, 0, 0, 0.3),
+							inset 0 1px 1px rgba(255, 255, 255, 0.15),
+							inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+						cursor: pointer;
+					}
+
+					a:focus {
+						outline: none;
+					}
+					&:focus-within {
+						outline: none;
+					}
+					&:has(a:focus-visible),
+					&:has(button:focus-visible) {
+						outline: solid 2px rgba(100, 200, 255, 0.8);
+					}
+					&:hover::after,
+					&:focus-within::after {
+						transform: translateX(100%);
+					}
+					&:active {
+						transform: translateY(1px);
+						background: linear-gradient(145deg, rgba(35, 35, 35, 0.9), rgba(25, 25, 25, 0.9));
+						box-shadow:
+							0 1px 2px rgba(0, 0, 0, 0.2),
+							inset 0 1px 1px rgba(255, 255, 255, 0.05),
+							inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+					}
 					a,
 					button {
 						all: unset;
@@ -959,7 +1021,13 @@
 
 				span.inert {
 					background: none;
-					pointer-events: none;
+					box-shadow: none;
+					cursor: default;
+					pointer-events: visibleStroke;
+					&:hover {
+						transform: none;
+						box-shadow: none;
+					}
 					&::after {
 						display: none;
 						content: none;
@@ -977,6 +1045,50 @@
 			border-radius: 0 0 12px 12px;
 			background: var(--color-background-dark);
 			box-shadow: 0px 0px 6px 4px rgb(28, 28, 28);
+		}
+	}
+
+	// Mobile Column Island
+	@media screen and (max-width: 575px) {
+		.island-section {
+			position: fixed;
+			top: 50%;
+			right: 0;
+			align-items: flex-end;
+			height: auto;
+			transform: translateY(-50%);
+
+			.island {
+				position: relative;
+
+				width: 80px;
+				height: min(100%, 700px);
+
+				.island-content {
+					flex-direction: column;
+					padding: 8px 0 8px 0;
+
+					.logo-links,
+					.icon-links {
+						flex-direction: column;
+
+						.vertical-spacer {
+							width: 20px;
+							height: 3px;
+						}
+
+						.circquare-left {
+							border-radius: 100% 100% 0 0;
+						}
+						.circquare-right {
+							border-radius: 0 0 100% 100%;
+						}
+					}
+				}
+			}
+			.dynamic-label {
+				display: none;
+			}
 		}
 	}
 
@@ -1001,18 +1113,51 @@
 		li {
 			position: relative;
 			list-style: none;
+
+			&:nth-child(1) {
+				--float-duration: 3.2s;
+				--float-delay: 0s;
+				top: 1rem;
+			}
+			&:nth-child(2) {
+				--float-duration: 2.8s;
+				--float-delay: 0.3s;
+				top: -1rem;
+			}
+			&:nth-child(3) {
+				--float-duration: 3.4s;
+				--float-delay: 0.7s;
+				top: 1rem;
+			}
+			&:nth-child(4) {
+				--float-duration: 3s;
+				--float-delay: 0.1s;
+				top: -1rem;
+			}
+			&:nth-child(5) {
+				--float-duration: 3.6s;
+				--float-delay: 0.5s;
+				top: 1rem;
+			}
+
 			&::after {
 				z-index: -1;
 				position: absolute;
 				bottom: -10px;
 				left: 50%;
 				width: 80%;
-				height: 20px;
+				height: 35px;
 				transform: translateX(-50%);
 				border-radius: 50%;
-				background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+				background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.25) 0%, rgba(5, 5, 5, 0) 90%);
 				content: "";
-				animation: shadowPulse 3s ease-in-out infinite;
+				animation: shadowPulse var(--float-duration, 3s) ease-in-out infinite;
+				animation-delay: var(--float-delay, 0s);
+				opacity: 0;
+			}
+
+			&:hover::after {
+				animation-play-state: paused;
 			}
 		}
 
@@ -1022,16 +1167,19 @@
 			padding: 0;
 			border: none;
 			background: none;
+			animation: float var(--float-duration, 3s) ease-in-out infinite;
+			animation-delay: var(--float-delay, 0s);
 			cursor: pointer;
-			transition: transform 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-			will-change: transform;
+			transition: scale 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+			will-change: transform, scale;
 
 			&:hover {
-				transform: scale(1.05);
+				scale: 1.05;
+				animation-play-state: paused;
 			}
 
 			&:active {
-				transform: scale(0.95);
+				scale: 0.95;
 			}
 		}
 
@@ -1047,38 +1195,29 @@
 		}
 
 		@keyframes float {
-			0%,
-			100% {
+			0% {
 				transform: translateY(0);
 			}
 			50% {
-				transform: translateY(-5px);
+				transform: translateY(10px);
+			}
+			100% {
+				transform: translateY(0);
 			}
 		}
 
 		@keyframes shadowPulse {
-			0%,
-			100% {
+			0% {
 				transform: translateX(-50%) scale(1);
-				opacity: 0.4;
+				opacity: 0.1;
 			}
 			50% {
 				transform: translateX(-50%) scale(0.95);
-				opacity: 0.2;
+				opacity: 1;
 			}
-		}
-
-		button {
-			animation: float 3s ease-in-out infinite;
-
-			@for $i from 1 through 5 {
-				&:nth-child(#{$i}) {
-					animation-delay: #{$i * 0.2}s;
-
-					&::after {
-						animation-delay: #{$i * 0.2}s;
-					}
-				}
+			100% {
+				transform: translateX(-50%) scale(1);
+				opacity: 0.1;
 			}
 		}
 	}
@@ -1087,18 +1226,39 @@
 	.footer-section {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: flex-end;
 		height: 128px;
-		padding: 1rem;
 		gap: 0.5rem;
-		color: var(--color-text-secondary);
 		a {
 			color: unset;
-			text-decoration: none;
-			&:hover {
-				text-decoration: underline;
+		}
+		.socials-container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			gap: 1rem;
+			color: rgb(125, 125, 125);
+			a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.5rem;
+				border-radius: 8px;
+				background: #2a2a2a;
+				&:hover {
+					background: #3a3a3a;
+					text-decoration: none;
+					&.bluesky {
+						color: #0085ff;
+					}
+					&.discord {
+						color: #5865f2;
+					}
+				}
 			}
+		}
+		.copyright {
+			color: rgb(75, 75, 75);
 		}
 	}
 
@@ -1340,7 +1500,7 @@
 				justify-content: center;
 				aspect-ratio: 1;
 				max-width: 128px;
-				padding: 1rem;
+				padding: 0.5rem;
 				border: none;
 				border-radius: 12px;
 				background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));

@@ -51,8 +51,16 @@ h3 {
 body {
 	z-index: 0;
 	position: relative;
+	height: 100%;
+	min-height: 100%;
 	background: linear-gradient(135deg, #27272b 0%, #242429 20%, #1f1f23 40%, #1d1d21 60%, #1b1b20 80%, #19191e 100%);
 	color: #e9e9ec;
+}
+
+/* Ensure SvelteKit's root div also takes full height */
+body > div {
+	height: 100%;
+	min-height: 100%;
 }
 
 body::after {
@@ -121,24 +129,36 @@ button:hover {
 	cursor: pointer;
 }
 
+button:focus {
+	outline: none;
+}
+
+button:focus-visible {
+	border-radius: 8px;
+	outline: solid 2px rgba(100, 200, 255, 0.8);
+}
+
 /* Some tailwind-esque generics to reuse */
 .absolute-top-left {
+	z-index: 1;
 	position: absolute;
 	top: 1.5rem;
 	left: 1.5rem;
 }
-
 .absolute-top-right {
+	z-index: 1;
 	position: absolute;
 	top: 1.5rem;
 	right: 1.5rem;
 }
 .fixed-top-right {
+	z-index: 1;
 	position: fixed;
 	top: 1.5rem;
 	right: 1.5rem;
 }
 .fixed-top-left {
+	z-index: 1;
 	position: fixed;
 	top: 1.5rem;
 	left: 1.5rem;
@@ -154,6 +174,9 @@ button:hover {
 .flex-row {
 	display: flex;
 	flex-direction: row;
+}
+.justify-start {
+	justify-content: flex-start !important;
 }
 .justify-center {
 	justify-content: center;
@@ -189,6 +212,18 @@ button:hover {
 	margin-top: 4rem;
 }
 
+/* Border radius presets */
+.squircle {
+	border-radius: 8px;
+}
+
+.circquare-left {
+	border-radius: 100% 8px 8px 100%;
+}
+
+.circquare-right {
+	border-radius: 8px 100% 100% 8px;
+}
 /* Stops filtering for pixel art */
 img.no-resample {
 	position: relative;

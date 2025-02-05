@@ -27,8 +27,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
 	list-style: none;
 }
 
@@ -63,8 +63,8 @@ h4 {
 /* Make images easier to work with */
 img,
 picture {
-	max-width: 100%;
 	display: block;
+	max-width: 100%;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -72,8 +72,8 @@ input,
 button,
 textarea,
 select {
-	font-family: inherit;
 	font-size: inherit;
+	font-family: inherit;
 }
 
 /* Make sure textareas without a rows attribute are not tiny */

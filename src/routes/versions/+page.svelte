@@ -1,27 +1,27 @@
 <script lang="ts">
-	import type { MinecraftVersion, SortOrder } from './types';
-	import { minecraftVersions, mods } from './data';
-	import { page } from '$app/stores';
+	import type { MinecraftVersion, SortOrder } from "./types";
+	import { minecraftVersions, mods } from "./data";
+	import { page } from "$app/stores";
 
-	import IconoirSortDown from 'virtual:icons/iconoir/sort-down';
-	import IconoirSortUp from 'virtual:icons/iconoir/sort-up';
-	import IconoirSquare from 'virtual:icons/iconoir/square';
-	import IconoirCheckSquare from 'virtual:icons/iconoir/check-square';
-	import IconoirInfoCircle from 'virtual:icons/iconoir/info-circle';
-	import CenterModal from '../../components/CenterModal.svelte';
-	import HomeButton from '../../components/HomeButton.svelte';
+	import IconoirSortDown from "virtual:icons/iconoir/sort-down";
+	import IconoirSortUp from "virtual:icons/iconoir/sort-up";
+	import IconoirSquare from "virtual:icons/iconoir/square";
+	import IconoirCheckSquare from "virtual:icons/iconoir/check-square";
+	import IconoirInfoCircle from "virtual:icons/iconoir/info-circle";
+	import CenterModal from "../../components/CenterModal.svelte";
+	import HomeButton from "../../components/HomeButton.svelte";
 
 	var showSupercededVersions = false;
-	var sortOrder: SortOrder = 'newest';
+	var sortOrder: SortOrder = "newest";
 	var displayedVersions: MinecraftVersion[] = [];
 	var showModal: boolean[] = Array(1).fill(false);
 
 	// Filtering & Sorting
 	$: {
 		displayedVersions = minecraftVersions
-			.filter(v => showSupercededVersions || v.type !== 'superceded')
+			.filter(v => showSupercededVersions || v.type !== "superceded")
 			.sort((a, b) => {
-				if (sortOrder === 'major') {
+				if (sortOrder === "major") {
 					// First sort by type (major > minor > superceded)
 					const typeOrder = { major: 0, minor: 1, superceded: 2 };
 					const typeDiff = typeOrder[a.type] - typeOrder[b.type];
@@ -32,9 +32,7 @@
 				} else {
 					const dateA = new Date(a.releaseDate);
 					const dateB = new Date(b.releaseDate);
-					return sortOrder === 'oldest'
-						? dateA.getTime() - dateB.getTime()
-						: dateB.getTime() - dateA.getTime();
+					return sortOrder === "oldest" ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
 				}
 			});
 	}
@@ -44,9 +42,9 @@
 	}
 
 	function toggleSortOrder() {
-		if (sortOrder === 'newest') sortOrder = 'oldest';
-		else if (sortOrder === 'oldest') sortOrder = 'major';
-		else sortOrder = 'newest';
+		if (sortOrder === "newest") sortOrder = "oldest";
+		else if (sortOrder === "oldest") sortOrder = "major";
+		else sortOrder = "newest";
 	}
 
 	function openModal() {
@@ -65,23 +63,19 @@
 				type="button"
 				class="control-btn"
 				on:click={toggleSortOrder}
-				title={sortOrder === 'newest'
-					? 'Sort oldest first'
-					: sortOrder === 'oldest'
-						? 'Sort major versions first'
-						: 'Sort newest first'}>
-				{#if sortOrder === 'newest'}
+				title={sortOrder === "newest"
+					? "Sort oldest first"
+					: sortOrder === "oldest"
+						? "Sort major versions first"
+						: "Sort newest first"}>
+				{#if sortOrder === "newest"}
 					<IconoirSortDown />
-				{:else if sortOrder === 'oldest'}
+				{:else if sortOrder === "oldest"}
 					<IconoirSortUp />
 				{:else}
 					<IconoirSortDown />
 				{/if}
-				{sortOrder === 'newest'
-					? 'Newest First'
-					: sortOrder === 'oldest'
-						? 'Oldest First'
-						: 'Major Versions First'}
+				{sortOrder === "newest" ? "Newest First" : sortOrder === "oldest" ? "Oldest First" : "Major Versions First"}
 			</button>
 
 			<button class="control-btn" on:click={toggleSupercededVersions} type="button">
@@ -114,10 +108,9 @@
 				{#each displayedVersions as version, i}
 					<tr
 						class={version.type}
-						data-new-group={i > 0 &&
-							version.versionGroup !== displayedVersions[i - 1].versionGroup}>
+						data-new-group={i > 0 && version.versionGroup !== displayedVersions[i - 1].versionGroup}>
 						<th>
-							<span class={version.type !== 'major' ? 'non-major-version-text' : ''}>
+							<span class={version.type !== "major" ? "non-major-version-text" : ""}>
 								{version.version}
 							</span>
 						</th>
@@ -125,9 +118,9 @@
 							<td>
 								<div
 									class={`compatibility-indicator ${
-										mod.supportedVersions.includes(version.version) ? 'supported' : 'unsupported'
+										mod.supportedVersions.includes(version.version) ? "supported" : "unsupported"
 									}`}>
-									{mod.supportedVersions.includes(version.version) ? '✓' : '✗'}
+									{mod.supportedVersions.includes(version.version) ? "✓" : "✗"}
 								</div>
 							</td>
 						{/each}
@@ -138,31 +131,30 @@
 	</div>
 </div>
 
-<CenterModal bind:showModal modalID={0} returnToURL={$page.url.origin + '/versions'}>
+<CenterModal bind:showModal modalID={0} returnToURL={$page.url.origin + "/versions"}>
 	<div slot="description" class="definition-list">
 		<h2>Version Types</h2>
 		<ul>
 			<li>
-				<span class="major-text">Major Versions</span> - Minecraft versions that modpacks target for
-				a long time as a stable version.
+				<span class="major-text">Major Versions</span> - Minecraft versions that modpacks target for a long time as a stable
+				version.
 			</li>
 			<li>
-				<span class="minor-text">Minor Versions</span> - Versions that aren't targeted by large modpacks
-				and which mod developers sometimes choose to skip when updating.
+				<span class="minor-text">Minor Versions</span> - Versions that aren't targeted by large modpacks and which mod developers
+				sometimes choose to skip when updating.
 			</li>
 			<li>
-				<span class="superceded-text">Superceded Versions</span> - These versions are usually replaced
-				by a hotfix put out by Mojang. (hidden by default)
+				<span class="superceded-text">Superceded Versions</span> - These versions are usually replaced by a hotfix put out
+				by Mojang. (hidden by default)
 			</li>
 		</ul>
 		<h2>Version Support Policy</h2>
 		<p>
-			I prioritize supporting the latest major Minecraft versions. Going forward this is likely to
-			be the major version number or first subsequent patch e.g. 1.20.1, 1.21.1
+			I prioritize supporting the latest major Minecraft versions. Going forward this is likely to be the major version
+			number or first subsequent patch e.g. 1.20.1, 1.21.1
 			<br />
 			<br />
-			If I have the time and capacity I'll also maintain compatibility with select minor versions where
-			possible.
+			If I have the time and capacity I'll also maintain compatibility with select minor versions where possible.
 			<br />
 			<br />
 			Superceded versions may be maintained for archival purposes but usually will not receive updates.
@@ -192,14 +184,14 @@
 	}
 
 	.table-container {
-		position: relative;
-		max-width: fit-content;
-		margin: 2rem auto;
-		padding: 1rem;
-		border-radius: 0.5rem;
-		z-index: 1;
-		color: var(--v-color-text-primary);
 		background: var(--v-color-background-darkest);
+		border-radius: 0.5rem;
+		color: var(--v-color-text-primary);
+		margin: 2rem auto;
+		max-width: fit-content;
+		padding: 1rem;
+		position: relative;
+		z-index: 1;
 
 		// Version Group Styling Logic
 		tbody {
@@ -210,7 +202,7 @@
 				}
 
 				// add a gap when version group changes
-				&[data-new-group='true'] {
+				&[data-new-group="true"] {
 					td,
 					th {
 						border-top: 0.5rem solid var(--v-color-background-darkest);
@@ -221,16 +213,16 @@
 	}
 
 	.table-container .table-controls {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 100%;
-		height: 3.5rem;
-		padding: 1rem 1rem 0 1rem;
-		display: inline-flex;
-		justify-content: flex-end;
-		gap: 0.5rem;
 		background: var(--v-color-background);
+		display: inline-flex;
+		gap: 0.5rem;
+		height: 3.5rem;
+		justify-content: flex-end;
+		padding: 1rem 1rem 0 1rem;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
 
 		span {
 			display: flex;
@@ -238,13 +230,13 @@
 		}
 		button,
 		a {
-			display: flex;
 			align-items: center;
-			gap: 0.5rem;
-			padding: 0.5rem 1rem;
 			border: 1px solid var(--v-color-border);
 			border-radius: 4px;
 			color: var(--v-color-text-primary);
+			display: flex;
+			gap: 0.5rem;
+			padding: 0.5rem 1rem;
 
 			&:hover {
 				cursor: pointer;
@@ -252,12 +244,12 @@
 		}
 		a,
 		.help-btn {
-			height: 2.5rem;
-			width: 2.5rem;
-			padding: 0.5rem;
-			display: inline-flex;
-			justify-content: center;
 			align-items: center;
+			display: inline-flex;
+			height: 2.5rem;
+			justify-content: center;
+			padding: 0.5rem;
+			width: 2.5rem;
 		}
 
 		.help-btn {
@@ -276,8 +268,8 @@
 
 		// Add custom scrollbar styling
 		&::-webkit-scrollbar {
-			width: 12px;
 			height: 24px;
+			width: 12px;
 		}
 
 		&::-webkit-scrollbar-track {
@@ -286,9 +278,9 @@
 
 		&::-webkit-scrollbar-thumb {
 			background: var(--v-color-background-dark);
-			border-top: 2px solid var(--v-color-background-darkest);
 			border-bottom: 2px solid var(--v-color-background-darkest);
 			border-radius: 3px;
+			border-top: 2px solid var(--v-color-background-darkest);
 
 			&:hover {
 				background: var(--v-color-background-light);
@@ -297,31 +289,31 @@
 	}
 
 	.table-container table {
-		margin: auto;
 		border-collapse: separate;
 		border-spacing: 0;
+		margin: auto;
 	}
 
 	// Cell Outer
 	.table-container th,
 	.table-container td {
-		padding: 0.5rem;
-		border: 1px solid var(--v-color-border);
 		background: var(--v-color-background-darker);
+		border: 1px solid var(--v-color-border);
+		height: 3rem;
+		padding: 0.5rem;
 		vertical-align: middle;
 		width: 3rem;
-		height: 3rem;
 	}
 
 	// Cell Inner
 	.table-container th img,
 	.table-container td div {
-		width: 2rem;
-		height: 2rem;
-		text-align: center;
-		display: inline-flex;
 		align-items: center;
+		display: inline-flex;
+		height: 2rem;
 		justify-content: center;
+		text-align: center;
+		width: 2rem;
 	}
 
 	.table-container thead th {
@@ -333,13 +325,13 @@
 	}
 
 	th:first-child {
+		background: var(--v-color-background-dark);
+		left: 0;
 		position: -webkit-sticky;
 		position: sticky;
-		vertical-align: middle;
-		left: 0;
-		z-index: 2;
-		background: var(--v-color-background-dark);
 		text-align: start;
+		vertical-align: middle;
+		z-index: 2;
 	}
 
 	thead th:first-child {
@@ -372,24 +364,24 @@
 	.mod-header {
 		z-index: 0;
 		.tooltip-container {
-			width: 100%;
-			height: 100%;
-			display: flex;
 			align-items: center;
+			display: flex;
+			height: 100%;
 			justify-content: center;
+			width: 100%;
 		}
 
 		.tooltip {
+			background: var(--v-color-background-darkest);
+			border-radius: 8px;
+			left: 1rem;
+			opacity: 0;
+			padding: 0.5rem 1rem;
+			pointer-events: none;
 			position: fixed;
 			top: 1rem;
-			left: 1rem;
-			background: var(--v-color-background-darkest);
-			padding: 0.5rem 1rem;
-			border-radius: 8px;
-			white-space: nowrap;
-			pointer-events: none;
-			opacity: 0;
 			transition: opacity 0.2s;
+			white-space: nowrap;
 			z-index: 1000;
 		}
 
@@ -414,13 +406,13 @@
 				flex-direction: column;
 			}
 			> a {
-				position: fixed;
 				bottom: 0.5rem;
+				height: 4rem;
 				left: 50%;
+				padding: 0.75rem;
+				position: fixed;
 				transform: translateX(-50%);
 				width: 4rem;
-				height: 4rem;
-				padding: 0.75rem;
 				z-index: 1000;
 			}
 		}
@@ -433,13 +425,13 @@
 	@media (max-width: 530px) {
 		.table-container .table-controls {
 			> .help-btn {
-				position: fixed;
 				bottom: 0.5rem;
+				height: 4rem;
 				left: calc(50% - 5rem);
+				padding: 0.75rem;
+				position: fixed;
 				transform: translateX(-50%);
 				width: 4rem;
-				height: 4rem;
-				padding: 0.75rem;
 				z-index: 1000;
 			}
 		}
@@ -463,65 +455,65 @@
 	@media (max-width: 530px) {
 		.table-container th,
 		.table-container td {
+			height: 2.5rem;
 			padding: 0.35rem;
 			width: 2.5rem;
-			height: 2.5rem;
 		}
 
 		.table-container th img,
 		.table-container td div {
-			width: 1.75rem;
 			height: 1.75rem;
+			width: 1.75rem;
 		}
 	}
 
 	.table-container .table-controls {
 		@media (max-width: 530px) {
-			position: fixed;
-			bottom: 0;
-			top: auto;
-			left: 0;
-			right: 0;
-			height: auto;
+			align-items: center;
 			background: var(--v-color-background-darkest);
 			border-top: 1px solid var(--v-color-border);
-			padding: 0.5rem;
-			z-index: 1000;
+			bottom: 0;
 			display: flex;
-			justify-content: center;
-			align-items: center;
 			gap: 0.5rem;
+			height: auto;
+			justify-content: center;
+			left: 0;
+			padding: 0.5rem;
+			position: fixed;
+			right: 0;
+			top: auto;
+			z-index: 1000;
 
 			span {
-				height: 2.25rem;
 				display: flex;
 				flex-direction: row;
-				justify-content: center;
 				gap: 0.5rem;
+				height: 2.25rem;
+				justify-content: center;
 			}
 
 			button,
 			a {
-				font-size: 0.85rem;
-				padding: 0.35rem 0.7rem;
-				height: 2.25rem;
-				min-height: 2.25rem;
 				background: var(--v-color-background-darker);
 				border: 1px solid var(--v-color-border);
+				font-size: 0.85rem;
+				height: 2.25rem;
+				min-height: 2.25rem;
+				padding: 0.35rem 0.7rem;
 				white-space: nowrap;
 			}
 
 			.home-btn,
 			.help-btn {
+				align-items: center;
+				background: var(--v-color-background-dark);
+				display: flex;
+				height: 2.25rem;
+				justify-content: center;
+				padding: 0.4rem;
 				position: fixed;
 				top: 0.5rem;
 				width: 2.25rem;
-				height: 2.25rem;
-				padding: 0.4rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background: var(--v-color-background-dark);
 			}
 
 			.home-btn {
@@ -534,13 +526,13 @@
 
 			// Make the control buttons more compact
 			.control-btn {
-				display: inline-flex;
 				align-items: center;
+				display: inline-flex;
 				gap: 0.25rem;
 
 				:global(svg) {
-					width: 1.2rem;
 					height: 1.2rem;
+					width: 1.2rem;
 				}
 			}
 		}
@@ -552,9 +544,9 @@
 			padding: 0.5rem;
 		}
 		.table-wrapper {
-			padding-top: 0rem;
-			padding-bottom: 0.5rem;
 			margin: 0;
+			padding-bottom: 0.5rem;
+			padding-top: 0rem;
 		}
 	}
 </style>

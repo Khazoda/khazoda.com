@@ -1,31 +1,31 @@
 <script lang="ts">
-	import HomeButton from 'src/components/HomeButton.svelte';
-	import HugeiconsSearch01 from 'virtual:icons/hugeicons/search-01';
-	import { onMount, onDestroy } from 'svelte';
-	import { fly, fade, scale } from 'svelte/transition';
-	import type { PageData } from './$types';
-	import { navigating } from '$app/stores';
-	import LoadingSpinner from 'src/components/LoadingSpinner.svelte';
+	import HomeButton from "src/components/HomeButton.svelte";
+	import HugeiconsSearch01 from "virtual:icons/hugeicons/search-01";
+	import { onMount, onDestroy } from "svelte";
+	import { fly, fade, scale } from "svelte/transition";
+	import type { PageData } from "./$types";
+	import { navigating } from "$app/stores";
+	import LoadingSpinner from "src/components/LoadingSpinner.svelte";
 
-	import HugeiconsBookDownload from 'virtual:icons/hugeicons/book-download';
-	import HugeiconsLinkSquare02 from 'virtual:icons/hugeicons/link-square-02';
-	import HugeiconsDownloadSquare02 from 'virtual:icons/hugeicons/download-square-02';
-	import HugeiconsBriefcase08 from 'virtual:icons/hugeicons/briefcase-08';
-	import HugeiconsSortByDown02 from 'virtual:icons/hugeicons/sort-by-down-02';
-	import HugeiconsSortByUp02 from 'virtual:icons/hugeicons/sort-by-up-02';
-	import HugeiconsArrowLeft02 from 'virtual:icons/hugeicons/arrow-left-02';
-	import SimpleIconsModrinth from 'virtual:icons/simple-icons/modrinth';
-	import HugeiconsMessageUpload01 from 'virtual:icons/hugeicons/message-upload-01';
-	import SimpleIconsDiscord from 'virtual:icons/simple-icons/discord';
+	import HugeiconsBookDownload from "virtual:icons/hugeicons/book-download";
+	import HugeiconsLinkSquare02 from "virtual:icons/hugeicons/link-square-02";
+	import HugeiconsDownloadSquare02 from "virtual:icons/hugeicons/download-square-02";
+	import HugeiconsBriefcase08 from "virtual:icons/hugeicons/briefcase-08";
+	import HugeiconsSortByDown02 from "virtual:icons/hugeicons/sort-by-down-02";
+	import HugeiconsSortByUp02 from "virtual:icons/hugeicons/sort-by-up-02";
+	import HugeiconsArrowLeft02 from "virtual:icons/hugeicons/arrow-left-02";
+	import SimpleIconsModrinth from "virtual:icons/simple-icons/modrinth";
+	import HugeiconsMessageUpload01 from "virtual:icons/hugeicons/message-upload-01";
+	import SimpleIconsDiscord from "virtual:icons/simple-icons/discord";
 
-	import ModrinthBwDependencyExample from '$lib/materialpack/media/modrinth_bw_dependency_example.png';
-	import TriangleIcon from 'virtual:icons/codicon/debug-breakpoint-function-unverified';
-	import HexagonIcon from 'virtual:icons/codicon/debug-breakpoint-data-unverified';
-	import DiamondIcon from 'virtual:icons/codicon/debug-breakpoint-log-unverified';
-	import type { MaterialPackCategory } from 'src/config/material-packs';
-	import ImportantButton from 'src/components/materialpack/ImportantButton.svelte';
-	import CenterModal, { closeDialog } from 'src/components/CenterModal.svelte';
-	import FeedbackButton from 'src/components/materialpack/FeedbackButton.svelte';
+	import ModrinthBwDependencyExample from "$lib/materialpack/media/modrinth_bw_dependency_example.png";
+	import TriangleIcon from "virtual:icons/codicon/debug-breakpoint-function-unverified";
+	import HexagonIcon from "virtual:icons/codicon/debug-breakpoint-data-unverified";
+	import DiamondIcon from "virtual:icons/codicon/debug-breakpoint-log-unverified";
+	import type { MaterialPackCategory } from "src/config/material-packs";
+	import ImportantButton from "src/components/materialpack/ImportantButton.svelte";
+	import CenterModal, { closeDialog } from "src/components/CenterModal.svelte";
+	import FeedbackButton from "src/components/materialpack/FeedbackButton.svelte";
 
 	export let data: PageData;
 	const rawMaterialPacks = data.materialPacks;
@@ -37,14 +37,14 @@
 		requestAnimationFrame(() => {
 			pageReady = true;
 		});
-		if (typeof window !== 'undefined' && window.innerWidth < 1000) {
+		if (typeof window !== "undefined" && window.innerWidth < 1000) {
 			isMobile = true;
 		}
 	});
 
 	// Sorting and filtering states
-	let searchQuery: string = '';
-	let debouncedSearchQuery: string = '';
+	let searchQuery: string = "";
+	let debouncedSearchQuery: string = "";
 
 	// Debounce the search query to prevent excessive re-renders
 	let searchTimeout: number;
@@ -55,17 +55,17 @@
 		}, 250);
 	}
 
-	type SortMethod = 'alphabetical' | 'downloads' | 'recent';
-	type SortDirection = 'asc' | 'desc';
+	type SortMethod = "alphabetical" | "downloads" | "recent";
+	type SortDirection = "asc" | "desc";
 
 	const categoryOrder: Record<MaterialPackCategory, number> = {
-		'mod compatibility': 0,
-		'vanilla-like': 1,
+		"mod compatibility": 0,
+		"vanilla-like": 1,
 		other: 2
 	};
 
-	let sortMethod: SortMethod = 'recent';
-	let sortDirection: SortDirection = 'asc';
+	let sortMethod: SortMethod = "recent";
+	let sortDirection: SortDirection = "asc";
 	let showCategories = true;
 
 	const sortFunctions = {
@@ -85,8 +85,7 @@
 		if (showCategories) {
 			// Always sort by category first when categories view is shown
 			comparison =
-				categoryOrder[a.category as MaterialPackCategory] -
-				categoryOrder[b.category as MaterialPackCategory];
+				categoryOrder[a.category as MaterialPackCategory] - categoryOrder[b.category as MaterialPackCategory];
 			if (comparison === 0) {
 				// Then apply the selected sort method within categories
 				comparison = sortFunctions[sortMethod](a, b);
@@ -95,7 +94,7 @@
 			// Sort by the selected method only when categories view is not active
 			comparison = sortFunctions[sortMethod](a, b);
 		}
-		return sortDirection === 'asc' ? comparison : -comparison;
+		return sortDirection === "asc" ? comparison : -comparison;
 	});
 
 	// Create display items with headers only if showing categories view
@@ -104,22 +103,22 @@
 				(acc, pack, index) => {
 					if (index === 0 || sortedPacks[index - 1].category !== pack.category) {
 						acc.push({
-							type: 'header',
+							type: "header",
 							category: pack.category,
 							content: pack.category
 						});
 					}
 					acc.push({
-						type: 'pack',
+						type: "pack",
 						category: pack.category,
 						content: pack
 					});
 					return acc;
 				},
-				[] as Array<{ type: 'header' | 'pack'; category: string; content: any }>
+				[] as Array<{ type: "header" | "pack"; category: string; content: any }>
 			)
 		: sortedPacks.map(pack => ({
-				type: 'pack',
+				type: "pack",
 				category: pack.category,
 				content: pack
 			}));
@@ -152,11 +151,7 @@
 		<div class="content" transition:fly={{ y: -20, duration: 500, delay: 0 }}>
 			<div class="flex-row gap-4 align-center above-header">
 				<a class="flex-row gap-2" href="/basicweapons/materialpacks">
-					<ImportantButton
-						icon={HugeiconsArrowLeft02}
-						label="Back"
-						color="grey"
-						backdropCorner="center" />
+					<ImportantButton icon={HugeiconsArrowLeft02} label="Back" color="grey" backdropCorner="center" />
 				</a>
 				{#if !isMobile}
 					<span style="filter: saturate(0.75)">
@@ -190,9 +185,9 @@
 
 					<button
 						class="sort-direction"
-						on:click={() => (sortDirection = sortDirection === 'asc' ? 'desc' : 'asc')}
+						on:click={() => (sortDirection = sortDirection === "asc" ? "desc" : "asc")}
 						aria-label="Toggle sort direction">
-						{#if sortDirection === 'asc'}
+						{#if sortDirection === "asc"}
 							<HugeiconsSortByUp02 width="24" height="24" />
 						{:else}
 							<HugeiconsSortByDown02 width="24" height="24" />
@@ -207,11 +202,11 @@
 				<div class="packs-grid">
 					{#each displayItems as item, index (item)}
 						<div
-							class={item.type === 'header' ? 'category-heading' : 'pack-card'}
-							in:flyAndScale={item.type === 'pack'
+							class={item.type === "header" ? "category-heading" : "pack-card"}
+							in:flyAndScale={item.type === "pack"
 								? { y: 5, delay: index * 25, duration: 100 }
 								: { y: 0, delay: 0, duration: 0 }}>
-							{#if item.type === 'header'}
+							{#if item.type === "header"}
 								<h2>{item.content}</h2>
 							{:else if item.content.name != null}
 								<span class="external-link-popup">
@@ -228,11 +223,10 @@
 								<div class="pack-info">
 									<div class="stats">
 										<span
-											><HugeiconsDownloadSquare02
-												width="16"
-												height="16" />{item.content.downloads.toLocaleString('en-US')} Downloads</span>
-										<span class="category"
-											><HugeiconsBriefcase08 width="16" height="16" />{item.content.category}</span>
+											><HugeiconsDownloadSquare02 width="16" height="16" />{item.content.downloads.toLocaleString(
+												"en-US"
+											)} Downloads</span>
+										<span class="category"><HugeiconsBriefcase08 width="16" height="16" />{item.content.category}</span>
 									</div>
 								</div>
 								<a
@@ -243,11 +237,9 @@
 								</a>
 								<div class="bottom-badges">
 									{#if item.content.official}
-										<span class="project-badge official"
-											><DiamondIcon width="16" height="16" />Official</span>
+										<span class="project-badge official"><DiamondIcon width="16" height="16" />Official</span>
 									{:else}
-										<span class="project-badge unofficial"
-											><HexagonIcon width="16" height="16" />Community</span>
+										<span class="project-badge unofficial"><HexagonIcon width="16" height="16" />Community</span>
 									{/if}
 									{#if item.content.required_mod}
 										<a
@@ -261,7 +253,7 @@
 									{/if}
 								</div>
 							{:else}
-								<div class="empty-pack"> Pending Modrinth Approval </div>
+								<div class="empty-pack">Pending Modrinth Approval</div>
 								<a
 									class="materialpack-modrinth-link-overlay"
 									href={item.content.url}
@@ -285,21 +277,16 @@
 
 			<ol>
 				<li>
-					Create your material pack using the <a href="/basicweapons/materialpacks/create"
-						>Material Pack Creator</a>
+					Create your material pack using the <a href="/basicweapons/materialpacks/create">Material Pack Creator</a>
 				</li>
 				<li>Export your material pack as a ZIP file</li>
 				<li>Thoroughly test your material pack in-game</li>
 				<li>
-					Upload your material pack to <a
-						href="https://modrinth.com"
-						target="_blank"
-						rel="noopener noreferrer">Modrinth.</a>
+					Upload your material pack to <a href="https://modrinth.com" target="_blank" rel="noopener noreferrer"
+						>Modrinth.</a>
 					View the official
-					<a
-						href="https://modrinth.com/collection/hVumlzpq"
-						target="_blank"
-						rel="noopener noreferrer">collection</a> for example projects that follow the guidelines.
+					<a href="https://modrinth.com/collection/hVumlzpq" target="_blank" rel="noopener noreferrer">collection</a> for
+					example projects that follow the guidelines.
 				</li>
 				<li>
 					Send your Modrinth project URL to @khazoda on Discord via direct message or by <a
@@ -336,11 +323,7 @@
 			</div>
 		</div>
 		<div class="modal-actions">
-			<a
-				href="https://discord.com/invite/vEZUkSxwR9"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="discord-btn">
+			<a href="https://discord.com/invite/vEZUkSxwR9" target="_blank" rel="noopener noreferrer" class="discord-btn">
 				<SimpleIconsDiscord width="1.5rem" height="1.5rem" />
 				Join Discord Server
 			</a>
@@ -361,11 +344,11 @@
 	}
 
 	.above-header {
-		margin-bottom: 1.5rem;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
 		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.5rem;
 	}
 
 	.content {
@@ -378,23 +361,23 @@
 
 	.controls {
 		display: flex;
-		gap: 1rem;
 		flex-wrap: wrap;
 		margin-bottom: 1rem;
+		gap: 1rem;
 
 		.search-bar {
-			flex: 1;
 			display: flex;
+			flex: 1;
 			align-items: center;
-			background: #2a2a2a;
 			padding: 0.5rem 1rem;
-			border-radius: 8px;
 			border: 2px solid #3a3a3a;
+			border-radius: 8px;
+			background: #2a2a2a;
 
 			input {
-				background: none;
-				border: none;
 				margin-left: 0.5rem;
+				border: none;
+				background: none;
 				color: white;
 				&:focus {
 					outline: none;
@@ -406,39 +389,39 @@
 			display: flex;
 			gap: 1rem;
 
-			@media screen and (max-width: 1000px) {
+			@media screen and (max-width: 499px) {
 				flex-direction: column;
 			}
 
 			select {
 				appearance: none;
+				min-width: 140px;
 				padding: 0.5rem 2.5rem 0.5rem 1rem;
+				border: 2px solid #3a3a3a;
 				border-radius: 8px;
 				background: #2a2a2a
 					url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'%3E%3C/path%3E%3C/svg%3E")
 					no-repeat;
 				background-position: right 0.75rem center;
 				background-size: 16px;
-				border: 2px solid #3a3a3a;
 				color: white;
 				cursor: pointer;
-				min-width: 140px;
 
 				&:hover {
-					background-color: #3a3a3a;
 					border-color: #4a4a4a;
+					background-color: #3a3a3a;
 				}
 
 				&:focus {
-					outline: none;
 					border-color: #4a9eff;
+					outline: none;
 					box-shadow: 0 0 0 1px #4a9eff33;
 				}
 
 				option {
+					padding: 0.5rem;
 					background: #2a2a2a;
 					color: white;
-					padding: 0.5rem;
 				}
 			}
 
@@ -446,35 +429,35 @@
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
+				width: 42px;
+				min-width: 42px;
+				height: 42px;
+				border: 2px solid #3a3a3a;
 				border-radius: 8px;
 				background: #2a2a2a;
-				border: 2px solid #3a3a3a;
 				color: white;
-				cursor: pointer;
 				font-size: 1.2rem;
 				line-height: 1;
-				min-width: 42px;
-				width: 42px;
-				height: 42px;
+				cursor: pointer;
 
 				&:hover {
 					background: #3a3a3a;
 				}
 
 				&:focus {
-					outline: none;
 					border-color: #4a9eff;
+					outline: none;
 				}
 			}
 
 			.category-toggle {
 				display: flex;
 				align-items: center;
-				gap: 0.75rem;
 				padding: 0.5rem 1rem;
+				gap: 0.75rem;
+				border: 2px solid #3a3a3a;
 				border-radius: 8px;
 				background: #2a2a2a;
-				border: 2px solid #3a3a3a;
 				color: white;
 				cursor: pointer;
 				user-select: none;
@@ -483,33 +466,33 @@
 					background: #3a3a3a;
 				}
 
-				input[type='checkbox'] {
+				input[type="checkbox"] {
+					display: grid;
 					appearance: none;
 					-webkit-appearance: none;
+					place-content: center;
 					width: 18px;
 					height: 18px;
+					margin: 0;
 					border: 2px solid #3a3a3a;
 					border-radius: 4px;
-					margin: 0;
-					display: grid;
-					place-content: center;
 					cursor: pointer;
 					transition: all 0.2s ease;
 
 					&::before {
-						content: '';
 						width: 10px;
 						height: 10px;
 						transform: scale(0);
-						transition: transform 0.2s ease;
-						box-shadow: inset 1em 1em #4a9eff;
 						transform-origin: center;
+						box-shadow: inset 1em 1em #4a9eff;
+						content: "";
 						clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+						transition: transform 0.2s ease;
 					}
 
 					&:checked {
-						background: #4a9eff33;
 						border-color: #4a9eff;
+						background: #4a9eff33;
 
 						&::before {
 							transform: scale(1);
@@ -517,15 +500,15 @@
 					}
 
 					&:focus {
-						outline: none;
 						border-color: #4a9eff;
+						outline: none;
 						box-shadow: 0 0 0 1px #4a9eff33;
 					}
 				}
 
 				span {
-					font-size: 0.9rem;
 					font-weight: 500;
+					font-size: 0.9rem;
 				}
 			}
 		}
@@ -533,8 +516,8 @@
 
 	.packs-grid {
 		display: grid;
-		justify-content: flex-start;
 		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+		justify-content: flex-start;
 		gap: 0.5rem;
 		@media screen and (max-width: 1000px) {
 			justify-items: center;
@@ -543,18 +526,18 @@
 
 	.pack-card {
 		display: flex;
+		position: relative;
 		flex-direction: column;
 		justify-content: space-between;
-		position: relative;
-		padding: 1rem;
-		background: #2a2a2a;
-		border: 2px solid #3a3a3a;
-		border-radius: 8px;
-		overflow: hidden;
-		transition: all 0.2s ease;
 		width: 275px;
 		height: 275px;
 		margin-bottom: 0.5rem;
+		padding: 1rem;
+		overflow: hidden;
+		border: 2px solid #3a3a3a;
+		border-radius: 8px;
+		background: #2a2a2a;
+		transition: all 0.2s ease;
 		.external-link-popup {
 			position: absolute;
 			top: 0.5rem;
@@ -563,8 +546,8 @@
 			transition: all 0.2s ease;
 		}
 		&:hover .external-link-popup {
-			opacity: 1;
 			transform: translateX(-1rem);
+			opacity: 1;
 		}
 
 		&:hover {
@@ -575,40 +558,40 @@
 		.pack-header {
 			display: flex;
 			flex-direction: row;
-			gap: 0.25rem;
 			margin: 0;
+			gap: 0.25rem;
 			img {
-				width: 96px;
 				aspect-ratio: 1;
+				width: 96px;
 				height: auto;
 				object-fit: cover;
 			}
 			span {
-				padding: 0.5rem 0.25rem;
 				width: 100%;
+				padding: 0.5rem 0.25rem;
 				h3,
 				p {
-					font-size: 1rem;
 					margin: 0;
+					font-size: 1rem;
 				}
 				p {
-					font-size: 0.8rem;
 					color: #aaa;
+					font-size: 0.8rem;
 				}
 			}
 		}
 
 		.pack-info {
-			padding: 0.5rem 0;
 			margin: 1rem 0 auto 0;
+			padding: 0.5rem 0;
 
 			.stats {
 				display: flex;
 				flex-direction: column;
-				gap: 0.1rem;
 				justify-content: space-between;
-				font-size: 0.8rem;
+				gap: 0.1rem;
 				color: #aaa;
+				font-size: 0.8rem;
 
 				.category {
 					text-transform: capitalize;
@@ -625,49 +608,49 @@
 
 		.bottom-badges {
 			display: flex;
-			padding: 0.25rem 0;
-			width: 100%;
 			flex-direction: column;
+			width: 100%;
+			padding: 0.25rem 0;
 			gap: 0.25rem;
 			font-size: 0.75rem;
 
 			a.required-mod {
-				text-decoration: none;
+				display: inline-flex;
+				z-index: 10;
+				align-items: center;
 				width: auto;
 				padding: 0.25rem 0.5rem;
-				display: inline-flex;
-				align-items: center;
 				gap: 0.25rem;
-				color: rgb(143, 238, 255);
-				background: #2a2a2a;
 				border: 2px solid #3a3a3a;
 				border-radius: 4px;
-				z-index: 10;
+				background: #2a2a2a;
+				color: rgb(143, 238, 255);
+				text-decoration: none;
 
 				&:hover {
-					background: #3a3a3a;
 					border-color: #4a9eff;
+					background: #3a3a3a;
 				}
 			}
 
 			.project-badge {
-				text-decoration: none;
-				width: auto;
-				padding: 0.25rem 0.5rem;
 				display: inline-flex;
 				align-items: center;
+				width: auto;
+				padding: 0.25rem 0.5rem;
 				gap: 0.25rem;
-				background: #2a2a2a;
 				border: 1px solid #3a3a3a;
 				border-radius: 4px;
+				background: #2a2a2a;
+				text-decoration: none;
 
 				.official {
-					background: #2a2a2a;
 					border: 1px solid #3a3a3a;
+					background: #2a2a2a;
 				}
 				.unofficial {
-					background: #2a2a2a;
 					border: 1px solid #3a3a3a;
+					background: #2a2a2a;
 				}
 			}
 		}
@@ -684,14 +667,14 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			text-align: center;
 			width: 100%;
 			height: 100%;
-			background: #252525;
 			border: 2px solid #181818;
 			border-radius: 8px;
-			font-size: 1.25rem;
+			background: #252525;
 			color: #aaa;
+			font-size: 1.25rem;
+			text-align: center;
 		}
 	}
 
@@ -700,8 +683,8 @@
 		margin: 2rem 0 1rem;
 		padding-bottom: 0.5rem;
 		border-bottom: 2px solid #3a3a3a;
-		text-transform: capitalize;
 		color: #4a9eff;
+		text-transform: capitalize;
 
 		&:first-of-type {
 			margin-top: 0;
@@ -723,19 +706,19 @@
 		.requirements {
 			margin-top: 1.5rem;
 			padding: 1rem;
-			background: #2a2a2a;
 			border: 1px solid #3a3a3a;
 			border-radius: 8px;
+			background: #2a2a2a;
 
 			h3 {
 				margin: 0 0 0.5rem 0;
-				font-size: 1rem;
 				color: #85c0ff;
+				font-size: 1rem;
 			}
 
 			ul {
-				list-style: inside;
 				padding-left: 0;
+				list-style: inside;
 
 				li {
 					margin-bottom: 0.25rem;
@@ -744,9 +727,9 @@
 				img {
 					width: 100%;
 					height: auto;
+					margin: 0.5rem 0;
 					object-fit: cover;
 					border-radius: 12px;
-					margin: 0.5rem 0;
 				}
 				h4 {
 					margin-bottom: 1rem;
@@ -765,21 +748,21 @@
 	}
 
 	.modal-actions {
-		margin-top: 1.5rem;
 		display: flex;
 		justify-content: flex-end;
+		margin-top: 1.5rem;
 	}
 
 	.discord-btn {
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
+		width: 250px;
 		margin: 0 0 0 auto;
 		padding: 0.75rem 1.5rem;
-		width: 250px;
+		border-radius: 4px;
 		background: #5865f2;
 		color: white;
-		border-radius: 4px;
 		font-weight: 600;
 		text-decoration: none;
 		transition: background-color 0.2s ease;

@@ -1,6 +1,6 @@
 <script>
-	import HomeButton from 'src/components/HomeButton.svelte';
-	import FeedbackButton from 'src/components/materialpack/FeedbackButton.svelte';
+	import HomeButton from "src/components/HomeButton.svelte";
+	import FeedbackButton from "src/components/materialpack/FeedbackButton.svelte";
 </script>
 
 <slot></slot>

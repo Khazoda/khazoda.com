@@ -1,9 +1,9 @@
 <script lang="ts">
-	import HugeiconsArchive02 from 'virtual:icons/hugeicons/archive-02';
-	import CenterModal from 'src/components/CenterModal.svelte';
-	import { closeDialog } from 'src/components/CenterModal.svelte';
+	import HugeiconsArchive02 from "virtual:icons/hugeicons/archive-02";
+	import CenterModal from "src/components/CenterModal.svelte";
+	import { closeDialog } from "src/components/CenterModal.svelte";
 
-	import HugeiconsDownload04 from 'virtual:icons/hugeicons/download-04';
+	import HugeiconsDownload04 from "virtual:icons/hugeicons/download-04";
 
 	type DownloadOption = {
 		url: string;
@@ -15,9 +15,9 @@
 	let showModal: boolean[] = Array(1).fill(false);
 
 	function downloadFile(key: string) {
-		const link = document.createElement('a');
+		const link = document.createElement("a");
 		link.href = downloadOptions[key].url;
-		link.download = downloadOptions[key].url.split('/').pop() || '';
+		link.download = downloadOptions[key].url.split("/").pop() || "";
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -33,8 +33,7 @@
 		<slot>
 			<h2>Download Example Textures</h2>
 			<p>
-				Feel free to use these as a starting point for your own weapon textures. Other good examples
-				can be found on the <a
+				Feel free to use these as a starting point for your own weapon textures. Other good examples can be found on the <a
 					target="_blank"
 					href="https://github.com/Khazoda/basic-weapons/tree/latest-stable/common/src/main/resources/assets/basicweapons/textures/item"
 					>GitHub repository</a
@@ -54,16 +53,16 @@
 
 <style lang="scss">
 	.download-examples-btn {
-		display: inline-flex;
-		justify-content: center;
 		align-items: center;
 
 		background: none;
 		border: none;
+		border-radius: 8px;
 		color: #ffffff;
 		cursor: pointer;
+		display: inline-flex;
+		justify-content: center;
 		padding: 0.5rem;
-		border-radius: 8px;
 		transition: all 0.2s ease;
 
 		&:hover {
@@ -77,9 +76,9 @@
 
 	.modal-actions {
 		display: flex;
+		gap: 1rem;
 		justify-content: center;
 		margin-top: 2rem;
-		gap: 1rem;
 
 		&.left-aligned {
 			justify-content: flex-start;
@@ -87,17 +86,17 @@
 	}
 
 	.download-btn {
-		padding: 0.5rem 1rem;
-		border-radius: 4px;
-		font-weight: 600;
-		cursor: pointer;
-		transition: all 0.2s ease;
-		border: none;
-		background: #4444ff;
-		color: white;
-		display: flex;
 		align-items: center;
+		background: #4444ff;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+		display: flex;
+		font-weight: 600;
 		gap: 0.25rem;
+		padding: 0.5rem 1rem;
+		transition: all 0.2s ease;
 
 		&:hover {
 			background: #2222ff;

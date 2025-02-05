@@ -1,9 +1,9 @@
 <script lang="ts">
-	import HugeiconsMessageMultiple01 from 'virtual:icons/hugeicons/message-multiple-01';
-	import CenterModal from '../CenterModal.svelte';
-	import { closeDialog } from '../CenterModal.svelte';
-	import SimpleIconsDiscord from 'virtual:icons/simple-icons/discord';
-	import big_tater from '$lib/materialpack/media/big-tater.png';
+	import HugeiconsMessageMultiple01 from "virtual:icons/hugeicons/message-multiple-01";
+	import CenterModal from "../CenterModal.svelte";
+	import { closeDialog } from "../CenterModal.svelte";
+	import SimpleIconsDiscord from "virtual:icons/simple-icons/discord";
+	import big_tater from "$lib/materialpack/media/big-tater.png";
 
 	let showModal: boolean[] = Array(1).fill(false);
 </script>
@@ -22,11 +22,7 @@
 			<li>Report bugs</li>
 		</ul>
 		<div class="modal-actions">
-			<a
-				href="https://discord.com/invite/vEZUkSxwR9"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="discord-btn">
+			<a href="https://discord.com/invite/vEZUkSxwR9" target="_blank" rel="noopener noreferrer" class="discord-btn">
 				<SimpleIconsDiscord width="1.5rem" height="1.5rem" />
 				Join Discord Server
 			</a>
@@ -44,20 +40,20 @@
 
 <style>
 	.feedback-btn {
-		width: 2.5rem;
-		height: 2.5rem;
-		padding: 0.4rem;
-		display: flex;
 		align-items: center;
-		justify-content: center;
+		background: #5865f2;
 
 		border: 1px solid var(--v-color-border);
 		border-radius: 4px;
-		color: var(--v-color-text-primary);
-		background: #5865f2;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-		transition: all 0.2s ease;
+		color: var(--v-color-text-primary);
 		cursor: pointer;
+		display: flex;
+		height: 2.5rem;
+		justify-content: center;
+		padding: 0.4rem;
+		transition: all 0.2s ease;
+		width: 2.5rem;
 	}
 
 	.feedback-btn:hover {
@@ -69,9 +65,9 @@
 	}
 
 	ul {
-		text-align: left;
 		margin: 1rem 1rem;
 		padding: 0 0 0 0.1rem;
+		text-align: left;
 	}
 
 	.modal-actions {
@@ -79,18 +75,18 @@
 	}
 
 	.discord-btn {
-		display: flex;
 		align-items: center;
+		background: #5865f2;
+		border-radius: 4px;
+		color: white;
+		display: flex;
+		font-weight: 600;
 		justify-content: space-around;
 		margin: 0 auto;
 		padding: 0.75rem 1.5rem;
-		width: 250px;
-		background: #5865f2;
-		color: white;
-		border-radius: 4px;
-		font-weight: 600;
 		text-decoration: none;
 		transition: background-color 0.2s ease;
+		width: 250px;
 	}
 
 	.discord-btn:hover {
@@ -98,15 +94,14 @@
 	}
 
 	.big-tater {
+		animation: taterGroove 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+		bottom: -1rem;
+		height: 100px;
 		pointer-events: none;
 		position: absolute;
-		bottom: -1rem;
 		right: -0.5rem;
-		width: 100px;
-		height: 100px;
-		animation: taterGroove 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 		transform-origin: bottom center;
-		filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+		width: 100px;
 	}
 
 	@keyframes taterGroove {
@@ -156,64 +151,64 @@
 	}
 
 	.note-container {
-		position: absolute;
 		bottom: 1rem;
-		right: 0.5rem;
-		width: 140px;
 		height: 140px;
 		pointer-events: none;
+		position: absolute;
+		right: 0.5rem;
+		width: 140px;
 	}
 
 	.music-note {
-		position: absolute;
+		color: rgba(255, 255, 255, 0.6);
 		font-size: 1rem;
 		opacity: 0;
-		color: rgba(255, 255, 255, 0.6);
+		position: absolute;
 	}
 
 	.note-1 {
-		right: 85px;
-		bottom: 60px;
 		animation:
 			floatNote1 2.8s ease-out infinite,
 			notePosition 11.2s ease-in-out infinite;
 		animation-delay: 0.48s, 0s;
+		bottom: 60px;
+		right: 85px;
 	}
 
 	.note-2 {
-		right: 100px;
-		bottom: 50px;
 		animation:
 			floatNote2 3.1s ease-out infinite,
 			notePosition 13.3s ease-in-out infinite;
 		animation-delay: 1.54s, 0.7s;
+		bottom: 50px;
+		right: 100px;
 	}
 
 	.note-3 {
-		right: 70px;
-		bottom: 55px;
 		animation:
 			floatNote3 2.6s ease-out infinite,
 			notePosition 9.7s ease-in-out infinite;
 		animation-delay: 2.72s, 1.3s;
+		bottom: 55px;
+		right: 70px;
 	}
 
 	.note-4 {
-		right: 90px;
-		bottom: 45px;
 		animation:
 			floatNote4 2.9s ease-out infinite,
 			notePosition 12.5s ease-in-out infinite;
 		animation-delay: 0.96s, 0.3s;
+		bottom: 45px;
+		right: 90px;
 	}
 
 	.note-5 {
-		right: 75px;
-		bottom: 65px;
 		animation:
 			floatNote5 2.7s ease-out infinite,
 			notePosition 10.9s ease-in-out infinite;
 		animation-delay: 2.1s, 1.8s;
+		bottom: 65px;
+		right: 75px;
 	}
 
 	@keyframes floatNote1 {

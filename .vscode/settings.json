@@ -1,0 +1,15 @@
+{
+	"editor.tabSize": 2,
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
+	"prettier.documentSelectors": ["**/*.svelte"],
+	"prettier.useEditorConfig": false,
+	"editor.codeLens": false,
+	"git.removedCodeLens": false,
+	"git.addedCodeLens": false,
+	"git.recentChangesCodeLens": false
+}

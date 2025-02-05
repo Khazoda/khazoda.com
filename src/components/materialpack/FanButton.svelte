@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Props for button styling
-	export let color: 'blue' | 'green' = 'blue';
+	export let color: "blue" | "green" = "blue";
 	export let href: string;
 
 	// Props for content
@@ -34,95 +34,95 @@
 
 <style lang="scss">
 	.btn-important {
-		text-decoration: none;
-		width: fit-content;
-		padding: 1rem 2rem;
-		font-family: 'Quicksand', system-ui, sans-serif;
+		font-family: "Quicksand", system-ui, sans-serif;
 		font-size: 1.2rem;
 		font-weight: 700;
 		letter-spacing: 0.01em;
+		padding: 1rem 2rem;
+		text-decoration: none;
+		width: fit-content;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		color: rgb(31, 31, 31);
 		border: none;
 		border-radius: 8px;
+		color: rgb(31, 31, 31);
+		display: flex;
+		gap: 0.5rem;
 		position: relative;
+		text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 		transition:
 			border 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275),
 			box-shadow 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 		&.green {
 			background: rgb(235, 235, 235);
-			box-shadow: 5px 5px 0px #2ac444;
 			border: 2px solid #2ac444;
+			box-shadow: 5px 5px 0px #2ac444;
 			&:hover {
-				box-shadow: 3px 3px 0px #24aa2f;
 				border: 2px solid #24aa2f;
+				box-shadow: 3px 3px 0px #24aa2f;
 				cursor: pointer;
 				span {
-					transform: scale(1.1);
 					backface-visibility: hidden;
 					-webkit-backface-visibility: hidden;
-					transform-style: preserve-3d;
 					perspective: 1000;
-					filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
+					text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+					transform: scale(1.1);
+					transform-style: preserve-3d;
 				}
 			}
 		}
 
 		&.blue {
 			background: rgb(235, 235, 235);
-			box-shadow: 5px 5px 0px #0099ff;
 			border: 2px solid #0099ff;
+			box-shadow: 5px 5px 0px #0099ff;
 			&:hover {
-				box-shadow: 3px 3px 0px #0066ff;
 				border: 2px solid #0066ff;
+				box-shadow: 3px 3px 0px #0066ff;
 				cursor: pointer;
 				span {
-					transform: scale(1.1);
 					backface-visibility: hidden;
 					-webkit-backface-visibility: hidden;
-					transform-style: preserve-3d;
 					perspective: 1000;
-					filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
+					text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+					transform: scale(1.1);
+					transform-style: preserve-3d;
 				}
 			}
 		}
 
 		span {
-			gap: 0.5rem;
-			transform: perspective(1px) translateZ(0);
 			backface-visibility: hidden;
 			-webkit-backface-visibility: hidden;
+			gap: 0.5rem;
+			text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+			transform: perspective(1px) translateZ(0);
 			transform-style: preserve-3d;
-			filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
 			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		}
 	}
 
 	.fan-overlay {
+		height: 64px;
+		left: 0rem;
+		pointer-events: none;
 		position: absolute;
 		top: 0.25rem;
-		left: 0rem;
 		transform: rotate(-25deg);
 		width: 64px;
-		height: 64px;
-		pointer-events: none;
 	}
 
 	.fan-image {
-		position: absolute;
-		width: 64px;
+		filter: blur(0px); // Fixes rotation creating jagged edges (maybe a GPU thing?)
 		height: 64px;
 		object-fit: contain;
 		opacity: 0;
+		position: absolute;
 		transform-origin: bottom center;
 		transition: all 0.3s ease-out;
-		filter: blur(0px); // Fixes rotation creating jagged edges (maybe a GPU thing?)
+		width: 64px;
 	}
 
 	.fan-1 {

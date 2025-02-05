@@ -1,5 +1,5 @@
 <script>
-	import IconoirHomeSimpleDoor from 'virtual:icons/iconoir/home-simple-door';
+	import IconoirHomeSimpleDoor from "virtual:icons/iconoir/home-simple-door";
 </script>
 
 <a href="/" class="home-btn">
@@ -8,19 +8,19 @@
 
 <style>
 	.home-btn {
-		width: 2.5rem;
-		height: 2.5rem;
-		padding: 0.4rem;
-		display: flex;
 		align-items: center;
-		justify-content: center;
+		background: #0091d9;
 
 		border: 1px solid var(--v-color-border);
 		border-radius: 4px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
 		color: var(--v-color-text-primary);
-		background: #0091d9;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		display: flex;
+		height: 2.5rem;
+		justify-content: center;
+		padding: 0.4rem;
+		width: 2.5rem;
 	}
 	.home-btn:hover {
 		background: #23a6e7;

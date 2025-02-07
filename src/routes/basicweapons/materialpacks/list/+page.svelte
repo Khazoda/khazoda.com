@@ -302,9 +302,14 @@
 						Name your project:<br />
 						<kbd
 							style="font-size: 0.8rem; font-family: monospace; padding: 0.25rem 0.5rem; background: #2a2a2a; border-radius: 4px; border: 2px solid #3a3a3a; margin: 0.25rem 0; width: 100%; display:block;">
-							"(material_pack_name) Material Pack for Basic Weapons"
+							"(X) Material Pack for Basic Weapons"
 						</kbd>
 					</li>
+					<p style="font-size: 0.8rem; color: #aaa; margin: 0.5rem 0 1rem 0;">
+						(x) can be either the name of the material pack, the mod name that the material pack is a compatibility pack
+						for, or anything else you think makes sense.
+					</p>
+
 					<li>Upload the zip file as a data pack</li>
 					<li>Set Basic Weapons as a required dependency:</li>
 					<img src={ModrinthBwDependencyExample} alt="Modrinth BW Dependency Example" />

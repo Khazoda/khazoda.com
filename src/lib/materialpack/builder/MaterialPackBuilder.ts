@@ -240,13 +240,13 @@ const MODEL_TEMPLATES = {
 	}
 } as const;
 
-const BASE_WEAPON_REACH = {
-	dagger: 2.75,
-	hammer: 3.0,
-	club: 3.0,
-	spear: 4.5,
-	quarterstaff: 3.75,
-	glaive: 3.75
+const BASE_WEAPON_REACH_BONUS = {
+	dagger: -0.25,
+	hammer: 0,
+	club: 0,
+	spear: 1.5,
+	quarterstaff: 0.75,
+	glaive: 0.75
 } as const;
 interface FabricAndCondition {
 	condition: 'fabric:and';
@@ -624,12 +624,16 @@ export class MaterialPackBuilder {
 					const fileName = `${material.material_name}_${weaponType}.json`;
 
 					// Calculate total reach by adding base reach and material bonus
-					const totalReach = BASE_WEAPON_REACH[weaponType] + material.reach_bonus;
+					let calculatedReachBonus = BASE_WEAPON_REACH_BONUS[weaponType] + material.reach_bonus;
+					// Add small value to avoid no change being applied whatsoever
+					if (calculatedReachBonus === 0) {
+						calculatedReachBonus = 0.01;
+					}
 
 					const content = {
 						parent: `basicweapons:basic_${weaponType}`,
 						attributes: {
-							attack_range: Number(totalReach.toFixed(2))
+							range_bonus: Number(calculatedReachBonus.toFixed(2))
 						}
 					};
 

@@ -28,5 +28,10 @@ export const MATERIAL_PACKS: MaterialPackMetadata[] = [
 		slug: 'bwmp_emerald_minecraft',
 		category: 'vanilla-like',
 		official: true
+	},
+	{
+		slug: 'bwmp_obsidian_minecraft',
+		category: 'vanilla-like',
+		official: true
 	}
 ];

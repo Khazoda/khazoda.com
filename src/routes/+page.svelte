@@ -318,6 +318,9 @@
 <!--#region Plushables Modal -->
 <Modal bind:showModal modalID={0}>
 	<h2 slot="header" class="header-slot">
+		<a href="/plushables" class="mod-description-link-button" title="View Full Description">
+			<HugeiconsDiagonalScrollPoint01 />
+		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -439,6 +442,9 @@
 <!-- #region Bronze Modal -->
 <Modal bind:showModal modalID={2}>
 	<h2 slot="header" class="header-slot">
+		<a href="/bronze" class="mod-description-link-button" title="View Full Description">
+			<HugeiconsDiagonalScrollPoint01 />
+		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -486,6 +492,9 @@
 <!-- #region Block Breaker & Block Placer -->
 <Modal bind:showModal modalID={3}>
 	<h2 slot="header" class="header-slot">
+		<a href="/breakerplacer" class="mod-description-link-button" title="View Full Description">
+			<HugeiconsDiagonalScrollPoint01 />
+		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -533,6 +542,9 @@
 <!-- #region Basic Storage Modal -->
 <Modal bind:showModal modalID={4}>
 	<h2 slot="header" class="header-slot">
+		<a href="/basicstorage" class="mod-description-link-button" title="View Full Description">
+			<HugeiconsDiagonalScrollPoint01 />
+		</a>
 		<span>
 			<img
 				class="project-logo"

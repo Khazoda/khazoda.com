@@ -26,10 +26,6 @@
 		width: 100%;
 	}
 
-	.side-nav-container {
-		display: none;
-	}
-
 	.content-container {
 		display: flex;
 		justify-content: center;
@@ -38,23 +34,21 @@
 	}
 
 	/* Show side nav on larger screens */
-	@media (min-width: 1340px) {
-		.side-nav-container {
-			display: block;
-			position: fixed;
-			top: 0;
-			left: max(calc(50% - 650px), 1rem);
-			width: 250px;
-			height: 100vh;
-		}
+	.side-nav-container {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: max(calc(50% - 650px), 1rem);
+		width: 250px;
+		height: 100vh;
+	}
 
-		.content-container {
-			margin: 0 auto;
-		}
+	.content-container {
+		margin: 0 auto;
 	}
 
 	/* Medium screens */
-	@media (min-width: 768px) and (max-width: 1199px) {
+	@media (min-width: 768px) and (max-width: 1340px) {
 		.content-container {
 			padding: 0 2rem;
 		}

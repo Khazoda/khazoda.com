@@ -11,40 +11,47 @@
 			<MarkdownSideNav />
 		</div>
 	{/if}
-	<div class="markdown-body">
-		<slot />
+	<div class="content-container">
+		<div class="markdown-body">
+			<slot />
+		</div>
 	</div>
 </div>
 
 <style>
 	.page-container {
-		display: flex;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
-		gap: 2rem;
+		position: relative;
+		width: 100%;
 	}
 
 	.side-nav-container {
 		display: none;
 	}
 
-	/* Show side nav on larger screens */
-	@media (min-width: 1024px) {
-		.side-nav-container {
-			display: block;
-			flex-shrink: 0;
-			width: 250px;
-		}
-
-		.markdown-body {
-			flex: 1;
-		}
+	.content-container {
+		display: flex;
+		justify-content: center;
+		width: 100%;
 	}
 
-	/* When side nav is hidden */
-	:global(.page-container:not(:has(.side-nav-container)) .markdown-body) {
-		max-width: 60rem;
-		margin: 0 auto;
+	/* Show side nav on larger screens */
+	@media (min-width: 1200px) {
+		.side-nav-container {
+			display: block;
+			z-index: 10;
+			position: fixed;
+			top: 0;
+			left: calc((100vw - 1200px) / 2);
+			width: 250px;
+			height: 100vh;
+			padding-top: 2rem;
+		}
+
+		/* Adjust when viewport is smaller than expected */
+		@media (max-width: 1300px) {
+			.side-nav-container {
+				left: 1rem;
+			}
+		}
 	}
 </style>

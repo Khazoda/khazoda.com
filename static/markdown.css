@@ -9,6 +9,10 @@
 	justify-content: center;
 	width: 100%;
 	gap: 1rem;
+	@media (max-width: 650px) {
+		flex-direction: column;
+		gap: 0rem;
+	}
 }
 
 .markdown-body {
@@ -36,7 +40,8 @@
 		sans-serif
 	);
 	word-wrap: break-word;
-	max-width: 59.75rem;
+	width: 100%;
+	max-width: 800px;
 }
 
 /* Headings */
@@ -342,6 +347,9 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
 	.markdown-body {
+		margin: 1rem auto;
+		padding: 1.5rem;
+		border-radius: var(--radius-card-mobile, 0.5rem);
 		font-size: 0.95rem;
 	}
 
@@ -358,11 +366,39 @@
 	}
 
 	.markdown-body pre {
+		width: calc(100% + 1rem);
+		margin: 1em -0.5rem;
 		padding: 0.75em;
+		border-radius: 0.25rem;
 	}
 
 	.markdown-body table {
 		display: block;
 		overflow-x: auto;
+		font-size: 0.9rem;
+	}
+
+	.markdown-body img {
+		max-width: 100%;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+	.markdown-body {
+		max-width: 800px;
+		margin: 1.5rem auto;
+		padding: 1.75rem;
+	}
+
+	.markdown-body table {
+		display: block;
+		overflow-x: auto;
+	}
+}
+
+@media (min-width: 1200px) {
+	.markdown-body {
+		max-width: 800px;
+		margin: 2rem auto;
 	}
 }

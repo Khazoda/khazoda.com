@@ -84,14 +84,29 @@
 	.markdown-side-nav {
 		position: sticky;
 		top: 2rem;
-		width: 250px;
-		max-height: calc(100vh - 4rem);
+		width: 100%;
+		height: calc(100vh - 4rem);
 		padding-right: 1rem;
 		overflow-y: auto;
-		font-size: 0.9rem;
+		scrollbar-color: var(--color-divider) transparent;
+		scrollbar-width: thin;
+	}
+
+	.markdown-side-nav::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.markdown-side-nav::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.markdown-side-nav::-webkit-scrollbar-thumb {
+		border-radius: 3px;
+		background-color: var(--color-divider);
 	}
 
 	nav {
+		padding: 0.5rem 0;
 		border-left: 1px solid var(--color-divider, #474b54);
 	}
 
@@ -108,21 +123,24 @@
 	a {
 		display: block;
 		margin-left: -1px;
-		padding: 0.25rem 0.5rem;
+		padding: 0.25rem 0.75rem;
 		border-left: 2px solid transparent;
 		color: var(--color-text-secondary, #96a2b0);
-		line-height: 1.2;
+		font-size: 0.95rem;
+		line-height: 1.4;
 		text-decoration: none;
 		transition: all 0.2s ease;
 	}
 
 	a:hover {
+		background-color: var(--color-hover-bg, rgba(79, 156, 255, 0.1));
 		color: var(--color-link, #4f9cff);
 		text-decoration: none;
 	}
 
 	a.active {
 		border-left: 2px solid var(--color-link, #4f9cff);
+		background-color: var(--color-active-bg, rgba(79, 156, 255, 0.1));
 		color: var(--color-link, #4f9cff);
 		font-weight: 500;
 	}

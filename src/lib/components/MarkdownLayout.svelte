@@ -20,7 +20,9 @@
 
 <style>
 	.page-container {
+		display: flex;
 		position: relative;
+		justify-content: center;
 		width: 100%;
 	}
 
@@ -32,26 +34,36 @@
 		display: flex;
 		justify-content: center;
 		width: 100%;
+		max-width: 800px;
 	}
 
 	/* Show side nav on larger screens */
-	@media (min-width: 1200px) {
+	@media (min-width: 1340px) {
 		.side-nav-container {
 			display: block;
-			z-index: 10;
 			position: fixed;
 			top: 0;
-			left: calc((100vw - 1200px) / 2);
+			left: max(calc(50% - 650px), 1rem);
 			width: 250px;
 			height: 100vh;
-			padding-top: 2rem;
 		}
 
-		/* Adjust when viewport is smaller than expected */
-		@media (max-width: 1300px) {
-			.side-nav-container {
-				left: 1rem;
-			}
+		.content-container {
+			margin: 0 auto;
+		}
+	}
+
+	/* Medium screens */
+	@media (min-width: 768px) and (max-width: 1199px) {
+		.content-container {
+			padding: 0 2rem;
+		}
+	}
+
+	/* Small screens */
+	@media (max-width: 767px) {
+		.content-container {
+			padding: 0 1rem;
 		}
 	}
 </style>

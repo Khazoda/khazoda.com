@@ -84,16 +84,16 @@
 	.markdown-side-nav {
 		position: sticky;
 		top: 2rem;
-		width: 100%;
+		width: 250px;
 		height: calc(100vh - 4rem);
-		padding-right: 1rem;
+		padding-right: 1.5rem;
 		overflow-y: auto;
 		scrollbar-color: var(--color-divider) transparent;
 		scrollbar-width: thin;
 	}
 
 	.markdown-side-nav::-webkit-scrollbar {
-		width: 6px;
+		width: 4px;
 	}
 
 	.markdown-side-nav::-webkit-scrollbar-track {
@@ -124,11 +124,14 @@
 		display: block;
 		margin-left: -1px;
 		padding: 0.25rem 0.75rem;
+		overflow: hidden;
 		border-left: 2px solid transparent;
 		color: var(--color-text-secondary, #96a2b0);
 		font-size: 0.95rem;
 		line-height: 1.4;
 		text-decoration: none;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		transition: all 0.2s ease;
 	}
 

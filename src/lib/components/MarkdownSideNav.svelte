@@ -6,6 +6,7 @@
 	export let headerSelectors = "h1, h2, h3, h4";
 	export let activeClass = "active";
 	export let offset = 80;
+	export let homePath = "/";
 
 	interface HeaderItem {
 		id: string;
@@ -68,6 +69,24 @@
 
 <div class="markdown-side-nav">
 	<nav>
+		<div class="home-button">
+			<a href={homePath}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round">
+					<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+					<polyline points="9 22 9 12 15 12 15 22"></polyline>
+				</svg>
+				<span>Home</span>
+			</a>
+		</div>
 		<ul>
 			{#each headers as header}
 				<li style="padding-left: {getIndentation(header.level)}">
@@ -83,7 +102,7 @@
 <style>
 	.markdown-side-nav {
 		position: sticky;
-		top: 2rem;
+		top: 2.5rem;
 		width: 250px;
 		height: calc(100vh - 4rem);
 		padding-right: 1.5rem;
@@ -105,7 +124,8 @@
 		background-color: var(--color-divider);
 	}
 
-	nav {
+	nav ul {
+		margin-top: 1.5rem;
 		padding: 0.5rem 0;
 		border-left: 1px solid var(--color-divider, #474b54);
 	}
@@ -118,6 +138,25 @@
 
 	li {
 		margin-bottom: 0.5rem;
+	}
+
+	.home-button a {
+		display: flex;
+		align-items: center;
+		padding: 0.5rem 0.75rem;
+		gap: 0.5rem;
+		background-color: var(--color-hover-bg, rgba(75, 125, 150, 0.1));
+		font-weight: 500;
+		font-size: 1rem;
+	}
+
+	.home-button a:hover {
+		background-color: var(--color-active-bg, rgba(79, 156, 255, 0.2));
+	}
+
+	.nav-divider {
+		height: 1px;
+		margin: 0.75rem 0;
 	}
 
 	a {

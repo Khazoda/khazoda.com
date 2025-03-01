@@ -51,6 +51,7 @@
 	import PixelarticonsList from "virtual:icons/pixelarticons/list";
 	import PixelarticonsHumanHandsup from "virtual:icons/pixelarticons/human-handsup";
 	import PixelarticonsPaintBucket from "virtual:icons/pixelarticons/paint-bucket";
+	import HugeiconsDiagonalScrollPoint01 from "virtual:icons/hugeicons/diagonal-scroll-point-01";
 
 	import PlushablesColoured from "components/PlushablesColoured.svelte";
 
@@ -368,6 +369,9 @@
 <!--#region Basic Weapons Modal -->
 <Modal bind:showModal modalID={1}>
 	<h2 slot="header" class="header-slot">
+		<a href="/basicweapons" class="mod-description-link-button" title="View Full Description">
+			<HugeiconsDiagonalScrollPoint01 />
+		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -1279,6 +1283,34 @@
 			display: inline-flex;
 			align-items: flex-start;
 			gap: 0.5rem;
+		}
+		.mod-description-link-button {
+			box-sizing: content-box;
+			display: flex;
+			position: absolute;
+			top: 1.5rem;
+			left: 1.5rem;
+			align-items: center;
+			justify-content: center;
+			aspect-ratio: 1;
+			width: 40px;
+			height: 40px;
+			margin: 0;
+			margin-left: auto;
+			padding: 0;
+			border: none;
+			border-radius: 0.5rem;
+			background: #383838;
+			color: #ffffff;
+			font-size: x-large;
+			line-height: 1;
+			&:hover {
+				background: #484848;
+			}
+			@media screen and (max-width: 1000px) {
+				right: 1.5rem;
+				left: unset;
+			}
 		}
 	}
 	ul {

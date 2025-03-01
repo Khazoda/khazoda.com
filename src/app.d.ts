@@ -12,4 +12,10 @@ declare global {
 	}
 }
 
+declare module '*.md' {
+	import type { SvelteComponentType } from 'svelte';
+	const content: SvelteComponentType;
+	export default content;
+}
+
 export {};

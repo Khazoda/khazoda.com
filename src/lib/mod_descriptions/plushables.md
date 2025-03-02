@@ -19,7 +19,7 @@
 
 </span>
 
-# About 🐧
+# About
 
 **Plushables adds over 45 new plushies to that you can craft and display wherever you like. Check
 them out in the [Gallery](https://modrinth.com/mod/plushables/gallery).**
@@ -28,25 +28,24 @@ This mod prides itself on offering a diverse mix of plushies that anyone and eve
 primary focus is on a wide array of original designs and adapting animals that don't already exist
 within Minecraft.
 
-Plushables is always expanding. At the mod's inception in 2019 there were only 3 plushies (one of
-which still exists today!). The list is evergrowing, and constructive feedback and ideas are always
-appreciated.
+Plushables is always expanding. At the mod's inception in 2019 there were only 3 plushies. The list
+is evergrowing, and constructive feedback and ideas are always appreciated.
 
-# Getting Started 📖
+# Getting Started
 
-Finding any type of flower, a gold nugget or a bottle of honey will all unlock the **Heart of Gold**
-recipe for you.  
+Finding any type of **flower**, a **gold nugget** or a **bottle of honey** will all unlock the
+**Heart of Gold** recipe for you.  
 Every plushable is crafted shapelessly from **one** wool block (of varying colour), **one** heart of
 gold, and **one** other thematic item. Every recipe is unlocked in your recipe book once you craft
 your first **Heart of Gold**.
 
-# Collaborations 🐝
+# Collaborations
 
 You might recognize some plushables from other mods. Those authors have been kind enough to allow
 their amazing models to be used or adapted to be in Plushables! If you like a mod's plushie, why not
 check out the mod itself?
 
-### The following plushables exist thanks to generous mod authors and artists
+**The following plushables exist thanks to generous mod authors and artists:**
 
 - **Plushable Conductor** by the [Steam n' Rails](https://modrinth.com/mod/create-steam-n-rails)
   team from [Create: Steam n' Rails](https://modrinth.com/mod/create-steam-n-rails)
@@ -59,13 +58,29 @@ check out the mod itself?
 - **Plushable Ribbit** by [Joosh](https://modrinth.com/user/Joo5h) from
   [Ribbits](https://modrinth.com/mod/ribbits)
 
-# Frequently Asked Questions (FAQ) 🧡
+# Frequently Asked Questions
 
-- Is there a (fabric/forge/neoforge/risugami's modloader) version?  
-  _`Since 1.21.1 Plushables exists on both Fabric and NeoForge. Support for other modloaders are not planned.`_
-- Can you backport the mod to Minecraft 1.X.X?  
-  _`While Plushables will be updated to newer major Minecraft versions as they release, older versions are not in the picture unfortunately. To see all available versions for every one of my mods, visit this website:`_ [https://www.khazoda.com/versions](https://www.khazoda.com/versions)
-- I found a bug / my game crashed  
-  _`If you find any problems with Plushables, please feel encouraged to create an issue on the GitHub repository issue tracker. Bug reports are incredibly helpful, and help make Plushables the best it can be.`_
+**Is there a (fabric/forge/neoforge/risugami's modloader) version?**
+
+```
+Since 1.21.1 Plushables exists on both Fabric and NeoForge.
+If you're running Quilt, use the Fabric jar.
+```
+
+**Can you backport the mod to Minecraft 1.X.X?**
+
+```
+Plushables will not be backported to any version before 1.20.1.
+To see all available versions for every one of my mods,
+visit https://www.khazoda.com/versions
+```
+
+**I found a bug / my game crashed**
+
+```
+If you find any problems with Plushables, please feel encouraged to
+create an issue on the GitHub repository issue tracker.
+Bug reports are incredibly helpful, and help make Plushables the best it can be.
+```
 
 ![divider](https://github.com/Khazoda/Plushables/blob/Web-Assets/description_common/divider.png?raw=true)

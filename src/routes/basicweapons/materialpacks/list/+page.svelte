@@ -340,6 +340,7 @@
 	.page-container {
 		width: 100%;
 		max-width: 1200px;
+		min-height: calc(100dvh - 16px);
 		margin: 0 auto;
 		padding: 2rem;
 		@media screen and (max-width: 1000px) {

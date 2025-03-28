@@ -9,8 +9,8 @@
 
 	import HugeiconsBookDownload from "virtual:icons/hugeicons/book-download";
 	import HugeiconsLinkSquare02 from "virtual:icons/hugeicons/link-square-02";
-	import HugeiconsDownloadSquare02 from "virtual:icons/hugeicons/download-square-02";
-	import HugeiconsBriefcase08 from "virtual:icons/hugeicons/briefcase-08";
+	import IcRoundFileDownload from "virtual:icons/ic/round-file-download";
+	import IcBaselineDonutLarge from "virtual:icons/ic/baseline-donut-large";
 	import HugeiconsSortByDown02 from "virtual:icons/hugeicons/sort-by-down-02";
 	import HugeiconsSortByUp02 from "virtual:icons/hugeicons/sort-by-up-02";
 	import HugeiconsArrowLeft02 from "virtual:icons/hugeicons/arrow-left-02";
@@ -19,7 +19,6 @@
 	import SimpleIconsDiscord from "virtual:icons/simple-icons/discord";
 
 	import ModrinthBwDependencyExample from "$lib/materialpack/media/modrinth_bw_dependency_example.png";
-	import TriangleIcon from "virtual:icons/codicon/debug-breakpoint-function-unverified";
 	import HexagonIcon from "virtual:icons/codicon/debug-breakpoint-data-unverified";
 	import DiamondIcon from "virtual:icons/codicon/debug-breakpoint-log-unverified";
 	import type { MaterialPackCategory } from "src/config/material-packs";
@@ -223,10 +222,8 @@
 								<div class="pack-info">
 									<div class="stats">
 										<span
-											><HugeiconsDownloadSquare02 width="16" height="16" />{item.content.downloads.toLocaleString(
-												"en-US"
-											)} Downloads</span>
-										<span class="category"><HugeiconsBriefcase08 width="16" height="16" />{item.content.category}</span>
+											><IcRoundFileDownload width="16" height="16" />{item.content.downloads.toLocaleString("en-US")} Downloads</span>
+										<span class="category"><IcBaselineDonutLarge width="16" height="16" />{item.content.category}</span>
 									</div>
 								</div>
 								<a
@@ -571,7 +568,7 @@
 			img {
 				aspect-ratio: 1;
 				width: 96px;
-				height: auto;
+				height: 96px;
 				object-fit: cover;
 			}
 			span {

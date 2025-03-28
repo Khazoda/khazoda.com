@@ -605,7 +605,7 @@
 				span {
 					display: flex;
 					flex-direction: row;
-					align-items: flex-start;
+					align-items: center;
 					gap: 0.25rem;
 				}
 			}

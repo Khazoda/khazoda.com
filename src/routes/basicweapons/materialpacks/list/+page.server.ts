@@ -73,11 +73,12 @@ export const load: PageServerLoad = async ({ fetch, setHeaders }) => {
 					}
 				}
 
-				const rawTitle = project.title
+				const titleLength = project.title
 					.toLowerCase()
 					.replace('material pack for basic weapons', '')
-					.trim();
-				const capitalizedTitle = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
+					.trim().length;
+				const truncatedTitle = project.title.substring(0, titleLength);
+				const capitalizedTitle = truncatedTitle.charAt(0).toUpperCase() + truncatedTitle.slice(1);
 
 				return {
 					name: capitalizedTitle,

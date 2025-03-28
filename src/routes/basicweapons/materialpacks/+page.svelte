@@ -18,6 +18,8 @@
 	import FeedbackButton from "src/components/materialpack/FeedbackButton.svelte";
 	import { navigating } from "$app/stores";
 	import LoadingSpinner from "src/components/LoadingSpinner.svelte";
+	import { MATERIAL_PACK_CREATOR_VERSION } from "src/config/version";
+	import Tooltip from "src/components/Tooltip.svelte";
 
 	let pageReady = false;
 
@@ -50,7 +52,12 @@
 				<span class="flex-col">
 					<h1 in:fade={{ duration: 500, delay: 0 }}>Basic Weapons</h1>
 
-					<h2 in:fade={{ duration: 500, delay: 50 }}>Material Pack Creator</h2>
+					<h2 in:fade={{ duration: 500, delay: 50 }}>
+						Material Pack Creator
+						<Tooltip text={`${MATERIAL_PACK_CREATOR_VERSION}`}>
+							<span class="beta-badge">BETA</span>
+						</Tooltip>
+					</h2>
 				</span>
 			</div>
 
@@ -85,65 +92,65 @@
 
 <style lang="scss">
 	.page-container {
-		align-items: center;
 		display: flex;
-		height: calc(100dvh - 16px);
+		align-items: center;
 		justify-content: center;
-		overflow-x: hidden;
 		width: 100%;
+		height: calc(100dvh - 16px);
+		overflow-x: hidden;
 	}
 
 	.center-container {
 		.title-container {
-			align-items: center;
 			display: flex;
 			flex-direction: row;
+			align-items: center;
 			justify-content: center;
 
 			.materialpack-logo {
-				filter: drop-shadow(6px 6px 1px rgba(0, 0, 0, 0.3));
-
-				height: 128px;
-				left: -1rem;
 				position: relative;
 				top: -2rem;
+				left: -1rem;
 				width: 128px;
+
+				height: 128px;
+				filter: drop-shadow(6px 6px 1px rgba(0, 0, 0, 0.3));
 			}
 			h1,
 			h2 {
+				margin-top: 0;
 				color: #51ebff;
 				filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 0.3));
-				margin-top: 0;
 			}
 			h1 {
 				font-size: 64px;
 			}
 			h2 {
 				display: inline-flex;
-				font-size: 20px;
-				font-weight: 800;
-				margin-bottom: 1.5rem;
-				margin-top: 0.25rem;
-				opacity: 0.7;
-				padding-left: 0.2rem;
 				position: relative;
+				margin-top: 0.25rem;
+				margin-bottom: 1.5rem;
+				padding-left: 0.2rem;
+				font-weight: 800;
+				font-size: 20px;
 				text-transform: uppercase;
-				&::after {
+				opacity: 0.7;
+				.beta-badge {
+					margin-left: 0.5rem;
+					padding: 0.2rem 0.5rem;
 					border: 1px solid #04ee04;
 					border-radius: 4px;
 					color: #04ee04;
-					content: "BETA";
-					font-size: 12px;
 					font-weight: 800;
-					margin-left: 0.5rem;
-					padding: 0.2rem 0.5rem;
+					font-size: 12px;
+					cursor: help;
 				}
 			}
 			@media screen and (max-width: 1000px) {
 				flex-direction: column;
 				.materialpack-logo {
-					left: 0;
 					top: 0;
+					left: 0;
 				}
 
 				@media screen and (max-width: 360px) {
@@ -151,9 +158,9 @@
 						margin-bottom: 3rem;
 					}
 					h2::after {
+						position: absolute;
 						bottom: -2rem;
 						left: -0.25rem;
-						position: absolute;
 					}
 				}
 			}
@@ -169,31 +176,31 @@
 		flex-direction: row;
 		gap: 2rem;
 		@media screen and (max-width: 1000px) {
-			align-items: flex-start;
 			flex-direction: column;
+			align-items: flex-start;
 			gap: 1rem;
 		}
 	}
 
 	.btn-important {
+		display: flex;
 		align-items: center;
+		width: fit-content;
+		padding: 1rem 2rem;
+		gap: 0.5rem;
 		border: none;
 		border-radius: 8px;
 		color: rgb(31, 31, 31);
-		display: flex;
-		font-family: "Quicksand", "sans-serif";
-		font-size: 1.2rem;
 		font-weight: 700;
-		gap: 0.5rem;
-		padding: 1rem 2rem;
+		font-size: 1.2rem;
+		font-family: "Quicksand", "sans-serif";
 		text-decoration: none;
 		transition:
 			border 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275),
 			box-shadow 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		width: fit-content;
 		&.green {
-			background: rgb(235, 235, 235);
 			border: 2px solid #2ac444;
+			background: rgb(235, 235, 235);
 			box-shadow: 5px 5px 0px #2ac444;
 			&:hover {
 				border: 2px solid #24aa2f;
@@ -205,8 +212,8 @@
 			}
 		}
 		&.blue {
-			background: rgb(235, 235, 235);
 			border: 2px solid #0099ff;
+			background: rgb(235, 235, 235);
 			box-shadow: 5px 5px 0px #0099ff;
 			&:hover {
 				border: 2px solid #0066ff;
@@ -219,8 +226,8 @@
 		}
 
 		span {
-			filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
 			gap: 0.5rem;
+			filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.1));
 			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		}
 	}

@@ -21,7 +21,7 @@
 
 <style lang="scss">
 	.tooltip {
-		display: inline-block;
+		display: inline-flex;
 		position: relative;
 	}
 

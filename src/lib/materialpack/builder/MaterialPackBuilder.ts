@@ -644,7 +644,11 @@ export class MaterialPackBuilder {
 	}
 
 	private capitalizeFirstLetter(str: string): string {
-		return str.charAt(0).toUpperCase() + str.slice(1);
+		// Split by underscore, capitalize each word, then join with space
+		return str
+			.split('_')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
 	}
 
 	private async generateLanguageFiles(resourceFolder: JSZip) {

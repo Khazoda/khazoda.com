@@ -650,13 +650,14 @@
 				background: #2a2a2a;
 				text-decoration: none;
 
-				.official {
+				&.official {
 					border: 1px solid #3a3a3a;
 					background: #2a2a2a;
 				}
-				.unofficial {
+				&.unofficial {
 					border: 1px solid #3a3a3a;
 					background: #2a2a2a;
+					color: #aaa;
 				}
 			}
 		}

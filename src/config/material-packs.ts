@@ -44,5 +44,11 @@ export const MATERIAL_PACKS: MaterialPackMetadata[] = [
 		required_mod_slug: 'ae2',
 		category: 'mod compatibility',
 		official: false
+	},
+	{
+		slug: 'better-nether-material-pack-for-basic-weapons',
+		required_mod_slug: 'betternether',
+		category: 'mod compatibility',
+		official: false
 	}
 ];

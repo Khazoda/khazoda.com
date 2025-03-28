@@ -319,7 +319,7 @@
 					<li>If your material pack has a mod dependency, list it at the top of the description</li>
 					<li>
 						Ideally copy the header of <a
-							href="https://modrinth.com/datapack/bwmp_warden_deeperdarker"
+							href="https://modrinth.com/datapack/bwmp_warden_deeper-and-darker"
 							target="_blank"
 							rel="noopener noreferrer">this description</a
 						>, or create a similar one that conveys the same information.

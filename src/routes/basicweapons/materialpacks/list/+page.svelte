@@ -381,6 +381,8 @@
 			background: #2a2a2a;
 
 			input {
+				flex: 1;
+				width: 100%;
 				margin-left: 0.5rem;
 				border: none;
 				background: none;

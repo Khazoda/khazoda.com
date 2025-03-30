@@ -368,6 +368,10 @@
 		margin-bottom: 1rem;
 		gap: 1rem;
 
+		@media screen and (max-width: 499px) {
+			flex-direction: column;
+		}
+
 		.search-bar {
 			display: flex;
 			flex: 1;

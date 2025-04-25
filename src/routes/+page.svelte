@@ -413,7 +413,7 @@
 		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/basicweapons">View the GitHub repository</a>
+			<a href="https://github.com/Khazoda/basic-weapons">View the GitHub repository</a>
 		</span>
 		<span class="modal-link wiki">
 			<SimpleIconsBookstack />

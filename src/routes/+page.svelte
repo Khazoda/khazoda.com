@@ -56,7 +56,7 @@
 	import PlushablesColoured from "components/PlushablesColoured.svelte";
 
 	import { onMount } from "svelte";
-	import { replaceState } from "$app/navigation";
+	import { replaceState, goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import IconoirSoundHigh from "virtual:icons/iconoir/sound-high";
 	import IconoirSoundOff from "virtual:icons/iconoir/sound-off";
@@ -106,6 +106,9 @@
 		if (storedPreference !== null) {
 			audioEnabled = storedPreference === "true";
 		}
+		// Add event listeners
+		window.addEventListener("keydown", handleKeydown);
+
 		// setTimeout in order to delay and allow document root to be hydrated
 		setTimeout(() => {
 			const hash = $page.url.hash;
@@ -114,6 +117,11 @@
 				showDialog(modalID);
 			}
 		}, 0);
+
+		// Event listener cleanup
+		return () => {
+			window.removeEventListener("keydown", handleKeydown);
+		};
 	});
 
 	function handleHover(node: HTMLElement, params: [string, boolean] = ["", false]) {
@@ -161,6 +169,36 @@
 		return {
 			destroy: () => node.removeEventListener("click", handleClick)
 		};
+	}
+
+	// Secret pokemon page navigation
+	let konamiCode = [
+		"ArrowUp",
+		"ArrowUp",
+		"ArrowDown",
+		"ArrowDown",
+		"ArrowLeft",
+		"ArrowRight",
+		"ArrowLeft",
+		"ArrowRight",
+		"b",
+		"a"
+	];
+	let konamiIndex = 0;
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key !== konamiCode[konamiIndex]) {
+			konamiIndex = 0;
+			return;
+		}
+		konamiIndex++;
+		if (konamiIndex === konamiCode.length) {
+			konamiIndex = 0;
+			sessionStorage.setItem("secret_pokemon", "1");
+			goto("/_pokemon", {
+				replaceState: true,
+				noScroll: true
+			});
+		}
 	}
 </script>
 

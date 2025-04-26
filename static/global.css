@@ -32,6 +32,11 @@
 	font-family: "Lexend";
 }
 
+@font-face {
+	src: url("fonts/pokemon-ds-font.ttf") format("truetype");
+	font-family: "dsFont";
+}
+
 :root {
 	--grid-colour: rgba(36, 36, 41, 0.5);
 }

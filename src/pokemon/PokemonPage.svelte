@@ -16,6 +16,12 @@
 	let zIndexes = games.map((_, i) => i + 1);
 	let topZ = games.length + 1;
 
+	let timelineZoom = 1;
+	$: timelineStyle = `scale: ${timelineZoom};`;
+	function toggleZoom() {
+		timelineZoom = timelineZoom === 1 ? 0.5 : 1;
+	}
+
 	function bringToFront(i: number) {
 		zIndexes[i] = ++topZ;
 	}
@@ -31,13 +37,21 @@
 
 <div class="desktop-bg">
 	<div class="timeline">
-		<div class="timeline-line"></div>
-		<div class="timeline-content">
+		<div class="timeline-line-wrapper">
+			<button
+				class="zoom-toggle-btn-minimal"
+				on:mousedown={toggleZoom}
+				aria-label={timelineZoom === 1 ? "Zoom out" : "Zoom in"}>
+				{timelineZoom === 1 ? "-" : "+"}
+			</button>
+			<div class="timeline-line"></div>
+		</div>
+		<div class="timeline-content" style={timelineStyle}>
 			<div class="timeline-start">March 2025</div>
 			{#each games as game, i}
 				{#if !openWindows[i]}
 					<div class="timeline-entry">
-						<button class="game-launcher-btn" on:click={() => openWindow(i)}>
+						<button class="game-launcher-btn" on:mousedown={() => openWindow(i)}>
 							<TrainerCard trainer={game.trainer} small={true} />
 						</button>
 						<div class="timeline-title-container">
@@ -62,7 +76,7 @@
 				</div>
 				<div class="window-header">
 					<span>{game.title}</span>
-					<button class="window-close" on:click={() => closeWindow(i)} aria-label="Close window">&times;</button>
+					<button class="window-close" on:mousedown={() => closeWindow(i)} aria-label="Close window">&times;</button>
 				</div>
 				<div class="window-content">
 					<div class="game-details">
@@ -87,7 +101,7 @@
 		height: 100svh;
 		padding-top: 3rem;
 		padding-bottom: 3rem;
-		overflow-x: auto;
+		overflow-x: hidden;
 		background: linear-gradient(135deg, #e0f4ff 0%, #fffbe7 100%);
 	}
 	.timeline {
@@ -97,13 +111,37 @@
 		align-items: flex-start;
 		height: 100%;
 	}
-	.timeline-line {
+	.timeline-line-wrapper {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		width: 4.5rem;
+		height: 100%;
+		padding-top: 2.5rem; /* space for button */
+	}
+	.zoom-toggle-btn-minimal {
+		z-index: 2;
 		position: absolute;
 		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		border: none;
+		background: none;
+		color: #7ec4cf;
+		font-size: 2rem;
+		cursor: pointer;
+		transition: transform 0.2s;
+	}
+	.timeline-line {
+		z-index: 1;
+		position: absolute;
+		top: 2.5rem; /* below button */
 		bottom: 0;
-		left: 0;
+		left: 50%;
 		width: 4px;
-		margin-left: 2.5rem;
+		transform: translateX(-50%);
 		border-radius: 2px;
 		background: linear-gradient(to bottom, #7ec4cf 0%, #ffe066 100%);
 	}
@@ -112,8 +150,12 @@
 		z-index: 1;
 		position: relative;
 		flex-direction: column;
-		margin-left: 5rem;
+		margin-top: 2.5rem;
+		margin-left: 0;
 		gap: 2rem;
+		transform-origin: top left;
+		scale: 1;
+		transition: scale 0.5s;
 	}
 	.timeline-start {
 		margin-bottom: 0.5rem;
@@ -171,8 +213,8 @@
 		position: absolute;
 		top: 60px;
 		right: 60px;
-		min-width: 500px;
-		max-width: 700px;
+		min-width: 650px;
+		max-width: 650px;
 		border-radius: 14px;
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 	}
@@ -275,5 +317,8 @@
 		font-size: 1.5rem;
 		font-family: "dsFont", cursive;
 		letter-spacing: 1px;
+	}
+	.zoom-toggle-btn {
+		display: none;
 	}
 </style>

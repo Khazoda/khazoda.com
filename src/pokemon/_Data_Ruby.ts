@@ -9,10 +9,10 @@ export const data: Playthrough = {
 	boxArt: boxart_ruby,
 	trainer: {
 		name: 'June',
-		id: '12345',
-		money: 123456,
-		startDate: '2024-01-01',
-		endDate: '2024-01-15',
+		id: '09609',
+		money: 55174,
+		startDate: '2025-03-27',
+		endDate: '2025-05-23',
 		badges: 8,
 		badgeImages: [
 			'https://archives.bulbagarden.net/media/upload/thumb/6/63/Stone_Badge.png/75px-Stone_Badge.png',
@@ -25,275 +25,130 @@ export const data: Playthrough = {
 			'https://archives.bulbagarden.net/media/upload/thumb/9/9b/Rain_Badge.png/75px-Rain_Badge.png'
 		],
 		trainerSprite: ruby_trainer_sprite,
-		playtime: '34:15',
-		pokedexCount: 151
+		playtime: '37:50',
+		pokedexCount: 74
 	},
 	team: [
 		{
-			name: 'Blaziken',
-			nickname: 'Torch',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/257.png',
-			level: 50,
-			dex: 257
+			name: 'Hariyama',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/297.png',
+			level: 54,
+			dex: 297
 		},
 		{
-			name: 'Swellow',
-			nickname: 'Wings',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/277.png',
-			level: 48,
-			dex: 277
-		},
-		{
-			name: 'Ludicolo',
-			nickname: 'Fiesta',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/272.png',
-			level: 49,
-			dex: 272
-		},
-		{
-			name: 'Manectric',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/310.png',
-			level: 47,
-			dex: 310
-		},
-		{
-			name: 'Aggron',
-			nickname: 'Ironclad',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png',
-			level: 48,
-			dex: 306
+			name: 'Exploud',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/295.png',
+			level: 57,
+			dex: 295
 		},
 		{
 			name: 'Gardevoir',
-			nickname: 'Grace',
+			nickname: 'Oolong',
 			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png',
-			level: 50,
+			level: 42,
 			dex: 282
+		},
+		{
+			name: 'Mightyena',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/262.png',
+			level: 42,
+			dex: 262
+		},
+		{
+			name: 'Sceptile',
+			nickname: 'Greeple',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png',
+			level: 60,
+			dex: 254
+		},
+		{
+			name: 'Tentacruel',
+			nickname: 'Scroot',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/73.png',
+			level: 40,
+			dex: 73
 		}
 	],
 	helpfulPokemon: [
 		{
-			name: 'Zigzagoon',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/263.png',
-			level: 12,
-			dex: 263
-		},
-		{
-			name: 'Pelipper',
-			nickname: 'Mailman',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png',
-			level: 28,
-			dex: 279
-		},
-		{
-			name: 'Hariyama',
-			nickname: 'Sumo',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/297.png',
-			level: 32,
-			dex: 297
+			name: 'Nuzleaf',
+			nickname: 'Acob',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/274.png',
+			level: 17,
+			dex: 274
 		},
 		{
 			name: 'Beautifly',
-			nickname: 'Petal',
+			nickname: 'Grumple',
 			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/267.png',
-			level: 22,
+			level: 11,
 			dex: 267
 		},
 		{
-			name: 'Makuhita',
-			nickname: 'Mak',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/296.png',
-			level: 16,
-			dex: 296
+			name: 'Wingull',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/278.png',
+			level: 14,
+			dex: 278
 		},
 		{
-			name: 'Electrike',
-			nickname: 'Bolt',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/309.png',
-			level: 18,
-			dex: 309
-		},
-		{
-			name: 'Sableye',
-			nickname: 'Gem',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/302.png',
-			level: 25,
-			dex: 302
-		},
-		{
-			name: 'Torkoal',
-			nickname: 'Coal',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/324.png',
-			level: 27,
-			dex: 324
-		},
-		{
-			name: 'Trapinch',
-			nickname: 'Chomp',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/328.png',
+			name: 'Ninjask',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/291.png',
 			level: 20,
-			dex: 328
+			dex: 291
 		},
 		{
-			name: 'Altaria',
-			nickname: 'Cloudy',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png',
-			level: 35,
-			dex: 334
+			name: 'Shedinja',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/292.png',
+			level: 20,
+			dex: 292
 		},
 		{
-			name: 'Absol',
-			nickname: 'Disaster',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/359.png',
-			level: 36,
-			dex: 359
+			name: 'Skarmory',
+			nickname: 'Vicious',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/227.png',
+			level: 18,
+			dex: 227
 		},
 		{
-			name: 'Wailord',
-			nickname: 'Big Blue',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/321.png',
-			level: 40,
-			dex: 321
+			name: 'Wobbuffet',
+			nickname: 'The Buffet',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/202.png',
+			level: 25,
+			dex: 202
 		},
 		{
 			name: 'Linoone',
-			nickname: 'Stripe',
 			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/264.png',
-			level: 20,
+			level: 29,
 			dex: 264
 		},
 		{
-			name: 'Manectric',
-			nickname: 'Amp',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/310.png',
-			level: 30,
-			dex: 310
+			name: 'Machoke',
+			nickname: 'Ralph',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/67.png',
+			level: 32,
+			dex: 67
 		},
 		{
-			name: 'Breloom',
-			nickname: 'Punchy',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/286.png',
-			level: 29,
-			dex: 286
-		},
-		{
-			name: 'Sharpedo',
-			nickname: 'Jaws',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/319.png',
-			level: 33,
-			dex: 319
-		},
-		{
-			name: 'Camerupt',
-			nickname: 'Volcano',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/323.png',
-			level: 34,
-			dex: 323
-		},
-		{
-			name: 'Flygon',
-			nickname: 'Dragonfly',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png',
+			name: 'Groudon',
+			nickname: 'Groodle',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png',
 			level: 45,
-			dex: 330
+			dex: 383
 		},
 		{
-			name: 'Walrein',
-			nickname: 'Tusk',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/365.png',
-			level: 44,
-			dex: 365
+			name: 'Pelipper',
+			nickname: 'Gully',
+			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png',
+			level: 31,
+			dex: 279
 		},
 		{
 			name: 'Dusclops',
-			nickname: 'Spooky',
+			nickname: 'Saul',
 			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/356.png',
 			level: 37,
 			dex: 356
-		},
-		{
-			name: 'Castform',
-			nickname: 'Weather',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/351.png',
-			level: 25,
-			dex: 351
-		},
-		{
-			name: 'Kecleon',
-			nickname: 'Chameleon',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/352.png',
-			level: 26,
-			dex: 352
-		},
-		{
-			name: 'Seviper',
-			nickname: 'Venom',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/336.png',
-			level: 28,
-			dex: 336
-		},
-		{
-			name: 'Solrock',
-			nickname: 'Sunstone',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/338.png',
-			level: 29,
-			dex: 338
-		},
-		{
-			name: 'Lunatone',
-			nickname: 'Moonstone',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/337.png',
-			level: 29,
-			dex: 337
-		},
-		{
-			name: 'Chimecho',
-			nickname: 'Bell',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/358.png',
-			level: 30,
-			dex: 358
-		},
-		{
-			name: 'Whiscash',
-			nickname: 'Whiskers',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/340.png',
-			level: 31,
-			dex: 340
-		},
-		{
-			name: 'Cacturne',
-			nickname: 'Spikes',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/332.png',
-			level: 32,
-			dex: 332
-		},
-		{
-			name: 'Banette',
-			nickname: 'Doll',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/354.png',
-			level: 34,
-			dex: 354
-		},
-		{
-			name: 'Tropius',
-			nickname: 'Banana',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/357.png',
-			level: 30,
-			dex: 357
-		},
-		{
-			name: 'Relicanth',
-			nickname: 'Ancient',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/369.png',
-			level: 35,
-			dex: 369
-		},
-		{
-			name: 'Claydol',
-			nickname: 'Totem',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/344.png',
-			level: 36,
-			dex: 344
 		}
 	]
 };

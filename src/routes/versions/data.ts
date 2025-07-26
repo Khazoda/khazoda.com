@@ -13,6 +13,10 @@ import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [
+	{ version: '1.21.8', type: 'minor', releaseDate: '2025-07-17', versionGroup: '1.21' },
+	{ version: '1.21.7', type: 'superceded', releaseDate: '2025-06-30', versionGroup: '1.21' },
+	{ version: '1.21.6', type: 'minor', releaseDate: '2025-05-17', versionGroup: '1.21' },
+	{ version: '1.21.5', type: 'minor', releaseDate: '2025-03-25', versionGroup: '1.21' },
 	{ version: '1.21.4', type: 'minor', releaseDate: '2024-12-03', versionGroup: '1.21' },
 	{ version: '1.21.3', type: 'minor', releaseDate: '2024-10-23', versionGroup: '1.21' },
 	{ version: '1.21.2', type: 'superceded', releaseDate: '2024-10-22', versionGroup: '1.21' },
@@ -81,7 +85,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'basic-storage',
 		icon: basicstorage_project_icon,
 		name: 'Basic Storage',
-		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4']
+		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8']
 	},
 	{
 		modId: 'breakerplacer',

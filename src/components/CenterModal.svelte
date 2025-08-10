@@ -46,22 +46,22 @@
 
 <style lang="scss">
 	dialog {
-		background: none;
-		border: none;
-		color: #e9e9ec;
-		height: fit-content;
-		inset: 0;
-		margin: auto;
-		max-height: 90vh;
-		max-width: 500px;
-		overflow-y: auto;
-		padding: 0;
 		position: fixed;
 		width: 90%;
+		max-width: 500px;
+		height: fit-content;
+		max-height: 90vh;
+		margin: auto;
+		inset: 0;
+		padding: 0;
+		overflow-y: auto;
+		border: none;
+		background: none;
+		color: #e9e9ec;
 
 		@media (max-width: 530px) {
-			margin: auto auto 5vh;
 			max-height: 85vh;
+			margin: auto auto 5vh;
 		}
 
 		&::backdrop {
@@ -74,10 +74,10 @@
 	}
 
 	.dialog-inner {
-		background: #141414;
-		border-radius: 0.5rem;
-		padding: 1.5rem;
 		width: 100%;
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		background: #141414;
 	}
 
 	@keyframes zoom {
@@ -101,20 +101,20 @@
 	}
 
 	.modal-close-button {
+		display: flex;
+		z-index: 1000;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
 		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		margin: 0 0 1rem auto;
 		border: none;
 		border-radius: 0.5rem;
-		cursor: pointer;
-		display: flex;
 
 		font-size: x-large;
-		height: 40px;
-		justify-content: center;
-		margin: 0 0 1rem auto;
-		position: absolute;
-		right: 1rem;
-		top: 1rem;
-		width: 40px;
-		z-index: 1000;
+		cursor: pointer;
 	}
 </style>

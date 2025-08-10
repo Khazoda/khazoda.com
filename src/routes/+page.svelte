@@ -32,6 +32,7 @@
 	import materialpack_link_logo from "$lib/media/materialpack-link-logo.webp";
 
 	import btn_press_sound from "$lib/sound/click.mp3";
+	import audio_activated_sound from "$lib/sound/audio_activated.mp3";
 
 	import Modal from "../components/Modal.svelte";
 	import IconoirBluesky from "virtual:icons/simple-icons/bluesky";
@@ -51,6 +52,7 @@
 	import PixelarticonsList from "virtual:icons/pixelarticons/list";
 	import PixelarticonsHumanHandsup from "virtual:icons/pixelarticons/human-handsup";
 	import PixelarticonsPaintBucket from "virtual:icons/pixelarticons/paint-bucket";
+	import PixelarticonsSliders2 from "virtual:icons/pixelarticons/sliders-2";
 	import HugeiconsDiagonalScrollPoint01 from "virtual:icons/hugeicons/diagonal-scroll-point-01";
 
 	import PlushablesColoured from "components/PlushablesColoured.svelte";
@@ -70,7 +72,7 @@
 	import { cubicInOut, cubicOut } from "svelte/easing";
 	import CenterModal from "src/components/CenterModal.svelte";
 
-	var showModal: boolean[] = Array(100).fill(false);
+	var showModal: boolean[] = Array(1000).fill(false);
 	$: currentlyHovered = "";
 	const hashToModalID: Record<string, number> = {
 		"#plushables": 0,
@@ -83,7 +85,8 @@
 		"#hookaduck": 97,
 		"#beef-and-blade": 98,
 		"#dwayne": 99,
-		"#other-mods": 999
+		"#other-mods": 999,
+		"#settings": 1000
 	};
 	const modalIDToHash = Object.fromEntries(Object.entries(hashToModalID).map(([hash, id]) => [id, hash]));
 
@@ -100,6 +103,10 @@
 	};
 
 	let audioEnabled = true;
+	enum RegisteredAudio {
+		Click = "click-sound",
+		AudioActivated = "audio-activated-sound"
+	}
 
 	onMount(() => {
 		const storedPreference = localStorage.getItem("audioEnabled");
@@ -137,7 +144,7 @@
 		node.addEventListener("focusout", handleLeave);
 
 		if (playClickSound) {
-			playAudio(node);
+			playAudio(node, RegisteredAudio.Click);
 		}
 
 		return {
@@ -152,17 +159,24 @@
 		};
 	}
 
-	function toggleAudio() {
-		audioEnabled = !audioEnabled;
+	function toggleAudioEnabled(node: HTMLElement) {
 		localStorage.setItem("audioEnabled", audioEnabled.toString());
 	}
 
-	function playAudio(node: HTMLElement) {
+	function playAudio(node: HTMLElement, audioName?: RegisteredAudio) {
 		const handleClick = () => {
 			if (audioEnabled) {
-				const audio = document.getElementById("click-sound") as HTMLAudioElement;
-				audio.volume = 0.4;
-				audio?.play();
+				// Play Default Click Sound
+				if (!audioName) {
+					const audio = document.getElementById("click-sound") as HTMLAudioElement;
+					audio.volume = 0.4;
+					audio?.play();
+				} else {
+					// Play Specified Audio
+					const audio = document.getElementById(audioName) as HTMLAudioElement;
+					audio.volume = 0.4;
+					audio?.play();
+				}
 			}
 		};
 		node.addEventListener("click", handleClick);
@@ -216,19 +230,15 @@
 		Build your own material packs for Basic Weapons!
 	</NewFeatureWidget> -->
 
-	<div class="fixed-top-right">
-		<audio id="click-sound" preload="auto">
-			<source src={btn_press_sound} type="audio/mpeg" />
-			Your browser does not support the audio element.
-		</audio>
-		<button class="square-btn" on:click={toggleAudio} title="Toggle audio" type="button">
-			{#if audioEnabled}
-				<IconoirSoundHigh />
-			{:else}
-				<IconoirSoundOff />
-			{/if}
-		</button>
-	</div>
+	<audio id="click-sound" preload="auto">
+		<source src={btn_press_sound} type="audio/mpeg" />
+		Your browser does not support the audio element.
+	</audio>
+	<audio id="audio-activated-sound" preload="auto">
+		<source src={audio_activated_sound} type="audio/mpeg" />
+		Your browser does not support the audio element.
+	</audio>
+
 	<div class="island-section">
 		{#if currentlyHovered !== ""}
 			<div transition:fly={{ y: -10, duration: 100, easing: cubicInOut }} class="dynamic-label">
@@ -272,7 +282,15 @@
 						</button>
 					</span>
 					<div class="vertical-spacer"></div>
-					<span class="circquare-right inert" style="box-shadow: 0 0 0 2px transparent;"> </span>
+					<span class="circquare-right settings-button">
+						<button
+							style="box-shadow: 0 0 0 2px transparent;"
+							on:click={() => showDialog(1000)}
+							aria-label="Settings"
+							use:handleHover={["🔧 Change Preferences", true]}>
+							<PixelarticonsSliders2 width="32" height="32" />
+						</button>
+					</span>
 				</div>
 			</span>
 		</div>
@@ -634,7 +652,7 @@
 </Modal>
 
 <!--#region PLASTAR Modal -->
-<Modal bind:showModal modalID={95}>
+<Modal bind:showModal modalID={95} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 		<span>
 			<img
@@ -681,7 +699,7 @@
 </Modal>
 
 <!--#region Kreebles Modal -->
-<Modal bind:showModal modalID={96}>
+<Modal bind:showModal modalID={96} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 		<span>
 			<img
@@ -736,7 +754,7 @@
 </Modal>
 
 <!--#region Hook a Duck Modal -->
-<Modal bind:showModal modalID={97}>
+<Modal bind:showModal modalID={97} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 		<span>
 			<img
@@ -783,7 +801,7 @@
 </Modal>
 
 <!-- #region Beef & Blade Modal -->
-<Modal bind:showModal modalID={98}>
+<Modal bind:showModal modalID={98} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 		<span>
 			<img
@@ -825,7 +843,7 @@
 </Modal>
 
 <!--#region Dwayne The Block Johnson Modal -->
-<Modal bind:showModal modalID={99}>
+<Modal bind:showModal modalID={99} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 		<span>
 			<img
@@ -867,8 +885,8 @@
 </Modal>
 
 <!-- #region Collaborations & Mini Mods Modal -->
-<CenterModal bind:showModal modalID={999}>
-	<h2 slot="header" class="header-slot">
+<CenterModal bind:showModal modalID={999} returnToURL="/">
+	<h2 slot="header" class="header-slot" style="margin-top: 0;">
 		<span>Other Mods</span>
 	</h2>
 
@@ -902,6 +920,38 @@
 					<span class="mod-label">Dwayne</span>
 				</button>
 			</div>
+		</div>
+	</div>
+</CenterModal>
+
+<!-- #region Settings Modal -->
+<CenterModal bind:showModal modalID={1000} returnToURL="/">
+	<h2 slot="header" class="header-slot" style="margin-top: 0;">
+		<span>User Preferences</span>
+	</h2>
+
+	<div slot="description" class="settings-modal">
+		<div class="section">
+			<span class="section-title">Audio</span>
+			<div class="audio-section">
+				<label for="audio-volume">Play Sounds</label>
+				<input
+					type="checkbox"
+					id="audio-volume"
+					bind:checked={audioEnabled}
+					on:change={e => toggleAudioEnabled(e.currentTarget)} />
+			</div>
+		</div>
+
+		<div class="section bottom-section">
+			<button
+				style="min-width: 150px; display: flex; align-items: center; justify-content: center;"
+				on:click={e => {
+					localStorage.clear();
+					window.location.reload();
+				}}
+				on:mouseenter={e => (e.currentTarget.textContent = "Are you Sure?")}
+				on:mouseleave={e => (e.currentTarget.textContent = "Reset Preferences")}>Reset Preferences</button>
 		</div>
 	</div>
 </CenterModal>
@@ -1070,6 +1120,9 @@
 						justify-content: center;
 						width: 100%;
 						height: 100%;
+					}
+					&.settings-button {
+						background: linear-gradient(145deg, rgba(65, 65, 65, 0.8), rgba(45, 45, 45, 0.8));
 					}
 				}
 
@@ -1468,6 +1521,74 @@
 			text-decoration: inherit;
 			&:hover {
 				text-decoration: underline;
+			}
+		}
+	}
+	.settings-modal {
+		font-family: Lexend, system-ui;
+
+		.audio-section {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.5rem;
+
+			label {
+				cursor: pointer;
+			}
+
+			input[type="checkbox"] {
+				appearance: none;
+				position: relative;
+				width: 40px;
+				height: 24px;
+				border-radius: 4px;
+				background: var(--color-background-dark);
+				cursor: pointer;
+				transition: 0.2s;
+
+				&:checked {
+					background: rgb(30, 171, 84);
+				}
+
+				&::before {
+					position: absolute;
+					top: 4px;
+					left: 4px;
+					width: 16px;
+					height: 16px;
+					border-radius: 2px;
+					background: var(--color-text-primary);
+					content: "";
+					transition: 0.2s;
+				}
+
+				&:checked::before {
+					left: 20px;
+				}
+			}
+		}
+		.bottom-section {
+			margin: 0;
+			margin-top: auto;
+			button {
+				all: unset;
+				padding: 0.75rem 1.5rem;
+				border-radius: 8px;
+				background: rgb(200, 50, 50);
+				color: var(--color-text-primary);
+				cursor: pointer;
+				transition: transform 0.1s;
+
+				&:hover {
+					transform: translateY(-1px);
+					background: rgb(220, 60, 60);
+				}
+
+				&:active {
+					transform: translateY(1px);
+					background: rgb(180, 40, 40);
+				}
 			}
 		}
 	}

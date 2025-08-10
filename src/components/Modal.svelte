@@ -7,6 +7,7 @@
 
 	export let showModal: boolean[];
 	export let modalID: number;
+	export let returnToURL: string | undefined = undefined;
 
 	let dialog: HTMLDialogElement;
 	let dialog_inner: HTMLDivElement;
@@ -50,7 +51,8 @@
 	const closeDialog = () => {
 		showModal[modalID] = false;
 		dialog.close();
-		replaceState($page.url.origin, {});
+		if (returnToURL) replaceState(returnToURL, {});
+		else replaceState($page.url.origin, {});
 	};
 </script>
 
@@ -82,20 +84,20 @@
 <style lang="scss">
 	dialog {
 		--mobile-backdrop-opacity: 1;
-		background: none;
-		border: none;
-		color: #e9e9ec;
-		height: 100%;
-		margin: 0 auto 0 0;
-		max-width: 30%;
-		min-height: 100dvh;
+		width: 100%;
 
 		min-width: 25rem;
+		max-width: 30%;
+		height: 100%;
+		min-height: 100dvh;
+		margin: 0 auto 0 0;
 		padding: 0.5rem 0 0.5rem 0.5rem;
+		border: none;
+		background: none;
+		color: #e9e9ec;
 		scrollbar-color: #383838 #141414;
 
 		scrollbar-width: thin;
-		width: 100%;
 
 		&::backdrop {
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
@@ -107,14 +109,14 @@
 		}
 
 		&::-webkit-scrollbar-track {
-			background: #141414;
 			border-radius: 0.5rem;
+			background: #141414;
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background-color: #383838;
 			border: 2px solid #141414;
 			border-radius: 0.5rem;
+			background-color: #383838;
 		}
 
 		&::-webkit-scrollbar-thumb:hover {
@@ -123,9 +125,9 @@
 	}
 	@media screen and (max-width: 1000px) {
 		dialog {
+			width: 100%;
 			min-width: 100%;
 			padding: 0.5rem;
-			width: 100%;
 
 			&::backdrop {
 				opacity: var(--mobile-backdrop-opacity);
@@ -136,15 +138,15 @@
 		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 	.dialog-inner {
-		background: #141414;
-		border-radius: 0.5rem;
-		margin: 0;
+		width: 100%;
 		min-height: 100%;
+		margin: 0;
 		padding: 1rem;
+		border-radius: 0.5rem;
+		background: #141414;
 		transition:
 			transform 0.5s ease,
 			opacity 0.5s ease;
-		width: 100%;
 	}
 	@keyframes zoom {
 		from {
@@ -155,22 +157,22 @@
 		}
 	}
 	.modal-close-button {
-		align-items: center;
-		aspect-ratio: 1;
-		border: none;
-		border-radius: 0.5rem;
 		box-sizing: content-box;
-
-		cursor: pointer;
 		display: flex;
-		font-size: x-large;
-		height: 40px;
+		align-items: center;
 		justify-content: center;
-		line-height: 1;
+		aspect-ratio: 1;
+		width: 40px;
+		height: 40px;
 		margin: 0;
 		margin-left: auto;
 		padding: 0;
-		width: 40px;
+		border: none;
+		border-radius: 0.5rem;
+		font-size: x-large;
+		line-height: 1;
+
+		cursor: pointer;
 	}
 	// Mobile
 	@media screen and (max-width: 1000px) {
@@ -184,30 +186,30 @@
 	}
 	@media screen and (max-width: 1000px) {
 		.mobile-swipe-indicator {
-			color: #868686;
 			display: inline-flex;
-			font-size: small;
-			gap: 0.25rem;
-			justify-content: flex-start;
 			position: relative;
+			justify-content: flex-start;
 			width: 100%;
+			gap: 0.25rem;
+			color: #868686;
+			font-size: small;
 
 			&::before {
-				background-color: rgba(134, 199, 108, 0.8);
-				border-radius: 0 0.25rem 0.25rem 0;
-				content: "";
-				height: 2rem;
-				left: -1rem;
 				position: absolute;
 				top: 50%;
-				transform: translateY(-50%);
+				left: -1rem;
 				width: 0.5rem;
+				height: 2rem;
+				transform: translateY(-50%);
+				border-radius: 0 0.25rem 0.25rem 0;
+				background-color: rgba(134, 199, 108, 0.8);
+				content: "";
 			}
 		}
 	}
 
 	hr {
-		border-color: #868686;
 		border-style: solid;
+		border-color: #868686;
 	}
 </style>

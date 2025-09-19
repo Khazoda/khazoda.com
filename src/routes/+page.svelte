@@ -10,6 +10,7 @@
 	import hookaduck_icon from "$lib/media/site_icons/hookaduck_project_icon_simple.webp";
 	import kreebles_icon from "$lib/media/site_icons/kreebles_project_icon_simple.webp";
 	import plastar_icon from "$lib/media/site_icons/plastar_project_icon_simple.webp";
+	import heirlooms_icon from "$lib/media/site_icons/heirlooms_project_icon_simple.webp";
 
 	// Project Icons (Same as Modrinth/Curseforge)
 	import plushables_project_icon from "$lib/media/project_icons/plushables_project_icon.webp";
@@ -907,6 +908,10 @@
 		<div class="section">
 			<span class="section-title">mini mods</span>
 			<div class="mod-grid">
+				<button on:click={() => showDialog(94)} use:playAudio type="button" title="Heirlooms">
+					<img src={heirlooms_icon} alt="Heirlooms" draggable="false" />
+					<span class="mod-label">Heirlooms</span>
+				</button>
 				<button on:click={() => showDialog(96)} use:playAudio type="button" title="Kreebles">
 					<img src={kreebles_icon} alt="Kreebles" draggable="false" />
 					<span class="mod-label">Kreebles</span>
@@ -1716,6 +1721,7 @@
 					width: 100%;
 					height: 100%;
 					object-fit: contain;
+					border-radius: 7px;
 					transition: transform 0.2s ease;
 				}
 

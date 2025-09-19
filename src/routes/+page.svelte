@@ -23,11 +23,13 @@
 	import hookaduck_project_icon from "$lib/media/project_icons/hookaduck_project_icon.webp";
 	import kreebles_project_icon from "$lib/media/project_icons/kreebles_project_icon.webp";
 	import plastar_project_icon from "$lib/media/project_icons/plastar_project_icon.webp";
+	import heirlooms_project_icon from "$lib/media/project_icons/heirlooms_project_icon.webp";
 	import creator_logo from "$lib/materialpack/media/creator_logo.webp";
 
 	// Project Feature Images
 	import plushables_feature from "$lib/media/animated/plushables_feature.webm";
 	import kreebles_feature from "$lib/media/animated/kreebles_feature.png";
+	import heirlooms_feature from "$lib/media/animated/heirlooms_feature.webm";
 
 	import profile_icon from "$lib/media/profile_icon.webp";
 	import materialpack_link_logo from "$lib/media/materialpack-link-logo.webp";
@@ -81,6 +83,7 @@
 		"#bronze": 2,
 		"#breakerplacer": 3,
 		"#basic-storage": 4,
+		"#heirlooms": 94,
 		"#plastar": 95,
 		"#kreebles": 96,
 		"#hookaduck": 97,
@@ -649,6 +652,56 @@
 			<SimpleIconsBookstack />
 			<a href="https://modded.wiki/w/Mod:Basic_Storage">Visit the Wiki</a>
 		</span>
+	</div>
+</Modal>
+
+<!--#region Heirlooms Modal -->
+<Modal bind:showModal modalID={94} returnToURL="/#other-mods">
+	<h2 slot="header" class="header-slot">
+		<span>
+			<img
+				class="project-logo"
+				src={heirlooms_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				height="32"
+				draggable="false" />
+			Heirlooms
+		</span>
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/heirlooms?style=flat&label=&color=%2311B848" />
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>This mod was made for the 2025 CurseForge ModJam</li>
+			<li>Crafting unstackable items affixes them with the date and the player's name</li>
+			<li>Look back at the history of your items and feel a greater sense of pride and ownership</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/heirlooms">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/heirlooms"> Download on CurseForge </a>
+		</span>
+		<span class="modal-link youtube">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/watch?v=0YIWTT6_AQk">Watch Showcase</a>
+		</span>
+		<span class="modal-link github separator-top">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/heirlooms">View the GitHub repository</a>
+		</span>
+	</div>
+
+	<div class="feature-slot" slot="feature">
+		<video src={heirlooms_feature} autoplay loop muted playsinline></video>
 	</div>
 </Modal>
 
@@ -1434,7 +1487,7 @@
 	.feature-slot {
 		display: inline-flex;
 		position: relative;
-		max-width: 325px;
+		max-width: 500px;
 		margin-top: 1rem;
 		padding: 12px;
 		overflow: hidden;

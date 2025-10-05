@@ -10,9 +10,11 @@ import dwayne_project_icon from '$lib/media/project_icons/dwayne_project_icon.we
 import hookaduck_project_icon from '$lib/media/project_icons/hookaduck_project_icon.webp';
 import kreebles_project_icon from '$lib/media/project_icons/kreebles_project_icon.webp';
 import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.webp';
+import heirlooms_project_icon from '$lib/media/project_icons/heirlooms_project_icon.webp';
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [
+	{ version: '1.21.9', type: 'major', releaseDate: '2025-09-30', versionGroup: '1.21' },
 	{ version: '1.21.8', type: 'minor', releaseDate: '2025-07-17', versionGroup: '1.21' },
 	{ version: '1.21.7', type: 'superceded', releaseDate: '2025-06-30', versionGroup: '1.21' },
 	{ version: '1.21.6', type: 'minor', releaseDate: '2025-05-17', versionGroup: '1.21' },
@@ -122,5 +124,11 @@ export let mods: ModCompatibility[] = [
 		icon: dwayne_project_icon,
 		name: 'Dwayne "The Block" Johnson',
 		supportedVersions: ['1.18.2', '1.19', '1.19.4', '1.20', '1.20.1', '1.21', '1.21.1']
+	},
+	{
+		modId: 'heirlooms',
+		icon: heirlooms_project_icon,
+		name: 'Heirlooms',
+		supportedVersions: ['1.21.1', '1.21.9']
 	}
 ];

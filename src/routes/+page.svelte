@@ -411,7 +411,7 @@
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables"> Download on CurseForge </a>
 		</span>
-		<span class="modal-link youtube separator-top">
+		<span class="modal-link youtube separator-top disabled">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
@@ -463,6 +463,10 @@
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basicweapons"> Download on CurseForge </a>
+		</span>
+		<span class="modal-link youtube separator-top disabled">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
@@ -528,7 +532,7 @@
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/bronze-mod"> Download on CurseForge </a>
 		</span>
-		<span class="modal-link youtube separator-top">
+		<span class="modal-link youtube separator-top disabled">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
@@ -575,7 +579,7 @@
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/breakerplacer"> Download on CurseForge </a>
 		</span>
-		<span class="modal-link youtube separator-top">
+		<span class="modal-link youtube separator-top disabled">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
@@ -624,7 +628,7 @@
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basic-storage"> Download on CurseForge </a>
 		</span>
-		<span class="modal-link youtube separator-top">
+		<span class="modal-link youtube separator-top disabled">
 			<SimpleIconsYoutube />
 			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
@@ -674,9 +678,9 @@
 			<SimpleIconsCurseforge />
 			<a href="https://legacy.curseforge.com/minecraft/mc-mods/heirlooms"> Download on CurseForge </a>
 		</span>
-		<span class="modal-link youtube">
+		<span class="modal-link youtube separator-top disabled">
 			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/watch?v=0YIWTT6_AQk">Watch Showcase</a>
+			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
 		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
@@ -1558,6 +1562,10 @@
 		}
 		&.youtube {
 			color: var(--color-link-youtube);
+			&.disabled {
+				color: var(--color-text-secondary);
+				pointer-events: none;
+			}
 		}
 		a {
 			color: inherit;

@@ -52,9 +52,9 @@
 	import HugeiconsMining01 from "virtual:icons/hugeicons/mining-01";
 	import HugeiconsBlockchain01 from "virtual:icons/hugeicons/blockchain-01";
 	import HugeiconsMonocle01 from "virtual:icons/hugeicons/monocle-01";
-	import PixelarticonsList from "virtual:icons/pixelarticons/list";
+	import PixelarticonsSortNumeric from "~icons/pixelarticons/sort-numeric";
 	import PixelarticonsHumanHandsup from "virtual:icons/pixelarticons/human-handsup";
-	import PixelarticonsPaintBucket from "virtual:icons/pixelarticons/paint-bucket";
+	import PixelarticonsGamepad from "~icons/pixelarticons/gamepad";
 	import PixelarticonsSliders2 from "virtual:icons/pixelarticons/sliders-2";
 	import HugeiconsDiagonalScrollPoint01 from "virtual:icons/hugeicons/diagonal-scroll-point-01";
 
@@ -270,25 +270,24 @@
 				</div>
 				<div class="icon-links">
 					<span class="squircle">
+						<button
+							use:handleHover={["Smaller Mods & Collaborations", true]}
+							on:click={() => showDialog(999)}
+							aria-label="Smaller Mods & Collaborations">
+							<PixelarticonsGamepad width="42" height="42" />
+						</button>
+					</span>
+					<span class="squircle">
 						<a
 							href="/versions"
 							use:handleHover={["Version Information Table", false]}
 							aria-label="Version Information Table">
-							<PixelarticonsList width="42" height="42" />
+							<PixelarticonsSortNumeric width="42" height="42" />
 						</a>
-					</span>
-					<span class="squircle">
-						<button
-							use:handleHover={["Collaborations & Mini Mods", true]}
-							on:click={() => showDialog(999)}
-							aria-label="Collaborations & Mini Mods">
-							<PixelarticonsPaintBucket width="42" height="42" />
-						</button>
 					</span>
 					<div class="vertical-spacer"></div>
 					<span class="circquare-right settings-button">
 						<button
-							style="box-shadow: 0 0 0 2px transparent;"
 							on:click={() => showDialog(1000)}
 							aria-label="Settings"
 							use:handleHover={["🔧 Change Preferences", true]}>
@@ -1180,7 +1179,8 @@
 						height: 100%;
 					}
 					&.settings-button {
-						background: linear-gradient(145deg, rgba(65, 65, 65, 0.8), rgba(45, 45, 45, 0.8));
+						border: 1px solid rgb(50, 50, 50);
+						background: none;
 					}
 				}
 

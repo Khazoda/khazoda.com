@@ -1,6 +1,7 @@
 <script lang="ts">
 	import MingcuteCloseFill from "virtual:icons/mingcute/close-fill";
 	import IcRoundSwipeLeft from "virtual:icons/ic/round-swipe-left";
+	import PixelarticonsScriptText from "~icons/pixelarticons/script-text";
 
 	import { replaceState } from "$app/navigation";
 	import { page } from "$app/stores";
@@ -8,6 +9,7 @@
 	export let showModal: boolean[];
 	export let modalID: number;
 	export let returnToURL: string | undefined = undefined;
+	export let fullDescriptionURL: string | undefined = undefined;
 
 	let dialog: HTMLDialogElement;
 	let dialog_inner: HTMLDivElement;
@@ -67,9 +69,16 @@
 		on:touchmove={swipeMove}
 		on:touchend={swipeEnd}>
 		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-			><MingcuteCloseFill />
-		</button>
+		<div class="top-buttons">
+			{#if fullDescriptionURL}
+				<a href={fullDescriptionURL} class="full-description-button" title="View Full Description">
+					<PixelarticonsScriptText /> Full Description
+				</a>
+			{/if}
+			<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
+				><MingcuteCloseFill />
+			</button>
+		</div>
 		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft /> swipe left anywhere to close</span>
 		<slot name="header" />
 		<hr />
@@ -156,24 +165,100 @@
 			transform: scale(1);
 		}
 	}
-	.modal-close-button {
-		box-sizing: content-box;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		aspect-ratio: 1;
-		width: 40px;
-		height: 40px;
-		margin: 0;
-		margin-left: auto;
-		padding: 0;
-		border: none;
-		border-radius: 0.5rem;
-		font-size: x-large;
-		line-height: 1;
 
-		cursor: pointer;
+	.top-buttons {
+		display: flex;
+		position: relative;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		height: 40px;
+		gap: 0.5rem;
+		@media screen and (max-width: 1000px) {
+			height: 0px;
+		}
+		@media screen and (max-width: 500px) {
+			height: 55px;
+		}
+
+		.full-description-button {
+			display: flex;
+			position: absolute;
+			top: 0;
+			left: 0;
+			align-items: center;
+			justify-content: center;
+			height: 40px;
+			margin: 0;
+			padding: 0.75rem 1rem;
+			gap: 0.5rem;
+			border: 2px solid #4a4a4a;
+			border-radius: 0.5rem;
+			background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
+			color: #ffffff;
+			font-weight: 500;
+			font-size: 1rem;
+			line-height: 40px;
+			text-decoration: none;
+			white-space: nowrap;
+			cursor: pointer;
+			transition: all 0.1s ease;
+
+			&:hover {
+				transform: translateY(-1px);
+				border-color: #5a5a5a;
+				background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			}
+
+			&:active {
+				transform: translateY(0);
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			}
+
+			@media screen and (max-width: 1000px) {
+				right: 50px;
+				left: unset;
+				width: min-content;
+			}
+		}
+
+		.modal-close-button {
+			display: flex;
+			position: absolute;
+			top: 0;
+			right: 0;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+			margin: 0;
+			margin-left: auto;
+
+			padding: 0;
+			border: 2px solid #4a4a4a;
+			border-radius: 0.5rem;
+			background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
+			color: #ffffff;
+			font-size: x-large;
+			line-height: 1;
+			cursor: pointer;
+			transition: all 0.1s ease;
+
+			&:hover {
+				transform: translateY(-1px);
+				border-color: #5a5a5a;
+				background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			}
+
+			&:active {
+				transform: translateY(0);
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			}
+		}
 	}
+
 	// Mobile
 	@media screen and (max-width: 1000px) {
 		.modal-close-button {

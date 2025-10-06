@@ -375,11 +375,8 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal modalID={0}>
+<Modal bind:showModal modalID={0} fullDescriptionURL="/plushables">
 	<h2 slot="header" class="header-slot">
-		<a href="/plushables" class="mod-description-link-button" title="View Full Description">
-			<HugeiconsDiagonalScrollPoint01 />
-		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -429,11 +426,8 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal modalID={1}>
+<Modal bind:showModal modalID={1} fullDescriptionURL="/basicweapons">
 	<h2 slot="header" class="header-slot">
-		<a href="/basicweapons" class="mod-description-link-button" title="View Full Description">
-			<HugeiconsDiagonalScrollPoint01 />
-		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -499,11 +493,8 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal modalID={2}>
+<Modal bind:showModal modalID={2} fullDescriptionURL="/bronze">
 	<h2 slot="header" class="header-slot">
-		<a href="/bronze" class="mod-description-link-button" title="View Full Description">
-			<HugeiconsDiagonalScrollPoint01 />
-		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -549,11 +540,8 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal modalID={3}>
+<Modal bind:showModal modalID={3} fullDescriptionURL="/breakerplacer">
 	<h2 slot="header" class="header-slot">
-		<a href="/breakerplacer" class="mod-description-link-button" title="View Full Description">
-			<HugeiconsDiagonalScrollPoint01 />
-		</a>
 		<span>
 			<img
 				class="project-logo"
@@ -599,11 +587,8 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal modalID={4}>
+<Modal bind:showModal modalID={4} fullDescriptionURL="/basicstorage">
 	<h2 slot="header" class="header-slot">
-		<a href="/basicstorage" class="mod-description-link-button" title="View Full Description">
-			<HugeiconsDiagonalScrollPoint01 />
-		</a>
 		<span>
 			<img
 				class="project-logo"

@@ -132,6 +132,6 @@ export let mods: ModCompatibility[] = [
 		modId: 'heirlooms',
 		icon: heirlooms_project_icon,
 		name: 'Heirlooms',
-		supportedVersions: ['1.21.1', '1.21.9']
+		supportedVersions: ['1.21.1', '1.21.9', '1.21.10']
 	}
 ];

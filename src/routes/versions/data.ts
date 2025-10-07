@@ -14,7 +14,8 @@ import heirlooms_project_icon from '$lib/media/project_icons/heirlooms_project_i
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [
-	{ version: '1.21.9', type: 'major', releaseDate: '2025-09-30', versionGroup: '1.21' },
+	{ version: '1.21.10', type: 'major', releaseDate: '2025-10-07', versionGroup: '1.21' },
+	{ version: '1.21.9', type: 'superceded', releaseDate: '2025-09-30', versionGroup: '1.21' },
 	{ version: '1.21.8', type: 'minor', releaseDate: '2025-07-17', versionGroup: '1.21' },
 	{ version: '1.21.7', type: 'superceded', releaseDate: '2025-06-30', versionGroup: '1.21' },
 	{ version: '1.21.6', type: 'minor', releaseDate: '2025-05-17', versionGroup: '1.21' },
@@ -57,7 +58,7 @@ export let mods: ModCompatibility[] = [
 			'1.21',
 			'1.21.1',
 			'1.21.5',
-			'1.21.9'
+			'1.21.10'
 		]
 	},
 	{

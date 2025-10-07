@@ -55,7 +55,9 @@ export let mods: ModCompatibility[] = [
 			'1.20.5',
 			'1.20.6',
 			'1.21',
-			'1.21.1'
+			'1.21.1',
+			'1.21.5',
+			'1.21.9'
 		]
 	},
 	{
@@ -81,7 +83,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'bronze',
 		icon: bronze_project_icon,
 		name: 'Bronze',
-		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1']
+		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5']
 	},
 	{
 		modId: 'basic-storage',
@@ -93,7 +95,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'breakerplacer',
 		icon: breakerplacer_project_icon,
 		name: 'Block Breaker & Block Placer',
-		supportedVersions: ['1.21', '1.21.1', '1.21.5']
+		supportedVersions: ['1.21', '1.21.1', '1.21.5', '1.21.6', '1.21.7', '1.21.8']
 	},
 	{
 		modId: 'plastar',

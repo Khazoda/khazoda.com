@@ -96,7 +96,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'breakerplacer',
 		icon: breakerplacer_project_icon,
 		name: 'Block Breaker & Block Placer',
-		supportedVersions: ['1.21', '1.21.1', '1.21.5', '1.21.6', '1.21.7', '1.21.8']
+		supportedVersions: ['1.21', '1.21.1', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.10']
 	},
 	{
 		modId: 'plastar',

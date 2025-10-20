@@ -1,2 +1,2 @@
 # khazoda.com
-## WIP
+## WIP README

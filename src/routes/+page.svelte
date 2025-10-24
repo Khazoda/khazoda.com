@@ -708,7 +708,7 @@
 	</div>
 
 	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={helpfulcampfires_feature} />
+		<VideoPlayer src={helpfulcampfires_feature} visible={showModal[93]} />
 	</div>
 </Modal>
 

@@ -2,13 +2,25 @@
 	export let src;
 	export let autoplay = true;
 	export let loop = true;
+	export let visible = true;
 
 	import IconoirSoundHigh from "virtual:icons/iconoir/sound-high";
 	import IconoirSoundOff from "virtual:icons/iconoir/sound-off";
+	import { onDestroy } from 'svelte';
 
 	let video: HTMLVideoElement;
 	let isMuted: boolean = true;
 	let isPlaying: boolean = false;
+
+	// Pause video when modal becomes invisible
+	$: if (video && !visible) {
+		video.pause();
+	}
+
+	//Resume video when modal becomes visible
+	$: if (video && visible) {
+		video.play();
+	}
 
 	function handleVideoClick(event: MouseEvent) {
 		event.preventDefault();
@@ -31,11 +43,23 @@
 		video.muted = isMuted;
 	}
 
+	// Set up event listeners for play/pause states
 	$: if (video) {
-		video.addEventListener("play", () => (isPlaying = true));
-		video.addEventListener("pause", () => (isPlaying = false));
+		const handlePlay = () => (isPlaying = true);
+		const handlePause = () => (isPlaying = false);
+
+		video.addEventListener("play", handlePlay);
+		video.addEventListener("pause", handlePause);
+		
 		isPlaying = !video.paused;
 	}
+
+	// Clean up when component is destroyed
+	onDestroy(() => {
+		if (video) {
+			video.pause();
+		}
+	});
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -85,8 +109,8 @@
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
-		background:none;
-		outline:none;
+		background: none;
+		outline: none;
 		padding: 4px 6px;
 		border: none;
 		border-radius: 3px;

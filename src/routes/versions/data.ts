@@ -11,6 +11,7 @@ import hookaduck_project_icon from '$lib/media/project_icons/hookaduck_project_i
 import kreebles_project_icon from '$lib/media/project_icons/kreebles_project_icon.webp';
 import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.webp';
 import heirlooms_project_icon from '$lib/media/project_icons/heirlooms_project_icon.webp';
+import helpfulcampfires_project_icon from '$lib/media/project_icons/helpfulcampfires_project_icon.webp';
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [
@@ -133,5 +134,11 @@ export let mods: ModCompatibility[] = [
 		icon: heirlooms_project_icon,
 		name: 'Heirlooms',
 		supportedVersions: ['1.21.1', '1.21.9', '1.21.10']
+	},
+	{
+		modId: 'helpfulcampfires',
+		icon: helpfulcampfires_project_icon,
+		name: 'Helpful Campfires',
+		supportedVersions: ['1.21.1']
 	}
 ];

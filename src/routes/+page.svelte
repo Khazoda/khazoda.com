@@ -11,6 +11,7 @@
 	import kreebles_icon from "$lib/media/site_icons/kreebles_project_icon_simple.webp";
 	import plastar_icon from "$lib/media/site_icons/plastar_project_icon_simple.webp";
 	import heirlooms_icon from "$lib/media/site_icons/heirlooms_project_icon_simple.webp";
+	import helpfulcampfires_icon from "$lib/media/site_icons/helpfulcampfires_project_icon_simple.webp";
 
 	// Project Icons (Same as Modrinth/Curseforge)
 	import plushables_project_icon from "$lib/media/project_icons/plushables_project_icon.webp";
@@ -24,6 +25,7 @@
 	import kreebles_project_icon from "$lib/media/project_icons/kreebles_project_icon.webp";
 	import plastar_project_icon from "$lib/media/project_icons/plastar_project_icon.webp";
 	import heirlooms_project_icon from "$lib/media/project_icons/heirlooms_project_icon.webp";
+	import helpfulcampfires_project_icon from "$lib/media/project_icons/helpfulcampfires_project_icon.webp";
 	import creator_logo from "$lib/materialpack/media/creator_logo.webp";
 
 	// Project Feature Images
@@ -83,6 +85,7 @@
 		"#bronze": 2,
 		"#breakerplacer": 3,
 		"#basic-storage": 4,
+		"#helpfulcampfires": 93,
 		"#heirlooms": 94,
 		"#plastar": 95,
 		"#kreebles": 96,
@@ -643,6 +646,54 @@
 	</div>
 </Modal>
 
+<!--#region Helpful Campfires Modal -->
+<Modal bind:showModal modalID={93} returnToURL="/#other-mods">
+	<h2 slot="header" class="header-slot">
+		<span>
+			<img
+				class="project-logo"
+				src={helpfulcampfires_project_icon}
+				alt="logo for the currently opened project"
+				width="32"
+				height="32"
+				draggable="false" />
+			Helpful Campfires
+		</span>
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/helpfulcampfires?style=flat&label=&color=%2311B848" />
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>This mod was made for SpookyJam 2025</li>
+			<li>Minecraft's campfires now give buffs in an area</li>
+			<li>Normal campfires give players a regeneration effect</li>
+			<li>Soul campfires give players a 2 block high jump boost</li>
+			<li>Additionally, a new stump chair block lets you sit around a campfire with your friends, whether they're players or animals</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/helpfulcampfires">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/helpfulcampfires"> Download on CurseForge </a>
+		</span>
+		<span class="modal-link youtube separator-top disabled">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
+		</span>
+		<span class="modal-link github separator-top">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/helpful-campfires">View the GitHub repository</a>
+		</span>
+	</div>
+</Modal>
+
 <!--#region Heirlooms Modal -->
 <Modal bind:showModal modalID={94} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
@@ -949,6 +1000,10 @@
 		<div class="section">
 			<span class="section-title">mini mods</span>
 			<div class="mod-grid">
+				<button on:click={() => showDialog(93)} use:playAudio type="button" title="Helpful Campfires">
+					<img src={helpfulcampfires_icon} alt="Helpful Campfires" draggable="false" />
+					<span class="mod-label">Helpful Campfires</span>
+				</button>
 				<button on:click={() => showDialog(94)} use:playAudio type="button" title="Heirlooms">
 					<img src={heirlooms_icon} alt="Heirlooms" draggable="false" />
 					<span class="mod-label">Heirlooms</span>

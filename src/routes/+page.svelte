@@ -32,6 +32,7 @@
 	import plushables_feature from "$lib/media/animated/plushables_feature.webm";
 	import kreebles_feature from "$lib/media/animated/kreebles_feature.png";
 	import heirlooms_feature from "$lib/media/animated/heirlooms_feature.webm";
+	import helpfulcampfires_feature from "$lib/media/animated/helpfulcampfires_feature.webm";
 
 	import profile_icon from "$lib/media/profile_icon.webp";
 	import materialpack_link_logo from "$lib/media/materialpack-link-logo.webp";
@@ -58,16 +59,15 @@
 	import PixelarticonsHumanHandsup from "virtual:icons/pixelarticons/human-handsup";
 	import PixelarticonsGamepad from "~icons/pixelarticons/gamepad";
 	import PixelarticonsSliders2 from "virtual:icons/pixelarticons/sliders-2";
+	import PixelarticonsDice from "virtual:icons/pixelarticons/dice";
 	import HugeiconsDiagonalScrollPoint01 from "virtual:icons/hugeicons/diagonal-scroll-point-01";
+	import PixelArticonsUsers from "virtual:icons/pixelarticons/users";
+	import PixelarticonsCameraFace from "virtual:icons/pixelarticons/camera-face";
 
 	import PlushablesColoured from "components/PlushablesColoured.svelte";
-
 	import { onMount } from "svelte";
 	import { replaceState, goto } from "$app/navigation";
 	import { page } from "$app/stores";
-	import IconoirSoundHigh from "virtual:icons/iconoir/sound-high";
-	import IconoirSoundOff from "virtual:icons/iconoir/sound-off";
-	import PixelArticonsUsers from "virtual:icons/pixelarticons/users";
 
 	import ImportantButton from "src/components/materialpack/ImportantButton.svelte";
 	import FluentNew16Filled from "~icons/fluent/new-16-filled";
@@ -76,6 +76,7 @@
 	import { fade, fly } from "svelte/transition";
 	import { cubicInOut, cubicOut } from "svelte/easing";
 	import CenterModal from "src/components/CenterModal.svelte";
+	import VideoPlayer from "src/components/VideoPlayer.svelte";
 
 	var showModal: boolean[] = Array(1000).fill(false);
 	$: currentlyHovered = "";
@@ -252,6 +253,7 @@
 				<span>{currentlyHovered}</span>
 			</div>
 		{/if}
+		<!-- #region Island -->
 		<div class="island">
 			<span class="island-content">
 				<div class="logo-links">
@@ -273,13 +275,22 @@
 				</div>
 				<div class="icon-links">
 					<span class="squircle">
+						<button use:handleHover={["Mod Jam Mods", true]} on:click={() => showDialog(997)} aria-label="Mod Jam Mods">
+							<PixelarticonsDice width="42" height="42" />
+						</button>
+					</span>
+					<span class="squircle">
 						<button
-							use:handleHover={["Smaller Mods & Collaborations", true]}
-							on:click={() => showDialog(999)}
-							aria-label="Smaller Mods & Collaborations">
+							use:handleHover={["Collaborations", true]} on:click={() => showDialog(998)} aria-label="Collaborations">
+							<PixelarticonsCameraFace width="42" height="42" /> 
+						</button>
+					</span>
+					<span class="squircle">
+						<button use:handleHover={["Other Mods", true]} on:click={() => showDialog(999)} aria-label="Other Mods">
 							<PixelarticonsGamepad width="42" height="42" />
 						</button>
 					</span>
+					<div class="vertical-spacer"></div>
 					<span class="squircle">
 						<a
 							href="/versions"
@@ -670,7 +681,10 @@
 			<li>Minecraft's campfires now give buffs in an area</li>
 			<li>Normal campfires give players a regeneration effect</li>
 			<li>Soul campfires give players a 2 block high jump boost</li>
-			<li>Additionally, a new stump chair block lets you sit around a campfire with your friends, whether they're players or animals</li>
+			<li>
+				Additionally, a new stump chair block lets you sit around a campfire with your friends, whether they're players
+				or animals
+			</li>
 		</ul>
 	</div>
 
@@ -685,12 +699,16 @@
 		</span>
 		<span class="modal-link youtube separator-top disabled">
 			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
+			<a href="https://youtube.com/shorts/6ty8oi36AoQ?si=SHc_ngt0WaAd6-tj">Watch Showcase</a>
 		</span>
 		<span class="modal-link github separator-top">
 			<SimpleIconsGithub />
 			<a href="https://github.com/Khazoda/helpful-campfires">View the GitHub repository</a>
 		</span>
+	</div>
+
+	<div class="feature-slot" slot="feature">
+		<VideoPlayer src={helpfulcampfires_feature} />
 	</div>
 </Modal>
 
@@ -977,15 +995,40 @@
 	</div>
 </Modal>
 
-<!-- #region Collaborations & Mini Mods Modal -->
-<CenterModal bind:showModal modalID={999} returnToURL="/">
+<!--#region ModJam Mods Modal-->
+<CenterModal bind:showModal modalID={997} returnToURL="/">
 	<h2 slot="header" class="header-slot" style="margin-top: 0;">
-		<span>Other Mods</span>
+		<span>Mod Jam Mods</span>
 	</h2>
 
 	<div slot="description">
 		<div class="section">
-			<span class="section-title">collaborations</span>
+			<div class="mod-grid">
+				<button on:click={() => showDialog(96)} use:playAudio type="button" title="Kreebles">
+					<img src={kreebles_icon} alt="Kreebles" draggable="false" />
+					<span class="mod-label">Kreebles</span>
+				</button>
+				<button on:click={() => showDialog(93)} use:playAudio type="button" title="Helpful Campfires">
+					<img src={helpfulcampfires_icon} alt="Helpful Campfires" draggable="false" />
+					<span class="mod-label">Helpful Campfires</span>
+				</button>
+				<button on:click={() => showDialog(94)} use:playAudio type="button" title="Heirlooms">
+					<img src={heirlooms_icon} alt="Heirlooms" draggable="false" />
+					<span class="mod-label">Heirlooms</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</CenterModal>
+
+<!--#region Collaborations Modal -->
+<CenterModal bind:showModal modalID={998} returnToURL="/">
+	<h2 slot="header" class="header-slot" style="margin-top: 0;">
+		<span>Collaborations</span>
+	</h2>
+
+	<div slot="description">
+		<div class="section">
 			<div class="mod-grid">
 				<button on:click={() => showDialog(95)} use:playAudio type="button" title="Mecha Soldier PLASTAR">
 					<img src={plastar_icon} alt="Mecha Soldier PLASTAR" draggable="false" />
@@ -997,21 +1040,18 @@
 				</button>
 			</div>
 		</div>
+	</div>
+</CenterModal>
+
+<!-- #region Other Mods Modal -->
+<CenterModal bind:showModal modalID={999} returnToURL="/">
+	<h2 slot="header" class="header-slot" style="margin-top: 0;">
+		<span>Other Mods</span>
+	</h2>
+
+	<div slot="description">
 		<div class="section">
-			<span class="section-title">mini mods</span>
 			<div class="mod-grid">
-				<button on:click={() => showDialog(93)} use:playAudio type="button" title="Helpful Campfires">
-					<img src={helpfulcampfires_icon} alt="Helpful Campfires" draggable="false" />
-					<span class="mod-label">Helpful Campfires</span>
-				</button>
-				<button on:click={() => showDialog(94)} use:playAudio type="button" title="Heirlooms">
-					<img src={heirlooms_icon} alt="Heirlooms" draggable="false" />
-					<span class="mod-label">Heirlooms</span>
-				</button>
-				<button on:click={() => showDialog(96)} use:playAudio type="button" title="Kreebles">
-					<img src={kreebles_icon} alt="Kreebles" draggable="false" />
-					<span class="mod-label">Kreebles</span>
-				</button>
 				<button on:click={() => showDialog(98)} use:playAudio type="button" title="Beef & Blade">
 					<img src={beef_icon} alt="Beef & Blade" draggable="false" />
 					<span class="mod-label">Beef & Blade</span>
@@ -1548,7 +1588,8 @@
 			bottom: -2px;
 			left: -2px;
 			border-radius: 10px; /* Slightly larger than the container */
-			background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+			background-image:
+				linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
 				linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 			background-position: 0 0;
 			background-size: 17.5px 17.5px; /* 350px / 20 = 17.5px */

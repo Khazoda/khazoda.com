@@ -93,6 +93,8 @@
 		"#hookaduck": 97,
 		"#beef-and-blade": 98,
 		"#dwayne": 99,
+		"#modjam-mods": 997,
+		"#collaborations": 998,
 		"#other-mods": 999,
 		"#settings": 1000
 	};

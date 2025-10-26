@@ -127,6 +127,7 @@ a:hover {
 button {
 	background: #383838;
 	color: #ffffff;
+	border: none;
 }
 
 button:hover {

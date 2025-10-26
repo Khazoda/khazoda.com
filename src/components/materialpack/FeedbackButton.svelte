@@ -8,7 +8,7 @@
 	let showModal: boolean[] = Array(1).fill(false);
 </script>
 
-<button class="feedback-btn fixed-top-right" on:click={() => (showModal[0] = true)}>
+<button class="feedback-button" on:click={() => (showModal[0] = true)} title="Feedback">
 	<HugeiconsMessageMultiple01 width="100%" height="100%" />
 </button>
 
@@ -38,28 +38,78 @@
 	</div>
 </CenterModal>
 
-<style>
-	.feedback-btn {
-		align-items: center;
-		background: #5865f2;
-
-		border: 1px solid var(--v-color-border);
-		border-radius: 4px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-		color: var(--v-color-text-primary);
-		cursor: pointer;
+<style lang="scss">
+	.feedback-button {
 		display: flex;
-		height: 2.5rem;
+		position: relative;
+		flex-shrink: 0;
+		align-items: center;
 		justify-content: center;
-		padding: 0.4rem;
-		transition: all 0.2s ease;
-		width: 2.5rem;
+		width: 52px;
+		height: 52px;
+		overflow: hidden;
+		border-radius: 8px;
+		background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(28, 28, 28, 0.9));
+		box-shadow:
+			0 2px 4px rgba(0, 0, 0, 0.2),
+			inset 0 1px 1px rgba(255, 255, 255, 0.1),
+			inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+		transition:
+			background 0.3s ease-out,
+			box-shadow 0.2s ease,
+			transform 0.2s ease;
+
+		&::after {
+			position: absolute;
+			width: 150%;
+			height: 150%;
+			inset: -25%;
+			transform: translateX(-100%);
+			background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), transparent 50%);
+			content: "";
+			pointer-events: none;
+			transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		}
+
+		&:hover {
+			transform: translateY(-1px);
+			background: linear-gradient(125deg, rgba(56, 56, 56, 0.9), rgba(49, 2, 27, 0.9));
+			box-shadow:
+				0 4px 8px rgba(0, 0, 0, 0.3),
+				inset 0 1px 1px rgba(255, 255, 255, 0.15),
+				inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+		}
+
+		&:has(a:focus-visible) {
+			outline: solid 2px rgba(100, 200, 255, 0.8);
+		}
+
+		&:hover::after,
+		&:focus-within::after {
+			transform: translateX(100%);
+		}
+
+		&:active {
+			transform: translateY(1px);
+			background: linear-gradient(145deg, rgba(35, 35, 35, 0.9), rgba(25, 25, 25, 0.9));
+			box-shadow:
+				0 1px 2px rgba(0, 0, 0, 0.2),
+				inset 0 1px 1px rgba(255, 255, 255, 0.05),
+				inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+		}
+
+		a {
+			all: unset;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			padding: 0.5rem;
+		}
 	}
 
-	.feedback-btn:hover {
-		background: #4752c4;
-		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-	}
 	h2 {
 		margin-top: 0;
 	}

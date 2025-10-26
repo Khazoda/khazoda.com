@@ -1,11 +1,10 @@
 <script>
-import PixelarticonsHome from '~icons/pixelarticons/home';</script>
+	export let colour;
+</script>
 
-<span class="home-button">
-	<a href="/">
-		<PixelarticonsHome width="100%" height="100%" />
-	</a>
-</span>
+<button class="home-button" style="--colour: {colour}" on:click >
+	<slot name="icon"/>
+</button>
 
 <style lang="scss">
 	.home-button {
@@ -17,6 +16,7 @@ import PixelarticonsHome from '~icons/pixelarticons/home';</script>
 		width: 52px;
 		height: 52px;
 		overflow: hidden;
+		padding: 0.5rem;
 		border-radius: 8px;
 		background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(28, 28, 28, 0.9));
 		box-shadow:
@@ -42,7 +42,7 @@ import PixelarticonsHome from '~icons/pixelarticons/home';</script>
 
 		&:hover {
 			transform: translateY(-1px);
-			background: linear-gradient(125deg, rgba(56, 56, 56, 0.9), rgba(2, 23, 49, 0.9));
+			background: linear-gradient(125deg, rgba(56, 56, 56, 0.9),var(--colour, rgba(45,45,45, 0.9)));
 			box-shadow:
 				0 4px 8px rgba(0, 0, 0, 0.3),
 				inset 0 1px 1px rgba(255, 255, 255, 0.15),
@@ -61,21 +61,11 @@ import PixelarticonsHome from '~icons/pixelarticons/home';</script>
 
 		&:active {
 			transform: translateY(1px);
-			background: linear-gradient(145deg, rgba(35, 35, 35, 0.9), rgba(25, 25, 25, 0.9));
+			background: linear-gradient(145deg, rgba(35, 35, 35, 0.9),var(--colour,rgba(45, 45, 45, 0.9)));
 			box-shadow:
 				0 1px 2px rgba(0, 0, 0, 0.2),
 				inset 0 1px 1px rgba(255, 255, 255, 0.05),
 				inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-		}
-
-		a {
-			all: unset;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			height: 100%;
-			padding: 0.5rem;
 		}
 	}
 </style>

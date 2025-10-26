@@ -10,6 +10,7 @@
 	import IconoirInfoCircle from "virtual:icons/iconoir/info-circle";
 	import CenterModal from "../../components/CenterModal.svelte";
 	import HomeButton from "../../components/HomeButton.svelte";
+	import GenericJSButton from "src/components/GenericJSButton.svelte";
 
 	var showSupercededVersions = false;
 	var sortOrder: SortOrder = "newest";
@@ -54,10 +55,12 @@
 
 <div class="table-container">
 	<div class="table-controls">
-		<HomeButton />
-		<button class="help-btn" on:click={openModal} type="button">
-			<IconoirInfoCircle width="100%" height="100%" />
-		</button>
+		<span style="margin-right:auto">
+			<HomeButton />
+			<GenericJSButton on:click={openModal} colour="rgba(100,25,0,0.9)">
+				<IconoirInfoCircle slot="icon" width="100%" height="100%" />
+			</GenericJSButton>
+		</span>
 		<span>
 			<button
 				type="button"
@@ -184,14 +187,14 @@
 	}
 
 	.table-container {
-		background: var(--v-color-background-darkest);
-		border-radius: 0.5rem;
-		color: var(--v-color-text-primary);
-		margin: 2rem auto;
-		max-width: fit-content;
-		padding: 1rem;
-		position: relative;
 		z-index: 1;
+		position: relative;
+		max-width: fit-content;
+		margin: 2rem auto;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		background: var(--v-color-background-darkest);
+		color: var(--v-color-text-primary);
 
 		// Version Group Styling Logic
 		tbody {
@@ -213,30 +216,30 @@
 	}
 
 	.table-container .table-controls {
-		background: var(--v-color-background);
 		display: inline-flex;
-		gap: 0.5rem;
-		height: 3.5rem;
-		justify-content: flex-end;
-		padding: 1rem 1rem 0 1rem;
 		position: absolute;
-		right: 0;
 		top: 0;
+		right: 0;
+		justify-content: flex-end;
 		width: 100%;
+		height: 4rem;
+		padding: 1rem 1rem 0 1rem;
+		gap: 0.5rem;
+		background: var(--v-color-background);
 
 		span {
 			display: flex;
-			gap: 1rem;
+			gap: 0.5rem;
 		}
 		button,
 		a {
+			display: flex;
 			align-items: center;
+			padding: 0.5rem 1rem;
+			gap: 0.5rem;
 			border: 1px solid var(--v-color-border);
 			border-radius: 4px;
 			color: var(--v-color-text-primary);
-			display: flex;
-			gap: 0.5rem;
-			padding: 0.5rem 1rem;
 
 			&:hover {
 				cursor: pointer;
@@ -244,12 +247,12 @@
 		}
 		a,
 		.help-btn {
-			align-items: center;
 			display: inline-flex;
-			height: 2.5rem;
+			align-items: center;
 			justify-content: center;
-			padding: 0.5rem;
 			width: 2.5rem;
+			height: 2.5rem;
+			padding: 0.5rem;
 		}
 
 		.help-btn {
@@ -263,13 +266,13 @@
 	}
 
 	.table-wrapper {
+		padding-top: 4rem;
 		overflow: auto;
-		padding-top: 3rem;
 
 		// Add custom scrollbar styling
 		&::-webkit-scrollbar {
-			height: 24px;
 			width: 12px;
+			height: 24px;
 		}
 
 		&::-webkit-scrollbar-track {
@@ -277,10 +280,10 @@
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: var(--v-color-background-dark);
+			border-top: 2px solid var(--v-color-background-darkest);
 			border-bottom: 2px solid var(--v-color-background-darkest);
 			border-radius: 3px;
-			border-top: 2px solid var(--v-color-background-darkest);
+			background: var(--v-color-background-dark);
 
 			&:hover {
 				background: var(--v-color-background-light);
@@ -289,49 +292,49 @@
 	}
 
 	.table-container table {
+		margin: auto;
 		border-collapse: separate;
 		border-spacing: 0;
-		margin: auto;
 	}
 
 	// Cell Outer
 	.table-container th,
 	.table-container td {
-		background: var(--v-color-background-darker);
-		border: 1px solid var(--v-color-border);
+		width: 3rem;
 		height: 3rem;
 		padding: 0.5rem;
+		border: 1px solid var(--v-color-border);
+		background: var(--v-color-background-darker);
 		vertical-align: middle;
-		width: 3rem;
 	}
 
 	// Cell Inner
 	.table-container th img,
 	.table-container td div {
-		align-items: center;
 		display: inline-flex;
-		height: 2rem;
+		align-items: center;
 		justify-content: center;
-		text-align: center;
 		width: 2rem;
+		height: 2rem;
+		text-align: center;
 	}
 
 	.table-container thead th {
-		background: var(--v-color-background-dark);
-		color: var(--v-color-text-primary);
 		position: -webkit-sticky;
 		position: sticky;
 		top: 0;
+		background: var(--v-color-background-dark);
+		color: var(--v-color-text-primary);
 	}
 
 	th:first-child {
-		background: var(--v-color-background-dark);
-		left: 0;
+		z-index: 2;
 		position: -webkit-sticky;
 		position: sticky;
+		left: 0;
+		background: var(--v-color-background-dark);
 		text-align: start;
 		vertical-align: middle;
-		z-index: 2;
 	}
 
 	thead th:first-child {
@@ -364,25 +367,25 @@
 	.mod-header {
 		z-index: 0;
 		.tooltip-container {
-			align-items: center;
 			display: flex;
-			height: 100%;
+			align-items: center;
 			justify-content: center;
 			width: 100%;
+			height: 100%;
 		}
 
 		.tooltip {
-			background: var(--v-color-background-darkest);
-			border-radius: 8px;
-			left: 1rem;
-			opacity: 0;
-			padding: 0.5rem 1rem;
-			pointer-events: none;
+			z-index: 1000;
 			position: fixed;
 			top: 1rem;
-			transition: opacity 0.2s;
+			left: 1rem;
+			padding: 0.5rem 1rem;
+			border-radius: 8px;
+			background: var(--v-color-background-darkest);
 			white-space: nowrap;
-			z-index: 1000;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.2s;
 		}
 
 		&:hover .tooltip {
@@ -400,20 +403,20 @@
 			margin-top: 0rem;
 		}
 		.table-container .table-controls {
-			gap: 0.5rem;
 			height: auto;
+			gap: 0.5rem;
 			span {
 				flex-direction: column;
 			}
 			> a {
-				bottom: 0.5rem;
-				height: 4rem;
-				left: 50%;
-				padding: 0.75rem;
-				position: fixed;
-				transform: translateX(-50%);
-				width: 4rem;
 				z-index: 1000;
+				position: fixed;
+				bottom: 0.5rem;
+				left: 50%;
+				width: 4rem;
+				height: 4rem;
+				padding: 0.75rem;
+				transform: translateX(-50%);
 			}
 		}
 	}
@@ -425,14 +428,14 @@
 	@media (max-width: 530px) {
 		.table-container .table-controls {
 			> .help-btn {
-				bottom: 0.5rem;
-				height: 4rem;
-				left: calc(50% - 5rem);
-				padding: 0.75rem;
-				position: fixed;
-				transform: translateX(-50%);
-				width: 4rem;
 				z-index: 1000;
+				position: fixed;
+				bottom: 0.5rem;
+				left: calc(50% - 5rem);
+				width: 4rem;
+				height: 4rem;
+				padding: 0.75rem;
+				transform: translateX(-50%);
 			}
 		}
 	}
@@ -455,65 +458,68 @@
 	@media (max-width: 530px) {
 		.table-container th,
 		.table-container td {
+			width: 2.5rem;
 			height: 2.5rem;
 			padding: 0.35rem;
-			width: 2.5rem;
 		}
 
 		.table-container th img,
 		.table-container td div {
-			height: 1.75rem;
 			width: 1.75rem;
+			height: 1.75rem;
 		}
 	}
 
 	.table-container .table-controls {
 		@media (max-width: 530px) {
-			align-items: center;
-			background: var(--v-color-background-darkest);
-			border-top: 1px solid var(--v-color-border);
-			bottom: 0;
 			display: flex;
-			gap: 0.5rem;
-			height: auto;
-			justify-content: center;
-			left: 0;
-			padding: 0.5rem;
-			position: fixed;
-			right: 0;
-			top: auto;
 			z-index: 1000;
-
+			position: fixed;
+			top: auto;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			align-items: center;
+			justify-content: center;
+			height: auto;
+			padding: 0.5rem;
+			gap: 0.5rem;
+			border-top: 1px solid var(--v-color-border);
+			background: var(--v-color-background-darkest);
+			@media (max-width: 450px) {
+				flex-direction: column;
+				align-items: flex-start;
+			}
 			span {
 				display: flex;
 				flex-direction: row;
-				gap: 0.5rem;
-				height: 2.25rem;
 				justify-content: center;
+				height: 3.25rem;
+				gap: 0.5rem;
 			}
 
 			button,
 			a {
-				background: var(--v-color-background-darker);
-				border: 1px solid var(--v-color-border);
-				font-size: 0.85rem;
-				height: 2.25rem;
+				height: 3.25rem;
 				min-height: 2.25rem;
 				padding: 0.35rem 0.7rem;
+				border: 1px solid var(--v-color-border);
+				background: var(--v-color-background-darker);
+				font-size: 0.85rem;
 				white-space: nowrap;
 			}
 
 			.home-btn,
 			.help-btn {
-				align-items: center;
-				background: var(--v-color-background-dark);
 				display: flex;
-				height: 2.25rem;
-				justify-content: center;
-				padding: 0.4rem;
 				position: fixed;
 				top: 0.5rem;
+				align-items: center;
+				justify-content: center;
 				width: 2.25rem;
+				height: 2.25rem;
+				padding: 0.4rem;
+				background: var(--v-color-background-dark);
 			}
 
 			.home-btn {
@@ -526,13 +532,13 @@
 
 			// Make the control buttons more compact
 			.control-btn {
-				align-items: center;
 				display: inline-flex;
+				align-items: center;
 				gap: 0.25rem;
 
 				:global(svg) {
-					height: 1.2rem;
 					width: 1.2rem;
+					height: 1.2rem;
 				}
 			}
 		}
@@ -545,8 +551,8 @@
 		}
 		.table-wrapper {
 			margin: 0;
-			padding-bottom: 0.5rem;
 			padding-top: 0rem;
+			padding-bottom: 0.5rem;
 		}
 	}
 </style>

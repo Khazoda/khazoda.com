@@ -5,9 +5,10 @@
 
 	import { data as ruby } from "./_Data_Ruby";
 	import { data as platinum } from "./_Data_Platinum";
+	import { data as za } from "./_Data_ZA";
 
 	// Data for each game
-	const games = [ruby, platinum];
+	const games = [ruby, za];
 
 	// By default, no windows are open
 	let openWindows = games.map(() => false);

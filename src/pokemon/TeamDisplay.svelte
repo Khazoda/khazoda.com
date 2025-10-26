@@ -19,7 +19,7 @@
 			on:mouseleave={() => (hovered = null)}
 			on:focus={() => (hovered = { ...poke, i })}
 			on:blur={() => (hovered = null)}>
-			<img class="box-sprite" src={poke.sprite} alt={poke.name} style="width: {size}px; height: {size}px;" />
+			<img class="box-sprite" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + (poke.shiny ? "shiny/" : "") + poke.dex + ".png"} alt={poke.name} style="width: {size}px; height: {size}px;" />
 			{#if hovered && hovered.i === i}
 				<div class="poke-popup">
 					<div class="popup-header">
@@ -27,7 +27,7 @@
 						<div class="popup-level">Lv.{poke.level}</div>
 					</div>
 					<img
-						src={poke.sprite}
+						src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + (poke.shiny ? "shiny/" : "") + poke.dex + ".png"}
 						alt={poke.name}
 						class="popup-sprite"
 						width="120"

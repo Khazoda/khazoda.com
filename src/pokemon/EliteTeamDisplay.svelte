@@ -20,7 +20,7 @@
 		<div class="team-row">
 			{#each row as poke}
 				<div class="pokemon">
-					<img class="sprite" src={poke.sprite} alt={poke.name} />
+					<img class="sprite" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + (poke.shiny ? "shiny/" : "") + poke.dex + ".png"} alt={poke.name} />
 					<div class="nickname">{poke.nickname ? poke.nickname : poke.name}</div>
 					<div class="level">Lv.{poke.level}</div>
 				</div>

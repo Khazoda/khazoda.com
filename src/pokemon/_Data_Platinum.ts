@@ -30,42 +30,36 @@ export const data: Playthrough = {
 		{
 			name: 'Infernape',
 			nickname: 'Blaze',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/392.png',
 			level: 55,
 			dex: 392
 		},
 		{
 			name: 'Staraptor',
 			nickname: 'Wings',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/398.png',
 			level: 53,
 			dex: 398
 		},
 		{
 			name: 'Luxray',
 			nickname: 'Spark',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/405.png',
 			level: 52,
 			dex: 405
 		},
 		{
 			name: 'Roserade',
 			nickname: 'Petal',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/407.png',
 			level: 51,
 			dex: 407
 		},
 		{
 			name: 'Gastrodon',
 			nickname: 'Slimey',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/423.png',
 			level: 50,
 			dex: 423
 		},
 		{
 			name: 'Garchomp',
 			nickname: 'Chomp',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png',
 			level: 56,
 			dex: 445
 		}
@@ -74,21 +68,18 @@ export const data: Playthrough = {
 		{
 			name: 'Bibarel',
 			nickname: 'HM Buddy',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/400.png',
 			level: 18,
 			dex: 400
 		},
 		{
 			name: 'Bronzor',
 			nickname: 'Shield',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/436.png',
 			level: 22,
 			dex: 436
 		},
 		{
 			name: 'Floatzel',
 			nickname: 'Swimmy',
-			sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/419.png',
 			level: 30,
 			dex: 419
 		}

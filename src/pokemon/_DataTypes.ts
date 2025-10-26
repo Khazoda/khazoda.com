@@ -2,9 +2,9 @@
 export interface Pokemon {
 	name: string;
 	nickname?: string;
-	sprite: string;
 	level: number;
 	dex: number;
+	shiny?: boolean;
 }
 
 export interface Playthrough {

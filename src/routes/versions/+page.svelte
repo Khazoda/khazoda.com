@@ -546,8 +546,8 @@
 	@media (max-width: 530px) {
 		.table-container {
 			margin: 0.5rem auto;
-			margin-top: 2.5rem;
-			padding: 0.5rem;
+			margin-top: 0;
+			padding: 0.5rem 0.5rem 4rem 0.5rem;
 		}
 		.table-wrapper {
 			margin: 0;

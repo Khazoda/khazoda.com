@@ -30,7 +30,7 @@
 
 	// Project Feature Images
 	import plushables_feature from "$lib/media/animated/plushables_feature.webm";
-	import kreebles_feature from "$lib/media/animated/kreebles_feature.png";
+	import kreebles_feature from "$lib/media/animated/kreebles_feature.webm";
 	import heirlooms_feature from "$lib/media/animated/heirlooms_feature.webm";
 	import helpfulcampfires_feature from "$lib/media/animated/helpfulcampfires_feature.webm";
 
@@ -437,7 +437,7 @@
 		</span>
 	</div>
 	<div class="feature-slot" slot="feature">
-		<video src={plushables_feature} autoplay loop muted playsinline></video>
+		<VideoPlayer src={plushables_feature} visible={showModal[0]} />
 	</div>
 </Modal>
 
@@ -862,7 +862,7 @@
 	</div>
 
 	<div class="feature-slot" slot="feature">
-		<img src={kreebles_feature} alt="Kreebles Feature" />
+		<VideoPlayer src={kreebles_feature} visible={showModal[96]} />
 	</div>
 </Modal>
 

@@ -437,7 +437,7 @@
 		</span>
 	</div>
 	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={plushables_feature} visible={showModal[0]} />
+		<VideoPlayer src={plushables_feature} visible={showModal[0]} disableMuteButton />
 	</div>
 </Modal>
 
@@ -862,7 +862,7 @@
 	</div>
 
 	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={kreebles_feature} visible={showModal[96]} />
+		<VideoPlayer src={kreebles_feature} visible={showModal[96]} disableMuteButton />
 	</div>
 </Modal>
 

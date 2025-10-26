@@ -183,6 +183,7 @@
 
 		.full-description-button {
 			display: flex;
+			z-index: 1000;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -234,6 +235,7 @@
 			height: 40px;
 			margin: 0;
 			margin-left: auto;
+			z-index: 1000;
 
 			padding: 0;
 			border: 2px solid #4a4a4a;

@@ -3,10 +3,11 @@
 	export let autoplay = true;
 	export let loop = true;
 	export let visible = true;
+	export let disableMuteButton = false;
 
 	import IconoirSoundHigh from "virtual:icons/iconoir/sound-high";
 	import IconoirSoundOff from "virtual:icons/iconoir/sound-off";
-	import { onDestroy } from 'svelte';
+	import { onDestroy } from "svelte";
 
 	let video: HTMLVideoElement;
 	let isMuted: boolean = true;
@@ -50,7 +51,7 @@
 
 		video.addEventListener("play", handlePlay);
 		video.addEventListener("pause", handlePause);
-		
+
 		isPlaying = !video.paused;
 	}
 
@@ -68,13 +69,15 @@
 	<div class="click-overlay" />
 	<video bind:this={video} {src} {autoplay} {loop} muted={isMuted} class="video" />
 
-	<button class="mute-btn {isMuted ? 'muted' : ''}" on:click={toggleMute} title={isMuted ? "Unmute" : "Mute"}>
-		{#if isMuted}
-			<IconoirSoundOff />
-		{:else}
-			<IconoirSoundHigh />
-		{/if}
-	</button>
+	{#if !disableMuteButton}
+		<button class="mute-btn {isMuted ? 'muted' : ''}" on:click={toggleMute} title={isMuted ? "Unmute" : "Mute"}>
+			{#if isMuted}
+				<IconoirSoundOff />
+			{:else}
+				<IconoirSoundHigh />
+			{/if}
+		</button>
+	{/if}
 </div>
 
 <style>
@@ -109,11 +112,11 @@
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
-		background: none;
-		outline: none;
 		padding: 4px 6px;
 		border: none;
 		border-radius: 3px;
+		outline: none;
+		background: none;
 		color: rgb(210, 210, 210);
 		font-size: 2rem;
 		cursor: pointer;

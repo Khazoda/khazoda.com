@@ -222,13 +222,6 @@ button:focus-visible {
 	border-radius: 8px;
 }
 
-.circquare-left {
-	border-radius: 100% 8px 8px 100%;
-}
-
-.circquare-right {
-	border-radius: 8px 100% 100% 8px;
-}
 /* Stops filtering for pixel art */
 img.no-resample {
 	position: relative;

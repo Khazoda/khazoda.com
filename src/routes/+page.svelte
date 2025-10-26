@@ -283,8 +283,10 @@
 					</span>
 					<span class="squircle">
 						<button
-							use:handleHover={["Collaborations", true]} on:click={() => showDialog(998)} aria-label="Collaborations">
-							<PixelarticonsCameraFace width="42" height="42" /> 
+							use:handleHover={["Collaborations", true]}
+							on:click={() => showDialog(998)}
+							aria-label="Collaborations">
+							<PixelarticonsCameraFace width="42" height="42" />
 						</button>
 					</span>
 					<span class="squircle">
@@ -1302,22 +1304,34 @@
 	// Mobile Column Island
 	@media screen and (max-width: 575px) {
 		.island-section {
+			contain: none;
+			z-index: 1000;
 			position: fixed;
 			top: 50%;
 			right: 0;
+			right: env(safe-area-inset-right, 0);
 			align-items: flex-end;
+			width: 96px;
 			height: auto;
+			/* Dynamic viewport height calculations*/
+			max-height: calc(100vh - 2rem);
+			max-height: calc(100dvh - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0));
+			padding: 8px;
 			transform: translateY(-50%);
 
 			.island {
 				position: relative;
-
 				width: 80px;
-				height: min(100%, 700px);
+				/* Dynamic viewport height calculations*/
+				height: min(calc(100vh - 4rem), 700px);
+				height: min(calc(100dvh - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0) - 2rem), 700px);
+				min-height: 200px;
 
 				.island-content {
 					flex-direction: column;
+					height: 100%;
 					padding: 8px 0 8px 0;
+					overflow: hidden;
 
 					.logo-links,
 					.icon-links {
@@ -1349,18 +1363,13 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		padding: 2rem;
+		min-width: 192px;
 
-		ul {
-			display: flex;
-			margin: 0;
-			padding: 0;
-			gap: 1.5rem;
-			list-style: none;
-
-			@media screen and (max-width: 575px) {
-				flex-direction: column;
-			}
+		@media screen and (max-width: 575px) {
+			flex-direction: column;
+			padding: 2rem calc(2rem + 96px) 2rem 2rem;
 		}
+
 		li {
 			position: relative;
 			list-style: none;
@@ -1431,6 +1440,9 @@
 
 			&:active {
 				scale: 0.95;
+			}
+			@media screen and (max-width: 575px) {
+				animation: none;
 			}
 		}
 

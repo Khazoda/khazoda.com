@@ -775,7 +775,7 @@
 	</div>
 
 	<div class="feature-slot" slot="feature">
-		<video src={heirlooms_feature} autoplay loop muted playsinline></video>
+		<VideoPlayer src={heirlooms_feature} disableMuteButton visible={showModal[94]}/>
 	</div>
 </Modal>
 

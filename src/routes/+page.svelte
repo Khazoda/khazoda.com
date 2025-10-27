@@ -1247,7 +1247,7 @@
 						max-width: 250px;
 						flex: 0 0 auto;
 						gap: 8px;
-						overflow: auto;
+						overflow-x: auto;
 					}
 				}
 
@@ -1324,7 +1324,6 @@
 						transform: translateX(100%);
 					}
 					&:active {
-						transform: translateY(1px);
 						background: linear-gradient(145deg, rgba(35, 35, 35, 0.9), rgba(25, 25, 25, 0.9));
 						box-shadow:
 							0 1px 2px rgba(0, 0, 0, 0.2),

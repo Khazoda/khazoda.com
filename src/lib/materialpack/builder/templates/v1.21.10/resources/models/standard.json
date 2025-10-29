@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "basicweapons:item/{{material_name}}_{{weapon_type}}"
+	}
+}
+

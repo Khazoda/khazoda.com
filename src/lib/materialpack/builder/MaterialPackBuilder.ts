@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import type { MaterialPack } from '../types/materialpackTypes';
-import { PACK_FORMAT_VERSIONS, applyTemplate } from './utils/template';
+import { PACK_FORMAT_VERSIONS, applyTemplate, loadTemplate, usesFileTemplates } from './utils/template';
 
 // All Weapon Types
 const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive'] as const;
@@ -269,6 +269,76 @@ export class MaterialPackBuilder {
 		this.versionRange = versionRange;
 	}
 
+	private getPackFormat(packType: 'data' | 'resource'): number {
+		const format = PACK_FORMAT_VERSIONS[packType][this.versionRange];
+		return format;
+	}
+
+	/**
+	 * Gets a dagger recipe template structure. For 1.21.10, loads from files; for 1.21-1.21.1, uses hardcoded templates.
+	 */
+	private async getDaggerTemplate(): Promise<DaggerRecipeTemplate> {
+		if (usesFileTemplates(this.versionRange)) {
+			const mainStr = await loadTemplate(this.versionRange, 'data/recipes/dagger.json');
+			const compatStr = await loadTemplate(this.versionRange, 'data/recipes/dagger_compat.json');
+			return {
+				main: JSON.parse(mainStr) as RecipeTemplate,
+				compat: JSON.parse(compatStr) as RecipeTemplate
+			};
+		}
+		return RECIPE_TEMPLATES.dagger as DaggerRecipeTemplate;
+	}
+
+	/**
+	 * Gets a club recipe template structure. For 1.21.10, loads from files; for 1.21-1.21.1, uses hardcoded templates.
+	 */
+	private async getClubTemplate(): Promise<ClubRecipeTemplate> {
+		if (usesFileTemplates(this.versionRange)) {
+			const mainStr = await loadTemplate(this.versionRange, 'data/recipes/club.json');
+			const variantStr = await loadTemplate(this.versionRange, 'data/recipes/club_variant.json');
+			return {
+				main: JSON.parse(mainStr) as RecipeTemplate,
+				alt: JSON.parse(variantStr) as RecipeTemplate
+			};
+		}
+		return RECIPE_TEMPLATES.club as ClubRecipeTemplate;
+	}
+
+	/**
+	 * Gets a recipe template for non-variant weapons. For 1.21.10, loads from file; for 1.21-1.21.1, uses hardcoded templates.
+	 */
+	private async getStandardRecipeTemplate(weaponType: WeaponType): Promise<RecipeTemplate> {
+		if (usesFileTemplates(this.versionRange)) {
+			const templatePath = `data/recipes/${weaponType}.json`;
+			const templateStr = await loadTemplate(this.versionRange, templatePath);
+			return JSON.parse(templateStr) as RecipeTemplate;
+		}
+		return RECIPE_TEMPLATES[weaponType] as RecipeTemplate;
+	}
+
+	/**
+	 * Gets a smithing recipe template. For 1.21.10, loads from file; for 1.21-1.21.1, uses hardcoded templates.
+	 */
+	private async getSmithingTemplate(): Promise<SmithingRecipeTemplate> {
+		if (usesFileTemplates(this.versionRange)) {
+			const templateStr = await loadTemplate(this.versionRange, 'data/recipes/smithing.json');
+			return JSON.parse(templateStr) as SmithingRecipeTemplate;
+		}
+		return { ...SMITHING_RECIPE_TEMPLATE };
+	}
+
+	/**
+	 * Gets a model template. For 1.21.10, loads from file; for 1.21-1.21.1, uses hardcoded templates.
+	 */
+	private async getModelTemplate(type: 'standard' | 'held'): Promise<Record<string, any>> {
+		if (usesFileTemplates(this.versionRange)) {
+			const templatePath = `resources/models/${type}.json`;
+			const templateStr = await loadTemplate(this.versionRange, templatePath);
+			return JSON.parse(templateStr);
+		}
+		return MODEL_TEMPLATES[type];
+	}
+
 	private async generateRootPackMcmeta() {
 		const packMcmeta = {
 			pack: {
@@ -306,7 +376,7 @@ export class MaterialPackBuilder {
 		// Add pack.mcmeta with version-specific format
 		const packMcmeta = {
 			pack: {
-				pack_format: PACK_FORMAT_VERSIONS.data[this.versionRange],
+				pack_format: this.getPackFormat('data'),
 				description: [
 					{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
 					{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
@@ -328,7 +398,7 @@ export class MaterialPackBuilder {
 		// Add pack.mcmeta with version-specific format
 		const packMcmeta = {
 			pack: {
-				pack_format: PACK_FORMAT_VERSIONS.resource[this.versionRange],
+				pack_format: this.getPackFormat('resource'),
 				description: [
 					{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
 					{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
@@ -339,6 +409,7 @@ export class MaterialPackBuilder {
 
 		await this.generateLanguageFiles(resourceFolder);
 		await this.generateModels(resourceFolder);
+		await this.generateItems(resourceFolder);
 		await this.generateTextures(resourceFolder);
 	}
 
@@ -349,12 +420,20 @@ export class MaterialPackBuilder {
 
 		for (const material of this.materialPack.materials) {
 			const isTag = material.repair_ingredient.startsWith('#');
-			const baseVariables = {
-				material_name: material.material_name,
-				repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
-				ingredient_type: isTag ? 'tag' : 'item',
-				handle_ingredient: material.handle_ingredient
-			};
+			// For 1.21.10: use direct string format (items are direct, tags have # prefix)
+			// For 1.21-1.21.1: use nested object format with ingredient_type
+			const baseVariables: Record<string, string | number> = usesFileTemplates(this.versionRange)
+				? {
+						material_name: material.material_name,
+						repair_ingredient: material.repair_ingredient, // Keep # prefix for tags if present
+						handle_ingredient: material.handle_ingredient
+					}
+				: {
+						material_name: material.material_name,
+						repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
+						ingredient_type: isTag ? 'tag' : 'item',
+						handle_ingredient: material.handle_ingredient
+					};
 
 			// Create mod dependency conditions if a mod dependency exists
 			let fabricCondition: FabricLoadCondition | undefined;
@@ -376,14 +455,14 @@ export class MaterialPackBuilder {
 
 				if (material.recipe_type === 'smithing') {
 					// Generate smithing recipe
-					const smithingVariables = {
+					const smithingVariables: Record<string, string | number> = {
 						...baseVariables,
 						weapon_type: weaponType,
 						upgrade_smithing_template_ingredient: material.upgrade_smithing_template_ingredient,
 						smithing_weapon_material_prefix: material.smithing_weapon_material_prefix
 					};
 
-					const smithingRecipe = { ...SMITHING_RECIPE_TEMPLATE };
+					const smithingRecipe = await this.getSmithingTemplate();
 
 					if (fabricCondition && neoforgeCondition) {
 						smithingRecipe['fabric:load_conditions'] = [fabricCondition];
@@ -402,7 +481,14 @@ export class MaterialPackBuilder {
 				}
 
 				// Handle crafting recipes
-				const template = RECIPE_TEMPLATES[weaponType];
+				let template: RecipeTemplate | DaggerRecipeTemplate | ClubRecipeTemplate;
+				if (weaponType === 'dagger') {
+					template = await this.getDaggerTemplate();
+				} else if (weaponType === 'club') {
+					template = await this.getClubTemplate();
+				} else {
+					template = await this.getStandardRecipeTemplate(weaponType);
+				}
 
 				if (weaponType === 'dagger') {
 					// Handle dagger recipes
@@ -544,7 +630,7 @@ export class MaterialPackBuilder {
 						)
 					);
 					recipesFolder.file(
-						`${material.material_name}_club_alt.json`,
+						`${material.material_name}_club${usesFileTemplates(this.versionRange) ? '_variant' : '_alt'}.json`,
 						JSON.stringify(
 							JSON.parse(applyTemplate(JSON.stringify(altRecipe), baseVariables)),
 							null,
@@ -695,10 +781,11 @@ export class MaterialPackBuilder {
 
 				// Generate standard model
 				const standardFileName = `${material.material_name}_${weaponType}.json`;
+				const standardModelTemplate = await this.getModelTemplate('standard');
 				modelsFolder.file(
 					standardFileName,
 					JSON.stringify(
-						JSON.parse(applyTemplate(JSON.stringify(MODEL_TEMPLATES.standard), variables)),
+						JSON.parse(applyTemplate(JSON.stringify(standardModelTemplate), variables)),
 						null,
 						2
 					)
@@ -710,15 +797,82 @@ export class MaterialPackBuilder {
 					const heldTextureKey = `${weaponType}_held` as keyof typeof material.textures;
 					if (material.textures[heldTextureKey] !== null) {
 						const heldFileName = `${material.material_name}_${weaponType}_held.json`;
+						const heldModelTemplate = await this.getModelTemplate('held');
 						modelsFolder.file(
 							heldFileName,
 							JSON.stringify(
-								JSON.parse(applyTemplate(JSON.stringify(MODEL_TEMPLATES.held), variables)),
+								JSON.parse(applyTemplate(JSON.stringify(heldModelTemplate), variables)),
 								null,
 								2
 							)
 						);
 					}
+				}
+			}
+		}
+	}
+
+	private async generateItems(resourceFolder: JSZip) {
+		if (!usesFileTemplates(this.versionRange)) {
+			// Only generate items folder for 1.21.10
+			return;
+		}
+
+		const itemsFolder = resourceFolder.folder('basicweapons/items');
+		if (!itemsFolder) throw new Error('Failed to create items folder');
+
+		for (const material of this.materialPack.materials) {
+			for (const weaponType of WEAPON_TYPES) {
+				// Skip if no texture exists for this weapon type
+				if (material.textures[weaponType] === null) continue;
+
+				const variables = {
+					material_name: material.material_name,
+					weapon_type: weaponType
+				};
+
+				const fileName = `${material.material_name}_${weaponType}.json`;
+
+				// Check if this weapon has a held variant
+				if (this.hasHeldVariant(weaponType)) {
+					const heldTextureKey = `${weaponType}_held` as keyof typeof material.textures;
+					if (material.textures[heldTextureKey] !== null) {
+						// Use held variant template
+						const templateStr = await loadTemplate(this.versionRange, 'resources/items/held_variant.json');
+						const template = JSON.parse(templateStr);
+						itemsFolder.file(
+							fileName,
+							JSON.stringify(
+								JSON.parse(applyTemplate(JSON.stringify(template), variables)),
+								null,
+								2
+							)
+						);
+					} else {
+						// Has held variant position but no texture, use simple template
+						const templateStr = await loadTemplate(this.versionRange, 'resources/items/simple.json');
+						const template = JSON.parse(templateStr);
+						itemsFolder.file(
+							fileName,
+							JSON.stringify(
+								JSON.parse(applyTemplate(JSON.stringify(template), variables)),
+								null,
+								2
+							)
+						);
+					}
+				} else {
+					// Use simple template for weapons without held variants
+					const templateStr = await loadTemplate(this.versionRange, 'resources/items/simple.json');
+					const template = JSON.parse(templateStr);
+					itemsFolder.file(
+						fileName,
+						JSON.stringify(
+							JSON.parse(applyTemplate(JSON.stringify(template), variables)),
+							null,
+							2
+						)
+					);
 				}
 			}
 		}
@@ -805,7 +959,8 @@ export class MaterialPackBuilder {
 					recipes.push(`basicweapons:${material.material_name}_${weaponType}`);
 					// Add variant recipes if they exist (only for crafting recipes)
 					if (weaponType === 'club') {
-						recipes.push(`basicweapons:${material.material_name}_${weaponType}_alt`);
+						const variantSuffix = usesFileTemplates(this.versionRange) ? '_variant' : '_alt';
+						recipes.push(`basicweapons:${material.material_name}_${weaponType}${variantSuffix}`);
 					}
 				}
 			}

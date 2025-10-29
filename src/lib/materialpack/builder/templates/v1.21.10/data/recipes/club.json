@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "{{material_name}}_club",
+	"pattern": [" #", "# ", "/ "],
+	"key": {
+		"#": "{{repair_ingredient}}",
+		"/": "{{handle_ingredient}}"
+	},
+	"result": {
+		"id": "basicweapons:{{material_name}}_club",
+		"count": 1
+	}
+}
+

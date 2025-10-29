@@ -11,5 +11,8 @@
 	"editor.codeLens": false,
 	"git.removedCodeLens": false,
 	"git.addedCodeLens": false,
-	"git.recentChangesCodeLens": false
+	"git.recentChangesCodeLens": false,
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	}
 }

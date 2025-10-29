@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": ["  /", " O ", "/  "],
+	"key": {
+		"/": "{{handle_ingredient}}",
+		"O": "{{repair_ingredient}}"
+	},
+	"result": {
+		"id": "basicweapons:{{material_name}}_quarterstaff",
+		"count": 1
+	}
+}
+

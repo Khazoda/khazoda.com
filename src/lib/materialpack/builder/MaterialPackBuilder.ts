@@ -332,7 +332,7 @@ export class MaterialPackBuilder {
 	 */
 	private async getModelTemplate(type: 'standard' | 'held'): Promise<Record<string, any>> {
 		if (usesFileTemplates(this.versionRange)) {
-			const templatePath = `resources/models/${type}.json`;
+			const templatePath = `assets/basicweapons/models/item/${type}.json`;
 			const templateStr = await loadTemplate(this.versionRange, templatePath);
 			return JSON.parse(templateStr);
 		}
@@ -340,17 +340,21 @@ export class MaterialPackBuilder {
 	}
 
 	private async generateRootPackMcmeta() {
-		const packMcmeta = {
-			pack: {
-				description: [
-					{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
-					{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
-				],
-				pack_format: 0
-			}
-		};
-
-		this.zip.file('pack.mcmeta', JSON.stringify(packMcmeta, null, 2));
+		if (usesFileTemplates(this.versionRange)) {
+			const templateStr = await loadTemplate(this.versionRange, 'root/pack.mcmeta.json');
+			this.zip.file('pack.mcmeta', templateStr);
+		} else {
+			const packMcmeta = {
+				pack: {
+					description: [
+						{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
+						{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
+					],
+					pack_format: 0
+				}
+			};
+			this.zip.file('pack.mcmeta', JSON.stringify(packMcmeta, null, 2));
+		}
 	}
 
 	private async generateMaterialPackIcon() {
@@ -374,16 +378,24 @@ export class MaterialPackBuilder {
 		if (!dataFolder) throw new Error('Failed to create data folder');
 
 		// Add pack.mcmeta with version-specific format
-		const packMcmeta = {
-			pack: {
-				pack_format: this.getPackFormat('data'),
-				description: [
-					{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
-					{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
-				]
-			}
-		};
-		dataFolder.file('pack.mcmeta', JSON.stringify(packMcmeta, null, 2));
+		if (usesFileTemplates(this.versionRange)) {
+			const templateStr = await loadTemplate(this.versionRange, 'data/pack.mcmeta.json');
+			const variables = {
+				pack_format: this.getPackFormat('data')
+			};
+			dataFolder.file('pack.mcmeta', applyTemplate(templateStr, variables));
+		} else {
+			const packMcmeta = {
+				pack: {
+					pack_format: this.getPackFormat('data'),
+					description: [
+						{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
+						{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
+					]
+				}
+			};
+			dataFolder.file('pack.mcmeta', JSON.stringify(packMcmeta, null, 2));
+		}
 
 		await this.generateRecipes(dataFolder);
 		await this.generateTags(dataFolder);
@@ -396,16 +408,24 @@ export class MaterialPackBuilder {
 		if (!resourceFolder) throw new Error('Failed to create assets folder');
 
 		// Add pack.mcmeta with version-specific format
-		const packMcmeta = {
-			pack: {
-				pack_format: this.getPackFormat('resource'),
-				description: [
-					{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
-					{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
-				]
-			}
-		};
-		resourceFolder.file('pack.mcmeta', JSON.stringify(packMcmeta, null, 2));
+		if (usesFileTemplates(this.versionRange)) {
+			const templateStr = await loadTemplate(this.versionRange, 'assets/pack.mcmeta.json');
+			const variables = {
+				pack_format: this.getPackFormat('resource')
+			};
+			resourceFolder.file('pack.mcmeta', applyTemplate(templateStr, variables));
+		} else {
+			const packMcmeta = {
+				pack: {
+					pack_format: this.getPackFormat('resource'),
+					description: [
+						{ text: 'ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ', color: '#9BE17B' },
+						{ text: '\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢', color: '#79CCF5' }
+					]
+				}
+			};
+			resourceFolder.file('pack.mcmeta', JSON.stringify(packMcmeta, null, 2));
+		}
 
 		await this.generateLanguageFiles(resourceFolder);
 		await this.generateModels(resourceFolder);
@@ -669,11 +689,6 @@ export class MaterialPackBuilder {
 		const tagsFolder = dataFolder.folder('basicweapons/tags/item/tools');
 		if (!tagsFolder) throw new Error('Failed to create tags folder');
 
-		const tagTemplate = {
-			replace: false,
-			values: [] as string[]
-		};
-
 		const weaponsByType = new Map(WEAPON_TYPES.map(type => [type, [] as string[]]));
 
 		for (const material of this.materialPack.materials) {
@@ -690,11 +705,26 @@ export class MaterialPackBuilder {
 				const fileName =
 					weaponType === 'quarterstaff' ? 'quarterstaves.json' : `${weaponType}s.json`;
 
-				const content = {
-					...tagTemplate,
-					values: weapons
-				};
-				tagsFolder.file(fileName, JSON.stringify(content, null, 2));
+				if (usesFileTemplates(this.versionRange)) {
+					// Load template and merge in the dynamic values array
+					const templateStr = await loadTemplate(this.versionRange, 'data/tags/tool.json');
+					const template = JSON.parse(templateStr);
+					const content = {
+						...template,
+						values: weapons
+					};
+					tagsFolder.file(fileName, JSON.stringify(content, null, 2));
+				} else {
+					const tagTemplate = {
+						replace: false,
+						values: [] as string[]
+					};
+					const content = {
+						...tagTemplate,
+						values: weapons
+					};
+					tagsFolder.file(fileName, JSON.stringify(content, null, 2));
+				}
 			}
 		}
 	}
@@ -716,14 +746,22 @@ export class MaterialPackBuilder {
 						calculatedReachBonus = 0.01;
 					}
 
-					const content = {
-						parent: `basicweapons:basic_${weaponType}`,
-						attributes: {
-							range_bonus: Number(calculatedReachBonus.toFixed(2))
-						}
-					};
-
-					weaponAttributesFolder.file(fileName, JSON.stringify(content, null, 2));
+					if (usesFileTemplates(this.versionRange)) {
+						const templateStr = await loadTemplate(this.versionRange, 'data/weapon_attribute.json');
+						const variables = {
+							weapon_type: weaponType,
+							range_bonus: calculatedReachBonus.toFixed(2)
+						};
+						weaponAttributesFolder.file(fileName, applyTemplate(templateStr, variables));
+					} else {
+						const content = {
+							parent: `basicweapons:basic_${weaponType}`,
+							attributes: {
+								range_bonus: Number(calculatedReachBonus.toFixed(2))
+							}
+						};
+						weaponAttributesFolder.file(fileName, JSON.stringify(content, null, 2));
+					}
 				}
 			}
 		}
@@ -838,7 +876,7 @@ export class MaterialPackBuilder {
 					const heldTextureKey = `${weaponType}_held` as keyof typeof material.textures;
 					if (material.textures[heldTextureKey] !== null) {
 						// Use held variant template
-						const templateStr = await loadTemplate(this.versionRange, 'resources/items/held_variant.json');
+						const templateStr = await loadTemplate(this.versionRange, 'assets/basicweapons/items/held_variant.json');
 						const template = JSON.parse(templateStr);
 						itemsFolder.file(
 							fileName,
@@ -850,7 +888,7 @@ export class MaterialPackBuilder {
 						);
 					} else {
 						// Has held variant position but no texture, use simple template
-						const templateStr = await loadTemplate(this.versionRange, 'resources/items/simple.json');
+						const templateStr = await loadTemplate(this.versionRange, 'assets/basicweapons/items/simple.json');
 						const template = JSON.parse(templateStr);
 						itemsFolder.file(
 							fileName,
@@ -863,7 +901,7 @@ export class MaterialPackBuilder {
 					}
 				} else {
 					// Use simple template for weapons without held variants
-					const templateStr = await loadTemplate(this.versionRange, 'resources/items/simple.json');
+					const templateStr = await loadTemplate(this.versionRange, 'assets/basicweapons/items/simple.json');
 					const template = JSON.parse(templateStr);
 					itemsFolder.file(
 						fileName,
@@ -924,18 +962,34 @@ export class MaterialPackBuilder {
 		if (!customMaterialsFolder) throw new Error('Failed to create custom_materials folder');
 
 		for (const material of this.materialPack.materials) {
-			const materialData = {
-				material_name: material.material_name,
-				durability: material.durability,
-				attack_damage_bonus: material.attack_damage_bonus,
-				attack_speed_bonus: material.attack_speed_bonus,
-				reach_bonus: material.reach_bonus,
-				enchantability: material.enchantability,
-				repair_ingredient: material.repair_ingredient
-			};
-
 			const fileName = `${material.material_name}.json`;
-			customMaterialsFolder.file(fileName, JSON.stringify(materialData, null, 2));
+
+			if (usesFileTemplates(this.versionRange)) {
+				// Use template for 1.21.10
+				const templateStr = await loadTemplate(this.versionRange, 'custom_materials/material.json');
+				const variables = {
+					material_name: material.material_name,
+					durability: material.durability,
+					attack_damage_bonus: material.attack_damage_bonus,
+					attack_speed_bonus: material.attack_speed_bonus,
+					reach_bonus: material.reach_bonus,
+					enchantability: material.enchantability,
+					repair_ingredient: material.repair_ingredient
+				};
+				customMaterialsFolder.file(fileName, applyTemplate(templateStr, variables));
+			} else {
+				// Hardcoded for 1.21-1.21.1
+				const materialData = {
+					material_name: material.material_name,
+					durability: material.durability,
+					attack_damage_bonus: material.attack_damage_bonus,
+					attack_speed_bonus: material.attack_speed_bonus,
+					reach_bonus: material.reach_bonus,
+					enchantability: material.enchantability,
+					repair_ingredient: material.repair_ingredient
+				};
+				customMaterialsFolder.file(fileName, JSON.stringify(materialData, null, 2));
+			}
 		}
 	}
 
@@ -968,28 +1022,49 @@ export class MaterialPackBuilder {
 			// Skip if no recipes left to give
 			if (recipes.length === 0) continue;
 
-			const advancement = {
-				parent: 'minecraft:recipes/root',
-				criteria: {
-					[criteriaId]: {
-						conditions: {
-							items: [
-								{
-									items: [isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient]
-								}
-							]
-						},
-						trigger: 'minecraft:inventory_changed'
+			if (usesFileTemplates(this.versionRange)) {
+				// Use template for 1.21.10
+				const templateStr = await loadTemplate(this.versionRange, 'data/advancement.json');
+				const repairIngredient = isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient;
+				
+				// Replace variables in template
+				let result = templateStr
+					.replace(/\{\{material_name\}\}/g, material.material_name)
+					.replace(/\{\{repair_ingredient\}\}/g, repairIngredient);
+				
+				// Replace recipes array - need to find the placeholder and replace with JSON array
+				result = result.replace(
+					'"{{recipes}}"',
+					JSON.stringify(recipes)
+				);
+				
+				const fileName = `got_${material.material_name}_material.json`;
+				advancementsFolder.file(fileName, result);
+			} else {
+				// Hardcoded for 1.21-1.21.1
+				const advancement = {
+					parent: 'minecraft:recipes/root',
+					criteria: {
+						[criteriaId]: {
+							conditions: {
+								items: [
+									{
+										items: [isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient]
+									}
+								]
+							},
+							trigger: 'minecraft:inventory_changed'
+						}
+					},
+					requirements: [[criteriaId]],
+					rewards: {
+						recipes: recipes
 					}
-				},
-				requirements: [[criteriaId]],
-				rewards: {
-					recipes: recipes
-				}
-			};
+				};
 
-			const fileName = `got_${material.material_name}_material.json`;
-			advancementsFolder.file(fileName, JSON.stringify(advancement, null, 2));
+				const fileName = `got_${material.material_name}_material.json`;
+				advancementsFolder.file(fileName, JSON.stringify(advancement, null, 2));
+			}
 		}
 	}
 

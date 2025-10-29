@@ -1,0 +1,28 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"got_{{material_name}}_material": {
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"{{repair_ingredient}}"
+						]
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"requirements": [
+		[
+			"got_{{material_name}}_material"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"{{recipes}}"
+		]
+	}
+}
+

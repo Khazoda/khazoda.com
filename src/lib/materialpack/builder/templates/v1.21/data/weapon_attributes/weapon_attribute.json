@@ -1,0 +1,7 @@
+{
+	"parent": "basicweapons:basic_{{weapon_type}}",
+	"attributes": {
+		"range_bonus": "{{range_bonus}}"
+	}
+}
+

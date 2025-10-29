@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { MaterialPack } from "$lib/materialpack/types/materialpackTypes";
 	import { MaterialPackBuilder } from "$lib/materialpack/builder/MaterialPackBuilder";
-	import { PACK_FORMAT_VERSIONS, getVersionRanges } from "$lib/materialpack/builder/utils/template";
+	import { type VersionRange, getVersionRanges } from "$lib/materialpack/builder/utils/template";
 	import materialpack_location_example from "$lib/materialpack/media/materialpack_location_example.png";
 	import HugeiconsZip01 from "virtual:icons/hugeicons/zip-01";
 	import CenterModal from "src/components/CenterModal.svelte";
@@ -9,7 +9,7 @@
 
 	export let materialPack: MaterialPack;
 
-	let selectedVersion: keyof typeof PACK_FORMAT_VERSIONS.data = "1.21 - 1.21.1";
+	let selectedVersion: VersionRange = "1.21 - 1.21.1";
 	let showModal = [false];
 	let showPackwizInstructions = false;
 
@@ -37,7 +37,7 @@
 
 	function handleVersionChange(event: Event) {
 		const target = event.target as HTMLInputElement;
-		selectedVersion = target.value as keyof typeof PACK_FORMAT_VERSIONS.data;
+		selectedVersion = target.value as VersionRange;
 	}
 </script>
 

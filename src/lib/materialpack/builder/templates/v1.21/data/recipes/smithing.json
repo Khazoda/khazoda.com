@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:smithing_transform",
+	"template": {
+		"item": "{{upgrade_smithing_template_ingredient}}"
+	},
+	"base": {
+		"item": "basicweapons:{{smithing_weapon_material_prefix}}_{{weapon_type}}"
+	},
+	"addition": {
+		"item": "{{repair_ingredient}}"
+	},
+	"result": {
+		"id": "basicweapons:{{material_name}}_{{weapon_type}}",
+		"count": 1
+	}
+}
+

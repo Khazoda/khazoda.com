@@ -1,0 +1,10 @@
+{
+	"material_name": "{{material_name}}",
+	"durability": "{{durability}}",
+	"attack_damage_bonus": "{{attack_damage_bonus}}",
+	"attack_speed_bonus": "{{attack_speed_bonus}}",
+	"reach_bonus": "{{reach_bonus}}",
+	"enchantability": "{{enchantability}}",
+	"repair_ingredient": "{{repair_ingredient}}"
+}
+

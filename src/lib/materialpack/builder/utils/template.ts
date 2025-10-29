@@ -6,44 +6,38 @@ export function applyTemplate(
 }
 
 /**
+ * Supported Minecraft version ranges
+ */
+export const VERSION_RANGES = ['1.21 - 1.21.1', '1.21.10'] as const;
+
+export type VersionRange = (typeof VERSION_RANGES)[number];
+
+/**
  * Maps version range keys to directory names
  */
-export function getVersionDirectory(versionRange: keyof typeof PACK_FORMAT_VERSIONS.data): string {
-	const versionMap: Record<string, string> = {
+export function getVersionDirectory(versionRange: VersionRange): string {
+	const versionMap: Record<VersionRange, string> = {
 		'1.21 - 1.21.1': 'v1.21',
 		'1.21.10': 'v1.21.10'
 	};
 	return versionMap[versionRange] || 'v1.21'; // Default to v1.21 for safety
 }
 
-/**
- * Checks if a version uses file-based templates
- * Currently only 1.21.10 uses file-based templates
- */
-export function usesFileTemplates(versionRange: keyof typeof PACK_FORMAT_VERSIONS.data): boolean {
-	return versionRange === '1.21.10';
-}
-
-// Preload v1.21.10 templates using Vite's glob import
+// Preload all template versions
 const templateModules = import.meta.glob<string>(
-	'../templates/v1.21.10/**/*.json',
+	'../templates/v*/**/*.json',
 	{ eager: false, import: 'default' }
 );
 
 /**
  * Loads a template JSON file from the version-specific templates directory
- * Only works for versions that use file-based templates (currently 1.21.10)
- * @param versionRange The version range (e.g., '1.21.10')
+ * @param versionRange The version range (e.g., '1.21.10' or '1.21 - 1.21.1')
  * @param templatePath Path relative to templates directory (e.g., 'data/recipes/dagger.json')
  */
 export async function loadTemplate(
-	versionRange: keyof typeof PACK_FORMAT_VERSIONS.data,
+	versionRange: VersionRange,
 	templatePath: string
 ): Promise<string> {
-	if (!usesFileTemplates(versionRange)) {
-		throw new Error(`Version ${versionRange} does not use file-based templates`);
-	}
-
 	const versionDir = getVersionDirectory(versionRange);
 	const fullPath = `../templates/${versionDir}/${templatePath}`;
 	
@@ -56,7 +50,8 @@ export async function loadTemplate(
 		const availablePaths = Object.keys(templateModules);
 		throw new Error(
 			`Template not found: ${normalizedPath}\n` +
-			`Available templates: ${availablePaths.slice(0, 5).join(', ')}...`
+			`Version dir: ${versionDir}\n` +
+			`Available templates: ${availablePaths.slice(0, 10).join(', ')}...`
 		);
 	}
 
@@ -64,20 +59,21 @@ export async function loadTemplate(
 	return typeof template === 'string' ? template : JSON.stringify(template);
 }
 
-// https://minecraft.wiki/w/Pack_format
-const PACK_FORMAT_VERSIONS = {
-	data: {
-		'1.21 - 1.21.1': 48,
-		'1.21.10': 88.0
-	},
-	resource: {
-		'1.21 - 1.21.1': 34,
-		'1.21.10': 69.0
-	}
-} as const;
+/**
+ * Gets the pack_format value from a pack.mcmeta.json template file
+ * @param versionRange The version range (e.g., '1.21.10' or '1.21 - 1.21.1')
+ * @param packType Either 'data' or 'assets'
+ */
+export async function getPackFormatFromTemplate(
+	versionRange: VersionRange,
+	packType: 'data' | 'assets'
+): Promise<number> {
+	const templatePath = packType === 'data' ? 'data/pack.mcmeta.json' : 'assets/pack.mcmeta.json';
+	const templateStr = await loadTemplate(versionRange, templatePath);
+	const template = JSON.parse(templateStr);
+	return template.pack.pack_format;
+}
 
 export const getVersionRanges = () => {
-	return Object.keys(PACK_FORMAT_VERSIONS.data).reverse();
+	return [...VERSION_RANGES].reverse();
 };
-
-export { PACK_FORMAT_VERSIONS };

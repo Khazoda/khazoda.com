@@ -1,12 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern": ["  /", " O ", "/  "],
+	"pattern": [
+		"  /",
+		" O ",
+		"/  "
+	],
 	"key": {
 		"/": {
-			"item": "minecraft:stick"
+			"item": "{{handle_ingredient}}"
 		},
 		"O": {
-			"item": "{{repair_ingredient}}"
+			"{{ingredient_type}}": "{{repair_ingredient}}"
 		}
 	},
 	"result": {
@@ -14,3 +18,4 @@
 		"count": 1
 	}
 }
+

@@ -1,6 +1,8 @@
 {
 	"pack": {
-		"pack_format": "{{pack_format}}",
+		"pack_format": 88,
+		"min_format": 88,
+		"max_format": 88,
 		"description": [
 			{ "text": "ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ", "color": "#9BE17B" },
 			{ "text": "\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢", "color": "#79CCF5" }

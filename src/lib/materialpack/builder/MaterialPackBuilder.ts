@@ -201,6 +201,7 @@ export class MaterialPackBuilder {
 
 		await this.generateRecipes(dataFolder);
 		await this.generateTags(dataFolder);
+		await this.generateRepairIngredientTags(dataFolder);
 		await this.generateWeaponAttributes(dataFolder);
 		await this.generateRecipeAdvancements(dataFolder);
 	}
@@ -722,12 +723,47 @@ export class MaterialPackBuilder {
 		}
 	}
 
+	private async generateRepairIngredientTags(dataFolder: JSZip) {
+		// Only generate repair ingredient tags for 1.21.10(where ToolMaterial requires TagKey)
+		if (this.versionRange !== '1.21.10') {
+			return;
+		}
+
+		const tagsFolder = dataFolder.folder('basicweapons/tags/item');
+		if (!tagsFolder) throw new Error('Failed to create basicweapons tags folder');
+
+		for (const material of this.materialPack.materials) {
+			// Only create tag if repair_ingredient is an item (doesn't start with #)
+			if (material.repair_ingredient.startsWith('#')) {
+				continue;
+			}
+
+			const tagFileName = `${material.material_name}_tool_materials.json`;
+			const tagContent = {
+				values: [material.repair_ingredient]
+			};
+
+			tagsFolder.file(tagFileName, JSON.stringify(tagContent, null, 2));
+		}
+	}
+
 	private async generateCustomMaterials() {
 		const customMaterialsFolder = this.zip.folder('custom_materials');
 		if (!customMaterialsFolder) throw new Error('Failed to create custom_materials folder');
 
 		for (const material of this.materialPack.materials) {
 			const fileName = `${material.material_name}.json`;
+
+			// For 1.21.10, if repair_ingredient is an item (not a tag), reference the generated tag
+			// Otherwise, use the repair_ingredient directly (keeping # prefix for tags)
+			let repairIngredientReference: string;
+			if (this.versionRange === '1.21.10' && !material.repair_ingredient.startsWith('#')) {
+				// Item-based repair ingredient: reference the generated tag
+				repairIngredientReference = `#basicweapons:${material.material_name}_tool_materials`;
+			} else {
+				// Tag-based repair ingredient (already has #) or older version: use as-is
+				repairIngredientReference = material.repair_ingredient;
+			}
 
 			const templateStr = await loadTemplate(this.versionRange, 'custom_materials/material.json');
 			const variables = {
@@ -737,7 +773,7 @@ export class MaterialPackBuilder {
 				attack_speed_bonus: material.attack_speed_bonus,
 				reach_bonus: material.reach_bonus,
 				enchantability: material.enchantability,
-				repair_ingredient: material.repair_ingredient
+				repair_ingredient: repairIngredientReference
 			};
 			customMaterialsFolder.file(fileName, applyTemplate(templateStr, variables));
 		}

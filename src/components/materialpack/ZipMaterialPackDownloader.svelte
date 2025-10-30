@@ -21,7 +21,11 @@
 		const modName = materialPack.mod_dependency_name
 			? materialPack.mod_dependency_name.toLowerCase().replace(/\s+/g, "-")
 			: "minecraft";
-		const zipFileName = `bwmp_${packName}_${modName}.zip`;
+		// Add version suffix; for ranges like "1.21 - 1.21.1" use the upper bound
+		const versionSuffix = selectedVersion.includes("-")
+			? selectedVersion.split("-")[1].trim()
+			: selectedVersion;
+		const zipFileName = `bwmp_${packName}_${modName}_${versionSuffix}.zip`;
 
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement("a");

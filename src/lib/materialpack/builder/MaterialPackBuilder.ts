@@ -200,10 +200,53 @@ export class MaterialPackBuilder {
 		dataFolder.file('pack.mcmeta', templateStr);
 
 		await this.generateRecipes(dataFolder);
+		await this.generateWeaponsToNuggetsRecipes(dataFolder);
 		await this.generateTags(dataFolder);
 		await this.generateRepairIngredientTags(dataFolder);
 		await this.generateWeaponAttributes(dataFolder);
 		await this.generateRecipeAdvancements(dataFolder);
+	}
+
+	private async generateWeaponsToNuggetsRecipes(dataFolder: JSZip) {
+		const targetFolder =
+			this.versionRange === '1.21.10'
+				? dataFolder.folder('basicweapons/recipe/weapons_to_nuggets')
+				: dataFolder.folder('basicweapons/recipe/weapons_to_nuggets');
+		if (!targetFolder) throw new Error('Failed to create weapons_to_nuggets recipe folder');
+
+		for (const material of this.materialPack.materials) {
+			if (!material.smelts_into) continue;
+
+			// Collect existing weapon item IDs for this material
+			const ingredientItems: string[] = [];
+			for (const weaponType of WEAPON_TYPES) {
+				if (material.textures[weaponType] !== null) {
+					ingredientItems.push(`basicweapons:${material.material_name}_${weaponType}`);
+				}
+			}
+			if (ingredientItems.length === 0) continue;
+
+			// Load templates and inject variables
+			const blastingStr = await loadTemplate(this.versionRange, 'data/recipes/weapons_to_nuggets_blasting.json');
+			const smeltingStr = await loadTemplate(this.versionRange, 'data/recipes/weapons_to_nuggets_smelting.json');
+
+			const blastingTemplate = JSON.parse(applyTemplate(blastingStr, { result_id: material.smelts_into }));
+			const smeltingTemplate = JSON.parse(applyTemplate(smeltingStr, { result_id: material.smelts_into }));
+
+			// 1.21/1.21.1 requires ingredient objects rather than direct strings like 1.21.10 onwards
+			if (this.versionRange === '1.21 - 1.21.1') {
+				const ingredientObjects = ingredientItems.map(id => ({ item: id }));
+				blastingTemplate.ingredient = ingredientObjects;
+				smeltingTemplate.ingredient = ingredientObjects;
+			} else {
+				blastingTemplate.ingredient = ingredientItems;
+				smeltingTemplate.ingredient = ingredientItems;
+			}
+
+			const baseName = `weapons_to_nuggets_${material.material_name}`;
+			targetFolder.file(`${baseName}_blasting.json`, JSON.stringify(blastingTemplate, null, 2));
+			targetFolder.file(`${baseName}_smelting.json`, JSON.stringify(smeltingTemplate, null, 2));
+		}
 	}
 
 	private async generateResourcePack() {

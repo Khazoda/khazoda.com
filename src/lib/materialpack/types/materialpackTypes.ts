@@ -26,6 +26,8 @@ type Material = {
 	};
 	// Recipes Section
 	recipe_type: RecipeType;
+	// Optional nugget smelting result (e.g., minecraft:iron_nugget)
+	smelts_into?: string;
 	// Crafting
 	repair_ingredient: string; // e.g. Diamond, Iron Ingot
 	handle_ingredient: string; // e.g. Stick, End Rod

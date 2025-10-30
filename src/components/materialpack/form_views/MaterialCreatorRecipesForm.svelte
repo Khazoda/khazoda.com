@@ -59,6 +59,43 @@
 		smithing_weapon_material_prefix: itemMaterialInSmithingRecipeSchema
 	};
 
+	function handleSmeltsIntoChange(event: Event) {
+		const input = event.target as HTMLInputElement;
+		const value = (input.value || "").trim();
+		try {
+			if (value === "") {
+				material.smelts_into = undefined;
+				input.setCustomValidity("");
+			} else {
+				const validated = itemSchema.parse(value);
+				material.smelts_into = validated;
+				input.setCustomValidity("");
+			}
+
+			materialPack.update(pack => {
+				const updatedMaterials = [...pack.materials];
+				updatedMaterials[index] = { ...material };
+				return { ...pack, materials: updatedMaterials };
+			});
+
+			materialPacks.update(state => ({
+				...state,
+				packs: {
+					...state.packs,
+					[$materialPack.localstorage_id]: {
+						...state.packs[$materialPack.localstorage_id],
+						materials: $materialPack.materials.map((m, i) => (i === index ? material : m))
+					}
+				}
+			}));
+		} catch (error) {
+			if (error instanceof z.ZodError) {
+				input.setCustomValidity(error.errors[0].message);
+			}
+		}
+		input.reportValidity();
+	}
+
 	function validateAndUpdate<K extends ValidFields>(event: Event, schema: z.ZodSchema, field: K) {
 		const input = event.target as HTMLInputElement;
 		try {
@@ -323,6 +360,19 @@
 			<img src={smithingRecipeExample} alt="Smithing Recipe Example" class="framed-image smithing grid-wide" />
 		</div>
 	{/if}
+
+	<!-- Smelts Into Nugget (Optional) -->
+	<div class="form-element text grid-wide">
+		<input
+			type="text"
+			id="smelts_into_{index}"
+			name="smelts_into"
+			bind:value={material.smelts_into}
+			on:input={handleSmeltsIntoChange}
+			placeholder=" " />
+		<label for="smelts_into_{index}"> Smelts into (optional nugget item) </label>
+		<small style="padding-left: 0.2rem; top:-1.75rem; right:0; pointer-events: none;">namespace:itemname</small>
+	</div>
 </form>
 
 <!-- Delete Material Modal -->
@@ -341,18 +391,18 @@
 
 <style lang="scss">
 	.material-recipes-form {
-		background: #2c2c2c;
-		border: 2px solid #1c1c1c;
-		border-radius: 8px;
-		height: 100%;
-		padding: 2rem;
 		position: relative;
 		width: 100%;
+		height: 100%;
+		padding: 2rem;
+		border: 2px solid #1c1c1c;
+		border-radius: 8px;
+		background: #2c2c2c;
 
 		h2 {
-			color: #ffffff;
 			margin: 0 0 1.5rem 0;
 			overflow: hidden;
+			color: #ffffff;
 			text-overflow: ellipsis;
 			text-transform: capitalize;
 			text-wrap: nowrap;
@@ -360,27 +410,27 @@
 	}
 	.grid {
 		display: grid;
-		gap: 1rem;
-		grid-template-columns: 1fr 1fr;
 		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
 		.form-element {
 			margin-bottom: 0.75rem;
 		}
 	}
 
 	.delete-material-btn {
-		align-items: center;
-		background: none;
-		border: none;
-		border-radius: 8px;
-		color: #ff4444;
-		cursor: pointer;
 		display: inline-flex;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		align-items: center;
 		justify-content: center;
 		padding: 0.5rem;
-		position: absolute;
-		right: 1rem;
-		top: 1rem;
+		border: none;
+		border-radius: 8px;
+		background: none;
+		color: #ff4444;
+		cursor: pointer;
 		transition: all 0.2s ease;
 
 		&:hover {
@@ -389,21 +439,21 @@
 	}
 	.modal-actions {
 		display: flex;
-		gap: 1rem;
 		justify-content: center;
 		margin-top: 2rem;
+		gap: 1rem;
 
 		button {
+			padding: 0.5rem 1.5rem;
 			border: none;
 			border-radius: 4px;
-			cursor: pointer;
 			font-weight: 600;
-			padding: 0.5rem 1.5rem;
+			cursor: pointer;
 			transition: all 0.2s ease;
 
 			&.cancel-btn {
-				background: transparent;
 				border: 1px solid #ccc;
+				background: transparent;
 				color: var(--color-text-secondary);
 
 				&:hover {
@@ -423,44 +473,44 @@
 	}
 
 	.form-element {
-		margin-bottom: 2rem;
 		position: relative;
 		width: 100%;
+		margin-bottom: 2rem;
 
 		&.text {
 			height: 3rem;
 
 			label {
-				align-items: center;
-				align-items: center;
-				border-top-left-radius: 4px;
-				border-top-right-radius: 4px;
-				color: rgb(70, 70, 70);
 				display: inline-flex;
 				display: flex;
-				font-weight: 500;
-				font-weight: 600;
-				gap: 0.5rem;
-				height: 100%;
-				justify-content: flex-start;
-				left: 0.6rem;
-				padding: 0.5rem;
-				pointer-events: none;
 				position: absolute;
 				top: 0;
-				transform: translateY(0);
-				transition: 0.2s ease;
+				left: 0.6rem;
+				align-items: center;
+				align-items: center;
+				justify-content: flex-start;
 				width: 100%;
+				height: 100%;
+				padding: 0.5rem;
+				gap: 0.5rem;
+				transform: translateY(0);
+				border-top-right-radius: 4px;
+				border-top-left-radius: 4px;
+				color: rgb(70, 70, 70);
+				font-weight: 500;
+				font-weight: 600;
+				pointer-events: none;
+				transition: 0.2s ease;
 			}
 
 			input {
-				background: #1c1c1c;
-				border: 1px solid #3c3c3c;
-				border-radius: 4px;
-				color: #ffffff;
+				width: 100%;
 				height: 100%;
 				padding: 0.5rem 1rem;
-				width: 100%;
+				border: 1px solid #3c3c3c;
+				border-radius: 4px;
+				background: #1c1c1c;
+				color: #ffffff;
 
 				&::placeholder {
 					color: transparent;
@@ -478,10 +528,10 @@
 
 			input:focus + label,
 			input:not(:placeholder-shown) + label {
-				color: white;
-				font-size: 14px;
 				left: -4px;
 				transform: translateY(-2.25rem);
+				color: white;
+				font-size: 14px;
 				img {
 					filter: brightness(0) invert(1); // This makes the image white
 				}
@@ -501,12 +551,12 @@
 		}
 
 		small {
-			bottom: -1.5rem;
-			color: #888888;
 			display: block;
-			font-size: 0.9rem;
-			margin-top: 0.25rem;
 			position: absolute;
+			bottom: -1.5rem;
+			margin-top: 0.25rem;
+			color: #888888;
+			font-size: 0.9rem;
 		}
 	}
 
@@ -515,32 +565,37 @@
 	}
 
 	.recipe-carousel {
-		margin-top: 1rem;
 		position: relative;
-		width: fit-content;
+		width: 350px;
+		height: 158px;
+		margin-top: 1rem;
+		margin-bottom: 2rem;
 	}
 
 	.framed-image {
+		width: 450px;
+		height: 157.5px;
+		margin-bottom: 2rem;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	}
 
 	.next-recipe-btn {
-		align-items: center;
-		background: #3c3c3c;
-		border: none;
-		border-radius: 4px;
-		bottom: 0.5rem;
-		color: white;
-		cursor: pointer;
 		display: flex;
-		font-family: inherit;
-		font-size: 0.9rem;
-		gap: 0.5rem;
-		padding: 0.5rem 1rem;
 		position: absolute;
 		right: 0.5rem;
-		transition: background-color 0.2s ease;
+		bottom: 0.5rem;
+		align-items: center;
 		width: fit-content;
+		padding: 0.5rem 1rem;
+		gap: 0.5rem;
+		border: none;
+		border-radius: 4px;
+		background: #3c3c3c;
+		color: white;
+		font-size: 0.9rem;
+		font-family: inherit;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
 
 		&:hover {
 			background-color: #4c4c4c;

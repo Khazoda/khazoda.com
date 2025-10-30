@@ -277,13 +277,13 @@ export class MaterialPackBuilder {
 					? {
 						material_name: material.material_name,
 						repair_ingredient: material.repair_ingredient, // Keep # prefix for tags if present
-						handle_ingredient: material.handle_ingredient
+						handle_ingredient: material.handle_ingredient || 'minecraft:stick',
 					}
 					: {
 						material_name: material.material_name,
 						repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
 						ingredient_type: isTag ? 'tag' : 'item',
-						handle_ingredient: material.handle_ingredient
+						handle_ingredient: material.handle_ingredient || 'minecraft:stick',
 					};
 
 			// Create mod dependency conditions if a mod dependency exists
@@ -309,9 +309,8 @@ export class MaterialPackBuilder {
 					const smithingVariables: Record<string, string | number> = {
 						...baseVariables,
 						weapon_type: weaponType,
-						upgrade_smithing_template_ingredient: material.upgrade_smithing_template_ingredient,
-						smithing_weapon_material_prefix: material.smithing_weapon_material_prefix
-					};
+						upgrade_smithing_template_ingredient: material.upgrade_smithing_template_ingredient || '',
+						smithing_weapon_material_prefix: material.smithing_weapon_material_prefix || '',					};
 
 					const smithingRecipe = await this.getSmithingTemplate();
 

@@ -4,17 +4,14 @@ import { get } from 'svelte/store';
 import type { Material, MaterialPack } from '../types/materialpackTypes';
 import { RecipeTypes } from '../types/materialpackTypes';
 
-// Add new types for managing multiple packs
 type MaterialPackList = {
 	packs: { [key: string]: MaterialPack }; // Using pack_name as key
 	currentPack: string | null;
 };
 
-// Initial state
 const initialState: MaterialPack = {
 	localstorage_id: '',
 	pack_name: '',
-	mod_dependency_name: '',
 	mod_dependency_modid: '',
 	materials: [],
 	pack_icon: null
@@ -25,16 +22,13 @@ const initialPackListState: MaterialPackList = {
 	currentPack: null
 };
 
-// Create stores
 export const materialPacks = persisted<MaterialPackList>('material-packs', initialPackListState);
 export const materialPack = writable<MaterialPack>(initialState);
 
-// Generate unique ID
 const generateUniqueId = () => {
 	return Date.now().toString(36) + Math.random().toString(36).substring(2);
 };
 
-// Update current pack whenever it changes
 materialPacks.subscribe(({ packs, currentPack }) => {
 	if (currentPack && packs[currentPack]) {
 		materialPack.set(packs[currentPack]);
@@ -43,7 +37,6 @@ materialPacks.subscribe(({ packs, currentPack }) => {
 	}
 });
 
-// Helper functions
 export const createNewPack = () => {
 	if (Object.keys(get(materialPacks).packs).length >= 10) {
 		throw new Error('Maximum number of packs (10) reached');
@@ -87,7 +80,6 @@ export const deletePack = (packId: string) => {
 	});
 };
 
-// Update pack helper
 export const updatePack = (packId: string, updatedPack: Partial<MaterialPack>) => {
 	materialPacks.update(state => {
 		if (state.packs[packId]) {
@@ -106,7 +98,6 @@ export const updatePack = (packId: string, updatedPack: Partial<MaterialPack>) =
 	});
 };
 
-// Update existing helper functions to work with the new structure
 export const addMaterial = () => {
 	materialPack.update(pack => {
 		const updatedPack = {
@@ -140,7 +131,6 @@ export const addMaterial = () => {
 			]
 		};
 
-		// Update the pack in the packs store
 		materialPacks.update(state => ({
 			...state,
 			packs: {

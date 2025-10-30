@@ -18,14 +18,14 @@
 		const blob = await builder.build();
 
 		const packName = materialPack.pack_name.toLowerCase().replace(/\s+/g, "_");
-		const modName = materialPack.mod_dependency_name
-			? materialPack.mod_dependency_name.toLowerCase().replace(/\s+/g, "-")
+		const modId = materialPack.mod_dependency_modid
+			? materialPack.mod_dependency_modid.toLowerCase().replace(/\s+/g, "-")
 			: "minecraft";
 		// Add version suffix; for ranges like "1.21 - 1.21.1" use the upper bound
 		const versionSuffix = selectedVersion.includes("-")
 			? selectedVersion.split("-")[1].trim()
 			: selectedVersion;
-		const zipFileName = `bwmp_${packName}_${modName}_${versionSuffix}.zip`;
+		const zipFileName = `bwmp_${packName}_${modId}_${versionSuffix}.zip`;
 
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement("a");

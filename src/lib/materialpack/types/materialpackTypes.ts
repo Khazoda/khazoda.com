@@ -26,25 +26,22 @@ type Material = {
 	};
 	// Recipes Section
 	recipe_type: RecipeType;
-	// Optional nugget smelting result (e.g., minecraft:iron_nugget)
 	smelts_into?: string;
 	// Crafting
-	repair_ingredient: string; // e.g. Diamond, Iron Ingot
-	handle_ingredient: string; // e.g. Stick, End Rod
+	repair_ingredient: string;
+	handle_ingredient?: string; // Only required for crafting recipes
 	// Smithing
-	upgrade_smithing_template_ingredient: string; // Slot 1
-	smithing_weapon_material_prefix: string; // Slot 2
+	upgrade_smithing_template_ingredient?: string; // Only required for smithing recipes
+	smithing_weapon_material_prefix?: string; // Only required for smithing recipes
 };
 
 type MaterialPack = {
 	localstorage_id: string;
 	pack_name: string;
-	mod_dependency_name: string;
 	mod_dependency_modid: string;
 	materials: Material[];
 	pack_icon: string | null;
 };
 
-// Update exports
 export type { Material, MaterialPack, RecipeType };
 export { RecipeTypes };

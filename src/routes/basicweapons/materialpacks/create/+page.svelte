@@ -42,6 +42,7 @@
 	import MaterialCreatorRecipes from "src/components/materialpack/form_views/MaterialCreatorRecipesForm.svelte";
 	import type { Material, MaterialPack } from "src/lib/materialpack/types/materialpackTypes";
 	import ZipMaterialPackDownloader from "src/components/materialpack/ZipMaterialPackDownloader.svelte";
+	import ZipMaterialPackImporter from "src/components/materialpack/ZipMaterialPackImporter.svelte";
 	import { templates, createPackFromTemplate, type MaterialPackTemplate } from "$lib/materialpack/stores/templateStore";
 	import { materialTemplates, type MaterialTemplate } from "$lib/materialpack/stores/materialTemplateStore";
 	import {
@@ -59,7 +60,6 @@
 
 	// Basic pack information
 	let pack_name = "";
-	let mod_dependency_name = "";
 	let mod_dependency_id = "";
 	let minecraft_version = "";
 
@@ -73,6 +73,8 @@
 	let isLoaded = false;
 	let isTransitioning = false;
 	let isMobile = false;
+
+	let importerRef: any;
 
 	// Track selected tabs
 	let selectedMainTab = "settings";
@@ -280,6 +282,30 @@
 		// Navigate to the new material's stats tab
 		handleTabChange(`material-${$materialPack.materials.length - 1}`, "stats");
 		closeDialog();
+	}
+
+	function handleImportComplete(importedPack: MaterialPack, detectedVersion?: string) {
+		const { hasSpace, error } = checkStorageQuota();
+		if (!hasSpace) {
+			alert(error);
+			return;
+		}
+
+		materialPacks.update(state => ({
+			...state,
+			packs: {
+				...state.packs,
+				[importedPack.localstorage_id]: importedPack
+			},
+			currentPack: importedPack.localstorage_id
+		}));
+
+		show_pack_creator = true;
+		handleTabChange("settings");
+
+		if (detectedVersion) {
+			console.log(`Detected Minecraft version: ${detectedVersion}`);
+		}
 	}
 
 	// Update pack order when packs change
@@ -519,13 +545,13 @@
 														title={"bwmp_" +
 															$materialPack.pack_name +
 															"_" +
-															($materialPack.mod_dependency_name ? $materialPack.mod_dependency_name : "minecraft") +
-															".zip"}>
+															($materialPack.mod_dependency_modid ? $materialPack.mod_dependency_modid : "minecraft") +
+															"_1.21.1.zip"}>
 														{"bwmp_" +
 															$materialPack.pack_name +
 															"_" +
-															($materialPack.mod_dependency_name ? $materialPack.mod_dependency_name : "minecraft") +
-															".zip"}
+															($materialPack.mod_dependency_modid ? $materialPack.mod_dependency_modid : "minecraft") +
+															"_1.21.1.zip"}
 													</span>
 												</span>
 											</div>
@@ -565,16 +591,6 @@
 
 											<div class="grid-section-mod-dependency flex-col">
 												<h3>Mod Dependency (Optional)</h3>
-												<div class="form-element text" style="margin-bottom:0.75rem;">
-													<input
-														type="text"
-														id="mod_dependency_name"
-														placeholder=" "
-														bind:value={$materialPack.mod_dependency_name}
-														on:input={e => validateAndUpdateStore(e, modDependencySchema, "mod_dependency_name")} />
-													<label for="mod_dependency_name">Mod Name</label>
-												</div>
-
 												<div class="form-element text">
 													<input
 														type="text"
@@ -582,7 +598,7 @@
 														placeholder=" "
 														bind:value={$materialPack.mod_dependency_modid}
 														on:input={e => validateAndUpdateStore(e, modDependencySchema, "mod_dependency_modid")} />
-													<label for="mod_dependency_modid"> Mod ID </label>
+													<label for="mod_dependency_modid">Mod ID</label>
 												</div>
 											</div>
 											<span class="download-frame-templates-container">
@@ -830,6 +846,11 @@
 				<span class="option-title">From Template</span>
 				<span class="option-desc">Start from a pre-made template</span>
 			</button>
+ 			<button class="option-btn" on:click={() => importerRef?.triggerFileInput()}>
+ 				<span class="option-title">Import from ZIP</span>
+ 				<span class="option-desc">Import an existing materialpack zip file</span>
+ 			</button>
+ 			<ZipMaterialPackImporter bind:this={importerRef} showButton={false} onImportComplete={handleImportComplete} />
 		</div>
 	</div>
 </CenterModal>

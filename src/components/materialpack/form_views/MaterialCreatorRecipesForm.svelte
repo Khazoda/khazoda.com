@@ -21,6 +21,7 @@
 	import glaiveRecipeExample from "$lib/materialpack/media/recipe_examples/glaive_recipe_example.webp";
 	import stickRecipeExampleIngredient from "$lib/materialpack/media/recipe_examples/stick_example.webp";
 	import ingotRecipeExampleIngredient from "$lib/materialpack/media/recipe_examples/ingot_example.webp";
+	import smeltingRecipeExample from "$lib/materialpack/media/recipe_examples/smelting_example.webp";
 
 	import {
 		itemMaterialInSmithingRecipeSchema,
@@ -56,7 +57,8 @@
 		recipe_type: recipeTypeSchema,
 		handle_ingredient: itemOrTagSchema,
 		upgrade_smithing_template_ingredient: itemSchema,
-		smithing_weapon_material_prefix: itemMaterialInSmithingRecipeSchema
+		smithing_weapon_material_prefix: itemMaterialInSmithingRecipeSchema,
+		smelts_into: itemSchema
 	};
 
 	function handleSmeltsIntoChange(event: Event) {
@@ -370,7 +372,10 @@
 			bind:value={material.smelts_into}
 			on:input={handleSmeltsIntoChange}
 			placeholder=" " />
-		<label for="smelts_into_{index}"> Smelts into (optional nugget item) </label>
+		<label for="smelts_into_{index}">
+			<img src={smeltingRecipeExample} alt="" width="16" height="16" />
+			Smelts into (optional nugget item)
+		</label>
 		<small style="padding-left: 0.2rem; top:-1.75rem; right:0; pointer-events: none;">namespace:itemname</small>
 	</div>
 </form>

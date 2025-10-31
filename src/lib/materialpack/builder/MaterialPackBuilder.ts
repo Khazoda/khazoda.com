@@ -1,6 +1,7 @@
 import JSZip from 'jszip';
 import type { MaterialPack } from '../types/materialpackTypes';
 import { type VersionRange, applyTemplate, loadTemplate } from './utils/template';
+import { DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
 // All Weapon Types
 const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive'] as const;
@@ -277,13 +278,13 @@ export class MaterialPackBuilder {
 					? {
 						material_name: material.material_name,
 						repair_ingredient: material.repair_ingredient, // Keep # prefix for tags if present
-						handle_ingredient: material.handle_ingredient || 'minecraft:stick',
+						handle_ingredient: material.handle_ingredient || DEFAULT_HANDLE_INGREDIENT,
 					}
 					: {
 						material_name: material.material_name,
 						repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
 						ingredient_type: isTag ? 'tag' : 'item',
-						handle_ingredient: material.handle_ingredient || 'minecraft:stick',
+						handle_ingredient: material.handle_ingredient || DEFAULT_HANDLE_INGREDIENT,
 					};
 
 			// Create mod dependency conditions if a mod dependency exists

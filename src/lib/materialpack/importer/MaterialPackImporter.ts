@@ -4,6 +4,16 @@ import { extractPackInfoFromFilename, detectMinecraftVersion } from './utils/zip
 import { discoverMaterials, parseCustomMaterial } from './utils/materialParser';
 import { parseRecipeInfo } from './utils/recipeParser';
 import { mapTextures, extractPackIcon } from './utils/textureMapper';
+import {
+	DEFAULT_DURABILITY,
+	DEFAULT_ATTACK_DAMAGE_BONUS,
+	DEFAULT_ATTACK_SPEED_BONUS,
+	DEFAULT_REACH_BONUS,
+	DEFAULT_ENCHANTABILITY,
+	DEFAULT_RECIPE_TYPE,
+	DEFAULT_REPAIR_INGREDIENT,
+	DEFAULT_HANDLE_INGREDIENT
+} from 'src/config/material-pack-creator';
 
 export class MaterialPackImporter {
 	private zip: JSZip;
@@ -53,15 +63,15 @@ export class MaterialPackImporter {
 		const textures = await mapTextures(this.zip, materialName);
 		const material: Material = {
 			material_name: stats.material_name || materialName,
-			durability: stats.durability || 100,
-			attack_damage_bonus: stats.attack_damage_bonus || 0,
-			attack_speed_bonus: stats.attack_speed_bonus || 0,
-			reach_bonus: stats.reach_bonus || 0,
-			enchantability: stats.enchantability || 10,
+			durability: stats.durability || DEFAULT_DURABILITY,
+			attack_damage_bonus: stats.attack_damage_bonus || DEFAULT_ATTACK_DAMAGE_BONUS,
+			attack_speed_bonus: stats.attack_speed_bonus || DEFAULT_ATTACK_SPEED_BONUS,
+			reach_bonus: stats.reach_bonus || DEFAULT_REACH_BONUS,
+			enchantability: stats.enchantability || DEFAULT_ENCHANTABILITY,
 			textures,
-			recipe_type: recipeInfo.recipe_type || 'crafting',
-			repair_ingredient: stats.repair_ingredient || 'minecraft:iron_ingot',
-			handle_ingredient: recipeInfo.handle_ingredient || 'minecraft:stick',
+			recipe_type: recipeInfo.recipe_type || DEFAULT_RECIPE_TYPE,
+			repair_ingredient: stats.repair_ingredient || DEFAULT_REPAIR_INGREDIENT,
+			handle_ingredient: recipeInfo.handle_ingredient || DEFAULT_HANDLE_INGREDIENT,
 			upgrade_smithing_template_ingredient:
 				recipeInfo.upgrade_smithing_template_ingredient || '',
 			smithing_weapon_material_prefix: recipeInfo.smithing_weapon_material_prefix || '',

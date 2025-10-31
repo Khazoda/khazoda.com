@@ -1,3 +1,10 @@
+import {
+	VERSION_RANGES,
+	VERSION_DIRECTORY_MAP,
+	DEFAULT_VERSION_DIRECTORY,
+	type VersionRange
+} from 'src/config/minecraft-versions';
+
 export function applyTemplate(
 	template: string,
 	variables: Record<string, string | number>
@@ -5,22 +12,10 @@ export function applyTemplate(
 	return template.replace(/\{\{(\w+)\}\}/g, (_, key) => String(variables[key] ?? ''));
 }
 
-/**
- * Supported Minecraft version ranges
- */
-export const VERSION_RANGES = ['1.21 - 1.21.1', '1.21.10'] as const;
+export { VERSION_RANGES, type VersionRange };
 
-export type VersionRange = (typeof VERSION_RANGES)[number];
-
-/**
- * Maps version range keys to directory names
- */
 export function getVersionDirectory(versionRange: VersionRange): string {
-	const versionMap: Record<VersionRange, string> = {
-		'1.21 - 1.21.1': 'v1.21',
-		'1.21.10': 'v1.21.10'
-	};
-	return versionMap[versionRange] || 'v1.21'; // Default to v1.21 for safety
+	return VERSION_DIRECTORY_MAP[versionRange] || DEFAULT_VERSION_DIRECTORY;
 }
 
 // Preload all template versions

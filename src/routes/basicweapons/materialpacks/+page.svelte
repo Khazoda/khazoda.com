@@ -18,7 +18,7 @@
 	import FeedbackButton from "src/components/materialpack/FeedbackButton.svelte";
 	import { navigating } from "$app/stores";
 	import LoadingSpinner from "src/components/LoadingSpinner.svelte";
-	import { MATERIAL_PACK_CREATOR_VERSION } from "src/config/version";
+	import { MATERIAL_PACK_CREATOR_VERSION } from "src/config/general-config";
 	import Tooltip from "src/components/Tooltip.svelte";
 
 	let pageReady = false;

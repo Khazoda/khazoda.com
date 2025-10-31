@@ -4,7 +4,10 @@
 		materialNameSchema,
 		numberSchema,
 		durabilitySchema,
-		enchantabilitySchema
+		enchantabilitySchema,
+
+		itemSchema
+
 	} from "$lib/materialpack/validation/materialPackValidation";
 	import type { Material } from "src/lib/materialpack/types/materialpackTypes";
 	import { materialPack, materialPacks } from "$lib/materialpack/stores/materialPackStore";
@@ -41,7 +44,8 @@
 		attack_damage_bonus: numberSchema,
 		attack_speed_bonus: numberSchema,
 		reach_bonus: numberSchema,
-		enchantability: enchantabilitySchema
+		enchantability: enchantabilitySchema,
+		smelts_into: itemSchema
 	};
 
 	// Function to validate a field without an event

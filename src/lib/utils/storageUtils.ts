@@ -1,4 +1,9 @@
-// Get total localStorage usage in bytes
+import {
+	MAX_LOCAL_STORAGE_SIZE,
+	STORAGE_WARNING_THRESHOLD,
+	STORAGE_ERROR_MESSAGE
+} from 'src/config/material-pack-creator';
+
 export function getLocalStorageSize(): number {
 	let total = 0;
 	for (let key in localStorage) {
@@ -9,17 +14,12 @@ export function getLocalStorageSize(): number {
 	return total;
 }
 
-// Get remaining storage space in bytes
 export function getRemainingStorage(): number {
-	// MAssuming 5MB as localStorage limit
-	const MAX_STORAGE = 5 * 1024 * 1024; // 5MB
-	return MAX_STORAGE - getLocalStorageSize();
+	return MAX_LOCAL_STORAGE_SIZE - getLocalStorageSize();
 }
 
-// Check if user isapproaching storage limit
 export function isApproachingStorageLimit(): boolean {
-	const WARNING_THRESHOLD = 1 * 1024 * 1024; // 1MB
-	return getRemainingStorage() < WARNING_THRESHOLD;
+	return getRemainingStorage() < STORAGE_WARNING_THRESHOLD;
 }
 
 // Check if we've exceeded storage quota
@@ -32,8 +32,7 @@ export function checkStorageQuota(dataToAdd: string = ''): { hasSpace: boolean; 
 	} catch (e) {
 		return {
 			hasSpace: false,
-			error:
-				'Available storage space exceeded. Please export and remove some material packs or textures to free up space.'
+			error: STORAGE_ERROR_MESSAGE
 		};
 	}
 }

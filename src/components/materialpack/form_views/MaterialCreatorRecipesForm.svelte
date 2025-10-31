@@ -31,6 +31,7 @@
 	} from "src/lib/materialpack/validation/materialPackValidation";
 	import { z } from "zod";
 	import ImportantButton from "../ImportantButton.svelte";
+	import { DEFAULT_HANDLE_INGREDIENT, DEFAULT_RECIPE_TYPE } from 'src/config/material-pack-creator';
 
 	export let material: Material;
 	export let index: number;
@@ -163,11 +164,9 @@
 		closeDialog();
 	}
 
-	// When a new material is created, ensure recipe_type defaults to 'crafting'
-	// and handle_ingredient defaults to minecraft:stick
 	if (!material.recipe_type) {
-		material.recipe_type = RecipeTypes.crafting;
-		material.handle_ingredient = "minecraft:stick";
+		material.recipe_type = DEFAULT_RECIPE_TYPE;
+		material.handle_ingredient = DEFAULT_HANDLE_INGREDIENT;
 
 		// Update both stores with the default values
 		materialPack.update(pack => {

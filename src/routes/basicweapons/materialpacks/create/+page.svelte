@@ -34,6 +34,19 @@
 	import { flip } from "svelte/animate";
 
 	import { materialPackNameSchema, modDependencySchema } from "$lib/materialpack/validation/materialPackValidation";
+	import {
+		isApproachingStorageLimit,
+		checkStorageQuota,
+		getRemainingStorage,
+		getLocalStorageSize
+	} from "$lib/utils/storageUtils";
+	import {
+		MIN_SCREEN_WIDTH,
+		PACK_ICON_RECOMMENDED_SIZE,
+		PACK_ICON_MAX_SIZE,
+		TRANSITION_DURATION_MS,
+		MAX_LOCAL_STORAGE_SIZE
+	} from "src/config/material-pack-creator";
 
 	import { z } from "zod";
 
@@ -45,12 +58,6 @@
 	import ZipMaterialPackImporter from "src/components/materialpack/ZipMaterialPackImporter.svelte";
 	import { templates, createPackFromTemplate, type MaterialPackTemplate } from "$lib/materialpack/stores/templateStore";
 	import { materialTemplates, type MaterialTemplate } from "$lib/materialpack/stores/materialTemplateStore";
-	import {
-		isApproachingStorageLimit,
-		checkStorageQuota,
-		getLocalStorageSize,
-		getRemainingStorage
-	} from "src/lib/utils/storageUtils";
 
 	import InfoTab from "src/components/materialpack/InfoTab.svelte";
 	import { packOrder } from "$lib/materialpack/stores/packOrderStore";
@@ -121,7 +128,7 @@
 	}
 
 	onMount(() => {
-		if (typeof window !== "undefined" && window.innerWidth < 1000) {
+		if (typeof window !== "undefined" && window.innerWidth < MIN_SCREEN_WIDTH) {
 			isMobile = true;
 		}
 		const unsubscribe = materialPacks.subscribe(state => {
@@ -168,7 +175,7 @@
 		isTransitioning = true;
 		isLoaded = false;
 		// Wait for the transition to complete before navigating
-		await new Promise(resolve => setTimeout(resolve, 300)); // Should match transition duration
+		await new Promise(resolve => setTimeout(resolve, TRANSITION_DURATION_MS));
 		goto("/basicweapons/materialpacks");
 	}
 
@@ -386,7 +393,7 @@
 {#if !isMobile}
 	<div class="page-container flex-col">
 		{#if isLoaded}
-			<div class="transition-wrapper" transition:fly={{ x: isTransitioning ? -50 : 50, duration: 300 }}>
+			<div class="transition-wrapper" transition:fly={{ x: isTransitioning ? -50 : 50, duration: TRANSITION_DURATION_MS }}>
 				{#key show_pack_creator}
 					<div class="view-container" transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}>
 						<!-- Materialpack Selector View -->
@@ -434,7 +441,7 @@
 											on:dragend={handleDragEnd}
 											on:dragover|preventDefault
 											on:drop|preventDefault={e => handleDrop(e, packId)}
-											animate:flip={{ duration: 300 }}>
+											animate:flip={{ duration: TRANSITION_DURATION_MS }}>
 											<div class="pack-inner">
 												<div class="actions-container">
 													<ZipMaterialPackDownloader materialPack={$materialPacks.packs[packId]} />
@@ -495,7 +502,7 @@
 											<h4 class="blurb">Change the main settings for your material pack</h4>
 											<div class="modal-content">
 												<h4>Pack Icon</h4>
-												<p>Recommended size is 32 x 32 pixels. Maximum size is 256 x 256 pixels.</p>
+												<p>Recommended size is {PACK_ICON_RECOMMENDED_SIZE} x {PACK_ICON_RECOMMENDED_SIZE} pixels. Maximum size is {PACK_ICON_MAX_SIZE} x {PACK_ICON_MAX_SIZE} pixels.</p>
 												<p>
 													Feel free to download the template image (right click and save) and edit it to display one of
 													your weapon textures in.
@@ -761,7 +768,7 @@
 <!-- Mobile Warning -->
 {#if isMobile}
 	<div class="mobile-warning">
-		<p>To use the Material Pack Creator, please use a device with a screen width of at least 1000px.</p>
+		<p>To use the Material Pack Creator, please use a device with a screen width of at least {MIN_SCREEN_WIDTH}px.</p>
 		<span class="flex-row">
 			<button on:click={() => window.location.reload()}>Refresh Page</button>
 			<button on:click={() => (window.location.href = "/basicweapons/materialpacks")}>Exit Pack Creator</button>
@@ -780,8 +787,7 @@
 			{#key showModal[1]}
 				{#if typeof window !== "undefined"}
 					{@const usedStorage = getLocalStorageSize()}
-					{@const totalStorage = 5 * 1024 * 1024}
-					<!-- 5MB -->
+					{@const totalStorage = MAX_LOCAL_STORAGE_SIZE}
 					{@const usagePercentage = (usedStorage / totalStorage) * 100}
 					<div class="meter-bar">
 						<div

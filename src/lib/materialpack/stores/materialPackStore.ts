@@ -3,6 +3,7 @@ import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
 import type { Material, MaterialPack } from '../types/materialpackTypes';
 import { RecipeTypes } from '../types/materialpackTypes';
+import { MAX_MATERIAL_PACKS, DEFAULT_PACK_ICON, DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
 type MaterialPackList = {
 	packs: { [key: string]: MaterialPack }; // Using pack_name as key
@@ -38,8 +39,8 @@ materialPacks.subscribe(({ packs, currentPack }) => {
 });
 
 export const createNewPack = () => {
-	if (Object.keys(get(materialPacks).packs).length >= 10) {
-		throw new Error('Maximum number of packs (10) reached');
+	if (Object.keys(get(materialPacks).packs).length >= MAX_MATERIAL_PACKS) {
+		throw new Error(`Maximum number of packs (${MAX_MATERIAL_PACKS}) reached`);
 	}
 
 	const localstorage_id = generateUniqueId();
@@ -47,8 +48,7 @@ export const createNewPack = () => {
 		...initialState,
 		localstorage_id,
 		pack_name: ``,
-		pack_icon:
-			'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kbtLA0EQh78kimKUCFGwsAiSWBnRCEEbi4hGQS1iBF9NcnkJeRx3CRJsBVtBQbTxVehfoK1gLQiKIoi1too2KudcEkgQM8vOfvvbmWF3FqzhtJLRGwYgk81roWDAtbC45Gp6xYITOx46I4quzsxNhKlrn/cSLXbrNWvVj/vX7LG4roClWXhUUbW88KTw9FpeNXlHuENJRWLCZ8J9mlxQ+M7Uo2V+MTlZ5m+TtXBoDKztwq5kDUdrWElpGWF5Oe5MuqBU7mO+pDWenZ+TtUdmNzohggRwMcU4Y/gZZES8Hy8++mVHnfyBUv4sOclVxKsU0VglSYo8faIWpHpc1oTocRlpimb///ZVTwz5ytVbA9D4bBjvHmjahp8tw/g6MoyfY7A9wWW2mp87hOEP0beqmvsAHBtwflXVortwsQldj2pEi5Qkm0xrIgFvp9C2CM4baFku96xyzskDhNflq65hbx96Jd6x8gtehWfiZr0+nQAAAAlwSFlzAAALEwAACxMBAJqcGAAAACFQTFRFAAAANzc3VlZWek4/i4uLqWJKrmVMvX5pw4p3y8vL////0LzRUAAAAAF0Uk5TAEDm2GYAAABnSURBVCjPY2AgDARRAFBAvLy8vLgcCgpBAh0dHc0dUAARQGiQAAs0KsGAikQgWEBzJhTMEiNTQNgQISBsSCVDaSIgSoZAIoaA1yoYgAogAhkikJaWlpwGBWCB0NDQ4FAoCMQWlYQAALdlmknY+BjuAAAAAElFTkSuQmCC'
+		pack_icon: DEFAULT_PACK_ICON
 	};
 
 	materialPacks.update(state => ({
@@ -113,7 +113,7 @@ export const addMaterial = () => {
 					enchantability: 0,
 					recipe_type: RecipeTypes.crafting,
 					repair_ingredient: '',
-					handle_ingredient: 'minecraft:stick',
+					handle_ingredient: DEFAULT_HANDLE_INGREDIENT,
 					upgrade_smithing_template_ingredient: '',
 					smithing_weapon_material_prefix: '',
 					textures: {

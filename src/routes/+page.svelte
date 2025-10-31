@@ -275,7 +275,7 @@
 								<img
 									src={materialpack_link_logo}
 									alt="Creator Logo"
-									width="64"
+									width="52"
 									draggable="false"
 									class="no-resample" /></a>
 						</span>
@@ -1240,7 +1240,7 @@
 						flex: 0 0 auto;
 						gap: 8px;
 						.element {
-							border: 2px solid rgb(35, 35, 35);
+							outline: 2px solid rgb(35, 35, 35);
 						}
 					}
 					.island-center-right {

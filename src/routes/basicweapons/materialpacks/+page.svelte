@@ -32,10 +32,12 @@
 		let initialized = false;
 		let translateX = 0;
 		let translateY = 0;
+		let scaleRatio = 1;
 
 		function calculatePositions() {
 			if (initialized) return;
 
+			// Batch all getBoundingClientRect calls before animation starts to reduce load when animation is playing
 			const rect = node.getBoundingClientRect();
 			const pageContainer = node.closest(".page-container")?.getBoundingClientRect();
 
@@ -52,13 +54,17 @@
 
 			translateX = endX - startX;
 			translateY = endY - startY;
+			
+			// Scale ratio calculation for transform
+			scaleRatio = START_SIZE / END_SIZE;
 
 			node.style.position = "fixed";
 			node.style.left = `${startX}px`;
 			node.style.top = `${startY}px`;
-			node.style.width = `${START_SIZE}px`;
-			node.style.height = `${START_SIZE}px`;
+			node.style.width = `${END_SIZE}px`;
+			node.style.height = `${END_SIZE}px`;
 			node.style.opacity = "0";
+			node.style.willChange = "transform, opacity";
 
 			initialized = true;
 		}
@@ -71,16 +77,14 @@
 					calculatePositions();
 				}
 
-				const size = START_SIZE + (END_SIZE - START_SIZE) * t;
+				const currentScale = scaleRatio + (1 - scaleRatio) * t;
 				const currentX = translateX * t;
 				const currentY = translateY * t;
 				const rotation = -225 * (1 - t);
 				const opacity = t;
 
 				return `
-					width: ${size}px;
-					height: ${size}px;
-					transform: translate(${currentX}px, ${currentY}px) rotate(${rotation}deg);
+					transform: translate(${currentX}px, ${currentY}px) scale(${currentScale}) rotate(${rotation}deg);
 					opacity: ${opacity};
 				`;
 			},
@@ -92,6 +96,7 @@
 					node.style.width = "";
 					node.style.height = "";
 					node.style.opacity = "";
+					node.style.willChange = "";
 				}
 			}
 		};
@@ -294,6 +299,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
+			will-change: transform, opacity;
 		}
 	}
 	.beta-badge {

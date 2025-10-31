@@ -101,6 +101,7 @@
 			transform: perspective(1px) translateZ(0);
 			transform-style: preserve-3d;
 			transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			will-change: transform;
 		}
 	}
 
@@ -121,7 +122,8 @@
 		opacity: 0;
 		position: absolute;
 		transform-origin: bottom center;
-		transition: all 0.3s ease-out;
+		transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+		will-change: transform, opacity;
 		width: 64px;
 	}
 

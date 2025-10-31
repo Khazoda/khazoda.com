@@ -8,6 +8,7 @@ interface RecipeInfo {
 	handle_ingredient?: string;
 	upgrade_smithing_template_ingredient?: string;
 	smithing_weapon_material_prefix?: string;
+	smithing_repair_ingredient?: string;
 	smelts_into?: string;
 }
 
@@ -23,51 +24,76 @@ export async function parseRecipeInfo(
 		const content = await smithingRecipe.async('text');
 		const recipe = JSON.parse(content);
 		
-		if (recipe.template) {
+		// Handle 1.21.10 format (strings) or 1.21 format (objects)
+		if (typeof recipe.template === 'string') {
+			// 1.21.10 
+			info.upgrade_smithing_template_ingredient = recipe.template;
+		} else if (recipe.template?.item) {
+			// 1.21 
 			info.upgrade_smithing_template_ingredient = recipe.template.item;
 		}
-		if (recipe.base) {
-			const baseItem = recipe.base.item || '';
+		
+		// Extract repair_ingredient from addition field for smithing recipes
+		if (typeof recipe.addition === 'string') {
+			// 1.21.10
+			info.smithing_repair_ingredient = recipe.addition;
+		} else if (recipe.addition?.item) {
+			// 1.21 
+			info.smithing_repair_ingredient = recipe.addition.item;
+		}
+		
+		const baseItem = typeof recipe.base === 'string' 
+			? recipe.base 
+			: recipe.base?.item || '';
+		if (baseItem) {
 			const match = baseItem.match(/^[^:]+:([^_]+)_(?:dagger|hammer|club|spear|quarterstaff|glaive)$/);
 			if (match) {
 				info.smithing_weapon_material_prefix = match[1];
 			}
 		}
-		return info;
 	}
 	
-	info.recipe_type = 'crafting';
-	
-	const craftingRecipe = zip.file(`data/basicweapons/recipe/${materialName}_hammer.json`) ||
-	                       zip.file(`data/basicweapons/recipe/${materialName}_dagger.json`);
-	
-	if (craftingRecipe) {
-		const content = await craftingRecipe.async('text');
-		const recipe = JSON.parse(content);
+	if (!info.recipe_type) {
+		info.recipe_type = 'crafting';
 		
-		if (recipe.key) {
-			for (const [key, value] of Object.entries(recipe.key)) {
-				if (key === '/') {
-					const ingredient = value as any;
-					if (ingredient.item) {
-						info.handle_ingredient = ingredient.item;
-					} else if (typeof ingredient === 'string') {
-						info.handle_ingredient = ingredient;
+		const craftingRecipe = zip.file(`data/basicweapons/recipe/${materialName}_hammer.json`) ||
+		                       zip.file(`data/basicweapons/recipe/${materialName}_dagger.json`);
+		
+		if (craftingRecipe) {
+			const content = await craftingRecipe.async('text');
+			const recipe = JSON.parse(content);
+			
+			if (recipe.key) {
+				for (const [key, value] of Object.entries(recipe.key)) {
+					if (key === '/') {
+						const ingredient = value as any;
+						if (ingredient.item) {
+							info.handle_ingredient = ingredient.item;
+						} else if (typeof ingredient === 'string') {
+							info.handle_ingredient = ingredient;
+						}
+						break;
 					}
-					break;
 				}
 			}
 		}
 	}
 	
-	const blastingRecipe = zip.file(`data/basicweapons/recipe/weapons_to_nuggets/weapons_to_nuggets_${materialName}_blasting.json`) ||
-	                      zip.file(`data/recipes/weapons_to_nuggets_${materialName}_blasting.json`);
+	const recipePaths = [
+		`data/basicweapons/recipe/weapons_to_nuggets/weapons_to_nuggets_${materialName}_smelting.json`,
+		`data/basicweapons/recipe/weapons_to_nuggets/weapons_to_nuggets_${materialName}_blasting.json`,
+	];
 	
-	if (blastingRecipe) {
-		const content = await blastingRecipe.async('text');
-		const recipe = JSON.parse(content);
-		if (recipe.result && recipe.result.id) {
-			info.smelts_into = recipe.result.id;
+	for (const path of recipePaths) {
+		const recipeFile = zip.file(path);
+
+		if (recipeFile) {
+			const content = await recipeFile.async('text');
+			const recipe = JSON.parse(content);
+			if (recipe.result?.id) {
+				info.smelts_into = recipe.result.id;
+				break;
+			}
 		}
 	}
 	

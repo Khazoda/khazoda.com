@@ -70,7 +70,7 @@ export class MaterialPackImporter {
 			enchantability: stats.enchantability || DEFAULT_ENCHANTABILITY,
 			textures,
 			recipe_type: recipeInfo.recipe_type || DEFAULT_RECIPE_TYPE,
-			repair_ingredient: stats.repair_ingredient || DEFAULT_REPAIR_INGREDIENT,
+			repair_ingredient: recipeInfo.smithing_repair_ingredient || stats.repair_ingredient || DEFAULT_REPAIR_INGREDIENT,
 			handle_ingredient: recipeInfo.handle_ingredient || DEFAULT_HANDLE_INGREDIENT,
 			upgrade_smithing_template_ingredient:
 				recipeInfo.upgrade_smithing_template_ingredient || '',

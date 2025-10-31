@@ -38,7 +38,7 @@
 		font-size: 1.2rem;
 		font-weight: 700;
 		letter-spacing: 0.01em;
-		padding: 1rem 2rem;
+		padding: 0.75rem 1.5rem;
 		text-decoration: none;
 		width: fit-content;
 		-webkit-font-smoothing: antialiased;

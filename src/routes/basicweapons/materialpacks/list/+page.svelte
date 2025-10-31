@@ -342,6 +342,7 @@
 		padding: 2rem;
 		@media screen and (max-width: 1000px) {
 			padding: 1rem;
+			padding-top: 50px;
 			padding-right: calc(1rem + 0.5rem);
 		}
 	}

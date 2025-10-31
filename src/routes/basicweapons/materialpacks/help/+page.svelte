@@ -36,15 +36,15 @@
 			<p>
 				Material packs can be created from scratch, but the recommended method is to use the
 				<a href="/basicweapons/materialpacks/create">Material Pack Creator</a>. You'll need to create the weapon
-				textures yourself, but everything else is generated dynamically.
+				textures yourself, but everything else is generated dynamically from values you provide.
 			</p>
 			<p>
-				If you want more granular control over certain values, or want to change things like item model files or
-				translations, you can always edit the materialpack files locally after generating them.
+				If you want more granular control, or want to change things like item model files or
+				translations, you can always edit the materialpack files locally after generating them. Their format is a zip file containing a mishmash of resource and datapack stuff.
 			</p>
 			<h3>How do I install a Material Pack?</h3>
 			<p>
-				Material packs can be downloaded from Modrinth. You can also browse our <a
+				Material packs can be downloaded from Modrinth and dropped into the basicweapons_materialpacks folder in your Minecraft root directory. You can also browse this site's <a
 					href="/basicweapons/materialpacks/list"
 					>list of published material packs
 				</a>, which links to the Modrinth page for each pack.

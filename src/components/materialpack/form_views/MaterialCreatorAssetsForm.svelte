@@ -16,6 +16,7 @@
 	import spear_held from "$lib/materialpack/media/weapon_outlines/spear_held.png";
 	import quarterstaff_held from "$lib/materialpack/media/weapon_outlines/quarterstaff_held.png";
 	import glaive_held from "$lib/materialpack/media/weapon_outlines/glaive_held.png";
+	import empty_spot from "$lib/materialpack/media/empty_spot.png";
 
 	import { z } from "zod";
 	import { isApproachingStorageLimit, checkStorageQuota } from "$lib/utils/storageUtils";
@@ -45,7 +46,9 @@
 			label: "quarterstaff_held.png",
 			placeholderBackground: quarterstaff_held
 		},
-		{ id: "glaive_held", label: "glaive_held.png", placeholderBackground: glaive_held }
+		{ id: "glaive_held", label: "glaive_held.png", placeholderBackground: glaive_held },
+		{ id: "sword", label: "sword.png", placeholderBackground: empty_spot },
+		{ id: "axe", label: "axe.png", placeholderBackground: empty_spot }
 	];
 
 	const downloadOptions = {

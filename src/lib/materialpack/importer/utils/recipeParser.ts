@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 import type { Material } from '../../types/materialpackTypes';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
 
 interface RecipeInfo {
 	recipe_type?: 'crafting' | 'smithing';
@@ -46,7 +46,7 @@ export async function parseRecipeInfo(
 			? recipe.base 
 			: recipe.base?.item || '';
 		if (baseItem) {
-			const match = baseItem.match(/^[^:]+:([^_]+)_(?:dagger|hammer|club|spear|quarterstaff|glaive)$/);
+			const match = baseItem.match(/^[^:]+:([^_]+)_(?:dagger|hammer|club|spear|quarterstaff|glaive|sword|axe)$/);
 			if (match) {
 				info.smithing_weapon_material_prefix = match[1];
 			}
@@ -57,7 +57,9 @@ export async function parseRecipeInfo(
 		info.recipe_type = 'crafting';
 		
 		const craftingRecipe = zip.file(`data/basicweapons/recipe/${materialName}_hammer.json`) ||
-		                       zip.file(`data/basicweapons/recipe/${materialName}_dagger.json`);
+		                       zip.file(`data/basicweapons/recipe/${materialName}_dagger.json`) ||
+		                       zip.file(`data/basicweapons/recipe/${materialName}_sword.json`) ||
+		                       zip.file(`data/basicweapons/recipe/${materialName}_axe.json`);
 		
 		if (craftingRecipe) {
 			const content = await craftingRecipe.async('text');

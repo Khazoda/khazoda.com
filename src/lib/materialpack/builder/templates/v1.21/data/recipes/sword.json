@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" # ",
+		" # ",
+		" / "
+	],
+	"key": {
+		"#": {
+			"{{ingredient_type}}": "{{repair_ingredient}}"
+		},
+		"/": {
+			"item": "{{handle_ingredient}}"
+		}
+	},
+	"result": {
+		"id": "basicweapons:{{material_name}}_sword",
+		"count": 1
+	}
+}
+

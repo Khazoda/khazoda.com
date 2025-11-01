@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 import type { Material } from '../../types/materialpackTypes';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
 
 export async function discoverMaterials(zip: JSZip): Promise<string[]> {
 	const customMaterialsFolder = zip.folder('custom_materials');

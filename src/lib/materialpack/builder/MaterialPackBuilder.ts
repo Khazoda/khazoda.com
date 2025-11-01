@@ -3,9 +3,10 @@ import type { MaterialPack } from '../types/materialpackTypes';
 import { type VersionRange, applyTemplate, loadTemplate } from './utils/template';
 import { DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
-// All Weapon Types
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
 type WeaponType = (typeof WEAPON_TYPES)[number];
+
+const OPTIONAL_WEAPON_TYPES = ['sword', 'axe'] as const;
 
 // Weapon Types with held variants only
 const HELD_VARIANT_WEAPONS = ['spear', 'glaive', 'quarterstaff'] as const;
@@ -96,7 +97,9 @@ const BASE_WEAPON_REACH_BONUS = {
 	club: 0,
 	spear: 1.5,
 	quarterstaff: 0.75,
-	glaive: 0.75
+	glaive: 0.75,
+	sword: 0,
+	axe: 0
 } as const;
 interface FabricAndCondition {
 	condition: 'fabric:and';
@@ -203,6 +206,7 @@ export class MaterialPackBuilder {
 		await this.generateRecipes(dataFolder);
 		await this.generateWeaponsToNuggetsRecipes(dataFolder);
 		await this.generateTags(dataFolder);
+		await this.generateVanillaTags(dataFolder);
 		await this.generateRepairIngredientTags(dataFolder);
 		await this.generateWeaponAttributes(dataFolder);
 		await this.generateRecipeAdvancements(dataFolder);
@@ -520,10 +524,11 @@ export class MaterialPackBuilder {
 		const tagsFolder = dataFolder.folder('basicweapons/tags/item/tools');
 		if (!tagsFolder) throw new Error('Failed to create tags folder');
 
-		const weaponsByType = new Map(WEAPON_TYPES.map(type => [type, [] as string[]]));
+		const basicWeaponsTypes = WEAPON_TYPES.filter(type => !OPTIONAL_WEAPON_TYPES.includes(type as any));
+		const weaponsByType = new Map(basicWeaponsTypes.map(type => [type, [] as string[]]));
 
 		for (const material of this.materialPack.materials) {
-			for (const weaponType of WEAPON_TYPES) {
+			for (const weaponType of basicWeaponsTypes) {
 				if (material.textures[weaponType] !== null) {
 					const weaponId = `basicweapons:${material.material_name}_${weaponType}`;
 					weaponsByType.get(weaponType)?.push(weaponId);
@@ -545,6 +550,48 @@ export class MaterialPackBuilder {
 				};
 				tagsFolder.file(fileName, JSON.stringify(content, null, 2));
 			}
+		}
+	}
+
+	private async generateVanillaTags(dataFolder: JSZip) {
+		const minecraftTagsFolder = dataFolder.folder('minecraft/tags/item');
+		if (!minecraftTagsFolder) throw new Error('Failed to create minecraft tags folder');
+
+		const swords: string[] = [];
+		const axes: string[] = [];
+
+		for (const material of this.materialPack.materials) {
+			const swordTexture = material.textures.sword;
+			if (swordTexture !== null && swordTexture) {
+				const weaponId = `basicweapons:${material.material_name}_sword`;
+				swords.push(weaponId);
+			}
+			
+			const axeTexture = material.textures.axe;
+			if (axeTexture !== null && axeTexture) {
+				const weaponId = `basicweapons:${material.material_name}_axe`;
+				axes.push(weaponId);
+			}
+		}
+
+		if (swords.length > 0) {
+			const templateStr = await loadTemplate(this.versionRange, 'data/tags/swords.json');
+			const template = JSON.parse(templateStr);
+			const content = {
+				...template,
+				values: swords
+			};
+			minecraftTagsFolder.file('swords.json', JSON.stringify(content, null, 2));
+		}
+
+		if (axes.length > 0) {
+			const templateStr = await loadTemplate(this.versionRange, 'data/tags/axes.json');
+			const template = JSON.parse(templateStr);
+			const content = {
+				...template,
+				values: axes
+			};
+			minecraftTagsFolder.file('axes.json', JSON.stringify(content, null, 2));
 		}
 	}
 

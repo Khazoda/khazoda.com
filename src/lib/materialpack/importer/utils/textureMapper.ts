@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 import type { Material } from '../../types/materialpackTypes';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
 const HELD_VARIANT_WEAPONS = ['spear', 'glaive', 'quarterstaff'] as const;
 
 function uint8ArrayToBase64(bytes: Uint8Array): string {
@@ -23,7 +23,9 @@ export async function mapTextures(
 		quarterstaff: null,
 		quarterstaff_held: null,
 		glaive: null,
-		glaive_held: null
+		glaive_held: null,
+		sword: null,
+		axe: null
 	};
 	
 	for (const weaponType of WEAPON_TYPES) {

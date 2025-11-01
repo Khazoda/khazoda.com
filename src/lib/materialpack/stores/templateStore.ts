@@ -2,6 +2,7 @@ import type { MaterialPack } from '../types/materialpackTypes';
 import { writable } from 'svelte/store';
 import wardenTemplate from '../templates/warden.json';
 import netherTemplate from '../templates/nether.json';
+import boneTemplate from '../templates/bone.json';
 
 export type MaterialPackTemplate = {
 	name: string;
@@ -13,7 +14,8 @@ export type MaterialPackTemplate = {
 
 export const templates = writable<MaterialPackTemplate[]>([
 	wardenTemplate as MaterialPackTemplate,
-	netherTemplate as MaterialPackTemplate
+	netherTemplate as MaterialPackTemplate,
+	boneTemplate as MaterialPackTemplate
 ]);
 
 export function createPackFromTemplate(template: MaterialPackTemplate): Partial<MaterialPack> {

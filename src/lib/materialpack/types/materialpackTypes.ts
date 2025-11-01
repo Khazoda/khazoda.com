@@ -8,6 +8,7 @@ type Material = {
 	// Stats Section
 	material_name: string;
 	durability: number;
+	mining_speed?: number;
 	attack_damage_bonus: number;
 	attack_speed_bonus: number;
 	reach_bonus: number;

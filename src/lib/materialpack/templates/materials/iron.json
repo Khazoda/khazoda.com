@@ -1,6 +1,7 @@
 {
 	"material_name": "iron",
 	"durability": 250,
+	"mining_speed": 6.0,
 	"attack_damage_bonus": 2,
 	"attack_speed_bonus": 0,
 	"reach_bonus": 0,

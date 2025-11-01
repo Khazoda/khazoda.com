@@ -1,6 +1,7 @@
 {
 	"material_name": "{{material_name}}",
 	"durability": "{{durability}}",
+	"mining_speed": "{{mining_speed}}",
 	"attack_damage_bonus": "{{attack_damage_bonus}}",
 	"attack_speed_bonus": "{{attack_speed_bonus}}",
 	"reach_bonus": "{{reach_bonus}}",

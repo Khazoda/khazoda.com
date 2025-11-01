@@ -1,6 +1,7 @@
 {
 	"material_name": "netherite",
 	"durability": 2031,
+	"mining_speed": 9.0,
 	"attack_damage_bonus": 4,
 	"attack_speed_bonus": 0,
 	"reach_bonus": 0,

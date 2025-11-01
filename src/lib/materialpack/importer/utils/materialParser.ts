@@ -34,6 +34,7 @@ export async function parseCustomMaterial(
 	const material: Partial<Material> = {
 		material_name: data.material_name || materialName,
 		durability: Number(data.durability) || 100,
+		mining_speed: data.mining_speed !== undefined ? Number(data.mining_speed) : 4.0,
 		attack_damage_bonus: Number(data.attack_damage_bonus) || 0,
 		attack_speed_bonus: Number(data.attack_speed_bonus) || 0,
 		reach_bonus: Number(data.reach_bonus) || 0,

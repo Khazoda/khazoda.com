@@ -8,6 +8,7 @@
 			"durability": 2519,
 			"attack_damage_bonus": 5,
 			"attack_speed_bonus": 0,
+			"mining_speed": 9.0,
 			"reach_bonus": 0,
 			"enchantability": 18,
 			"recipe_type": "smithing",

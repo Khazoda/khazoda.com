@@ -859,6 +859,7 @@ export class MaterialPackBuilder {
 			const variables = {
 				material_name: material.material_name,
 				durability: material.durability,
+				mining_speed: material.mining_speed ?? 4.0,
 				attack_damage_bonus: material.attack_damage_bonus,
 				attack_speed_bonus: material.attack_speed_bonus,
 				reach_bonus: material.reach_bonus,

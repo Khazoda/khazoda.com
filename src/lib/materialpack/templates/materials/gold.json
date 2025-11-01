@@ -1,6 +1,7 @@
 {
 	"material_name": "golden",
 	"durability": 32,
+	"mining_speed": 12.0,
 	"attack_damage_bonus": 0,
 	"attack_speed_bonus": 0.5,
 	"reach_bonus": 0,

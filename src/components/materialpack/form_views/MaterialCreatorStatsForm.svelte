@@ -41,6 +41,7 @@
 	const schemas: SchemaMap = {
 		material_name: materialNameSchema,
 		durability: durabilitySchema,
+		mining_speed: numberSchema,
 		attack_damage_bonus: numberSchema,
 		attack_speed_bonus: numberSchema,
 		reach_bonus: numberSchema,
@@ -53,7 +54,7 @@
 		try {
 			const schema = schemas[field];
 			const parsedValue =
-				field.includes("bonus") || field.includes("durability") || field.includes("enchantability")
+				field.includes("bonus") || field.includes("durability") || field.includes("enchantability") || field.includes("mining_speed")
 					? parseFloat(value)
 					: value;
 
@@ -73,7 +74,7 @@
 		const input = event.target as HTMLInputElement;
 		try {
 			const value =
-				field.includes("bonus") || field.includes("durability") || field.includes("enchantability")
+				field.includes("bonus") || field.includes("durability") || field.includes("enchantability") || field.includes("mining_speed")
 					? parseFloat(input.value)
 					: input.value;
 
@@ -111,6 +112,7 @@
 	onMount(() => {
 		const numberFields: ValidFields[] = [
 			"durability",
+			"mining_speed",
 			"attack_damage_bonus",
 			"attack_speed_bonus",
 			"reach_bonus",
@@ -183,6 +185,18 @@
 			required
 			placeholder=" " />
 		<label for="durability_{index}">Durability</label>
+	</div>
+
+	<div class="form-element text">
+		<input
+			type="number"
+			id="mining_speed_{index}"
+			name="mining_speed"
+			bind:value={material.mining_speed}
+			step="0.01"
+			on:input={e => validateAndUpdate(e, schemas.mining_speed, "mining_speed")}
+			placeholder=" " />
+		<label for="mining_speed_{index}">Mining Speed</label>
 	</div>
 
 	<div class="form-element text">

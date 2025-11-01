@@ -6,6 +6,7 @@
 		{
 			"material_name": "bone",
 			"durability": 206,
+			"mining_speed": 4.0,
 			"attack_damage_bonus": 0.5,
 			"attack_speed_bonus": 0,
 			"reach_bonus": 0,

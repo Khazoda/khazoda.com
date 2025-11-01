@@ -1,6 +1,7 @@
 {
 	"material_name": "diamond",
 	"durability": 1561,
+	"mining_speed": 8.0,
 	"attack_damage_bonus": 3,
 	"attack_speed_bonus": 0,
 	"reach_bonus": 0,

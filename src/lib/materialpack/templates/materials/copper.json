@@ -1,6 +1,7 @@
 {
 	"material_name": "copper",
 	"durability": 190,
+	"mining_speed": 5.0,
 	"attack_damage_bonus": 1,
 	"attack_speed_bonus": 0,
 	"reach_bonus": 0,

@@ -107,6 +107,7 @@ export const addMaterial = () => {
 				{
 					material_name: '',
 					durability: 0,
+					mining_speed: 2.0,
 					attack_damage_bonus: 0,
 					attack_speed_bonus: 0,
 					reach_bonus: 0,
@@ -125,7 +126,9 @@ export const addMaterial = () => {
 						quarterstaff: null,
 						quarterstaff_held: null,
 						glaive: null,
-						glaive_held: null
+						glaive_held: null,
+						sword: null,
+						axe: null
 					}
 				}
 			]

@@ -178,7 +178,13 @@
 					placeholderBackground={texture.placeholderBackground}
 					backgroundImage={minecraft_gui}
 					onImageSelect={base64String => handleTextureUpdate(texture.id, base64String)} />
-				<label for="texture_{texture.id}_{index}">{texture.label}</label>
+				<span class="label-container">
+					<label for="texture_{texture.id}_{index}">{texture.label}</label>
+					{#if texture.id === "sword" || texture.id === "axe"}
+						<span class="extra-signifier optional">optional</span>
+						<span class="extra-signifier version">1.21.10+</span>
+					{/if}
+				</span>
 			</div>
 		{/each}
 	</div>
@@ -204,8 +210,8 @@
 		width: 100%;
 		height: 100%;
 		padding: 2rem;
-		outline: 2px solid #1c1c1c;
 		border-radius: 8px;
+		outline: 2px solid #1c1c1c;
 		background: #2c2c2c;
 
 		h2 {
@@ -230,11 +236,25 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 0.5rem;
-		label {
+		.label-container {
 			color: #ffffff;
 			font-weight: 400;
 			font-size: 0.75rem;
 			letter-spacing: 0.05rem;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			line-height: 1.1;
+		}
+		.extra-signifier {
+			&.optional {
+				color: #44baff;
+			}
+			&.version {
+				color: #ffae44;
+			}
 		}
 	}
 

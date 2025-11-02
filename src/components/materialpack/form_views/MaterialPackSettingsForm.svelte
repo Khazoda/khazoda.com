@@ -170,7 +170,7 @@
 		overflow-y: hidden;
 		outline: 2px solid #1c1c1c;
 		border-radius: 16px;
-		background: linear-gradient(150deg, #373737 0%, #373737 45%, #8b8b8b 50%, #aaaaaa 55%, #aaaaaa 100%);
+		background: linear-gradient(0, #222222 0%, #333333 100%);
 		.weapon-texture-preview-container {
 			flex-wrap: wrap;
 			height: 100%;

@@ -345,7 +345,7 @@
 
 			<div class="form-element text">
 				<input
-					title="namespace:itemname or #namespace:tagname"
+					title="e.g. 'netherite' or 'stone'"
 					type="text"
 					id="smithing_weapon_{index}"
 					name="smithing_weapon_material_prefix"

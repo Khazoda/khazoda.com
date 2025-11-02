@@ -19,8 +19,6 @@
 	import HugeiconsFolder01 from "virtual:icons/hugeicons/folder-01";
 	import HugeiconsArchive02 from "~icons/hugeicons/archive-02";
 
-	import HomeButton from "src/components/HomeButton.svelte";
-	import FeedbackButton from "src/components/materialpack/FeedbackButton.svelte";
 	import ImportantButton from "src/components/materialpack/ImportantButton.svelte";
 	import ImagePicker from "src/components/materialpack/ImagePicker.svelte";
 	import CenterModal from "src/components/CenterModal.svelte";
@@ -1214,7 +1212,7 @@
 			border: none;
 			border-radius: 8px 8px 0 0;
 		}
-		form {
+		form.pack-settings-form {
 			display: grid;
 			position: relative;
 			grid-template-columns: 1fr 2fr;

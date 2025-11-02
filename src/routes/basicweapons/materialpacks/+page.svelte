@@ -171,7 +171,7 @@
 				{/if}
 				<div class="col justify-start margin-left-auto title-row">
 					<h1 in:fade={{ duration: 500, delay: 700 }}>Basic Weapons</h1>
-					<h2 in:fade={{ duration: 500, delay: 750 }}>
+					<h2 in:fade={{ duration: 500, delay: 725 }}>
 						Material Pack Creator
 						<Tooltip text={`${MATERIAL_PACK_CREATOR_VERSION}`}>
 							<span class="beta-badge">BETA</span>
@@ -184,13 +184,13 @@
 					Use this tool to create
 					<a href="/basicweapons/materialpacks/help"> material packs </a> for Basic Weapons
 				</span>
-				<span in:fade={{ duration: 500, delay: 900 }}>
+				<span in:fade={{ duration: 500, delay: 825 }}>
 					Share your pack with your friends or have it featured on the <a href="/basicweapons/materialpacks/list"
 						>public list</a
 					></span>
 			</div>
 			<div class="row flex-space-between width-100 bottom-row">
-				<span in:fly={{ y: 50, duration: 500, delay: 950 }}>
+				<span in:fly={{ y: 50, duration: 500, delay: 900 }}>
 					<FanButton
 						color="blue"
 						href="/basicweapons/materialpacks/list"
@@ -198,7 +198,7 @@
 						label="Explore Material Packs"
 						fanImages={[copper_hammer, copper_spear, copper_dagger]} />
 				</span>
-				<span in:fly={{ y: 50, duration: 500, delay: 1000 }}>
+				<span in:fly={{ y: 50, duration: 500, delay: 925 }}>
 					<FanButton
 						color="green"
 						href="/basicweapons/materialpacks/create"

@@ -16,6 +16,8 @@
 	import spear_held from "$lib/materialpack/media/weapon_outlines/spear_held.png";
 	import quarterstaff_held from "$lib/materialpack/media/weapon_outlines/quarterstaff_held.png";
 	import glaive_held from "$lib/materialpack/media/weapon_outlines/glaive_held.png";
+	import sword from "$lib/materialpack/media/weapon_outlines/sword.png";
+	import axe from "$lib/materialpack/media/weapon_outlines/axe.png";
 	import empty_spot from "$lib/materialpack/media/empty_spot.png";
 
 	import { z } from "zod";
@@ -47,8 +49,8 @@
 			placeholderBackground: quarterstaff_held
 		},
 		{ id: "glaive_held", label: "glaive_held.png", placeholderBackground: glaive_held },
-		{ id: "sword", label: "sword.png", placeholderBackground: empty_spot },
-		{ id: "axe", label: "axe.png", placeholderBackground: empty_spot }
+		{ id: "sword", label: "sword.png", placeholderBackground: sword },
+		{ id: "axe", label: "axe.png", placeholderBackground: axe }
 	];
 
 	const downloadOptions = {
@@ -206,7 +208,7 @@
 					currentImage={material.textures[texture.id]}
 					accept="image/png"
 					imgSize="96px"
-					padding="0.5rem"
+					padding="0.35rem"
 					placeholderBackground={texture.placeholderBackground}
 					backgroundImage={minecraft_gui}
 					onImageSelect={base64String => handleTextureUpdate(texture.id, base64String)} />
@@ -253,7 +255,7 @@
 	.textures-grid {
 		display: grid;
 		gap: 2rem;
-		grid-template-columns: repeat(3, minmax(64px, 1fr));
+		grid-template-columns: repeat(4, minmax(64px, 1fr));
 		width: 100%;
 	}
 

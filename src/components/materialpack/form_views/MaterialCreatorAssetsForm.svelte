@@ -281,4 +281,38 @@
 			background: rgba(255, 68, 68, 0.1);
 		}
 	}
+	.modal-actions {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+		gap: 1rem;
+
+		button {
+			padding: 0.5rem 1.5rem;
+			border: none;
+			border-radius: 4px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease;
+
+			&.cancel-btn {
+				border: 1px solid #ccc;
+				background: transparent;
+				color: var(--color-text-secondary);
+
+				&:hover {
+					background: #2c2c2c;
+				}
+			}
+
+			&.delete-btn {
+				background: #ff4444;
+				color: white;
+
+				&:hover {
+					background: #ff2222;
+				}
+			}
+		}
+	}
 </style>

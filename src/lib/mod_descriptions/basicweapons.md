@@ -35,7 +35,7 @@
 </span>
 <span class="markdown-row">
 
-![Static Badge](https://img.shields.io/badge/1.21.10-active-%2313c21c)
+![Static Badge](https://img.shields.io/badge/1.21.10-active-lightgreen)
 ![Static Badge](https://img.shields.io/badge/1.21.1-LTS-blue)
 
 </span>

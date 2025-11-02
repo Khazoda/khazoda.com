@@ -123,6 +123,17 @@ export class MaterialPackBuilder {
 	}
 
 	/**
+	 * Determines if a weapon type should be skipped for the current version.
+	 * Example: sword and axe are only available in 1.21.10+
+	 */
+	private shouldSkipWeaponType(weaponType: WeaponType): boolean {
+		return (
+			OPTIONAL_WEAPON_TYPES.includes(weaponType as any) &&
+			this.versionRange === '1.21 - 1.21.1'
+		);
+	}
+
+	/**
 	 * Gets a dagger recipe template structure.
 	 */
 	private async getDaggerTemplate(): Promise<DaggerRecipeTemplate> {
@@ -225,6 +236,7 @@ export class MaterialPackBuilder {
 			// Collect existing weapon item IDs for this material
 			const ingredientItems: string[] = [];
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				if (material.textures[weaponType] !== null) {
 					ingredientItems.push(`basicweapons:${material.material_name}_${weaponType}`);
 				}
@@ -307,6 +319,7 @@ export class MaterialPackBuilder {
 			}
 
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				if (material.textures[weaponType] === null) continue;
 
 				if (material.recipe_type === 'smithing') {
@@ -552,8 +565,14 @@ export class MaterialPackBuilder {
 			}
 		}
 	}
-
+	
+	// Vanilla sword and axe tags
 	private async generateVanillaTags(dataFolder: JSZip) {
+		// Sword and axe tags are only available in 1.21.10+ versions of basic weapons
+		if (this.versionRange === '1.21 - 1.21.1') {
+			return;
+		}
+
 		const minecraftTagsFolder = dataFolder.folder('minecraft/tags/item');
 		if (!minecraftTagsFolder) throw new Error('Failed to create minecraft tags folder');
 
@@ -601,6 +620,7 @@ export class MaterialPackBuilder {
 
 		for (const material of this.materialPack.materials) {
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				// Only generate attribute file if the material has a texture for this weapon type
 				if (material.textures[weaponType] !== null) {
 					const fileName = `${material.material_name}_${weaponType}.json`;
@@ -642,6 +662,7 @@ export class MaterialPackBuilder {
 			const materialNameCapitalized = this.capitalizeFirstLetter(material.material_name);
 
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				// Only add language entry if the material has a texture for this weapon type
 				if (material.textures[weaponType] !== null) {
 					const key = `item.basicweapons.${material.material_name}_${weaponType}`;
@@ -665,6 +686,7 @@ export class MaterialPackBuilder {
 
 		for (const material of this.materialPack.materials) {
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				// Skip if no texture exists for this weapon type
 				if (material.textures[weaponType] === null) continue;
 
@@ -789,6 +811,7 @@ export class MaterialPackBuilder {
 		for (const material of this.materialPack.materials) {
 			// Process each weapon type
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				const textureKey = weaponType as keyof typeof material.textures;
 				const texture = material.textures[textureKey];
 
@@ -881,6 +904,7 @@ export class MaterialPackBuilder {
 			// Build the list of recipes to reward
 			const recipes: string[] = [];
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				if (material.textures[weaponType] === null) continue;
 
 				// Add recipe with appropriate suffix for smithing recipes

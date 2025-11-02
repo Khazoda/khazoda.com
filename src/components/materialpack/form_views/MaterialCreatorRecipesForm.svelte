@@ -45,6 +45,7 @@
 		| "textures"
 		| "material_name"
 		| "durability"
+		| "mining_speed"
 		| "attack_damage_bonus"
 		| "attack_speed_bonus"
 		| "reach_bonus"
@@ -399,7 +400,7 @@
 		width: 100%;
 		height: 100%;
 		padding: 2rem;
-		border: 2px solid #1c1c1c;
+		outline: 2px solid #1c1c1c;
 		border-radius: 8px;
 		background: #2c2c2c;
 

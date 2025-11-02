@@ -265,7 +265,7 @@
 <style lang="scss">
 	.material-stats-form {
 		background: #2c2c2c;
-		border: 2px solid #1c1c1c;
+		outline: 2px solid #1c1c1c;
 		border-radius: 8px;
 		display: grid;
 		gap: 1rem;

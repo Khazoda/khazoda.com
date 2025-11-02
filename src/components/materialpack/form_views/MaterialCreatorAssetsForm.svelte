@@ -7,22 +7,11 @@
 	import CenterModal from "src/components/CenterModal.svelte";
 	import { closeDialog } from "src/components/CenterModal.svelte";
 	import minecraft_gui from "$lib/materialpack/media/minecraft_gui.png";
-	import club from "$lib/materialpack/media/weapon_outlines/club.png";
-	import dagger from "$lib/materialpack/media/weapon_outlines/dagger.png";
-	import hammer from "$lib/materialpack/media/weapon_outlines/hammer.png";
-	import glaive from "$lib/materialpack/media/weapon_outlines/glaive.png";
-	import quarterstaff from "$lib/materialpack/media/weapon_outlines/quarterstaff.png";
-	import spear from "$lib/materialpack/media/weapon_outlines/spear.png";
-	import spear_held from "$lib/materialpack/media/weapon_outlines/spear_held.png";
-	import quarterstaff_held from "$lib/materialpack/media/weapon_outlines/quarterstaff_held.png";
-	import glaive_held from "$lib/materialpack/media/weapon_outlines/glaive_held.png";
-	import sword from "$lib/materialpack/media/weapon_outlines/sword.png";
-	import axe from "$lib/materialpack/media/weapon_outlines/axe.png";
 	import empty_spot from "$lib/materialpack/media/empty_spot.png";
-
 	import { z } from "zod";
 	import { isApproachingStorageLimit, checkStorageQuota } from "$lib/utils/storageUtils";
 	import DownloadExamplesButton from "../DownloadExamplesButton.svelte";
+	import { WEAPON_TEXTURES } from "$lib/materialpack/constants/weaponTextures";
 
 	export let material: Material;
 	export let index: number;
@@ -31,27 +20,6 @@
 
 	const VALID_SIZES = [8, 16, 32, 64, 128, 256] as const;
 	type ValidSize = (typeof VALID_SIZES)[number];
-	const WEAPON_TEXTURES: Array<{
-		id: keyof Material["textures"];
-		label: string;
-		placeholderBackground: string;
-	}> = [
-		{ id: "dagger", label: "dagger.png", placeholderBackground: dagger },
-		{ id: "hammer", label: "hammer.png", placeholderBackground: hammer },
-		{ id: "club", label: "club.png", placeholderBackground: club },
-		{ id: "spear", label: "spear.png", placeholderBackground: spear },
-		{ id: "quarterstaff", label: "quarterstaff.png", placeholderBackground: quarterstaff },
-		{ id: "glaive", label: "glaive.png", placeholderBackground: glaive },
-		{ id: "spear_held", label: "spear_held.png", placeholderBackground: spear_held },
-		{
-			id: "quarterstaff_held",
-			label: "quarterstaff_held.png",
-			placeholderBackground: quarterstaff_held
-		},
-		{ id: "glaive_held", label: "glaive_held.png", placeholderBackground: glaive_held },
-		{ id: "sword", label: "sword.png", placeholderBackground: sword },
-		{ id: "axe", label: "axe.png", placeholderBackground: axe }
-	];
 
 	const downloadOptions = {
 		metallic: {
@@ -194,9 +162,7 @@
 	<button class="delete-material-btn" on:click={() => (showModal[0] = true)} type="button">
 		<HugeiconsDelete02 width="24" height="24" />
 	</button>
-	<span class="download-examples-button-container">
-		<DownloadExamplesButton {downloadOptions} />
-	</span>
+	<DownloadExamplesButton {downloadOptions} />
 	<h2 class="grid-wide">
 		{material.material_name ? `${material.material_name} Material Textures` : `Textures for Material ${index + 1}`}
 	</h2>
@@ -234,18 +200,18 @@
 
 <style lang="scss">
 	.material-assets-form {
-		background: #2c2c2c;
-		border: 2px solid #1c1c1c;
-		border-radius: 8px;
-		height: 100%;
-		padding: 2rem;
 		position: relative;
 		width: 100%;
+		height: 100%;
+		padding: 2rem;
+		outline: 2px solid #1c1c1c;
+		border-radius: 8px;
+		background: #2c2c2c;
 
 		h2 {
-			color: #ffffff;
 			margin: 0 0 1.5rem 0;
 			overflow: hidden;
+			color: #ffffff;
 			text-overflow: ellipsis;
 			text-transform: capitalize;
 			text-wrap: nowrap;
@@ -254,20 +220,20 @@
 
 	.textures-grid {
 		display: grid;
-		gap: 2rem;
 		grid-template-columns: repeat(4, minmax(64px, 1fr));
 		width: 100%;
+		gap: 2rem;
 	}
 
 	.form-element {
-		align-items: center;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: 0.5rem;
 		label {
 			color: #ffffff;
-			font-size: 0.75rem;
 			font-weight: 400;
+			font-size: 0.75rem;
 			letter-spacing: 0.05rem;
 		}
 	}
@@ -277,28 +243,22 @@
 	}
 
 	.delete-material-btn {
-		align-items: center;
-		background: none;
-		border: none;
-		border-radius: 8px;
-		color: #ff4444;
-		cursor: pointer;
 		display: inline-flex;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		align-items: center;
 		justify-content: center;
 		padding: 0.5rem;
-		position: absolute;
-		right: 1rem;
-		top: 1rem;
+		border: none;
+		border-radius: 8px;
+		background: none;
+		color: #ff4444;
+		cursor: pointer;
 		transition: all 0.2s ease;
 
 		&:hover {
 			background: rgba(255, 68, 68, 0.1);
 		}
-	}
-
-	.download-examples-button-container {
-		position: absolute;
-		right: 4rem;
-		top: 1rem;
 	}
 </style>

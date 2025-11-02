@@ -25,7 +25,7 @@
 </script>
 
 <button class="download-examples-btn" on:click={() => (showModal[0] = true)} type="button">
-	<HugeiconsArchive02 width="24" height="24" />
+	<HugeiconsArchive02 width="32" height="32" />
 </button>
 
 <CenterModal bind:showModal modalID={0}>
@@ -53,17 +53,25 @@
 
 <style lang="scss">
 	.download-examples-btn {
+		display: inline-flex;
+		position: absolute;
+		left: -3rem;
+		top: 1rem;
 		align-items: center;
 
-		background: none;
-		border: none;
-		border-radius: 8px;
+
+		justify-content: center;
+		width: fit-content;
+		padding: 0.5rem;
+		border: 2px solid #1c1c1c;
+		border-right: none;
+		border-radius: 6px 0 0 6px;
+
+		background: #333333;
 		color: #ffffff;
 		cursor: pointer;
-		display: inline-flex;
-		justify-content: center;
-		padding: 0.5rem;
-		transition: all 0.2s ease;
+		transition: all 0.1s ease;
+		z-index: -1;
 
 		&:hover {
 			background: rgba(255, 255, 255, 0.1);
@@ -76,9 +84,9 @@
 
 	.modal-actions {
 		display: flex;
-		gap: 1rem;
 		justify-content: center;
 		margin-top: 2rem;
+		gap: 1rem;
 
 		&.left-aligned {
 			justify-content: flex-start;
@@ -86,16 +94,16 @@
 	}
 
 	.download-btn {
+		display: flex;
 		align-items: center;
-		background: #4444ff;
+		padding: 0.5rem 1rem;
+		gap: 0.25rem;
 		border: none;
 		border-radius: 4px;
+		background: #4444ff;
 		color: white;
-		cursor: pointer;
-		display: flex;
 		font-weight: 600;
-		gap: 0.25rem;
-		padding: 0.5rem 1rem;
+		cursor: pointer;
 		transition: all 0.2s ease;
 
 		&:hover {

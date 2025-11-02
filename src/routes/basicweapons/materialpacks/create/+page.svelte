@@ -20,7 +20,6 @@
 	import HugeiconsArchive02 from "~icons/hugeicons/archive-02";
 
 	import ImportantButton from "src/components/materialpack/ImportantButton.svelte";
-	import ImagePicker from "src/components/materialpack/ImagePicker.svelte";
 	import CenterModal from "src/components/CenterModal.svelte";
 	import TabBookmarks from "src/components/materialpack/TabBookmarks.svelte";
 	import { closeDialog } from "src/components/CenterModal.svelte";
@@ -31,7 +30,6 @@
 	import { blur, crossfade, draw, fade, fly, scale, slide } from "svelte/transition";
 	import { flip } from "svelte/animate";
 
-	import { materialPackNameSchema, modDependencySchema } from "$lib/materialpack/validation/materialPackValidation";
 	import {
 		isApproachingStorageLimit,
 		checkStorageQuota,
@@ -51,6 +49,7 @@
 	import MaterialCreatorStats from "src/components/materialpack/form_views/MaterialCreatorStatsForm.svelte";
 	import MaterialCreatorAssets from "src/components/materialpack/form_views/MaterialCreatorAssetsForm.svelte";
 	import MaterialCreatorRecipes from "src/components/materialpack/form_views/MaterialCreatorRecipesForm.svelte";
+	import MaterialPackSettings from "src/components/materialpack/form_views/MaterialPackSettingsForm.svelte";
 	import type { Material, MaterialPack } from "src/lib/materialpack/types/materialpackTypes";
 	import ZipMaterialPackDownloader from "src/components/materialpack/ZipMaterialPackDownloader.svelte";
 	import ZipMaterialPackImporter from "src/components/materialpack/ZipMaterialPackImporter.svelte";
@@ -61,7 +60,6 @@
 	import { packOrder } from "$lib/materialpack/stores/packOrderStore";
 	import assets_tab_example from "$lib/materialpack/media/assets_tab_example.png";
 	import stats_tab_example from "$lib/materialpack/media/stats_tab_example.png";
-	import DownloadExamplesButton from "src/components/materialpack/DownloadExamplesButton.svelte";
 
 	// Basic pack information
 	let pack_name = "";
@@ -198,33 +196,6 @@
 		showModal[2] = true;
 	}
 
-	function validateAndUpdateStore(event: Event, schema: z.ZodSchema, field: keyof MaterialPack) {
-		const input = event.target as HTMLInputElement;
-		try {
-			const validatedValue = schema.parse(input.value);
-			materialPack.update(pack => ({
-				...pack,
-				[field]: validatedValue
-			}));
-
-			materialPacks.update(state => ({
-				...state,
-				packs: {
-					...state.packs,
-					[$materialPack.localstorage_id]: {
-						...state.packs[$materialPack.localstorage_id],
-						[field]: validatedValue
-					}
-				}
-			}));
-			input.setCustomValidity("");
-		} catch (error) {
-			if (error instanceof z.ZodError) {
-				input.setCustomValidity(error.errors[0].message);
-			}
-		}
-		input.reportValidity();
-	}
 
 	function handleAddMaterial() {
 		showModal[5] = true;
@@ -538,90 +509,7 @@
 											</div>
 										</InfoTab>
 										<!-- Settings form content -->
-										<form class="pack-settings-form">
-											<div class="pack-settings-header">
-												<span>
-													<span class="icon">
-														{#if $materialPack}
-															<ZipMaterialPackDownloader materialPack={$materialPack} />
-														{/if}</span>
-													<span
-														class="pack-name-container"
-														title={"bwmp_" +
-															$materialPack.pack_name +
-															"_" +
-															($materialPack.mod_dependency_modid ? $materialPack.mod_dependency_modid : "minecraft") +
-															"_1.21.1.zip"}>
-														{"bwmp_" +
-															$materialPack.pack_name +
-															"_" +
-															($materialPack.mod_dependency_modid ? $materialPack.mod_dependency_modid : "minecraft") +
-															"_1.21.1.zip"}
-													</span>
-												</span>
-											</div>
-											<div class="form-element imagepicker">
-												<ImagePicker
-													currentImage={$materialPack.pack_icon}
-													accept="image/png"
-													onImageSelect={base64String => {
-														materialPack.update(pack => ({
-															...pack,
-															pack_icon: base64String
-														}));
-														materialPacks.update(state => ({
-															...state,
-															packs: {
-																...state.packs,
-																[$materialPack.localstorage_id]: {
-																	...state.packs[$materialPack.localstorage_id],
-																	pack_icon: base64String
-																}
-															}
-														}));
-													}} />
-											</div>
-											<div class="grid-section-general flex-col">
-												<div class="form-element text">
-													<input
-														type="text"
-														id="pack_name"
-														placeholder=" "
-														bind:value={$materialPack.pack_name}
-														on:input={e => validateAndUpdateStore(e, materialPackNameSchema, "pack_name")}
-														required />
-													<label for="pack_name">Material Pack Name</label>
-												</div>
-											</div>
-
-											<div class="grid-section-mod-dependency flex-col">
-												<h3>Mod Dependency (Optional)</h3>
-												<div class="form-element text">
-													<input
-														type="text"
-														id="mod_dependency_modid"
-														placeholder=" "
-														bind:value={$materialPack.mod_dependency_modid}
-														on:input={e => validateAndUpdateStore(e, modDependencySchema, "mod_dependency_modid")} />
-													<label for="mod_dependency_modid">Mod ID</label>
-												</div>
-											</div>
-											<span class="download-frame-templates-container">
-												<DownloadExamplesButton
-													downloadOptions={{
-														frame: {
-															url: "/files/materialpack-frame-templates.zip",
-															displayName: "Download Templates"
-														}
-													}}>
-													<h2>Download Frame Templates</h2>
-													<p>
-														You can use these frame backgrounds for your materialpack icons if you wish. If you're not
-														sure which one to use, check out the materialpack templates when creating a new one.
-													</p>
-												</DownloadExamplesButton>
-											</span>
-										</form>
+										<MaterialPackSettings />
 									{:else}
 										<!-- Material content -->
 										{#each $materialPack.materials as material, index}
@@ -1212,113 +1100,6 @@
 			border: none;
 			border-radius: 8px 8px 0 0;
 		}
-		form.pack-settings-form {
-			display: grid;
-			position: relative;
-			grid-template-columns: 1fr 2fr;
-			width: 100%;
-			height: 100%;
-			padding: 2rem;
-			gap: 1rem;
-			border: 2px solid #1c1c1c;
-			border-radius: 8px;
-			background: #2c2c2c;
-		}
-
-		.pack-settings-header {
-			display: flex;
-			grid-row: 1 / 2;
-			grid-column: 1 / 3;
-			align-items: center;
-			justify-content: space-between;
-			width: 500px;
-			max-width: 500px;
-			margin: 0 0 0.5rem 0;
-			gap: 1rem;
-			font-size: medium;
-		}
-		.pack-settings-header > span {
-			display: inline-flex;
-			align-items: center;
-			gap: 0.5rem;
-			.pack-name-container {
-				max-width: 475px;
-				overflow: hidden;
-				font-size: 1.1rem;
-				text-overflow: ellipsis;
-			}
-		}
-		.form-element {
-			position: relative;
-			width: 100%;
-			margin-bottom: 2.5rem;
-
-			&.text {
-				height: 3rem;
-				label {
-					display: inline-flex;
-					position: absolute;
-					top: 0;
-					left: 0.6rem;
-					align-items: center;
-					justify-content: flex-start;
-					width: 100%;
-					height: 100%;
-					padding: 0.5rem;
-					transform: translateY(0);
-					border-top-right-radius: 4px;
-					border-top-left-radius: 4px;
-					color: rgb(70, 70, 70);
-					font-weight: 500;
-					pointer-events: none;
-					transition: 0.2s ease;
-				}
-				input {
-					width: 100%;
-					height: 100%;
-					padding: 0.5rem 1rem;
-					border-radius: 4px;
-					&::placeholder {
-						color: transparent;
-					}
-				}
-
-				input:focus + label,
-				input:not(:placeholder-shown) + label {
-					left: -4px;
-					transform: translateY(-2.25rem);
-					color: white;
-					font-size: 14px;
-				}
-			}
-			&.imagepicker {
-				position: relative;
-				width: fit-content;
-				height: fit-content;
-				margin: auto auto 1rem 0;
-			}
-		}
-
-		.grid-section-general {
-			justify-content: space-between;
-			max-height: 124px;
-			margin: auto 0 1rem 0;
-			gap: 1rem;
-			div {
-				margin: 0;
-			}
-		}
-		.grid-section-mod-dependency {
-			grid-column: 1/3;
-			padding: 1rem 2rem;
-			gap: 1rem;
-			border-radius: 4px;
-			background: rgba(0, 0, 0, 0.1);
-			box-shadow: inset 0px 0px 10px 0px #1c1c1c;
-			h3 {
-				margin-bottom: 1rem;
-			}
-		}
 	}
 	//#region Modal Styles
 	.modal-content {
@@ -1577,11 +1358,6 @@
 		gap: 0.5rem;
 	}
 
-	.download-frame-templates-container {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-	}
 
 	//#region Mobile Warning
 	.mobile-warning {

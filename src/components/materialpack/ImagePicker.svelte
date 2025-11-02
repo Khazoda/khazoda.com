@@ -116,6 +116,7 @@
 		gap: 0.5rem;
 		transition: all 0.2s ease;
 		width: fit-content;
+		height: fit-content;
 
 		&:hover {
 			border: 2px dashed #fff;
@@ -146,7 +147,7 @@
 	}
 
 	.preview-image {
-		filter: drop-shadow(4px 4px 0px rgba(25, 25, 25, 0.3));
+		filter: drop-shadow(0px 0px 5px rgba(25, 25, 25, 0.8));
 		height: 100%;
 		object-fit: contain;
 		width: 100%;

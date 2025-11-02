@@ -30,19 +30,20 @@
 ![Dutch Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAQpJREFUWEftlz9OAkEchd/jAFIYG5atlEtYGsMdKIhLYeQCcwouALGwoPAO/LOj4ArEioAmYLEcgGd2i7WxXR7FzgHm+/JmJr83hHnRzEclcDkJ7ONWpyZ1BdwDqJd0N1ICyxM5vtms3zNGnsBPfDuU+FIS9N9tSY2uN599HuJWAuntnPCCRfZ4aN7NATxYBIBFJpACuDIJHDMBmeA51i+wT54/rAnsvr69R1AJVAnYE3h6XXmfYRSm3mdoF2iGaSrTMCJwZBRmc0CmccwFozBJAHoKCdTLK1kUZkNAZ61kAEfbwWO/aMWNMOmQtS6kUkspyKV0Gu8G7b9Sah3HTnhRy50Sl/MzcqXwCwMrX7kulVoYAAAAAElFTkSuQmCC)
 ![French Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAOtJREFUWEftlyEOwkAQRf+vQIIgGIpvDRJDUBwBhyABBffBgEIguENbSBWGIxBUBQJVEmyHtIIE0qSbQNmKXbuTmT9vJ5m/hOZDzfVhBFSHQNv1xhRrAkgfQCNvNk5hV2lkar1BXtyDwpsgCcWyvFZ03qVBGQHbCVaAzIuyfyngI71cKRzRdr0phJui4un9bwVk/S9pO8EekKEeARB2HD8WoK5JAGg7vqgUL+cJYAQYAoaAIWAIVICA5mV0172OD3oNCTnTZslIWTejy+Lliv9gSlNLERM4JuT2zZSqGpIy4qrzLyijO5WchsATve+CMee3emkAAAAASUVORK5CYII=)
 ![Hungarian Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAQNJREFUWEftlyGOwkAYhd9bVQyb0F1HFXAJJFdAVZAUsYEzFA1nAIVAcArAcQmCImE3oWxSDCh+0opisOVVdA4w78ubmfzfEOJFcT5KgOI0cPJa/odZz4A2gM+c7kZMYHsnF9+H3TLJSBs4e42pGQc5hb7clrSZe9gPGXmtAGbzd4ZnWWSfUb25AtCRAADrBCAGUBUBXBIAE4WnsXqAU/CzkTZw/P3THkEJUDYgb8Cfd7XP0A0d7TMsAoB2GLkjZwUTjWNiTTd0AgAaIQH6qZLVQmdK4K1KZsDsf3IbZlb8Nar4SKXU2gBzklKLCW5BLqLx9Sml0nGsDM+0XAlRnJ+RqoUHQSNZssKcKYwAAAAASUVORK5CYII=)
+![Belarusian Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADDUlEQVR4AeyVW0gUURjH/+fMrru6ul7xSUQRylAiUEOlvDxU3tq0R8EoCrKMyNrsYaUULIPUekjD6rnAQqUkFCrUTFLLS5CalwRBElfxsra6t5nOjjuQT73sMQiH+c83M+fj+//mcL4zFP/42AXYnYFtMzBZVXVxqr6+ZbLxcadbfUCFNzUAXPkMHPpz3csAE5WV52eaW37pzp6r16al5+sMhnS32OAtb4oZ35eADwykvx9IZc+gP0ymNHF+/pGl5p7fytVSrJSbsGw0usd4KokAb0aAaEpi9z2koWEk5MlT2EZGoDt9BjQ4iKe5UjvQDlyjqtjYWOf8T6xVV8O/qAibHR0QwsOVJN4xiwoREWqi0cInMRHOqSkIUVGAoOJtrNSPYWsM0CQlgahUEDc2QDQaiGurSgL3KAOQgAAs3yiDOi4O6w31cIx85W6sGMgAtp4eqCIjYX32HOo9e+EYGoTkcik5XKMMYP/YA21WNmigHr75+fA1GEAI4WqsFJcBtEeOwjkxASEsDBtNTXCZzZBEUcnhGrcAsrJA/XUQrVZ5BjTJyfKi5OrsKS4DbL57C8rWgBAcwvaBdjinpwGHw5PCN8gAG21tcAwOwrW4CHVCAlwrrA3Var7OnuoygG9eHuzfRiFa1mB98RJKFzQXpoC3ZABtRibjkaA3lYOGhkBvvA4iCGgtTOUuGcDW9wlB1XdhqauFX8FJbHZ3QXI6GRT/UwZQR0XDziB8c3Phmp2FNiNj57pgwbbmcO96qpgYuObmQPQBcAwP8//0LYdpOrO5OC6ur0NisvX2QlwwA2ofYCc2IgntdNpuvrR8oRh21oaEUtYJFlD2RwS734Lkdl0VfUgtNe4/0d37paXYctNoDXv1GvqyMviXlnJzdReWCAYkSDnfj9XMUPeLywcMjSlJ6bqWpaGS99Tc2rk01uVWANXekSSp0lsCSCkRcHg8t/bgeF5dL9ghA7AonyXx2Q2n4jILCuMzM9zqz7ltGj9eV+EtjeXVPBjNru2RzTyXbQCedzsa/n+Av03nbwAAAP//W5pzzgAAAAZJREFUAwAln9FQJIluBQAAAABJRU5ErkJggg==)
 
 </span>
 <span class="markdown-row">
 
-![Static Badge](https://img.shields.io/badge/1.21.1-active-%2313c21c)
-![Static Badge](https://img.shields.io/badge/1.20.1-LTS-blue)
+![Static Badge](https://img.shields.io/badge/1.21.10-active-%2313c21c)
+![Static Badge](https://img.shields.io/badge/1.21.1-LTS-blue)
 
 </span>
 
 **⚠️ Please Read First**
 
-- Item models in Vanilla Minecraft have visible gaps. Until Mojang fixes this bug
-  ([MC-73186](https://bugs.mojang.com/browse/MC/issues/MC-73186)), I strongly recommend using the
+- Item models in Vanilla Minecraft have visible gaps in versions **up to and including** 1.21.10. Mojang has fixed this bug in 1.21.11 ([MC-73186](https://bugs.mojang.com/browse/MC/issues/MC-73186)).
+If you're playing on a version before that, I strongly recommend using the
   **[Model Gap Fix](https://modrinth.com/mod/modelfix)** mod.
 - Minecraft 1.21+ has a bug ([MC-271840](https://bugs.mojang.com/browse/MC/issues/MC-271840)) that
   stops damage increase enchantments (like Sharpness and Might) from showing the damage increase in
@@ -88,12 +89,12 @@ submit them to the public list if you wish.
 
 Material Packs are loaded at the start of the game from the <kbd>basicweapons_materialpacks</kbd>
 folder in your Minecraft root directory. Make sure you add packs before loading the game up, if you
-add them after, they won't load.
+add them after, they won't load. **Treat them as if they are mod files rather than resource or datapacks.**
 
 # Mod Integrations
 
 Basic Weapons can be enhanced by installing other mods alongside it. The following are mods that
-Basic Weapons has in-built support for.
+Basic Weapons has built-in support for.
 
 ## Bronze
 
@@ -177,14 +178,15 @@ Basic Weapons officially supports Neoforge & Fabric. If you're running Quilt, us
 
 ```
 Unfortunately I don't have the time to backport Basic Weapons to earlier versions.
-The mod will however support each new major version of Minecraft.
+The mod will however support new 'major' versions of Minecraft. 
 ```
+
+##### Check [This handy table](https://www.khazoda.com/versions) to see what I count as a 'major' version
 
 **I found a bug / my game crashed**
 
 ```
-If you find any problems with Basic Weapons, please feel encouraged
-to create an issue on the GitHub repository issue tracker.
+If you find any problems with Basic Weapons, please feel encouraged to create an issue on the GitHub repository issue tracker.
 Bug reports are incredibly helpful, and help make Basic Weapons the best it can be.
 ```
 
@@ -192,12 +194,18 @@ Bug reports are incredibly helpful, and help make Basic Weapons the best it can 
 
 **Thank you to all the wonderful people who have contributed translations!**
 
-|             |              |            |            |
-| ----------- | ------------ | ---------- | ---------- |
-| junshengxie | FirePhantom  | goofy_boyd | nimbXnumb  |
-| Alexander   | Hexasan      | GumIsNoob  | Pituto     |
-| Stefan      | Germinecraft | Singlain   | Yes20name  |
-| Darkwhite   | Danio        | Ardufish   | Harjjw     |
-| lotl        | DarkEclipse  | dungpc     | Emrys      |
-| EnderKTS    | Gavis        | Jakub      | Stargazer  |
-| Zwaluw      | Артём        | ejfour15   | \_Kiwo\_\_ |
+|             |              |            |              |
+| ----------- | ------------ | ---------- | ------------ |
+| junshengxie | FirePhantom  | goofy_boyd | nimbXnumb    |
+| Alexander   | Hexasan      | GumIsNoob  | Pituto       |
+| Stefan      | Germinecraft | Singlain   | Yes20name    |
+| Darkwhite   | DanioMalinowy| ArduFish123| Harjjw       |
+| lotl        | DarkEclipse  | dungpc     | EmrysAkalp   |
+| EnderKTS    | Gavis        | Jakub Michalski | Stargazer  |
+| Zwaluw      | Артём Шориков| ejfour15   | Kiwo_        |
+| Axel        | Barron       | Damijan Dzijanski | Jam      |
+| kyuri90A1   | Lapsiluco    | Lengyel Mukola | Lucas     |
+| Michyt      | Nguyễn Bảo Khang | observr | Pedro     |
+| QueDoom !   | Saul         | snaiper20a2 | taguima    |
+| toyo        | unnamed_sk8er | Horang    | ivan        |
+|  sssehnsuchttt | | | |

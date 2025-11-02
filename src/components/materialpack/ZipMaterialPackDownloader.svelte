@@ -199,6 +199,7 @@
 		padding-right: 2.5rem;
 		transition: all 0.2s ease;
 		width: 100%;
+		font-family: monospace;
 
 		&:hover {
 			background-color: #3a3a3a;

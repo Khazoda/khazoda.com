@@ -147,7 +147,7 @@
 	}
 
 	.preview-image {
-		filter: drop-shadow(0px 0px 5px rgba(25, 25, 25, 0.8));
+		filter: drop-shadow(5px 5px 0px rgba(25, 25, 25, 0.2));
 		height: 100%;
 		object-fit: contain;
 		width: 100%;

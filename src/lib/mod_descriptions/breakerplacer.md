@@ -1,7 +1,6 @@
 <span class="markdown-header">
 
-[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/eb541d0c77a91ed5ef8c1e76cd96e18e0ed55635.png)](https://khazoda.com)
-[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/317afd25b5c697dbaf4b749bc12c079147698b23.png)](https://poeditor.com/join/project/0OAhc1DnLs)
+[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/bef88760b8669152ada4ead1fc1d84fdb3ad2b0a.png)](https://khazoda.com)[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/f4061e450abcb4cd17694477fc070878dcb8ddd1.png)](https://poeditor.com/join/project/0OAhc1DnLs)
 
 </span>
 
@@ -9,13 +8,13 @@
 
 <span class="markdown-row">
 
-![US Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAh1JREFUWEdjZBhgwDjA9jOMOmBwhYBo2lQbpn+MJv8ZGPnxpY3rO3rJSjr/GRleMzIyHBB+dOcazABwCIilTrVi/M84gYGBwZQYk6/u6CNGGT41G///+1su+uz+TUbxlNmKDAy/zzEwMAgQa+qFGB2E0p+/bxCrD6yOnVUDRP3/++8Dg6aaKqNYyrQp1upS2Y/ffGaQFeFlOHbzGYOVuhSYlhXmZXj89jOYjyx/vjkI1c4/f54S5QgWFmlkdczv3k1nFE+ZdsdKXUoZZAEIgBwBswwmhqwJ5CAqRAHYyP8MDHdBDvgPthjqW2Rfw0IB5gCQ5SBwmeU6A4Os9G6ifI1P0ZNnTmAHwIKcWBojCihwCUYIEHIEyK4rJ+eBEi1VANgBsGAPt9JgWHnsBgM6DXMUTPzqkRlfqGI7AwMDPATQUz62tABLA1SPAvRgR7ccXf6S6vejVA8BUgykVjYE2ck4YcPR46RYDlIbLsVBqhac6hmfPX8BLgcGCjC+kVH5NVCWg6PgdWzSiQF1wIBHwVtZtd////9jYdDUOEDXkLh+w+E/A8M/UBq4wsDAoE1XyxGW3WF8uXZD4F9VlYkD4YD/nz6tZHz+/LnC/89f1g6EA6TUVI3BbcLXUorqDIzMXYyMDH50cch/hk3///8tA7cJkS18IaOky8LAaM/IwChMC4f8Z/j/9g/D/4MST+5dhpk/uPoFtPA1ITNHQwAAWLMQ9nMJOhoAAAAASUVORK5CYII=)
-![Chinese Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAZxJREFUWEftV7FOwlAUPbdQQSKaaNBFJmWSL3CTn1AHE51w0S/Qn3CSycHB+BHi5hewGSc2isaiEhToM/eRNi005LV5DQx0adN33znnnnvTd0uY8UUz5sdCwPw4YBVLx4YQJwLYB7CWUG/YBLw4RPeF5usDc0gH3os7t0JQdRopFQwIy9Gmi0jUNppv59Qulk4hxN005FTZxPJFHt/VD20CJBDRGbW3d58AVMaRmXTY6I/ifNlrdqLOAmwAq+MCVmrr+Ln6DNjOopYOc+jdfOkqR4cFCJecs0uXTaQrWXkfNPoY1HtwLEe6wevGVspzRkc9AgLMgwyyl/kJ3O61rZXUTxAQwAtsceYo58Ww3f3nX68XzEoWf49dHcmPMP0l4BeuC6LlgDYNWW9XAPdAas9MVgA7IFpDScpi+OJnzd3vOTjhQJi3iX0HwkoQJiCp7EN7QFt3KQIplUARK1bYQsBcOBB6GMUqaPRN8jAKPY6jY8XaUVcaSGJBq2zigYTjVEYyFbwoMd5I5m6a6VAaRbnu2Pn5L9CdmSrewoF/wfKsTZBdqQgAAAAASUVORK5CYII=)
+![Flag US](https://flagsapi.com/US/shiny/32.png)
+![Flag China](https://flagsapi.com/CN/shiny/32.png)
 
 </span>
 <span class="markdown-row">
 
-![Static Badge](https://img.shields.io/badge/1.21.1-LTS-blue)
+![Static Badge](https://img.shields.io/badge/1.21.10-LTS-dodgerblue)
 
 </span>
 

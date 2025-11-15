@@ -1,51 +1,59 @@
+<!-- Button Header -->
 <span class="markdown-header">
 
-[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/eb541d0c77a91ed5ef8c1e76cd96e18e0ed55635.png)](https://khazoda.com)
-[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/317afd25b5c697dbaf4b749bc12c079147698b23.png)](https://poeditor.com/join/project/s6iwe7N69K)
+[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/bef88760b8669152ada4ead1fc1d84fdb3ad2b0a.png)](https://khazoda.com)[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/f4061e450abcb4cd17694477fc070878dcb8ddd1.png)](https://poeditor.com/join/project/s6iwe7N69K)
 
 </span>
 
-![Bronze Mod Banner](https://cdn.modrinth.com/data/cached_images/1b1d5cb612f587ed3cf5119e4ebd3b7d96559082.png)
+<!-- Mod Banner -->
+![Bronze Mod Banner](https://cdn.modrinth.com/data/cached_images/91e53d8a1afce20bfde2054d2f4dea4e2c4c91a4.png)
 
+<!-- Supported Languages -->
 <span class="markdown-row">
 
-![US Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAh1JREFUWEdjZBhgwDjA9jOMOmBwhYBo2lQbpn+MJv8ZGPnxpY3rO3rJSjr/GRleMzIyHBB+dOcazABwCIilTrVi/M84gYGBwZQYk6/u6CNGGT41G///+1su+uz+TUbxlNmKDAy/zzEwMAgQa+qFGB2E0p+/bxCrD6yOnVUDRP3/++8Dg6aaKqNYyrQp1upS2Y/ffGaQFeFlOHbzGYOVuhSYlhXmZXj89jOYjyx/vjkI1c4/f54S5QgWFmlkdczv3k1nFE+ZdsdKXUoZZAEIgBwBswwmhqwJ5CAqRAHYyP8MDHdBDvgPthjqW2Rfw0IB5gCQ5SBwmeU6A4Os9G6ifI1P0ZNnTmAHwIKcWBojCihwCUYIEHIEyK4rJ+eBEi1VANgBsGAPt9JgWHnsBgM6DXMUTPzqkRlfqGI7AwMDPATQUz62tABLA1SPAvRgR7ccXf6S6vejVA8BUgykVjYE2ck4YcPR46RYDlIbLsVBqhac6hmfPX8BLgcGCjC+kVH5NVCWg6PgdWzSiQF1wIBHwVtZtd////9jYdDUOEDXkLh+w+E/A8M/UBq4wsDAoE1XyxGW3WF8uXZD4F9VlYkD4YD/nz6tZHz+/LnC/89f1g6EA6TUVI3BbcLXUorqDIzMXYyMDH50cch/hk3///8tA7cJkS18IaOky8LAaM/IwChMC4f8Z/j/9g/D/4MST+5dhpk/uPoFtPA1ITNHQwAAWLMQ9nMJOhoAAAAASUVORK5CYII=)
-![Germany Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAQZJREFUWEftlzGywVAYhc9R0L23AaVUKvIQ0dmFwgwVy1FSvULxVoEKQ4wN2IImRiOF/801g0YbR5EsIN83J7lzziXED8V8ZAKfk4D30+zYFV2SIYDvlP6N2MxWzGF62K3/HOOWgFdtjUEbpAR9/Vrj5LBfDulVwx6I37fC7zBDnyU/nBFoKwQMmNPzwxjAl0IAwMkJmAh+w+oFBmV/IU3gWCxpP0EmkCUgT+A8qmiP4SUKtMdQLpBEQWyiMqIro2TXnJmZpI5Jzplsg56JBgndIHFFlESNsYFvnWSETfK1zfCxii9RvQPkugBSHaUAVsB1Wqhtn6NUWsdK+GOWKyU+52akSuEfvnJV++7ai6UAAAAASUVORK5CYII=)
-![Brazilian Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAA1dJREFUWEftV11Ik2EUfj7nflScuqnTbbkMf/IiwRuhoPUDKnRXFmSlFBVWIEQXUbqkdHNeRkElBkFBBYFdeBFYGXWRYBdFIbaZtbm/5ubPJjp/cl+839j0c9/mJopeeO72vuc85/nOe87zvqOwyUZtcn5sE9g6FcjQC2ooiqoFsA9A2gb1hgfAZ5qmn03cnH9BcjAVkLQLHwGo36CkkWA7xm/MXaKketFZmqKfrCW5hM+DVMDH0PTsWsJB0dQ5StIufA/gcLwIR7LSoStWQipIhMZgxVObO14I4t9LCJBzEccT3VKoxMW8LFbIa+c4mgxWTCwsxgPlJQToWCPK01OgLVJiT2oyZ4hjboEh8cY1GSskYibQoMpBY0FuCFjbpYLZJYLJLcSBEg9q1U6oMgO90GkZRbPRFhOJVQnkJwmZsz4kDZzSp8F0VOhKw8BJ8jq1E5pjZmbvx9QMU40vnumoRKISqMmVMsmTeAkMiNktQtHV8oiAhISm2oy6/c6QT9uwHfdNS79XBnMSSE3kQVekxIlcCcvflX4HPxcppPEEoGkKPK8fXQMG6Np+h/zUJZN42/SdFdc75mWqYfLNhZEPI1CRmcY0Wl6SIMz5oL4KfQM+7FRkMHvZCi/OH90NXh4Fn3MSDdeszDohQIgsN5/fj0aDBS/t46x1FoGTcgnIiJEKcJnwjJpznRCqqpTg9um96O7rQf7suzACwcCWIRsejoyGcMIqsEMkgLZYicrM8OsgEoEgGiGivy5Dtbwb9JyDRfarZwaNRiu+edlNGbEJr6hkuFUgZ4GQ0WvtUkGRLYZt1MtZDdKAnfUG1t4DsxOtv+yc/lGnoEyczExBmTglNAUV2lL4+TJYHERAA6aQieH30xDQLhjv9ofWLb55aIxW9LiXfGOagpVOzYUKXM7LDpG40FHE6MFyIyP4uN4YOvtXjnE0Ga2Y+hddmlcVomAS0hOkN0iPECOa8HEwDSMuEUsFZxf9TOLn9jHOknNVIObLSEz0oViJ4zlsfQiCfiDzbrTiz0z4vEdgw1xGcV/Hp+QBhRQlBBSSmH7YgXumvzF99TKn3jU/SHYlB+4IKT/wHuhfRfO5mDEPErKxqU+yILNNfZTGe3Dr6b91/hes51fFg7Vdgf+HBTaUIvl+0AAAAABJRU5ErkJggg==)
-![Turkish Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAZlJREFUWEftl7FKA0EQhv+JiCgSkWDlXaV5BtHSRxAUBAWttFEwjc9gE0EbrSwUBAXfQLEy+AzB6mJlLBJEETEr/8LGFDG3e1zcKzJVCLP7f/PP3N6ewHOIZ30MALLjwEtYXM0pta6ABQATfZqNhgAPLZHzqah6SQ3twGs4c6KUbPVJtOu2Iuq0ED1tSz0sbkCps/8Ub2uJbEo9mL0FsOgFALgjQANA3hNAkwAqiXgumNbLWrXnJMt/u+AKMDw/h/HyAToBvqMa3kr7iWCcHBhZXtLijPfyET6vb7QoYYbCQP//VXl0csQagJXnry705qyW4mmENQArpwOssLmyFqvNXBtIa4DJyr22mpvSgV7BPOYzCNurLdYAhaja7v3H4XFPgNG9HYyVdvV8EDYVAPafc2DbAraMgxr3qFo7YJ4Am6piB6QjwRqAfWVVdOEvCOa4HkzWAISmAJ0w/eUBZAT5O242ujnjBGA2IAidMKehOZBcrDe5mXgZeX4d+76QsBder2RmGLxeSpNMb1prsvNdkFZFrvsMHPgBtjvQTetR5nwAAAAASUVORK5CYII=)
-![Russian Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAQpJREFUWEftlzFOAkEYhd/bA2hhjMRlK+EQUnoJQ0EClVzAu0BlsQWHMCAVh9BYEZg1rsVygH0GolhZLm+LnQPM9+XNTP43hHnRzEcjUJ8ENpusH0UcCOoBOK/ibhAoAK7KUmkct2Z7xiGBbfYxgfRQBfTfPcnpdetqzBDCUODTSeE/MEIjhpDNBdx5BLDYCxQCzkwCO25DJgf8l+kXSJevL9YE4sdn7xE0Ak0C9gRmt/feZ5i3O95nWAeBAqZhBGDHvN2ZwzSOASyYJ90hJEshATk6VLKv5GYi8aSVjNT0Yv0+Prbiz6Tbj6SBgMpKKYCCwKok08v1218ptY5jJ/xYy50S9fkZuVL4BkC/YFDaIqbbAAAAAElFTkSuQmCC)
-![Spanish Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAf9JREFUWEftls9KG1EUxr/LDIaihigmiokxNhFF0Kob8Q8lqSIodNVCwY15gu7adX0BX0F9A1ctFEqkBpGIGjWVUEVH1FFpdDTxT2LneppJcRcRYcbrwgN3e77f/c7l3I9BcDHB+ngGeDoO/PEEgoxoFEAQjPkseRtEChgzzlTV7sakoVFwIFXXGAbRhCWidzQl4Itzb3OMaTU+H5fl7ccUv9WSdL2Bpdz+ibwtYREA+XHPGADbls38/lvNsJQnkB+HuGKnH7oi4uQBxmMjRR3IXOrIXV3h5+IcettcUC+q0eGvNZ31ToCsfoGlqBM88R2/NQ5XbQkGw22wSaWmQhQFmF/+hYPNHPzXTqjqAez9b1ERsEPXokirx+jtbjENoijAykkzsvEoZpM7yBwR+gY+wVsfgHY6jhtHN3q8CWsB1herkYjHcF22ijmlCV5/P4bfBKFNf0Zl+xBaO/esBYj/IGQaHODRr1hISyiX/6K1/gRN7tdYO3YjFLq0FiCyxeG0ZaF+i0N9kUZz1gFdPoc08A6Zsy0MtlRZCzC1VIP3r86R3FjHy8Z2nKl2uGxJrOY8iCX28XHIZh6A8EUkfBWLBxD5GxIpYvMA0eT/RCRJkUfPBESKxHmokAkNCF2WR5kRSIl8lsIQFcKoxPlYxaGiPJ1YbtpmeWCjZweEO/APkC7PUs5ICzIAAAAASUVORK5CYII=)
-![Chinese Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAZxJREFUWEftV7FOwlAUPbdQQSKaaNBFJmWSL3CTn1AHE51w0S/Qn3CSycHB+BHi5hewGSc2isaiEhToM/eRNi005LV5DQx0adN33znnnnvTd0uY8UUz5sdCwPw4YBVLx4YQJwLYB7CWUG/YBLw4RPeF5usDc0gH3os7t0JQdRopFQwIy9Gmi0jUNppv59Qulk4hxN005FTZxPJFHt/VD20CJBDRGbW3d58AVMaRmXTY6I/ifNlrdqLOAmwAq+MCVmrr+Ln6DNjOopYOc+jdfOkqR4cFCJecs0uXTaQrWXkfNPoY1HtwLEe6wevGVspzRkc9AgLMgwyyl/kJ3O61rZXUTxAQwAtsceYo58Ww3f3nX68XzEoWf49dHcmPMP0l4BeuC6LlgDYNWW9XAPdAas9MVgA7IFpDScpi+OJnzd3vOTjhQJi3iX0HwkoQJiCp7EN7QFt3KQIplUARK1bYQsBcOBB6GMUqaPRN8jAKPY6jY8XaUVcaSGJBq2zigYTjVEYyFbwoMd5I5m6a6VAaRbnu2Pn5L9CdmSrewoF/wfKsTZBdqQgAAAAASUVORK5CYII=)
-![French Flag](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAMRJREFUWEdjZBhgwDjA9jOMOgASAqpTNRkYGHwZ/jOK44qSwnhNtbocg1vERNnf6fPVGJeswa72//8iRob/5f+YGTaLXDlxnZFBeVoAA+P/9YQMTgtTO95RYmxJSB1I/n//jOMMazYTVPufgSGQkUFl6gkGBgZzQgbTwgEMDAwnQQ74T8hykDyNHMAw6oDREBgNgdEQGA2B0RAYDYHREBjoEPg3CJpkA94opXeznIGBgfH/v5eIZjkxLVIaqhntmg14CAAAOB73BZFZZhAAAAAASUVORK5CYII=)
+![Flag US](https://flagsapi.com/US/shiny/32.png)
+![Flag Germany](https://flagsapi.com/DE/shiny/32.png)
+![Flag Brazil](https://flagsapi.com/BR/shiny/32.png)
+![Flag Turkey](https://flagsapi.com/TR/shiny/32.png)
+![Flag Russia](https://flagsapi.com/RU/shiny/32.png)
+![Flag Spain](https://flagsapi.com/ES/shiny/32.png)
+![Flag China](https://flagsapi.com/CN/shiny/32.png)
+![Flag Mexico](https://flagsapi.com/FR/shiny/32.png)
 
 </span>
+
+<!-- Version Badges -->
 <span class="markdown-row">
 
-![Static Badge](https://img.shields.io/badge/1.21.1-active-%2313c21c)
-![Static Badge](https://img.shields.io/badge/1.20.1-LTS-blue)
+![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
+![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
 
 </span>
 
-<br/>
+**Bronze aims to be the most vanilla-friendly bronze mod available for modern Minecraft.**  
+*Tin and Bronze are two new fully fledged materials with their own weapons, armour, blocks and more*
 
-**Bronze aims to be the most vanilla-friendly bronze mod available for modern Minecraft.**
+![General Stat Overview for Tin and Bronze Gear](https://cdn.modrinth.com/data/cached_images/9cf006418f213dedb80bd0abd1d9b6cca43b7d2d.png)
 
-Bronze is made from copper and tin. Tools and Armour crafted with it are **better than iron** but
-**worse than diamond**.
 
 ![Getting Started](https://github.com/Khazoda/bronze/blob/Web-Assets/description_common/bronze_getting_started.png?raw=true)
 
 <img style="float: right;" src="https://github.com/Khazoda/bronze/blob/Web-Assets/description_common/gifs/mining_tin_cut-optimized.gif?raw=true">
 
-### Your first step is to gather some raw tin and copper.
+### Your first step is to gather raw tin and copper.
+
+#### Tin Gear
+Tin is a sidegrade to copper, being generally *more effective* but *less durable*.
+
+Tin weapons and armour are crafted with <kbd>Tin Ingots</kbd>, which are easily obtained by smelting <kbd>Raw Tin</kbd>.
+
+#### Bronze Gear
+Bronze is a sidegrade to iron, having *mostly the same* stats but *greater durability*.
 
 You will need 1 <kbd>Raw Tin</kbd> and 3 <kbd>Raw Copper</kbd> for every <kbd>Bronze Ingot</kbd> you
-want to make.<br/>Craft 3 <kbd>Raw Copper</kbd> with 1 <kbd>Raw Tin</kbd> in a crafting window to
+want to make.<br/>Craft these items together in a crafting window to
 obtain <kbd>Bronze Blend</kbd> - then smelt this item in a furnace to obtain a <kbd>Bronze
 Ingot</kbd>.
-
-With your new bronze ingot, a new material tier opens up to you. Read on to find out about all the
-wonderful things you can make with bronze.
 
 <!-- BRONZE ARMOR SECTION -->
 
@@ -53,7 +61,7 @@ wonderful things you can make with bronze.
 
 ### Armour Strengths
 
-<img style="float: right;" src="https://github.com/Khazoda/bronze/blob/Web-Assets/description_common/trimming_features.png?raw=true" alt="Trimmable bronze armor items">
+<img style="float: right;" src="https://cdn.modrinth.com/data/cached_images/d22481c9371ba11cdff8f6829a4efc3608860cb0.png" alt="Trimmable bronze armor items">
 
 #### Bronze armor is a tier slightly above iron and below diamond.
 
@@ -111,7 +119,8 @@ similar to iron, but with some distinct benefits:
 - Bronze tools have 0.5 more attack damage than iron tools
   ![Tools banner](https://github.com/Khazoda/bronze/blob/Web-Assets/description_common/tools_items.png?raw=true)
 
-<img style="float: left;" src="https://github.com/Khazoda/bronze/blob/Web-Assets/description_common/sickle_item.png?raw=true" alt="Sickle item">
+
+<img style="float: left;" src="https://cdn.modrinth.com/data/cached_images/230c0809805ec58af8ea583abe2bdfe1855d97bb.png" alt="Sickle item">
 This mod adds a new tool in addition to the 4 standard bronze tools - the <kbd>Sickle</kbd>.<br/>
 This item helps you manage the flora in your world. It can harvest fully-grown crops on farmland as well as short and tall grass, leaving flowers and bushes intact.<br/>The <kbd>Sickle</kbd> is the perfect item for builders, who want to clear an area of land before building, as well as farmers, who will benefit from faster crop harvests and auto-replanting.<br/>Drops from blocks destroyed with the sickle are respected, so you will still get all those seeds from the grass you cut down.
 
@@ -166,8 +175,8 @@ comments section🙂.
 
 ## Third Party Related Projects
 
-[Slow Your Bronze](https://modrinth.com/mod/slow-your-bronze) adds compatibility between this mod
-and [Slow Your Roll](https://modrinth.com/mod/slow-your-roll). Thank you KayoticCarnige!
+[**1.21.1**] [Slow Your Bronze](https://modrinth.com/mod/slow-your-bronze) adds compatibility between this mod and [Slow Your Roll](https://modrinth.com/mod/slow-your-roll).  
+[**1.21.1**] [Tools of Steel](https://modrinth.com/mod/tools-of-steel) adds an extra steel tier after bronze
 
 ## Explicit Compatibility
 
@@ -175,6 +184,7 @@ The following mods have built-in compatibility with the Bronze mod. If you find 
 between Bronze and any other mods, please
 [create an issue](https://github.com/Khazoda/bronze/issues/new).
 
+- [Create](https://modrinth.com/mod/create) by simibubi
 - [Alloy Forgery](https://modrinth.com/mod/alloy-forgery) by Wisp Forest
 - [Continuity](https://modrinth.com/mod/continuity) by PepperCode1
 
@@ -200,6 +210,7 @@ The best way to find it is by going caving above the deepslate layer, or by stri
 Tin Ore
 Deepslate Tin Ore
 Block of Tin
+Tin Tiles
 Chiseled Tin
 Cut Tin
 Cut Tin Stairs
@@ -216,9 +227,17 @@ Bronze Trapdoor
 
 ```
 Raw Tin
-Bronze Blend
+Tin Nugget
 Tin Ingot
+Bronze Blend
+Bronze Nugget
 Bronze Ingot
+
+Tin Sword
+Tin Pickaxe
+Tin Axe
+Tin Shovel
+Tin Hoe
 
 Bronze Sword
 Bronze Pickaxe
@@ -228,16 +247,21 @@ Bronze Hoe
 
 Sickle
 
+Tin Helmet
+Tin Chestplate
+Tin Leggings
+Tin Boots
+
 Bronze Helmet
 Bronze Chestplate
 Bronze Leggings
 Bronze Boots
 
+Tin Horse Armor
 Bronze Horse Armor
 
 6 Vanilla-style achievements
 Full Minecraft recipe book integration
-Bronze and Tin as armor trim materials
 ```
 
 Thank you to all the wonderful translation contributors! If you'd like to contribute translations

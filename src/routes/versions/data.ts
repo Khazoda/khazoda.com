@@ -86,7 +86,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'bronze',
 		icon: bronze_project_icon,
 		name: 'Bronze',
-		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5']
+		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5', '1.21.10']
 	},
 	{
 		modId: 'basic-storage',

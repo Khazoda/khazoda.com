@@ -8,10 +8,16 @@
 
 <span class="markdown-row">
 
+![Flag China](https://flagsapi.com/CN/shiny/32.png)
 ![Flag US](https://flagsapi.com/US/shiny/32.png)
+![Flag France](https://flagsapi.com/FR/shiny/32.png)
 ![Flag Germany](https://flagsapi.com/DE/shiny/32.png)
+![Flag Italy](https://flagsapi.com/IT/shiny/32.png)
+![Flag Japan](https://flagsapi.com/JP/shiny/32.png)
+![Flag Portugal](https://flagsapi.com/BR/shiny/32.png)
 ![Flag Sweden](https://flagsapi.com/SE/shiny/32.png)
 ![Flag Turkey](https://flagsapi.com/TR/shiny/32.png)
+![Flag Ukraine](https://flagsapi.com/UA/shiny/32.png)
 
 </span>
 <span class="markdown-row">

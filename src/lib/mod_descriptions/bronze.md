@@ -22,6 +22,7 @@
 ![Flag Mexico](https://flagsapi.com/FR/shiny/32.png)
 ![Flag Korea](https://flagsapi.com/KR/shiny/32.png)
 ![Flag Poland](https://flagsapi.com/PL/shiny/32.png)  
+![Flag Taiwan](https://flagsapi.com/TW/shiny/32.png)  
 
 </span>
 

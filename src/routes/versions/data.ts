@@ -92,7 +92,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'basic-storage',
 		icon: basicstorage_project_icon,
 		name: 'Basic Storage',
-		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8']
+		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8', '1.21.10']
 	},
 	{
 		modId: 'breakerplacer',

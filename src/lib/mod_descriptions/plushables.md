@@ -4,22 +4,28 @@
 
 </span>
 
-![Plushables Banner](https://cdn.modrinth.com/data/cached_images/55abbf24a4aeb1526c084e31f614639adba2b128.png)
+![Plushables Banner](https://cdn.modrinth.com/data/cached_images/cb60b6ec48dfe11d96de002801e9950e443e3c27.webp)
 
-<span class="markdown-row">
+<div class="markdown-row">
 
 ![Flag US ](https://flagsapi.com/US/shiny/32.png)
 ![Flag Canada](https://flagsapi.com/CA/shiny/32.png)
 ![Flag Thailand](https://flagsapi.com/TH/shiny/32.png)
 ![Flag Mexico](https://flagsapi.com/MX/shiny/32.png)
+![Flag Netherlands](https://flagsapi.com/NL/shiny/32.png)
+![Flag Poland](https://flagsapi.com/PL/shiny/32.png)
+![Flag Portugal](https://flagsapi.com/PT/shiny/32.png)
+![Flag Russia](https://flagsapi.com/RU/shiny/32.png)
+![Flag Turkey](https://flagsapi.com/TR/shiny/32.png)
+![Flag Ukraine](https://flagsapi.com/UA/shiny/32.png)
 
-</span>
-<span class="markdown-row">
+</div>
+<div class="markdown-row">
 
 ![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
 ![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
 
-</span>
+</div>
 
 # About
 

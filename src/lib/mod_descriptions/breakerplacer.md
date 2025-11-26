@@ -4,19 +4,32 @@
 
 </span>
 
-![Block Breaker & Block Placer Banner](https://cdn.modrinth.com/data/cached_images/155d2c95fa3caf55023eeaa6d449ae8b27cf370f_0.webp)
+![Block Breaker & Block Placer Banner](https://cdn.modrinth.com/data/cached_images/d8b8cd1af140afffbb508dce90884c1009b10d83.webp)
 
-<span class="markdown-row">
+<div class="markdown-row">
 
 ![Flag US](https://flagsapi.com/US/shiny/32.png)
 ![Flag China](https://flagsapi.com/CN/shiny/32.png)
+![Flag Taiwan](https://flagsapi.com/TW/shiny/32.png)
+![Flag Germany](https://flagsapi.com/DE/shiny/32.png)
+![Flag Spain](https://flagsapi.com/ES/shiny/32.png)
+![Flag Chile](https://flagsapi.com/CL/shiny/32.png)
+![Flag Sweden](https://flagsapi.com/SE/shiny/32.png)
+![Flag Turkey](https://flagsapi.com/TR/shiny/32.png)
+![Flag Ukraine](https://flagsapi.com/UA/shiny/32.png)
+![Flag Brazil](https://flagsapi.com/BR/shiny/32.png)
+![Flag Russia](https://flagsapi.com/RU/shiny/32.png)
 
-</span>
-<span class="markdown-row">
+</div>
 
-![Static Badge](https://img.shields.io/badge/1.21.10-LTS-dodgerblue)
+<!-- Version Badges -->
+<div class="markdown-row">
 
-</span>
+![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
+![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
+
+</div>
+
 
 # About
 

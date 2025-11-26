@@ -4,9 +4,9 @@
 
 </span>
 
-![Basic Weapons Banner](https://cdn.modrinth.com/data/cached_images/51d8640f2911de557e4d839452534c71e72ee9d6.png)
+![Basic Weapons Banner](https://cdn.modrinth.com/data/cached_images/0c4df9350326f1d9c7d34ea879ff7714d5c7f63c.webp)
 
-<span class="markdown-row">
+<div class="markdown-row">
 
 ![Flag US](https://flagsapi.com/US/shiny/32.png)
 ![Flag China](https://flagsapi.com/CN/shiny/32.png)
@@ -30,22 +30,26 @@
 ![Flag Hungary](https://flagsapi.com/HU/shiny/32.png)
 ![Flag Belarus](https://flagsapi.com/BY/shiny/32.png)
 
-</span>
-<span class="markdown-row">
+</div>
+<div class="markdown-row">
 
 ![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
 ![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
 
-</span>
+</div>
 
-**⚠️ Please Read First**
+**⚠️ Minecraft Bugs That Affect This Mod**
 
-- Item models in Vanilla Minecraft have visible gaps in versions **up to and including** 1.21.10. Mojang has fixed this bug in 1.21.11 ([MC-73186](https://bugs.mojang.com/browse/MC/issues/MC-73186)).
-If you're playing on a version before that, I strongly recommend using the
-  **[Model Gap Fix](https://modrinth.com/mod/modelfix)** mod.
-- Minecraft 1.21+ has a bug ([MC-271840](https://bugs.mojang.com/browse/MC/issues/MC-271840)) that
-  stops damage increase enchantments (like Sharpness and Might) from showing the damage increase in
-  a weapon's tooltip. Hopefully this bug is fixed soon.
+- 🚩**Problem**: Item models in Vanilla Minecraft have visible gaps in versions *up to and including* 1.21.10.
+- 🟢 **Solution**: 
+	- 1.21.10 and earlier: I strongly recommend using the **[Model Gap Fix](https://modrinth.com/mod/modelfix)** mod
+	- 1.21.11+: Mojang has fixed this bug in 1.21.11 ([MC-73186](https://bugs.mojang.com/browse/MC/issues/MC-73186))
+- 🚩**Problem**:
+	Minecraft 1.21+ has a bug ([MC-271840](https://bugs.mojang.com/browse/MC/issues/MC-271840)) that
+  stops damage increase enchantments (like Sharpness and Might) from showing the damage increase in a weapon's tooltip.
+- 🟢 **Solution**:
+	- 1.21 - 1.21.4: Install [Legendary Tooltips](https://modrinth.com/mod/legendary-tooltips)
+	- 1.21.10: Make sure you're using Basic Weapons [2.2.2+1.21.10](https://modrinth.com/mod/basicweapons/version/QxrGeMMG) or later
 
 # About
 
@@ -85,7 +89,7 @@ If it doesn't exist? No problem! You can create materialpacks yourself with the
 [Material Pack Creator](https://www.khazoda.com/basicweapons/materialpacks) web application, and
 submit them to the public list if you wish.
 
-Material Packs are loaded at the start of the game from the <kbd>basicweapons_materialpacks</kbd>
+Material Packs are loaded at the start of the game from the **basicweapons_materialpacks**
 folder in your Minecraft root directory. Make sure you add packs before loading the game up, if you
 add them after, they won't load. **Treat them as if they are mod files rather than resource or datapacks.**
 

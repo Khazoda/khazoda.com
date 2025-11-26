@@ -10,7 +10,7 @@
 ![Bronze Mod Banner](https://cdn.modrinth.com/data/cached_images/91e53d8a1afce20bfde2054d2f4dea4e2c4c91a4.png)
 
 <!-- Supported Languages -->
-<span class="markdown-row">
+<div class="markdown-row">
 
 ![Flag US](https://flagsapi.com/US/shiny/32.png)
 ![Flag Germany](https://flagsapi.com/DE/shiny/32.png)
@@ -21,18 +21,18 @@
 ![Flag China](https://flagsapi.com/CN/shiny/32.png)
 ![Flag Mexico](https://flagsapi.com/FR/shiny/32.png)
 ![Flag Korea](https://flagsapi.com/KR/shiny/32.png)
-![Flag Poland](https://flagsapi.com/PL/shiny/32.png)  
-![Flag Taiwan](https://flagsapi.com/TW/shiny/32.png)  
+![Flag Poland](https://flagsapi.com/PL/shiny/32.png)
+![Flag Taiwan](https://flagsapi.com/TW/shiny/32.png)
 
-</span>
+</div>
 
 <!-- Version Badges -->
-<span class="markdown-row">
+<div class="markdown-row">
 
 ![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
 ![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
 
-</span>
+</div>
 
 **Bronze aims to be the most vanilla-friendly bronze mod available for modern Minecraft.**  
 *Tin and Bronze are two new fully fledged materials with their own weapons, armour, blocks and more*

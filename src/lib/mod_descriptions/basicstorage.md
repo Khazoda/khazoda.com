@@ -4,9 +4,9 @@
 
 </span>
 
-![Basic Storage Banner](https://cdn.modrinth.com/data/cached_images/24417ae4a485dfded7977d414140b38bc7dff8e5.png)
+![Basic Storage Banner](https://cdn.modrinth.com/data/cached_images/f919fe7f92f85941e6944f3a8b8dc48c3c971939.webp)
 
-<span class="markdown-row">
+<div class="markdown-row">
 
 ![Flag China](https://flagsapi.com/CN/shiny/32.png)
 ![Flag US](https://flagsapi.com/US/shiny/32.png)
@@ -19,13 +19,14 @@
 ![Flag Turkey](https://flagsapi.com/TR/shiny/32.png)
 ![Flag Ukraine](https://flagsapi.com/UA/shiny/32.png)
 
-</span>
-<span class="markdown-row">
+</div>
+
+<div class="markdown-row">
 
 ![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
 ![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
 
-</span>
+</div>
 
 <details>
   <summary>Demonstration Video</summary>
@@ -43,10 +44,10 @@ Basic Storage adds a new block, the **Crate**. It can hold up to 1 billion items
 type**. Items can be quickly deposited and withdrawn by:
 
 - directly interacting with crates (no GUI)
-  - <kbd>Right Click</kbd> inserts one item
-  - <kbd>Shift Right Click</kbd> inserts all matching items from your inventory
-  - <kbd>Left Click</kbd> takes out one item
-  - <kbd>Shift Left Click</kbd> takes out a single stack of items
+  - **Right Click** inserts one item
+  - **Shift Right Click** inserts all matching items from your inventory
+  - **Left Click** takes out one item
+  - **Shift Left Click** takes out a single stack of items
 - using hoppers/hopper carts
 - using third party mods (e.g. AE2, RS, Tom's Storage, Copper Pipes)
 
@@ -73,8 +74,8 @@ Any crates connected directly to the crate station, or to a crate which is conne
 station, are part of the same network.  
 Interacting with the crate station is similar to crates:
 
-- <kbd>Right Click</kbd> inserts the entire stack of what you're holding into a compatible crate
-- <kbd>Shift Right Click</kbd> inserts all items from your inventory which match crates in the
+- **Right Click** inserts the entire stack of what you're holding into a compatible crate
+- **Shift Right Click** inserts all items from your inventory which match crates in the
   network.
 
 **What's its use?**
@@ -105,7 +106,7 @@ There are two distinct features in this mod which will help you immensely:
 
 ### Crate Hammer
 
-<kbd>Right Click</kbd> any crate with a hammer and it'll be broken instantly, retaining all its
+**Right Click** any crate with a hammer and it'll be broken instantly, retaining all its
 contents. Simply place the crate down somewhere else, and you'll see that all your items have been
 safely transferred with it.  
 This doesn't mean you must use a hammer though. Simply breaking a crate with your hands or an axe

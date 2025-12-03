@@ -1,31 +1,33 @@
 <script lang="ts">
 	// Site Exclusive Icons
-	import plushables_icon from "$lib/media/site_icons/plushables_icon.webp";
-	import basicweapons_icon from "$lib/media/site_icons/basicweapons_icon.webp";
-	import bronze_icon from "$lib/media/site_icons/bronze_icon.webp";
-	import breakerplacer_icon from "$lib/media/site_icons/breakerplacer_icon.webp";
-	import basicstorage_icon from "$lib/media/site_icons/basicstorage_icon.webp";
-	import beef_icon from "$lib/media/site_icons/beef_project_icon_simple.webp";
-	import dwayne_icon from "$lib/media/site_icons/dwayne_project_icon_simple.webp";
-	import hookaduck_icon from "$lib/media/site_icons/hookaduck_project_icon_simple.webp";
-	import kreebles_icon from "$lib/media/site_icons/kreebles_project_icon_simple.webp";
-	import plastar_icon from "$lib/media/site_icons/plastar_project_icon_simple.webp";
-	import heirlooms_icon from "$lib/media/site_icons/heirlooms_project_icon_simple.webp";
-	import helpfulcampfires_icon from "$lib/media/site_icons/helpfulcampfires_project_icon_simple.webp";
+	import web_large_plushables from "$lib/media/mod_icons/web_large_plushables.webp";
+	import web_large_basicweapons from "$lib/media/mod_icons/web_large_basicweapons.webp";
+	import web_large_bronze from "$lib/media/mod_icons/web_large_bronze.webp";
+	import web_large_basicstorage from "$lib/media/mod_icons/web_large_basicstorage.webp";
+	import web_large_breakerplacer from "$lib/media/mod_icons/web_large_breakerplacer.webp";
+	import web_large_heirlooms from "$lib/media/mod_icons/web_large_heirlooms.webp";
+
+	import beef_icon from "$lib/media/mod_icons/beef_project_icon_simple.webp";
+	import dwayne_icon from "$lib/media/mod_icons/dwayne_project_icon_simple.webp";
+	import hookaduck_icon from "$lib/media/mod_icons/hookaduck_project_icon_simple.webp";
+	import kreebles_icon from "$lib/media/mod_icons/kreebles_project_icon_simple.webp";
+	import plastar_icon from "$lib/media/mod_icons/plastar_project_icon_simple.webp";
+	import helpfulcampfires_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon_simple.webp";
 
 	// Project Icons (Same as Modrinth/Curseforge)
-	import plushables_project_icon from "$lib/media/project_icons/plushables_project_icon.webp";
-	import basicweapons_project_icon from "$lib/media/project_icons/basicweapons_project_icon.webp";
-	import bronze_project_icon from "$lib/media/project_icons/bronze_project_icon.webp";
-	import breakerplacer_project_icon from "$lib/media/project_icons/breakerplacer_project_icon.webp";
-	import basicstorage_project_icon from "$lib/media/project_icons/basicstorage_project_icon.webp";
-	import beef_project_icon from "$lib/media/project_icons/beef_project_icon.webp";
-	import dwayne_project_icon from "$lib/media/project_icons/dwayne_project_icon.webp";
-	import hookaduck_project_icon from "$lib/media/project_icons/hookaduck_project_icon.webp";
-	import kreebles_project_icon from "$lib/media/project_icons/kreebles_project_icon.webp";
-	import plastar_project_icon from "$lib/media/project_icons/plastar_project_icon.webp";
-	import heirlooms_project_icon from "$lib/media/project_icons/heirlooms_project_icon.webp";
-	import helpfulcampfires_project_icon from "$lib/media/project_icons/helpfulcampfires_project_icon.webp";
+	import platform_plushables from "$lib/media/mod_icons/platform_plushables.webp";
+	import platform_basicweapons from "$lib/media/mod_icons/platform_basicweapons.webp";
+	import platform_bronze from "$lib/media/mod_icons/platform_bronze.webp";
+	import platform_basicstorage from "$lib/media/mod_icons/platform_basicstorage.webp";
+	import platform_breakerplacer from "$lib/media/mod_icons/platform_breakerplacer.webp";
+	import platform_heirlooms from "$lib/media/mod_icons/platform_heirlooms.webp";
+
+	import beef_project_icon from "$lib/media/mod_icons/beef_project_icon.webp";
+	import dwayne_project_icon from "$lib/media/mod_icons/dwayne_project_icon.webp";
+	import hookaduck_project_icon from "$lib/media/mod_icons/hookaduck_project_icon.webp";
+	import kreebles_project_icon from "$lib/media/mod_icons/kreebles_project_icon.webp";
+	import plastar_project_icon from "$lib/media/mod_icons/plastar_project_icon.webp";
+	import helpfulcampfires_project_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon.webp";
 	import creator_logo from "$lib/materialpack/media/creator_logo.webp";
 
 	// Project Feature Images
@@ -84,10 +86,10 @@
 		"#plushables": 0,
 		"#basicweapons": 1,
 		"#bronze": 2,
-		"#breakerplacer": 3,
-		"#basic-storage": 4,
+		"#basic-storage": 3,
+		"#breakerplacer": 4,
 		"#helpfulcampfires": 93,
-		"#heirlooms": 94,
+		"#heirlooms": 5,
 		"#plastar": 95,
 		"#kreebles": 96,
 		"#hookaduck": 97,
@@ -329,6 +331,7 @@
 			</span>
 		</div>
 	</div>
+	<!-- #region Main Projects -->
 	<ul class="projects-section">
 		<li>
 			<button
@@ -337,7 +340,7 @@
 				type="button"
 				title="Plushables"
 				tabindex="0">
-				<img src={plushables_icon} alt="Plushables" width="512" draggable="false" class="ms-edge-imgfix" />
+				<img src={web_large_plushables} alt="Plushables" width="512" draggable="false" class="ms-edge-imgfix" />
 			</button>
 		</li>
 		<li>
@@ -347,7 +350,7 @@
 				type="button"
 				title="Basic Weapons"
 				tabindex="0">
-				<img src={basicweapons_icon} alt="Basic Weapons" width="512" draggable="false" class="ms-edge-imgfix" />
+				<img src={web_large_basicweapons} alt="Basic Weapons" width="512" draggable="false" class="ms-edge-imgfix" />
 			</button>
 		</li>
 		<li>
@@ -357,18 +360,28 @@
 				type="button"
 				title="Bronze"
 				tabindex="0">
-				<img src={bronze_icon} alt="Bronze" width="512" draggable="false" class="ms-edge-imgfix" />
+				<img src={web_large_bronze} alt="Bronze" width="512" draggable="false" class="ms-edge-imgfix" />
 			</button>
 		</li>
 		<li>
 			<button
 				on:click={() => showDialog(3)}
+				use:handleHover={["Basic Storage", true]}
+				type="button"
+				title="Basic Storage"
+				tabindex="0">
+				<img src={web_large_basicstorage} alt="Basic Storage" width="512" draggable="false" class="ms-edge-imgfix" />
+			</button>
+		</li>
+		<li>
+			<button
+				on:click={() => showDialog(4)}
 				use:handleHover={["Block Breaker & Block Placer", true]}
 				type="button"
 				title="Block Breaker & Block Placer"
 				tabindex="0">
 				<img
-					src={breakerplacer_icon}
+					src={web_large_breakerplacer}
 					alt="Block Breaker & Block Placer"
 					width="512"
 					draggable="false"
@@ -377,12 +390,12 @@
 		</li>
 		<li>
 			<button
-				on:click={() => showDialog(4)}
-				use:handleHover={["Basic Storage", true]}
+				on:click={() => showDialog(5)}
+				use:handleHover={["Heirlooms", true]}
 				type="button"
-				title="Basic Storage"
+				title="Heirlooms"
 				tabindex="0">
-				<img src={basicstorage_icon} alt="Basic Storage" width="512" draggable="false" class="ms-edge-imgfix" />
+				<img src={web_large_heirlooms} alt="Heirlooms" width="512" draggable="false" class="ms-edge-imgfix" />
 			</button>
 		</li>
 	</ul>
@@ -411,7 +424,7 @@
 		<span>
 			<img
 				class="project-logo"
-				src={plushables_project_icon}
+				src={platform_plushables}
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
@@ -462,7 +475,7 @@
 		<span>
 			<img
 				class="project-logo"
-				src={basicweapons_project_icon}
+				src={platform_basicweapons}
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
@@ -533,7 +546,7 @@
 		<span>
 			<img
 				class="project-logo"
-				src={bronze_project_icon}
+				src={platform_bronze}
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
@@ -574,60 +587,13 @@
 	</div>
 </Modal>
 
-<!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal modalID={3} fullDescriptionURL="/breakerplacer">
-	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={breakerplacer_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				draggable="false" />
-			Block Breaker & Block Placer
-		</span>
-		<img
-			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848" />
-	</h2>
-
-	<div slot="description" class="definition-list">
-		<ul>
-			<li>Block Breaker & Block Placer is a content mod that adds two new blocks.</li>
-			<li>The Breaker breaks a block in front of it when powered by a redstone pulse.</li>
-			<li>The Placer places a block in front of it when powered by a redstone pulse.</li>
-			<li>Considerations have been made in regards to gameplay balance for the Breaker</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/breakerplacer">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/breakerplacer"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/block-breaker-placer">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal modalID={4} fullDescriptionURL="/basicstorage">
+<Modal bind:showModal modalID={3} fullDescriptionURL="/basicstorage">
 	<h2 slot="header" class="header-slot">
 		<span>
 			<img
 				class="project-logo"
-				src={basicstorage_project_icon}
+				src={platform_basicstorage}
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
@@ -671,6 +637,103 @@
 			<SimpleIconsBookstack />
 			<a href="https://modded.wiki/w/Mod:Basic_Storage">Visit the Wiki</a>
 		</span>
+	</div>
+</Modal>
+
+<!-- #region Block Breaker & Block Placer -->
+<Modal bind:showModal modalID={4} fullDescriptionURL="/breakerplacer">
+	<h2 slot="header" class="header-slot">
+		<span>
+			<img
+				class="project-logo"
+				src={platform_breakerplacer}
+				alt="logo for the currently opened project"
+				width="32"
+				height="32"
+				draggable="false" />
+			Block Breaker & Block Placer
+		</span>
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848" />
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>Block Breaker & Block Placer is a content mod that adds two new blocks.</li>
+			<li>The Breaker breaks a block in front of it when powered by a redstone pulse.</li>
+			<li>The Placer places a block in front of it when powered by a redstone pulse.</li>
+			<li>Considerations have been made in regards to gameplay balance for the Breaker</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/breakerplacer">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/breakerplacer"> Download on CurseForge </a>
+		</span>
+		<span class="modal-link youtube separator-top disabled">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
+		</span>
+		<span class="modal-link github separator-top">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/block-breaker-placer">View the GitHub repository</a>
+		</span>
+	</div>
+</Modal>
+
+<!--#region Heirlooms Modal -->
+<Modal bind:showModal modalID={5} fullDescriptionURL="/heirlooms">
+	<h2 slot="header" class="header-slot">
+		<span>
+			<img
+				class="project-logo"
+				src={platform_heirlooms}
+				alt="logo for the currently opened project"
+				width="32"
+				height="32"
+				draggable="false" />
+			Heirlooms
+		</span>
+		<img
+			alt="latest minecraft version"
+			src="https://img.shields.io/modrinth/game-versions/heirlooms?style=flat&label=&color=%2311B848" />
+	</h2>
+
+	<div slot="description" class="definition-list">
+		<ul>
+			<li>This mod was made for the 2025 CurseForge ModJam</li>
+			<li>Crafting unstackable items affixes them with the date and the player's name</li>
+			<li>Look back at the history of your items and feel a greater sense of pride and ownership</li>
+		</ul>
+	</div>
+
+	<div class="info-slot" slot="info">
+		<span class="modal-link modrinth">
+			<SimpleIconsModrinth />
+			<a href="https://modrinth.com/mod/heirlooms">Download on Modrinth</a>
+		</span>
+		<span class="modal-link curseforge">
+			<SimpleIconsCurseforge />
+			<a href="https://legacy.curseforge.com/minecraft/mc-mods/heirlooms"> Download on CurseForge </a>
+		</span>
+		<span class="modal-link youtube separator-top disabled">
+			<SimpleIconsYoutube />
+			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
+		</span>
+		<span class="modal-link github separator-top">
+			<SimpleIconsGithub />
+			<a href="https://github.com/Khazoda/heirlooms">View the GitHub repository</a>
+		</span>
+	</div>
+
+	<div class="feature-slot" slot="feature">
+		<VideoPlayer src={heirlooms_feature} disableMuteButton visible={showModal[94]}/>
 	</div>
 </Modal>
 
@@ -726,56 +789,6 @@
 
 	<div class="feature-slot" slot="feature">
 		<VideoPlayer src={helpfulcampfires_feature} visible={showModal[93]} />
-	</div>
-</Modal>
-
-<!--#region Heirlooms Modal -->
-<Modal bind:showModal modalID={94} returnToURL="/#other-mods">
-	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={heirlooms_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				draggable="false" />
-			Heirlooms
-		</span>
-		<img
-			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/heirlooms?style=flat&label=&color=%2311B848" />
-	</h2>
-
-	<div slot="description" class="definition-list">
-		<ul>
-			<li>This mod was made for the 2025 CurseForge ModJam</li>
-			<li>Crafting unstackable items affixes them with the date and the player's name</li>
-			<li>Look back at the history of your items and feel a greater sense of pride and ownership</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/heirlooms">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/heirlooms"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/heirlooms">View the GitHub repository</a>
-		</span>
-	</div>
-
-	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={heirlooms_feature} disableMuteButton visible={showModal[94]}/>
 	</div>
 </Modal>
 
@@ -1028,10 +1041,6 @@
 				<button on:click={() => showDialog(93)} use:playAudio type="button" title="Helpful Campfires">
 					<img src={helpfulcampfires_icon} alt="Helpful Campfires" draggable="false" />
 					<span class="mod-label">Helpful Campfires</span>
-				</button>
-				<button on:click={() => showDialog(94)} use:playAudio type="button" title="Heirlooms">
-					<img src={heirlooms_icon} alt="Heirlooms" draggable="false" />
-					<span class="mod-label">Heirlooms</span>
 				</button>
 			</div>
 		</div>
@@ -1399,6 +1408,11 @@
 		justify-content: center;
 		min-width: 192px;
 		padding: 2rem;
+		row-gap: 2rem;
+
+		/* Ensure 3 items per row on desktop */
+		max-width: calc(3 * 256px + 4rem);
+		margin-inline: auto;
 
 		@media screen and (max-width: 575px) {
 			flex-direction: column;
@@ -1408,7 +1422,11 @@
 		li {
 			position: relative;
 			list-style: none;
-			min-width: 192px;
+			min-width: 256px;
+			flex: 1 1 256px; /* prefer 256px, allow wrapping */
+			max-width: calc(100% / 3); 
+			display: flex;
+			justify-content: center;
 
 			&:nth-child(1) {
 				--float-duration: 3.2s;

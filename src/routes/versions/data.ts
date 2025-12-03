@@ -1,17 +1,18 @@
 import type { MinecraftVersion, ModCompatibility } from './types';
 
-import plushables_project_icon from '$lib/media/project_icons/plushables_project_icon.webp';
-import basicweapons_project_icon from '$lib/media/project_icons/basicweapons_project_icon.webp';
-import bronze_project_icon from '$lib/media/project_icons/bronze_project_icon.webp';
-import breakerplacer_project_icon from '$lib/media/project_icons/breakerplacer_project_icon.webp';
-import basicstorage_project_icon from '$lib/media/project_icons/basicstorage_project_icon.webp';
-import beef_project_icon from '$lib/media/project_icons/beef_project_icon.webp';
-import dwayne_project_icon from '$lib/media/project_icons/dwayne_project_icon.webp';
-import hookaduck_project_icon from '$lib/media/project_icons/hookaduck_project_icon.webp';
-import kreebles_project_icon from '$lib/media/project_icons/kreebles_project_icon.webp';
-import plastar_project_icon from '$lib/media/project_icons/plastar_project_icon.webp';
-import heirlooms_project_icon from '$lib/media/project_icons/heirlooms_project_icon.webp';
-import helpfulcampfires_project_icon from '$lib/media/project_icons/helpfulcampfires_project_icon.webp';
+import platform_plushables from '$lib/media/mod_icons/platform_plushables.webp';
+import platform_basicweapons from '$lib/media/mod_icons/platform_basicweapons.webp';
+import platform_bronze from '$lib/media/mod_icons/platform_bronze.webp';
+import platform_breakerplacer from '$lib/media/mod_icons/platform_breakerplacer.webp';
+import platform_basicstorage from '$lib/media/mod_icons/platform_basicstorage.webp';
+import platform_heirlooms from '$lib/media/mod_icons/platform_heirlooms.webp';
+
+import beef_project_icon from '$lib/media/mod_icons/beef_project_icon.webp';
+import dwayne_project_icon from '$lib/media/mod_icons/dwayne_project_icon.webp';
+import hookaduck_project_icon from '$lib/media/mod_icons/hookaduck_project_icon.webp';
+import kreebles_project_icon from '$lib/media/mod_icons/kreebles_project_icon.webp';
+import plastar_project_icon from '$lib/media/mod_icons/plastar_project_icon.webp';
+import helpfulcampfires_project_icon from '$lib/media/mod_icons/helpfulcampfires_project_icon.webp';
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [
@@ -45,7 +46,7 @@ export let minecraftVersions: MinecraftVersion[] = [
 export let mods: ModCompatibility[] = [
 	{
 		modId: 'plushables',
-		icon: plushables_project_icon,
+		icon: platform_plushables,
 		name: 'Plushables',
 		supportedVersions: [
 			'1.16.5',
@@ -64,7 +65,7 @@ export let mods: ModCompatibility[] = [
 	},
 	{
 		modId: 'basicweapons',
-		icon: basicweapons_project_icon,
+		icon: platform_basicweapons,
 		name: 'Basic Weapons',
 		supportedVersions: [
 			'1.19.2',
@@ -84,21 +85,27 @@ export let mods: ModCompatibility[] = [
 	},
 	{
 		modId: 'bronze',
-		icon: bronze_project_icon,
+		icon: platform_bronze,
 		name: 'Bronze',
 		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5', '1.21.10']
 	},
 	{
 		modId: 'basic-storage',
-		icon: basicstorage_project_icon,
+		icon: platform_basicstorage,
 		name: 'Basic Storage',
 		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8', '1.21.10']
 	},
 	{
 		modId: 'breakerplacer',
-		icon: breakerplacer_project_icon,
+		icon: platform_breakerplacer,
 		name: 'Block Breaker & Block Placer',
 		supportedVersions: ['1.21', '1.21.1', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.10']
+	},
+	{
+		modId: 'heirlooms',
+		icon: platform_heirlooms,
+		name: 'Heirlooms',
+		supportedVersions: ['1.21.1', '1.21.9', '1.21.10']
 	},
 	{
 		modId: 'plastar',
@@ -129,12 +136,6 @@ export let mods: ModCompatibility[] = [
 		icon: dwayne_project_icon,
 		name: 'Dwayne "The Block" Johnson',
 		supportedVersions: ['1.18.2', '1.19', '1.19.4', '1.20', '1.20.1', '1.21', '1.21.1']
-	},
-	{
-		modId: 'heirlooms',
-		icon: heirlooms_project_icon,
-		name: 'Heirlooms',
-		supportedVersions: ['1.21.1', '1.21.9', '1.21.10']
 	},
 	{
 		modId: 'helpfulcampfires',

@@ -1588,6 +1588,9 @@
 		gap: 0.5rem;
 		line-height: 2rem;
 		text-wrap: pretty;
+		.project-logo {
+			border-radius: 4px;
+		}
 		img {
 			max-width: 100%;
 			height: auto;

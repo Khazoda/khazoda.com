@@ -372,6 +372,9 @@
 			justify-content: center;
 			width: 100%;
 			height: 100%;
+			img {
+				border-radius: 4px;
+			}
 		}
 
 		.tooltip {

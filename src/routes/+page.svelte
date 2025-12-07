@@ -1411,22 +1411,28 @@
 		row-gap: 2rem;
 
 		/* Ensure 3 items per row on desktop */
-		max-width: calc(3 * 256px + 4rem);
+		@media screen and (min-width: 576px) {
+			max-width: calc(3 * 256px + 4rem);
+		}
 		margin-inline: auto;
 
 		@media screen and (max-width: 575px) {
 			flex-direction: column;
 			padding: 2rem calc(2rem + 96px) 2rem 2rem;
+			max-width: 100%;
 		}
 
 		li {
 			position: relative;
 			list-style: none;
-			min-width: 256px;
-			flex: 1 1 256px; /* prefer 256px, allow wrapping */
-			max-width: calc(100% / 3); 
 			display: flex;
 			justify-content: center;
+
+			@media screen and (min-width: 576px) {
+				min-width: 256px;
+				flex: 1 1 256px; 
+				max-width: calc(100% / 3);
+			}
 
 			&:nth-child(1) {
 				--float-duration: 3.2s;

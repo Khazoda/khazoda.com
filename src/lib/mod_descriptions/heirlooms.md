@@ -1,7 +1,7 @@
 <!-- Button Header -->
 <span class="markdown-header">
 
-[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/4d365bfbb6bd0121dbccfe1b618f9bc3592c72ec.png)](https://www.khazoda.com)
+[![Explore All Mods Button](https://cdn.modrinth.com/data/cached_images/c6d32f79d6730fcfa7eb1c59b0c71783f3429990.png)](https://khazoda.com)[![Full Mod Description Button](https://cdn.modrinth.com/data/cached_images/7bdc40049d20ff26aa3f65f03d2e758a352d1bce.png)](https://www.khazoda.com/heirlooms)
 
 </span>
 

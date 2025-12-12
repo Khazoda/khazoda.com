@@ -1,6 +1,6 @@
 <span class="markdown-header">
 
-[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/bef88760b8669152ada4ead1fc1d84fdb3ad2b0a.png)](https://khazoda.com)[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/f4061e450abcb4cd17694477fc070878dcb8ddd1.png)](https://poeditor.com/join/project/2zBD4jyzJj)
+[![Explore All Mods Button](https://cdn.modrinth.com/data/cached_images/c6d32f79d6730fcfa7eb1c59b0c71783f3429990.png)](https://khazoda.com)[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/26ca581bda9315561258983f084c33103c7610bf.png)](https://poeditor.com/join/project/2zBD4jyzJj)[![Full Mod Description Button](https://cdn.modrinth.com/data/cached_images/7bdc40049d20ff26aa3f65f03d2e758a352d1bce.png)](https://www.khazoda.com/plushables)
 
 </span>
 

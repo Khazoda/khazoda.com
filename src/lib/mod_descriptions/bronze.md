@@ -2,7 +2,7 @@
 <span class="markdown-header">
 
 
-[![Explore Mods Button Link](https://cdn.modrinth.com/data/cached_images/4d365bfbb6bd0121dbccfe1b618f9bc3592c72ec.png)](https://www.khazoda.com)[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/6a15dc6a04a69896a6320396227da068bd191729.png)](https://poeditor.com/join/project/s6iwe7N69K)[![Mod Description Button](https://cdn.modrinth.com/data/cached_images/8084950625b501f9e756550563089e2d1d226e00.png)](https://www.khazoda.com/bronze)
+[![Explore All Mods Button](https://cdn.modrinth.com/data/cached_images/c6d32f79d6730fcfa7eb1c59b0c71783f3429990.png)](https://khazoda.com)[![Help Translate Button](https://cdn.modrinth.com/data/cached_images/26ca581bda9315561258983f084c33103c7610bf.png)](https://poeditor.com/join/project/s6iwe7N69K)[![Full Mod Description Button](https://cdn.modrinth.com/data/cached_images/7bdc40049d20ff26aa3f65f03d2e758a352d1bce.png)](https://www.khazoda.com/bronze)
 
 </span>
 

@@ -5,7 +5,7 @@
 
 </span>
 
-![Heirlooms Mod Banner](https://cdn.modrinth.com/data/cached_images/77a04a9c3f9d2ad68181924e56d45d5719e16c90.webp)
+![Heirlooms Mod Banner](https://cdn.modrinth.com/data/cached_images/b722ddbb483720464ae93c6a952f6c5257929cca.webp)
 
 <div class="markdown-row">
 

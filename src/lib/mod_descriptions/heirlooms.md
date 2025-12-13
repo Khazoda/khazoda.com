@@ -42,17 +42,18 @@ Any item that you craft which can't be stacked will receive an heirloom tooltip.
 ![Iron Sword and Netherite Chestplate recipes](https://cdn.modrinth.com/data/cached_images/b8e0416bcc46f0e781ffabb9b03cf1083ce6bb0f.png)
 
 ### Hidden by default
-The tooltip information is only shown when holding down the CTRL or ALT keys while hovering over the item
-![The tooltip for an iron sword with a [CTRL] prompt at the bottom, then the same tooltip but with a player name and a date crafted shown](https://cdn.modrinth.com/data/cached_images/cd58263355a68bab1981bc3bc5faacb5cb3e9798.webp)
+The tooltip information is only shown when holding down the CTRL or ALT keys while hovering over the item  
 
+![The tooltip for an iron sword with a ctrl prompt](https://cdn.modrinth.com/data/cached_images/cd58263355a68bab1981bc3bc5faacb5cb3e9798.webp)
 
 ### Supports modded items
 As long as the item is made in a crafting table or a smithing table, or enchanted in an enchanting table, it should work, no matter the mod.  
 This example shows an item from [Basic Weapons](https://modrinth.com/mod/basicweapons)
-![The tooltip for a copper glaive is shown, with [ctrl] and [alt] as buttons to press. There is another tooltip saying the item was enchatned by JuneMinecraft on 28th September 2025](https://cdn.modrinth.com/data/cached_images/a5b97e73cf269532505aa278de7bd32ea0eedfaa.webp)
+
+![The tooltip for a copper glaive](https://cdn.modrinth.com/data/cached_images/a5b97e73cf269532505aa278de7bd32ea0eedfaa.webp)
 
 # Blocks
-Heirlooms adds two blocks to show off your items with
+Heirlooms adds two blocks to show off your items with  
 
 ![Display case and display rack isometric 3d models](https://cdn.modrinth.com/data/cached_images/bb24ece8a8e2732bb276b7b8ce3a39f1f71de379.webp)
 

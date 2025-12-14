@@ -970,7 +970,7 @@
 	<div class="info-slot" slot="info">
 		<span class="modal-link modrinth">
 			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/beef-and-blade">Download on Modrinth</a>
+			<a href="https://modrinth.com/mod/beefandblade">Download on Modrinth</a>
 		</span>
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />

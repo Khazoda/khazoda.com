@@ -86,14 +86,14 @@
 		"#plushables": 0,
 		"#basicweapons": 1,
 		"#bronze": 2,
-		"#basic-storage": 3,
+		"#basicstorage": 3,
 		"#breakerplacer": 4,
 		"#helpfulcampfires": 93,
 		"#heirlooms": 5,
 		"#plastar": 95,
 		"#kreebles": 96,
 		"#hookaduck": 97,
-		"#beef-and-blade": 98,
+		"#beefandblade": 98,
 		"#dwayne": 99,
 		"#modjam-mods": 997,
 		"#collaborations": 998,
@@ -602,7 +602,7 @@
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/basic-storage?style=flat&label=&color=%2311B848" />
+			src="https://img.shields.io/modrinth/game-versions/basicstorage?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">
@@ -619,7 +619,7 @@
 	<div class="info-slot" slot="info">
 		<span class="modal-link modrinth">
 			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/basic-storage">Download on Modrinth</a>
+			<a href="https://modrinth.com/mod/basicstorage">Download on Modrinth</a>
 		</span>
 		<span class="modal-link curseforge">
 			<SimpleIconsCurseforge />
@@ -956,7 +956,7 @@
 		</span>
 		<img
 			alt="latest minecraft version"
-			src="https://img.shields.io/modrinth/game-versions/beef-and-blade?style=flat&label=&color=%2311B848" />
+			src="https://img.shields.io/modrinth/game-versions/beefandblade?style=flat&label=&color=%2311B848" />
 	</h2>
 
 	<div slot="description" class="definition-list">

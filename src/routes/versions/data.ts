@@ -90,7 +90,7 @@ export let mods: ModCompatibility[] = [
 		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5', '1.21.10']
 	},
 	{
-		modId: 'basic-storage',
+		modId: 'basicstorage',
 		icon: platform_basicstorage,
 		name: 'Basic Storage',
 		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8', '1.21.10']
@@ -126,7 +126,7 @@ export let mods: ModCompatibility[] = [
 		supportedVersions: ['1.21', '1.21.1']
 	},
 	{
-		modId: 'beef-and-blade',
+		modId: 'beefandblade',
 		icon: beef_project_icon,
 		name: 'Beef & Blade',
 		supportedVersions: ['1.19', '1.19.3', '1.20.1', '1.21', '1.21.1']

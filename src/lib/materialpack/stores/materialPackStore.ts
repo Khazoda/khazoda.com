@@ -3,7 +3,7 @@ import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
 import type { Material, MaterialPack } from '../types/materialpackTypes';
 import { RecipeTypes } from '../types/materialpackTypes';
-import { MAX_MATERIAL_PACKS, DEFAULT_PACK_ICON, DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
+import { DEFAULT_PACK_ICON, DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
 type MaterialPackList = {
 	packs: { [key: string]: MaterialPack }; // Using pack_name as key
@@ -39,8 +39,8 @@ materialPacks.subscribe(({ packs, currentPack }) => {
 });
 
 export const createNewPack = () => {
-	if (Object.keys(get(materialPacks).packs).length >= MAX_MATERIAL_PACKS) {
-		throw new Error(`Maximum number of packs (${MAX_MATERIAL_PACKS}) reached`);
+	if (Object.keys(get(materialPacks).packs).length > 9) {
+		throw new Error(`Maximum number of packs (9) reached`);
 	}
 
 	const localstorage_id = generateUniqueId();

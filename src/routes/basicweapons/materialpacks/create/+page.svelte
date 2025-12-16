@@ -196,7 +196,6 @@
 		showModal[2] = true;
 	}
 
-
 	function handleAddMaterial() {
 		showModal[5] = true;
 	}
@@ -362,7 +361,9 @@
 {#if !isMobile}
 	<div class="page-container flex-col">
 		{#if isLoaded}
-			<div class="transition-wrapper" transition:fly={{ x: isTransitioning ? -50 : 50, duration: TRANSITION_DURATION_MS }}>
+			<div
+				class="transition-wrapper"
+				transition:fly={{ x: isTransitioning ? -50 : 50, duration: TRANSITION_DURATION_MS }}>
 				{#key show_pack_creator}
 					<div class="view-container" transition:fly|local={{ y: show_pack_creator ? 15 : -15, duration: 100 }}>
 						<!-- Materialpack Selector View -->
@@ -471,7 +472,10 @@
 											<h4 class="blurb">Change the main settings for your material pack</h4>
 											<div class="modal-content">
 												<h4>Pack Icon</h4>
-												<p>Recommended size is {PACK_ICON_RECOMMENDED_SIZE} x {PACK_ICON_RECOMMENDED_SIZE} pixels. Maximum size is {PACK_ICON_MAX_SIZE} x {PACK_ICON_MAX_SIZE} pixels.</p>
+												<p>
+													Recommended size is {PACK_ICON_RECOMMENDED_SIZE} x {PACK_ICON_RECOMMENDED_SIZE} pixels. Maximum
+													size is {PACK_ICON_MAX_SIZE} x {PACK_ICON_MAX_SIZE} pixels.
+												</p>
 												<p>
 													Feel free to download the template image (right click and save) and edit it to display one of
 													your weapon textures in.
@@ -738,11 +742,11 @@
 				<span class="option-title">From Template</span>
 				<span class="option-desc">Start from a pre-made template</span>
 			</button>
- 			<button class="option-btn" on:click={() => importerRef?.triggerFileInput()}>
- 				<span class="option-title">Import from ZIP</span>
- 				<span class="option-desc">Import an existing materialpack zip file</span>
- 			</button>
- 			<ZipMaterialPackImporter bind:this={importerRef} showButton={false} onImportComplete={handleImportComplete} />
+			<button class="option-btn" on:click={() => importerRef?.triggerFileInput()}>
+				<span class="option-title">Import from ZIP</span>
+				<span class="option-desc">Import an existing materialpack zip file</span>
+			</button>
+			<ZipMaterialPackImporter bind:this={importerRef} showButton={false} onImportComplete={handleImportComplete} />
 		</div>
 	</div>
 </CenterModal>
@@ -1357,7 +1361,6 @@
 	.gap-2 {
 		gap: 0.5rem;
 	}
-
 
 	//#region Mobile Warning
 	.mobile-warning {

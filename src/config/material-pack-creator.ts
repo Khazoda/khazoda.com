@@ -1,6 +1,3 @@
-// Material Pack Creator Limits
-export const MAX_MATERIAL_PACKS = 10;
-
 // UI Settings
 export const MIN_SCREEN_WIDTH = 1000;
 export const TRANSITION_DURATION_MS = 300;

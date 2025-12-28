@@ -26,6 +26,8 @@ type Material = {
 		glaive_held: string | null;
 		sword: string | null;
 		axe: string | null;
+		pike: string | null;
+		pike_held: string | null;
 	};
 	// Recipes Section
 	recipe_type: RecipeType;

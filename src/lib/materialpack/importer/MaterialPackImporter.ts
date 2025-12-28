@@ -6,6 +6,7 @@ import { parseRecipeInfo } from './utils/recipeParser';
 import { mapTextures, extractPackIcon } from './utils/textureMapper';
 import {
 	DEFAULT_DURABILITY,
+	DEFAULT_MINING_SPEED,
 	DEFAULT_ATTACK_DAMAGE_BONUS,
 	DEFAULT_ATTACK_SPEED_BONUS,
 	DEFAULT_REACH_BONUS,
@@ -64,6 +65,7 @@ export class MaterialPackImporter {
 		const material: Material = {
 			material_name: stats.material_name || materialName,
 			durability: stats.durability || DEFAULT_DURABILITY,
+			mining_speed: stats.mining_speed || DEFAULT_MINING_SPEED,
 			attack_damage_bonus: stats.attack_damage_bonus || DEFAULT_ATTACK_DAMAGE_BONUS,
 			attack_speed_bonus: stats.attack_speed_bonus || DEFAULT_ATTACK_SPEED_BONUS,
 			reach_bonus: stats.reach_bonus || DEFAULT_REACH_BONUS,

@@ -1,21 +1,21 @@
 import JSZip from 'jszip';
 import type { Material } from '../../types/materialpackTypes';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe', 'pike'] as const;
 
 export async function discoverMaterials(zip: JSZip): Promise<string[]> {
 	const customMaterialsFolder = zip.folder('custom_materials');
 	if (!customMaterialsFolder) return [];
-	
+
 	const materialNames: string[] = [];
-	
+
 	customMaterialsFolder.forEach((relativePath, file) => {
 		if (file && !file.dir && relativePath.endsWith('.json')) {
 			const materialName = relativePath.replace(/\.json$/, '');
 			materialNames.push(materialName);
 		}
 	});
-	
+
 	return materialNames;
 }
 
@@ -27,10 +27,10 @@ export async function parseCustomMaterial(
 	if (!file) {
 		throw new Error(`Material file not found: ${materialName}`);
 	}
-	
+
 	const content = await file.async('text');
 	const data = JSON.parse(content);
-	
+
 	const material: Partial<Material> = {
 		material_name: data.material_name || materialName,
 		durability: Number(data.durability) || 100,
@@ -40,7 +40,7 @@ export async function parseCustomMaterial(
 		reach_bonus: Number(data.reach_bonus) || 0,
 		enchantability: Number(data.enchantability) || 10
 	};
-	
+
 	const repairIngredient = data.repair_ingredient || '';
 	if (repairIngredient.startsWith('#basicweapons:')) {
 		const tagName = repairIngredient.replace('#basicweapons:', '').replace('_tool_materials', '');
@@ -55,7 +55,7 @@ export async function parseCustomMaterial(
 	} else {
 		material.repair_ingredient = repairIngredient;
 	}
-	
+
 	return material;
 }
 

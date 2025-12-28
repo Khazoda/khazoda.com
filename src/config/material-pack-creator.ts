@@ -29,6 +29,7 @@ export const ENCHANTABILITY_MAX = 100;
 
 // Material Defaults
 export const DEFAULT_DURABILITY = 100;
+export const DEFAULT_MINING_SPEED = 4.0;
 export const DEFAULT_ATTACK_DAMAGE_BONUS = 0;
 export const DEFAULT_ATTACK_SPEED_BONUS = 0;
 export const DEFAULT_REACH_BONUS = 0;

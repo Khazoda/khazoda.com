@@ -1,0 +1,25 @@
+{
+	"model": {
+		"type": "minecraft:select",
+		"cases": [
+			{
+				"model": {
+					"type": "minecraft:model",
+					"model": "basicweapons:item/{{material_name}}_{{weapon_type}}"
+				},
+				"when": [
+					"gui",
+					"ground",
+					"fixed",
+					"on_shelf"
+				]
+			}
+		],
+		"fallback": {
+			"type": "minecraft:model",
+			"model": "basicweapons:item/{{material_name}}_{{weapon_type}}_held"
+		},
+		"property": "minecraft:display_context"
+	}
+}
+

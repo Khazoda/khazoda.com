@@ -128,7 +128,9 @@ export const addMaterial = () => {
 						glaive: null,
 						glaive_held: null,
 						sword: null,
-						axe: null
+						axe: null,
+						pike: null,
+						pike_held: null
 					}
 				}
 			]

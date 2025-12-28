@@ -184,6 +184,10 @@
 						<span class="extra-signifier optional">optional</span>
 						<span class="extra-signifier version">1.21.10+</span>
 					{/if}
+					{#if texture.id === "pike" || texture.id === "pike_held"}
+						<span class="extra-signifier optional">optional</span>
+						<span class="extra-signifier version">1.21.11+</span>
+					{/if}
 				</span>
 			</div>
 		{/each}
@@ -237,16 +241,16 @@
 		align-items: center;
 		gap: 0.5rem;
 		.label-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
 			color: #ffffff;
 			font-weight: 400;
 			font-size: 0.75rem;
-			letter-spacing: 0.05rem;
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			align-items: center;
 			line-height: 1.1;
+			letter-spacing: 0.05rem;
 		}
 		.extra-signifier {
 			&.optional {

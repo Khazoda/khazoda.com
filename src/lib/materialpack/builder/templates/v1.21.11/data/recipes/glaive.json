@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [" OO", "O/ ", "/  "],
+	"key": {
+		"/": "{{handle_ingredient}}",
+		"O": "{{repair_ingredient}}"
+	},
+	"result": {
+		"id": "basicweapons:{{material_name}}_glaive",
+		"count": 1
+	}
+}
+

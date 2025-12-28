@@ -2,9 +2,14 @@
 	"pack": {
 		"pack_format": 34,
 		"description": [
-			{ "text": "ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ", "color": "#9BE17B" },
-			{ "text": "\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢", "color": "#79CCF5" }
+			{
+				"text": "ᴍᴀᴛᴇʀɪᴀʟ ᴘᴀᴄᴋ ғᴏʀ",
+				"color": "#9BE17B"
+			},
+			{
+				"text": "\n▢ ʙᴀsɪᴄ ᴡᴇᴀᴘᴏɴs ▢",
+				"color": "#79CCF5"
+			}
 		]
 	}
 }
-

@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 import type { Material } from '../../types/materialpackTypes';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe', 'pike'] as const;
 
 interface RecipeInfo {
 	recipe_type?: 'crafting' | 'smithing';
@@ -46,7 +46,7 @@ export async function parseRecipeInfo(
 			? recipe.base
 			: recipe.base?.item || '';
 		if (baseItem) {
-			const match = baseItem.match(/^[^:]+:([^_]+)_(?:dagger|hammer|club|spear|quarterstaff|glaive|sword|axe)$/);
+			const match = baseItem.match(/^[^:]+:([^_]+)_(?:dagger|hammer|club|spear|quarterstaff|glaive|sword|axe|pike)$/);
 			if (match) {
 				info.smithing_weapon_material_prefix = match[1];
 			}

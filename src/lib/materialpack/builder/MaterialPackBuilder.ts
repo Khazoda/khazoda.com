@@ -4,13 +4,13 @@ import { type VersionRange, applyTemplate, loadTemplate } from './utils/template
 import { getVersionMetadata, type VersionMetadata } from 'src/config/minecraft-versions';
 import { DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe', 'pike'] as const;
 type WeaponType = (typeof WEAPON_TYPES)[number];
 
-const OPTIONAL_WEAPON_TYPES = ['sword', 'axe'] as const;
+const OPTIONAL_WEAPON_TYPES = ['sword', 'axe', 'pike'] as const;
 
 // Weapon Types with held variants only
-const HELD_VARIANT_WEAPONS = ['spear', 'glaive', 'quarterstaff'] as const;
+const HELD_VARIANT_WEAPONS = ['spear', 'glaive', 'quarterstaff', 'pike'] as const;
 type HeldVariantWeapon = (typeof HELD_VARIANT_WEAPONS)[number];
 
 interface FabricModCondition {
@@ -100,7 +100,8 @@ const BASE_WEAPON_REACH_BONUS = {
 	quarterstaff: 0.75,
 	glaive: 0.75,
 	sword: 0,
-	axe: 0
+	axe: 0,
+	pike: 1.5
 } as const;
 interface FabricAndCondition {
 	condition: 'fabric:and';
@@ -130,10 +131,13 @@ export class MaterialPackBuilder {
 	 * Example: sword and axe are only available in 1.21.10+
 	 */
 	private shouldSkipWeaponType(weaponType: WeaponType): boolean {
-		return (
-			OPTIONAL_WEAPON_TYPES.includes(weaponType as any) &&
-			!this.metadata.features.supportsSwordsAndAxes
-		);
+		if (weaponType === 'sword' || weaponType === 'axe') {
+			return !this.metadata.features.supportsSwordsAndAxes;
+		}
+		if (weaponType === 'pike') {
+			return !this.metadata.features.hasPike;
+		}
+		return false;
 	}
 
 	/**
@@ -320,6 +324,7 @@ export class MaterialPackBuilder {
 
 			for (const weaponType of WEAPON_TYPES) {
 				if (this.shouldSkipWeaponType(weaponType)) continue;
+				if (weaponType === 'spear' && !this.metadata.features.spearHasRecipes) continue;
 				if (material.textures[weaponType] === null) continue;
 
 				if (material.recipe_type === 'smithing') {
@@ -538,7 +543,10 @@ export class MaterialPackBuilder {
 		const tagsFolder = dataFolder.folder('basicweapons/tags/item/tools');
 		if (!tagsFolder) throw new Error('Failed to create tags folder');
 
-		const basicWeaponsTypes = WEAPON_TYPES.filter(type => !OPTIONAL_WEAPON_TYPES.includes(type as any));
+		const basicWeaponsTypes = WEAPON_TYPES.filter(type => {
+			if (type === 'sword' || type === 'axe') return false;
+			return !this.shouldSkipWeaponType(type);
+		});
 		const weaponsByType = new Map(basicWeaponsTypes.map(type => [type, [] as string[]]));
 
 		for (const material of this.materialPack.materials) {
@@ -740,6 +748,7 @@ export class MaterialPackBuilder {
 
 		for (const material of this.materialPack.materials) {
 			for (const weaponType of WEAPON_TYPES) {
+				if (this.shouldSkipWeaponType(weaponType)) continue;
 				// Skip if no texture exists for this weapon type
 				if (material.textures[weaponType] === null) continue;
 
@@ -906,6 +915,7 @@ export class MaterialPackBuilder {
 			const recipes: string[] = [];
 			for (const weaponType of WEAPON_TYPES) {
 				if (this.shouldSkipWeaponType(weaponType)) continue;
+				if (weaponType === 'spear' && !this.metadata.features.spearHasRecipes) continue;
 				if (material.textures[weaponType] === null) continue;
 
 				// Add recipe with appropriate suffix for smithing recipes

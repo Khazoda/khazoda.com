@@ -43,14 +43,23 @@ export async function parseCustomMaterial(
 
 	const repairIngredient = data.repair_ingredient || '';
 	if (repairIngredient.startsWith('#basicweapons:')) {
-		const tagName = repairIngredient.replace('#basicweapons:', '').replace('_tool_materials', '');
-		const tagFile = zip.file(`data/basicweapons/tags/item/${tagName}.json`);
+		const tagName = repairIngredient.replace('#basicweapons:', '');
+		// Try full tag name, fallback to stripped item name for compatibility
+		const tagFile = zip.file(`data/basicweapons/tags/item/${tagName}.json`) ||
+			zip.file(`data/basicweapons/tags/item/${tagName.replace('_tool_materials', '')}.json`);
+
 		if (tagFile) {
 			const tagContent = await tagFile.async('text');
 			const tagData = JSON.parse(tagContent);
 			if (tagData.values && tagData.values.length > 0) {
 				material.repair_ingredient = tagData.values[0];
+			} else {
+				// File exists but is empty/invalid, keep the tag ref
+				material.repair_ingredient = repairIngredient;
 			}
+		} else {
+			// Tag file not found, keep the tag reference instead of defaulting
+			material.repair_ingredient = repairIngredient;
 		}
 	} else {
 		material.repair_ingredient = repairIngredient;

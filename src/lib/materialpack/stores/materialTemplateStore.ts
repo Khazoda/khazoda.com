@@ -49,7 +49,7 @@ export const materialTemplates = writable<MaterialTemplate[]>([
 		recipe_type: goldTemplate.recipe_type as RecipeType,
 		name: 'Golden',
 		description: 'Very low durability, high enchantability',
-		exampleTexture: goldTemplate.textures.spear
+		exampleTexture: goldTemplate.textures.pike
 	},
 	{
 		...diamondTemplate,

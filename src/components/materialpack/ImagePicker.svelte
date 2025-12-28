@@ -4,6 +4,7 @@
 	export let onImageSelect: (base64: string | null) => void;
 	export let imgSize: string = "128px";
 	export let padding: string = "0rem";
+	export let innerPadding: string = "0rem";
 	export let backgroundImage: string = "";
 	export let placeholderBackground: string = "";
 
@@ -78,7 +79,7 @@
 		class="picker-button"
 		on:click={handleClick}
 		title="Click to change image"
-		style={`width: ${imgSize}; height: ${imgSize}; padding: ${padding};`}
+		style={`width: ${imgSize}; height: ${imgSize}; padding: ${innerPadding};`}
 		aria-label="Select or drop an image">
 		{#if currentImage}
 			<div class="actions-container">
@@ -110,33 +111,33 @@
 
 <style lang="scss">
 	.image-picker {
-		border: 2px dashed #ccc;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		transition: all 0.2s ease;
 		width: fit-content;
 		height: fit-content;
+		gap: 0.5rem;
+		border: 2px dashed rgb(100, 100, 100);
+		transition: all 0.2s ease;
 
 		&:hover {
 			border: 2px dashed #fff;
 		}
 
 		&.dragging {
-			background-color: rgba(255, 255, 255, 0.1);
 			border: 2px dashed #fff;
+			background-color: rgba(255, 255, 255, 0.1);
 		}
 	}
 
 	.picker-button {
-		background: none;
+		position: relative;
+		width: 128px;
+		height: 128px;
 		border: none;
 		border-radius: 4px;
+		background: none;
 		cursor: pointer;
-		height: 128px;
-		position: relative;
 		transition: all 0.2s ease;
-		width: 128px;
 
 		&:hover {
 			border-color: #fff;
@@ -147,61 +148,59 @@
 	}
 
 	.preview-image {
-		filter: drop-shadow(5px 5px 0px rgba(25, 25, 25, 0.2));
+		width: 100%;
 		height: 100%;
 		object-fit: contain;
-		width: 100%;
 	}
 
 	.placeholder {
-		align-items: center;
-		color: #ccc;
 		display: flex;
-		height: 100%;
+		align-items: center;
 		justify-content: center;
 		width: 100%;
+		height: 100%;
+		color: #ccc;
 	}
 
 	.background-image {
-		filter: blur(0px);
-		height: 100%;
-		image-rendering: pixelated;
-		left: 0;
 		position: absolute;
 		top: 0;
+		left: 0;
 		width: 100%;
+		height: 100%;
+		image-rendering: pixelated;
 	}
 
 	.placeholder-background {
-		filter: brightness(0.5);
-		height: 100%;
-		image-rendering: pixelated;
-		object-fit: contain;
-		opacity: 0.4;
 		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		filter: brightness(0.5);
+		image-rendering: pixelated;
+		opacity: 0.4;
 	}
 
 	.actions-container {
-		align-items: center;
 		display: flex;
-		flex-direction: column;
-		height: 100%;
-		justify-content: flex-start;
-		opacity: 0;
-		position: absolute;
-		right: -1.5rem;
-		top: -1.5rem;
-		transform: translateX(-1rem);
-		transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 		z-index: 10;
+		position: absolute;
+		top: -1.5rem;
+		right: -1.5rem;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		height: 100%;
+		transform: translateX(-1rem);
+		opacity: 0;
+		transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 		.delete-btn {
-			background: rgba(50, 50, 50, 0.75);
+			padding: 0.25rem;
 			border: 2px solid rgba(25, 25, 25, 1);
 			border-radius: 6px;
+			background: rgba(50, 50, 50, 0.75);
 			color: #ff4444;
 			cursor: pointer;
-			padding: 0.25rem;
 			transition: all 0.2s ease;
 
 			&:hover {
@@ -211,8 +210,8 @@
 	}
 
 	.picker-button:hover .actions-container {
-		opacity: 1;
 		transform: translateX(0);
+		opacity: 1;
 	}
 
 	// Prevent actions from showing while dragging

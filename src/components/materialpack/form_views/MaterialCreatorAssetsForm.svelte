@@ -173,20 +173,25 @@
 				<ImagePicker
 					currentImage={material.textures[texture.id]}
 					accept="image/png"
-					imgSize="96px"
-					padding="0.35rem"
+					imgSize="72px"
+					padding="0.2rem"
+					innerPadding="4px"
 					placeholderBackground={texture.placeholderBackground}
 					backgroundImage={minecraft_gui}
 					onImageSelect={base64String => handleTextureUpdate(texture.id, base64String)} />
 				<span class="label-container">
 					<label for="texture_{texture.id}_{index}">{texture.label}</label>
-					{#if texture.id === "sword" || texture.id === "axe"}
-						<span class="extra-signifier optional">optional</span>
-						<span class="extra-signifier version">1.21.10+</span>
-					{/if}
 					{#if texture.id === "pike" || texture.id === "pike_held"}
-						<span class="extra-signifier optional">optional</span>
-						<span class="extra-signifier version">1.21.11+</span>
+						<span class="extra-signifier version" title="only available in minecraft 1.21.11 and later">1.21.11 »</span>
+					{/if}
+					{#if texture.id === "spear" || texture.id === "spear_held"}
+						<span
+							class="extra-signifier version"
+							title="only available in minecraft 1.21.10 and earlier. deprecated since december 2025">« 1.21.10</span>
+					{/if}
+					{#if texture.id === "sword" || texture.id === "axe"}
+						<span class="extra-signifier version" title="only available in minecraft 1.21.10 and later">1.21.10 »</span>
+						<span class="extra-signifier optional" title="not required">optional</span>
 					{/if}
 				</span>
 			</div>
@@ -230,9 +235,9 @@
 
 	.textures-grid {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(64px, 1fr));
+		grid-template-columns: repeat(6, minmax(64px, 1fr));
 		width: 100%;
-		gap: 2rem;
+		gap: 1rem;
 	}
 
 	.form-element {
@@ -243,16 +248,19 @@
 		.label-container {
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			align-items: flex-start;
 			justify-content: space-between;
 			width: 100%;
+			max-width: 85px;
 			color: #ffffff;
 			font-weight: 400;
 			font-size: 0.75rem;
-			line-height: 1.1;
+			line-height: 1rem;
 			letter-spacing: 0.05rem;
+			overflow-wrap: anywhere;
 		}
 		.extra-signifier {
+			cursor: help;
 			&.optional {
 				color: #44baff;
 			}

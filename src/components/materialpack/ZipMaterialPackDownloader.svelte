@@ -1,15 +1,16 @@
 <script lang="ts">
 	import type { MaterialPack } from "$lib/materialpack/types/materialpackTypes";
 	import { MaterialPackBuilder } from "$lib/materialpack/builder/MaterialPackBuilder";
-	import { type VersionRange, getVersionRanges } from "$lib/materialpack/builder/utils/template";
-	import materialpack_location_example from "$lib/materialpack/media/materialpack_location_example.png";
+	import { getVersionMetadata, VERSION_RANGE, type VersionRange } from "src/config/minecraft-versions";
 	import HugeiconsZip01 from "virtual:icons/hugeicons/zip-01";
 	import CenterModal from "src/components/CenterModal.svelte";
 	import { closeDialog } from "src/components/CenterModal.svelte";
+	import { getVersionRanges } from "src/lib/materialpack/builder/utils/template";
+	import materialpack_location_example from "$lib/materialpack/media/materialpack_location_example.png";
 
 	export let materialPack: MaterialPack;
 
-	let selectedVersion: VersionRange = "1.21 - 1.21.1";
+	let selectedVersion: VersionRange = VERSION_RANGE.V1_21;
 	let showModal = [false];
 	let showPackwizInstructions = false;
 
@@ -21,10 +22,9 @@
 		const modId = materialPack.mod_dependency_modid
 			? materialPack.mod_dependency_modid.toLowerCase().replace(/\s+/g, "-")
 			: "minecraft";
-		// Add version suffix; for ranges like "1.21 - 1.21.1" use the upper bound
-		const versionSuffix = selectedVersion.includes("-")
-			? selectedVersion.split("-")[1].trim()
-			: selectedVersion;
+
+		const metadata = getVersionMetadata(selectedVersion);
+		const versionSuffix = metadata.filenameSuffix;
 		const zipFileName = `bwmp_${packName}_${modId}_${versionSuffix}.zip`;
 
 		const url = URL.createObjectURL(blob);
@@ -103,17 +103,17 @@
 		color: #bbb;
 	}
 	.export-pack-btn {
+		display: inline-flex;
 		align-items: center;
-		background: none;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		padding: 0;
 		border: none;
 		border-radius: 4px;
+		background: none;
 		color: whitesmoke;
-		display: inline-flex;
-		height: 32px;
-		justify-content: center;
-		padding: 0;
 		transition: transform 0.1s 0.05s ease-out;
-		width: 32px;
 
 		&:hover {
 			color: rgb(65, 245, 125);
@@ -122,49 +122,49 @@
 
 	.version-select {
 		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		margin: 1rem 0;
 		position: relative;
+		flex-direction: column;
+		margin: 1rem 0;
+		gap: 0.5rem;
 		.packwiz-instructions-btn {
-			margin-top: 0;
 			position: absolute;
-			right: 0;
 			top: -0.5rem;
+			right: 0;
+			margin-top: 0;
 		}
 	}
 	.packwiz-instructions-btn {
-		background: rgba(255, 255, 255, 0.1);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 4px;
-		color: white;
-		cursor: pointer;
-		font-size: 0.9rem;
 		margin-top: 1rem;
 		padding: 0.4rem 0.8rem;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 4px;
+		background: rgba(255, 255, 255, 0.1);
+		color: white;
+		font-size: 0.9rem;
 		text-decoration: none;
+		cursor: pointer;
 		transition: all 0.2s ease;
 	}
 
 	.packwiz-instructions-btn:hover {
-		background: rgba(255, 255, 255, 0.15);
 		border-color: rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.15);
 	}
 
 	.modal-actions {
 		display: flex;
-		gap: 1rem;
 		justify-content: center;
 		margin-top: 1rem;
+		gap: 1rem;
 
 		.ok-btn {
-			background: #4a9eff;
+			padding: 0.5rem 2rem;
 			border: none;
 			border-radius: 4px;
+			background: #4a9eff;
 			color: white;
-			cursor: pointer;
 			font-weight: 600;
-			padding: 0.5rem 2rem;
+			cursor: pointer;
 			transition: all 0.2s ease;
 
 			&:hover {
@@ -177,33 +177,33 @@
 	}
 
 	img {
+		margin-top: 1rem;
 		border: 2px solid #3a3a3a;
 		border-radius: 8px;
-		margin-top: 1rem;
 	}
 
 	.version-dropdown {
 		appearance: none;
+		width: 100%;
+		padding: 0.75rem;
+		padding-right: 2.5rem;
+		border: 1px solid #3a3a3a;
+		border-radius: 8px;
 		background: #2a2a2a;
 		// Fake dropdown arrow
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 		background-position: right 0.75rem center;
-		background-repeat: no-repeat;
 		background-size: 1em;
-		border: 1px solid #3a3a3a;
-		border-radius: 8px;
+		background-repeat: no-repeat;
 		color: white;
-		cursor: pointer;
 		font-size: 1rem;
-		padding: 0.75rem;
-		padding-right: 2.5rem;
-		transition: all 0.2s ease;
-		width: 100%;
 		font-family: monospace;
+		cursor: pointer;
+		transition: all 0.2s ease;
 
 		&:hover {
-			background-color: #3a3a3a;
 			border-color: #5bd9ff;
+			background-color: #3a3a3a;
 		}
 
 		&:focus {
@@ -212,9 +212,9 @@
 		}
 
 		option {
+			padding: 0.5rem;
 			background: #2a2a2a;
 			color: white;
-			padding: 0.5rem;
 		}
 	}
 

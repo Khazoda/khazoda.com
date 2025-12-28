@@ -1,6 +1,7 @@
 import JSZip from 'jszip';
 import type { MaterialPack } from '../types/materialpackTypes';
 import { type VersionRange, applyTemplate, loadTemplate } from './utils/template';
+import { getVersionMetadata, type VersionMetadata } from 'src/config/minecraft-versions';
 import { DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
 const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe'] as const;
@@ -115,11 +116,13 @@ export class MaterialPackBuilder {
 	private materialPack: MaterialPack;
 	private zip: JSZip;
 	private versionRange: VersionRange;
+	private metadata: VersionMetadata;
 
 	constructor(materialPack: MaterialPack, versionRange: VersionRange) {
 		this.materialPack = materialPack;
 		this.zip = new JSZip();
 		this.versionRange = versionRange;
+		this.metadata = getVersionMetadata(versionRange);
 	}
 
 	/**
@@ -129,7 +132,7 @@ export class MaterialPackBuilder {
 	private shouldSkipWeaponType(weaponType: WeaponType): boolean {
 		return (
 			OPTIONAL_WEAPON_TYPES.includes(weaponType as any) &&
-			this.versionRange === '1.21 - 1.21.1'
+			!this.metadata.features.supportsSwordsAndAxes
 		);
 	}
 
@@ -151,7 +154,7 @@ export class MaterialPackBuilder {
 	private async getClubTemplate(): Promise<ClubRecipeTemplate> {
 		const mainStr = await loadTemplate(this.versionRange, 'data/recipes/club.json');
 		// 1.21 uses club_alt.json, 1.21.10 uses club_variant.json
-		const variantFileName = this.versionRange === '1.21.10' ? 'club_variant.json' : 'club_alt.json';
+		const variantFileName = this.metadata.features.usesClubVariantNaming ? 'club_variant.json' : 'club_alt.json';
 		const variantStr = await loadTemplate(this.versionRange, `data/recipes/${variantFileName}`);
 		return {
 			main: JSON.parse(mainStr) as RecipeTemplate,
@@ -224,10 +227,7 @@ export class MaterialPackBuilder {
 	}
 
 	private async generateWeaponsToNuggetsRecipes(dataFolder: JSZip) {
-		const targetFolder =
-			this.versionRange === '1.21.10'
-				? dataFolder.folder('basicweapons/recipe/weapons_to_nuggets')
-				: dataFolder.folder('basicweapons/recipe/weapons_to_nuggets');
+		const targetFolder = dataFolder.folder('basicweapons/recipe/weapons_to_nuggets');
 		if (!targetFolder) throw new Error('Failed to create weapons_to_nuggets recipe folder');
 
 		for (const material of this.materialPack.materials) {
@@ -251,7 +251,7 @@ export class MaterialPackBuilder {
 			const smeltingTemplate = JSON.parse(applyTemplate(smeltingStr, { result_id: material.smelts_into }));
 
 			// 1.21/1.21.1 requires ingredient objects rather than direct strings like 1.21.10 onwards
-			if (this.versionRange === '1.21 - 1.21.1') {
+			if (this.metadata.features.usesNestedIngredients) {
 				const ingredientObjects = ingredientItems.map(id => ({ item: id }));
 				blastingTemplate.ingredient = ingredientObjects;
 				smeltingTemplate.ingredient = ingredientObjects;
@@ -290,16 +290,16 @@ export class MaterialPackBuilder {
 			// For 1.21.10: use direct string format (items are direct, tags have # prefix)
 			// For 1.21-1.21.1: use nested object format with ingredient_type
 			const baseVariables: Record<string, string | number> =
-				this.versionRange === '1.21.10'
+				this.metadata.features.usesNestedIngredients
 					? {
 						material_name: material.material_name,
-						repair_ingredient: material.repair_ingredient, // Keep # prefix for tags if present
+						repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
+						ingredient_type: isTag ? 'tag' : 'item',
 						handle_ingredient: material.handle_ingredient || DEFAULT_HANDLE_INGREDIENT,
 					}
 					: {
 						material_name: material.material_name,
-						repair_ingredient: isTag ? material.repair_ingredient.slice(1) : material.repair_ingredient,
-						ingredient_type: isTag ? 'tag' : 'item',
+						repair_ingredient: material.repair_ingredient, // Keep # prefix for tags if present
 						handle_ingredient: material.handle_ingredient || DEFAULT_HANDLE_INGREDIENT,
 					};
 
@@ -328,7 +328,8 @@ export class MaterialPackBuilder {
 						...baseVariables,
 						weapon_type: weaponType,
 						upgrade_smithing_template_ingredient: material.upgrade_smithing_template_ingredient || '',
-						smithing_weapon_material_prefix: material.smithing_weapon_material_prefix || '',					};
+						smithing_weapon_material_prefix: material.smithing_weapon_material_prefix || '',
+					};
 
 					const smithingRecipe = await this.getSmithingTemplate();
 
@@ -498,7 +499,7 @@ export class MaterialPackBuilder {
 						)
 					);
 					recipesFolder.file(
-						`${material.material_name}_club${this.versionRange === '1.21.10' ? '_variant' : '_alt'}.json`,
+						`${material.material_name}_club${this.metadata.features.usesClubVariantNaming ? '_variant' : '_alt'}.json`,
 						JSON.stringify(
 							JSON.parse(applyTemplate(JSON.stringify(altRecipe), baseVariables)),
 							null,
@@ -565,11 +566,11 @@ export class MaterialPackBuilder {
 			}
 		}
 	}
-	
+
 	// Vanilla sword and axe tags
 	private async generateVanillaTags(dataFolder: JSZip) {
 		// Sword and axe tags are only available in 1.21.10+ versions of basic weapons
-		if (this.versionRange === '1.21 - 1.21.1') {
+		if (!this.metadata.features.supportsSwordsAndAxes) {
 			return;
 		}
 
@@ -585,7 +586,7 @@ export class MaterialPackBuilder {
 				const weaponId = `basicweapons:${material.material_name}_sword`;
 				swords.push(weaponId);
 			}
-			
+
 			const axeTexture = material.textures.axe;
 			if (axeTexture !== null && axeTexture) {
 				const weaponId = `basicweapons:${material.material_name}_axe`;
@@ -730,7 +731,7 @@ export class MaterialPackBuilder {
 
 	private async generateItems(resourceFolder: JSZip) {
 		// Only generate items folder for 1.21.10
-		if (this.versionRange !== '1.21.10') {
+		if (!this.metadata.features.hasItemsFolder) {
 			return;
 		}
 
@@ -838,7 +839,7 @@ export class MaterialPackBuilder {
 
 	private async generateRepairIngredientTags(dataFolder: JSZip) {
 		// Only generate repair ingredient tags for 1.21.10(where ToolMaterial requires TagKey)
-		if (this.versionRange !== '1.21.10') {
+		if (!this.metadata.features.hasRepairIngredientTags) {
 			return;
 		}
 
@@ -870,7 +871,7 @@ export class MaterialPackBuilder {
 			// For 1.21.10, if repair_ingredient is an item (not a tag), reference the generated tag
 			// Otherwise, use the repair_ingredient directly (keeping # prefix for tags)
 			let repairIngredientReference: string;
-			if (this.versionRange === '1.21.10' && !material.repair_ingredient.startsWith('#')) {
+			if (this.metadata.features.hasRepairIngredientTags && !material.repair_ingredient.startsWith('#')) {
 				// Item-based repair ingredient: reference the generated tag
 				repairIngredientReference = `#basicweapons:${material.material_name}_tool_materials`;
 			} else {
@@ -913,7 +914,7 @@ export class MaterialPackBuilder {
 				} else {
 					recipes.push(`basicweapons:${material.material_name}_${weaponType}`);
 					if (weaponType === 'club') {
-						const variantSuffix = this.versionRange === '1.21.10' ? '_variant' : '_alt';
+						const variantSuffix = this.metadata.features.usesClubVariantNaming ? '_variant' : '_alt';
 						recipes.push(`basicweapons:${material.material_name}_${weaponType}${variantSuffix}`);
 					}
 				}

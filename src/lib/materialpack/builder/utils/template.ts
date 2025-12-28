@@ -1,7 +1,6 @@
 import {
 	VERSION_RANGES,
-	VERSION_DIRECTORY_MAP,
-	DEFAULT_VERSION_DIRECTORY,
+	getVersionMetadata,
 	type VersionRange
 } from 'src/config/minecraft-versions';
 
@@ -15,7 +14,7 @@ export function applyTemplate(
 export { VERSION_RANGES, type VersionRange };
 
 export function getVersionDirectory(versionRange: VersionRange): string {
-	return VERSION_DIRECTORY_MAP[versionRange] || DEFAULT_VERSION_DIRECTORY;
+	return getVersionMetadata(versionRange).directory;
 }
 
 // Preload all template versions
@@ -35,10 +34,10 @@ export async function loadTemplate(
 ): Promise<string> {
 	const versionDir = getVersionDirectory(versionRange);
 	const fullPath = `../templates/${versionDir}/${templatePath}`;
-	
+
 	// Normalize path separators for cross-platform compatibility
 	const normalizedPath = fullPath.replace(/\\/g, '/');
-	
+
 	const module = templateModules[normalizedPath];
 	if (!module) {
 		// Try to list available modules for debugging

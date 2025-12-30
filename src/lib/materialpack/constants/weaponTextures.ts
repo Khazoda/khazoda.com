@@ -18,23 +18,24 @@ import vanillaspear_held from "../media/weapon_outlines/vanillaspear_held.png";
 export const WEAPON_TEXTURES: Array<{
 	id: keyof Material["textures"];
 	label: string;
+	classification: "basic" | "vanilla" | "deprecated";
 	placeholderBackground: string;
 }> = [
-		{ id: "dagger", label: "dagger.png", placeholderBackground: dagger },
-		{ id: "hammer", label: "hammer.png", placeholderBackground: hammer },
-		{ id: "club", label: "club.png", placeholderBackground: club },
-		{ id: "quarterstaff", label: "quarterstaff.png", placeholderBackground: quarterstaff },
-		{ id: "glaive", label: "glaive.png", placeholderBackground: glaive },
-		{ id: "pike", label: "pike.png", placeholderBackground: pike },
-		{ id: "quarterstaff_held", label: "quarterstaff_held.png", placeholderBackground: quarterstaff_held },
-		{ id: "glaive_held", label: "glaive_held.png", placeholderBackground: glaive_held },
-		{ id: "pike_held", label: "pike_held.png", placeholderBackground: pike_held },
-		{ id: "sword", label: "sword.png", placeholderBackground: sword },
-		{ id: "axe", label: "axe.png", placeholderBackground: axe },
-		{ id: "vanillaspear", label: "vanillaspear.png", placeholderBackground: vanillaspear },
-		{ id: "vanillaspear_held", label: "vanillaspear_held.png", placeholderBackground: vanillaspear_held },
+		{ id: "dagger", label: "dagger.png", classification: "basic", placeholderBackground: dagger },
+		{ id: "hammer", label: "hammer.png", classification: "basic", placeholderBackground: hammer },
+		{ id: "club", label: "club.png", classification: "basic", placeholderBackground: club },
+		{ id: "quarterstaff", label: "quarterstaff.png", classification: "basic", placeholderBackground: quarterstaff },
+		{ id: "glaive", label: "glaive.png", classification: "basic", placeholderBackground: glaive },
+		{ id: "pike", label: "pike.png", classification: "basic", placeholderBackground: pike },
+		{ id: "quarterstaff_held", label: "quarterstaff_held.png", classification: "basic", placeholderBackground: quarterstaff_held },
+		{ id: "glaive_held", label: "glaive_held.png", classification: "basic", placeholderBackground: glaive_held },
+		{ id: "pike_held", label: "pike_held.png", classification: "basic", placeholderBackground: pike_held },
+		{ id: "sword", label: "sword.png", classification: "vanilla", placeholderBackground: sword },
+		{ id: "axe", label: "axe.png", classification: "vanilla", placeholderBackground: axe },
+		{ id: "vanillaspear", label: "vanillaspear.png", classification: "vanilla", placeholderBackground: vanillaspear },
+		{ id: "vanillaspear_held", label: "vanillaspear_held.png", classification: "vanilla", placeholderBackground: vanillaspear_held },
 
-		{ id: "spear", label: "spear.png", placeholderBackground: spear },
-		{ id: "spear_held", label: "spear_held.png", placeholderBackground: spear_held },
+		{ id: "spear", label: "spear.png", classification: "deprecated", placeholderBackground: spear },
+		{ id: "spear_held", label: "spear_held.png", classification: "deprecated", placeholderBackground: spear_held },
 	];
 

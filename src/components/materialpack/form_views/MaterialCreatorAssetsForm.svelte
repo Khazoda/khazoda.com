@@ -163,43 +163,57 @@
 		<HugeiconsDelete02 width="24" height="24" />
 	</button>
 	<DownloadExamplesButton {downloadOptions} />
-	<h2 class="grid-wide">
+	<h2 class="grid-wide" style="margin-bottom: 0;">
 		{material.material_name ? `${material.material_name} Material Textures` : `Textures for Material ${index + 1}`}
 	</h2>
 
-	<div class="textures-grid">
-		{#each WEAPON_TEXTURES as texture}
-			<div class="form-element">
-				<ImagePicker
-					currentImage={material.textures[texture.id]}
-					accept="image/png"
-					imgSize="72px"
-					padding="0.2rem"
-					innerPadding="4px"
-					placeholderBackground={texture.placeholderBackground}
-					backgroundImage={minecraft_gui}
-					onImageSelect={base64String => handleTextureUpdate(texture.id, base64String)} />
-				<span class="label-container">
-					<label for="texture_{texture.id}_{index}">{texture.label}</label>
-					{#if texture.id === "pike" || texture.id === "pike_held"}
-						<span class="extra-signifier version" title="only available in minecraft 1.21.11 and later">1.21.11 »</span>
-					{/if}
-					{#if texture.id === "spear" || texture.id === "spear_held"}
-						<span
-							class="extra-signifier version"
-							title="only available in minecraft 1.21.10 and earlier. deprecated since december 2025">« 1.21.10</span>
-					{/if}
-					{#if texture.id === "vanillaspear" || texture.id === "vanillaspear_held"}
-						<span class="extra-signifier version" title="only available in minecraft 1.21.11 and later">1.21.11 »</span>
-					{/if}
-					{#if texture.id === "sword" || texture.id === "axe"}
-						<span class="extra-signifier version" title="only available in minecraft 1.21.10 and later">1.21.10 »</span>
-						<span class="extra-signifier optional" title="not required">optional</span>
-					{/if}
-				</span>
-			</div>
-		{/each}
-	</div>
+	{#each ["basic", "vanilla", "deprecated"] as classification}
+		<div class="textures-grid">
+			<h3>
+				{classification == "basic"
+					? "Basic Weapons"
+					: classification == "vanilla"
+						? "Vanilla Weapons"
+						: "Deprecated Weapons"}
+			</h3>
+			{#each WEAPON_TEXTURES.filter(t => t.classification === classification) as texture}
+				<div class="form-element">
+					<ImagePicker
+						currentImage={material.textures[texture.id]}
+						accept="image/png"
+						imgSize="40px"
+						padding="0.3rem"
+						innerPadding="4px"
+						placeholderBackground={texture.placeholderBackground}
+						backgroundImage={minecraft_gui}
+						onImageSelect={base64String => handleTextureUpdate(texture.id, base64String)} />
+					<span class="label-container">
+						<label title={texture.label} for="texture_{texture.id}_{index}">{texture.label}</label>
+						{#if ["pike", "pike_held"].includes(texture.id)}
+							<span class="extra-signifier version" title="only available in minecraft 1.21.11 and later"
+								>1.21.11 »</span>
+						{:else if ["spear", "spear_held"].includes(texture.id)}
+							<span
+								class="extra-signifier version"
+								title="only available in minecraft 1.21.10 and earlier. deprecated since december 2025">« 1.21.10</span>
+						{:else if ["sword", "axe"].includes(texture.id)}
+							<span class="extra-signifier version" title="only available in minecraft 1.21.10 and later"
+								>1.21.10 »</span>
+							<span
+								class="extra-signifier optional"
+								title="won't generate this item in-game if you don't provide a texture">optional</span>
+						{:else if ["vanillaspear", "vanillaspear_held"].includes(texture.id)}
+							<span class="extra-signifier version" title="only available in minecraft 1.21.11 and later"
+								>1.21.11 »</span>
+							<span
+								class="extra-signifier optional"
+								title="won't generate this item in-game if you don't provide a texture">optional</span>
+						{/if}
+					</span>
+				</div>
+			{/each}
+		</div>
+	{/each}
 </form>
 
 <!-- Delete Material Modal -->
@@ -237,33 +251,60 @@
 	}
 
 	.textures-grid {
-		display: grid;
-		grid-template-columns: repeat(6, minmax(64px, 1fr));
+		display: flex;
+		flex-wrap: wrap;
 		width: 100%;
-		gap: 1rem;
+		gap: 0.1rem;
+	}
+
+	.textures-grid h3 {
+		width: 100%;
+		margin-bottom: 0.5rem;
+		color: #ffffff;
+		font-weight: 400;
+		font-size: 0.8rem;
+		text-decoration: underline;
 	}
 
 	.form-element {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		width: 64px;
 		gap: 0.5rem;
+
 		.label-container {
 			display: flex;
 			flex-direction: column;
-			align-items: flex-start;
-			justify-content: space-between;
+			align-items: center;
 			width: 100%;
-			max-width: 85px;
+			gap: 0.2rem;
 			color: #ffffff;
 			font-weight: 400;
-			font-size: 0.75rem;
-			line-height: 1rem;
-			letter-spacing: 0.05rem;
-			overflow-wrap: anywhere;
+			font-size: 0.7rem;
+			text-align: center;
 		}
-		.extra-signifier {
+
+		label {
+			width: 100%;
+			overflow: hidden;
+			color: #e0e0e0;
+			line-height: 1.2;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 			cursor: help;
+		}
+
+		.extra-signifier {
+			display: inline-block;
+			padding: 1px 4px;
+			border-radius: 3px;
+			background: rgba(0, 0, 0, 0.2);
+			font-weight: 600;
+			font-size: 0.6rem;
+			text-transform: uppercase;
+			cursor: help;
+
 			&.optional {
 				color: #44baff;
 			}
@@ -271,10 +312,6 @@
 				color: #ffae44;
 			}
 		}
-	}
-
-	.grid-wide {
-		grid-column: 1 / 3;
 	}
 
 	.delete-material-btn {

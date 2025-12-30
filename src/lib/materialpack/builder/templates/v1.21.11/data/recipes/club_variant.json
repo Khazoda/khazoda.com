@@ -1,7 +1,11 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "{{material_name}}_club",
-	"pattern": ["# ", " #", " /"],
+	"pattern": [
+		"# ",
+		" #",
+		" /"
+	],
 	"key": {
 		"#": "{{repair_ingredient}}",
 		"/": "{{handle_ingredient}}"
@@ -11,4 +15,3 @@
 		"count": 1
 	}
 }
-

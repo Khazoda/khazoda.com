@@ -1,6 +1,9 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern": ["#", "/"],
+	"pattern": [
+		"#",
+		"/"
+	],
 	"key": {
 		"#": "{{repair_ingredient}}",
 		"/": "{{handle_ingredient}}"
@@ -14,7 +17,9 @@
 			"condition": "fabric:not",
 			"value": {
 				"condition": "fabric:all_mods_loaded",
-				"values": ["farmersdelight"]
+				"values": [
+					"farmersdelight"
+				]
 			}
 		}
 	],
@@ -28,4 +33,3 @@
 		}
 	]
 }
-

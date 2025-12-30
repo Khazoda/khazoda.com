@@ -1,12 +1,12 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"  ^",
-		" / ",
+		"  #",
+		" # ",
 		"/  "
 	],
 	"key": {
-		"^": "{{repair_ingredient}}",
+		"#": "{{repair_ingredient}}",
 		"/": "{{handle_ingredient}}"
 	},
 	"result": {

@@ -108,12 +108,15 @@
 		<div class="weapon-texture-preview-container flex-row">
 			{#each $materialPack.materials as material}
 				{#each WEAPON_TEXTURES as weaponTexture}
-					<div class="weapon-texture-preview">
-						<img
-							src={material.textures[weaponTexture.id] || weaponTexture.placeholderBackground}
-							alt={weaponTexture.label}
-							class="texture-image" />
-					</div>
+					<!-- Always show basic weapons, show vanilla/deprecated if they have a texture -->
+					{#if weaponTexture.classification == "basic" || material.textures[weaponTexture.id]}
+						<div class="weapon-texture-preview">
+							<img
+								src={material.textures[weaponTexture.id] || weaponTexture.placeholderBackground}
+								alt={weaponTexture.label}
+								class="texture-image" />
+						</div>
+					{/if}
 				{/each}
 			{/each}
 		</div>
@@ -147,8 +150,8 @@
 		height: 100%;
 		padding: 2rem;
 		gap: 1rem;
-		outline: 2px solid #1c1c1c;
 		border-radius: 8px;
+		outline: 2px solid #1c1c1c;
 		background: #303030;
 	}
 	// One Level Below Container
@@ -168,8 +171,8 @@
 		margin-top: auto;
 		padding: 0.5rem;
 		overflow-y: hidden;
-		outline: 2px solid #1c1c1c;
 		border-radius: 16px;
+		outline: 2px solid #1c1c1c;
 		background: linear-gradient(0, #222222 0%, #333333 100%);
 		.weapon-texture-preview-container {
 			flex-wrap: wrap;
@@ -268,8 +271,8 @@
 
 	.pack-name-display {
 		position: relative;
-		overflow-wrap: anywhere;
 		width: 100%;
+		overflow-wrap: anywhere;
 		&:after {
 			position: absolute;
 			top: 0;

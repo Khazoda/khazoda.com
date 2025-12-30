@@ -13,7 +13,7 @@
 	import GenericJSButton from "src/components/GenericJSButton.svelte";
 
 	var showSupercededVersions = false;
-	var sortOrder: SortOrder = "newest";
+	var sortOrder: SortOrder = "major";
 	var displayedVersions: MinecraftVersion[] = [];
 	var showModal: boolean[] = Array(1).fill(false);
 

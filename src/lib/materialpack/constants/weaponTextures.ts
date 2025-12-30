@@ -12,6 +12,8 @@ import sword from "../media/weapon_outlines/sword.png";
 import axe from "../media/weapon_outlines/axe.png";
 import pike from "../media/weapon_outlines/pike.png";
 import pike_held from "../media/weapon_outlines/pike_held.png";
+import vanillaspear from "../media/weapon_outlines/vanillaspear.png";
+import vanillaspear_held from "../media/weapon_outlines/vanillaspear_held.png";
 
 export const WEAPON_TEXTURES: Array<{
 	id: keyof Material["textures"];
@@ -29,6 +31,8 @@ export const WEAPON_TEXTURES: Array<{
 		{ id: "pike_held", label: "pike_held.png", placeholderBackground: pike_held },
 		{ id: "sword", label: "sword.png", placeholderBackground: sword },
 		{ id: "axe", label: "axe.png", placeholderBackground: axe },
+		{ id: "vanillaspear", label: "vanillaspear.png", placeholderBackground: vanillaspear },
+		{ id: "vanillaspear_held", label: "vanillaspear_held.png", placeholderBackground: vanillaspear_held },
 
 		{ id: "spear", label: "spear.png", placeholderBackground: spear },
 		{ id: "spear_held", label: "spear_held.png", placeholderBackground: spear_held },

@@ -4,13 +4,11 @@ import { type VersionRange, applyTemplate, loadTemplate } from './utils/template
 import { getVersionMetadata, type VersionMetadata } from 'src/config/minecraft-versions';
 import { DEFAULT_HANDLE_INGREDIENT } from 'src/config/material-pack-creator';
 
-const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe', 'pike'] as const;
+const WEAPON_TYPES = ['dagger', 'hammer', 'club', 'spear', 'quarterstaff', 'glaive', 'sword', 'axe', 'pike', 'vanillaspear'] as const;
 type WeaponType = (typeof WEAPON_TYPES)[number];
 
-const OPTIONAL_WEAPON_TYPES = ['sword', 'axe', 'pike'] as const;
-
 // Weapon Types with held variants only
-const HELD_VARIANT_WEAPONS = ['spear', 'glaive', 'quarterstaff', 'pike'] as const;
+const HELD_VARIANT_WEAPONS = ['spear', 'glaive', 'quarterstaff', 'pike', 'vanillaspear'] as const;
 type HeldVariantWeapon = (typeof HELD_VARIANT_WEAPONS)[number];
 
 interface FabricModCondition {
@@ -101,7 +99,8 @@ const BASE_WEAPON_REACH_BONUS = {
 	glaive: 0.75,
 	sword: 0,
 	axe: 0,
-	pike: 1.5
+	pike: 1.5,
+	vanillaspear: 1.5
 } as const;
 interface FabricAndCondition {
 	condition: 'fabric:and';
@@ -136,6 +135,9 @@ export class MaterialPackBuilder {
 		}
 		if (weaponType === 'pike') {
 			return !this.metadata.features.hasPike;
+		}
+		if (weaponType === 'vanillaspear') {
+			return !this.metadata.features.supportsVanillaSpear;
 		}
 		return false;
 	}
@@ -544,7 +546,7 @@ export class MaterialPackBuilder {
 		if (!tagsFolder) throw new Error('Failed to create tags folder');
 
 		const basicWeaponsTypes = WEAPON_TYPES.filter(type => {
-			if (type === 'sword' || type === 'axe') return false;
+			if (type === 'sword' || type === 'axe' || type === 'vanillaspear') return false;
 			return !this.shouldSkipWeaponType(type);
 		});
 		const weaponsByType = new Map(basicWeaponsTypes.map(type => [type, [] as string[]]));
@@ -575,51 +577,73 @@ export class MaterialPackBuilder {
 		}
 	}
 
-	// Vanilla sword and axe tags
+	// Vanilla tags
 	private async generateVanillaTags(dataFolder: JSZip) {
-		// Sword and axe tags are only available in 1.21.10+ versions of basic weapons
-		if (!this.metadata.features.supportsSwordsAndAxes) {
-			return;
-		}
 
 		const minecraftTagsFolder = dataFolder.folder('minecraft/tags/item');
 		if (!minecraftTagsFolder) throw new Error('Failed to create minecraft tags folder');
 
-		const swords: string[] = [];
-		const axes: string[] = [];
+		// Sword and axe tags are only available in 1.21.10+ versions of basic weapons
+		if (this.metadata.features.supportsSwordsAndAxes) {
+			const swords: string[] = [];
+			const axes: string[] = [];
 
-		for (const material of this.materialPack.materials) {
-			const swordTexture = material.textures.sword;
-			if (swordTexture !== null && swordTexture) {
-				const weaponId = `basicweapons:${material.material_name}_sword`;
-				swords.push(weaponId);
+			for (const material of this.materialPack.materials) {
+				const swordTexture = material.textures.sword;
+				if (swordTexture !== null && swordTexture) {
+					const weaponId = `basicweapons:${material.material_name}_sword`;
+					swords.push(weaponId);
+				}
+
+				const axeTexture = material.textures.axe;
+				if (axeTexture !== null && axeTexture) {
+					const weaponId = `basicweapons:${material.material_name}_axe`;
+					axes.push(weaponId);
+				}
 			}
 
-			const axeTexture = material.textures.axe;
-			if (axeTexture !== null && axeTexture) {
-				const weaponId = `basicweapons:${material.material_name}_axe`;
-				axes.push(weaponId);
+			if (swords.length > 0) {
+				const templateStr = await loadTemplate(this.versionRange, 'data/tags/swords.json');
+				const template = JSON.parse(templateStr);
+				const content = {
+					...template,
+					values: swords
+				};
+				minecraftTagsFolder.file('swords.json', JSON.stringify(content, null, 2));
+			}
+
+			if (axes.length > 0) {
+				const templateStr = await loadTemplate(this.versionRange, 'data/tags/axes.json');
+				const template = JSON.parse(templateStr);
+				const content = {
+					...template,
+					values: axes
+				};
+				minecraftTagsFolder.file('axes.json', JSON.stringify(content, null, 2));
 			}
 		}
 
-		if (swords.length > 0) {
-			const templateStr = await loadTemplate(this.versionRange, 'data/tags/swords.json');
-			const template = JSON.parse(templateStr);
-			const content = {
-				...template,
-				values: swords
-			};
-			minecraftTagsFolder.file('swords.json', JSON.stringify(content, null, 2));
-		}
+		if (this.metadata.features.supportsVanillaSpear) {
 
-		if (axes.length > 0) {
-			const templateStr = await loadTemplate(this.versionRange, 'data/tags/axes.json');
-			const template = JSON.parse(templateStr);
-			const content = {
-				...template,
-				values: axes
-			};
-			minecraftTagsFolder.file('axes.json', JSON.stringify(content, null, 2));
+			// Vanilla Spear tags are only available in 1.21.11+ versions of basic weapons
+			const vanillaspears: string[] = [];
+			for (const material of this.materialPack.materials) {
+				const spearTexture = material.textures.vanillaspear;
+				if (spearTexture !== null && spearTexture) {
+					const weaponId = `basicweapons:${material.material_name}_vanillaspear`;
+					vanillaspears.push(weaponId);
+				}
+			}
+
+			if (vanillaspears.length > 0) {
+				const templateStr = await loadTemplate(this.versionRange, 'data/tags/spears.json');
+				const template = JSON.parse(templateStr);
+				const content = {
+					...template,
+					values: vanillaspears
+				};
+				minecraftTagsFolder.file('spears.json', JSON.stringify(content, null, 2));
+			}
 		}
 	}
 
@@ -653,6 +677,7 @@ export class MaterialPackBuilder {
 	}
 
 	private capitalizeFirstLetter(str: string): string {
+		if (str === 'vanillaspear') return 'Spear';
 		// Split by underscore, capitalize each word, then join with space
 		return str
 			.split('_')

@@ -189,6 +189,9 @@
 							class="extra-signifier version"
 							title="only available in minecraft 1.21.10 and earlier. deprecated since december 2025">« 1.21.10</span>
 					{/if}
+					{#if texture.id === "vanillaspear" || texture.id === "vanillaspear_held"}
+						<span class="extra-signifier version" title="only available in minecraft 1.21.11 and later">1.21.11 »</span>
+					{/if}
 					{#if texture.id === "sword" || texture.id === "axe"}
 						<span class="extra-signifier version" title="only available in minecraft 1.21.10 and later">1.21.10 »</span>
 						<span class="extra-signifier optional" title="not required">optional</span>

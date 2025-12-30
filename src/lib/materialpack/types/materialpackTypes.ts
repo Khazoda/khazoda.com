@@ -28,6 +28,8 @@ type Material = {
 		axe: string | null;
 		pike: string | null;
 		pike_held: string | null;
+		vanillaspear: string | null;
+		vanillaspear_held: string | null;
 	};
 	// Recipes Section
 	recipe_type: RecipeType;

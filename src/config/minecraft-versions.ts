@@ -20,6 +20,7 @@ export interface VersionMetadata {
 		hasRepairIngredientTags: boolean;
 		hasPike: boolean;
 		spearHasRecipes: boolean;
+		supportsVanillaSpear: boolean;
 	};
 }
 
@@ -36,7 +37,8 @@ export const VERSION_METADATA: Record<string, VersionMetadata> = {
 			hasItemsFolder: false,
 			hasRepairIngredientTags: false,
 			hasPike: false,
-			spearHasRecipes: true
+			spearHasRecipes: true,
+			supportsVanillaSpear: false
 		}
 	},
 	[VERSION_RANGE.V1_21_10]: {
@@ -51,7 +53,8 @@ export const VERSION_METADATA: Record<string, VersionMetadata> = {
 			hasItemsFolder: true,
 			hasRepairIngredientTags: true,
 			hasPike: false,
-			spearHasRecipes: true
+			spearHasRecipes: true,
+			supportsVanillaSpear: false
 		}
 	},
 	[VERSION_RANGE.V1_21_11]: {
@@ -66,7 +69,8 @@ export const VERSION_METADATA: Record<string, VersionMetadata> = {
 			hasItemsFolder: true,
 			hasRepairIngredientTags: true,
 			hasPike: true,
-			spearHasRecipes: false
+			spearHasRecipes: false,
+			supportsVanillaSpear: true
 		}
 	}
 };

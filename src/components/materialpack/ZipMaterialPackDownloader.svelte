@@ -10,7 +10,7 @@
 
 	export let materialPack: MaterialPack;
 
-	let selectedVersion: VersionRange = VERSION_RANGE.V1_21;
+	let selectedVersion: VersionRange = VERSION_RANGE.V1_21_11;
 	let showModal = [false];
 	let showPackwizInstructions = false;
 

@@ -69,5 +69,5 @@ export async function getPackFormatFromTemplate(
 }
 
 export const getVersionRanges = () => {
-	return [...VERSION_RANGES].reverse();
+	return [...VERSION_RANGES];
 };

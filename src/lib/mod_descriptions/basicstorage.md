@@ -23,7 +23,7 @@
 
 <div class="markdown-row">
 
-![Static Badge](https://img.shields.io/badge/1.21.10-active_development-seagreen)
+![Static Badge](https://img.shields.io/badge/1.21.11-active_development-seagreen)
 ![Static Badge](https://img.shields.io/badge/1.21.1-bugfixes-dodgerblue)
 
 </div>

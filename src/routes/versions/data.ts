@@ -16,6 +16,7 @@ import helpfulcampfires_project_icon from '$lib/media/mod_icons/helpfulcampfires
 
 // Update these manually as new versions are released
 export let minecraftVersions: MinecraftVersion[] = [
+	{ version: '1.21.11', type: 'major', releaseDate: '2025-12-09', versionGroup: '1.21' },
 	{ version: '1.21.10', type: 'major', releaseDate: '2025-10-07', versionGroup: '1.21' },
 	{ version: '1.21.9', type: 'superceded', releaseDate: '2025-09-30', versionGroup: '1.21' },
 	{ version: '1.21.8', type: 'minor', releaseDate: '2025-07-17', versionGroup: '1.21' },
@@ -60,7 +61,8 @@ export let mods: ModCompatibility[] = [
 			'1.21',
 			'1.21.1',
 			'1.21.5',
-			'1.21.10'
+			'1.21.10',
+			'1.21.11'
 		]
 	},
 	{
@@ -80,32 +82,33 @@ export let mods: ModCompatibility[] = [
 			'1.21.2',
 			'1.21.3',
 			'1.21.4',
-			'1.21.10'
+			'1.21.10',
+			'1.21.11'
 		]
 	},
 	{
 		modId: 'bronze',
 		icon: platform_bronze,
 		name: 'Bronze',
-		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5', '1.21.10']
+		supportedVersions: ['1.20.1', '1.20.2', '1.20.6', '1.21', '1.21.1', '1.21.5', '1.21.10', '1.21.11']
 	},
 	{
 		modId: 'basicstorage',
 		icon: platform_basicstorage,
 		name: 'Basic Storage',
-		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8', '1.21.10']
+		supportedVersions: ['1.20.1', '1.20.2', '1.21', '1.21.1', '1.21.4', '1.21.8', '1.21.10', '1.21.11']
 	},
 	{
 		modId: 'breakerplacer',
 		icon: platform_breakerplacer,
 		name: 'Block Breaker & Block Placer',
-		supportedVersions: ['1.21', '1.21.1', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.10']
+		supportedVersions: ['1.21', '1.21.1', '1.21.5', '1.21.6', '1.21.7', '1.21.8', '1.21.10', '1.21.11']
 	},
 	{
 		modId: 'heirlooms',
 		icon: platform_heirlooms,
 		name: 'Heirlooms',
-		supportedVersions: ['1.21.1', '1.21.9', '1.21.10']
+		supportedVersions: ['1.21.1', '1.21.9', '1.21.10', '1.21.11']
 	},
 	{
 		modId: 'plastar',

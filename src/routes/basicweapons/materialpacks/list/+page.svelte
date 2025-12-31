@@ -17,6 +17,8 @@
 	import SimpleIconsModrinth from "virtual:icons/simple-icons/modrinth";
 	import HugeiconsMessageUpload01 from "virtual:icons/hugeicons/message-upload-01";
 	import SimpleIconsDiscord from "virtual:icons/simple-icons/discord";
+	import HugeiconsCopy01 from "virtual:icons/hugeicons/copy-01";
+	import HugeiconsTick01 from "virtual:icons/hugeicons/tick-01";
 
 	import ModrinthBwDependencyExample from "$lib/materialpack/media/modrinth_bw_dependency_example.png";
 	import HexagonIcon from "virtual:icons/codicon/debug-breakpoint-data-unverified";
@@ -143,6 +145,26 @@
 	}
 
 	let showModal = Array(0).fill(false);
+
+	let copySuccess = false;
+	const markdownHeader = `<div align="center">
+
+### ৹ Requires the [REQUIRED_MOD_NAME](https://REQUIRED_MOD_LINK) Mod ৹ ![Badge](https://cdn.modrinth.com/data/cached_images/f3916821baec16a8354d4a97779a34d0b2e1c767.png)
+### This is a materialpack for the Basic Weapons mod.
+#### Place it in the <kbd>basicweapons_materialpacks</kbd> folder in the minecraft root directory on both the server and client
+#### This folder is created automatically when running Basic Weapons the first time
+
+</div>`;
+
+	async function copyToClipboard(text: string) {
+		try {
+			await navigator.clipboard.writeText(text);
+			copySuccess = true;
+			setTimeout(() => (copySuccess = false), 2000);
+		} catch (err) {
+			console.error("Failed to copy!", err);
+		}
+	}
 </script>
 
 <div class="page-container">
@@ -314,12 +336,21 @@
 					<li>Include images of your weapons</li>
 					<li>List all the materials in your pack, preferably with stats</li>
 					<li>If your material pack has a mod dependency, list it at the top of the description</li>
-					<li>
-						Ideally copy the header of <a
-							href="https://modrinth.com/datapack/bwmp_warden_deeper-and-darker"
-							target="_blank"
-							rel="noopener noreferrer">this description</a
-						>, or create a similar one that conveys the same information.
+					<li>Ideally copy the header below, or create a similar one that conveys the same information.</li>
+					<li style="margin-top: 1rem; list-style: none;">
+						<div class="copy-container">
+							<code
+								style="display: block; white-space: pre-wrap; font-size: 0.8rem; padding: 1rem; background: #1a1a1a; border: 1px solid #3a3a3a; border-radius: 8px; position: relative; color: #ccc;">
+								{markdownHeader}
+								<button class="copy-btn" on:click={() => copyToClipboard(markdownHeader)} title="Copy to clipboard">
+									{#if copySuccess}
+										<HugeiconsTick01 width="18" height="18" color="#4a9eff" />
+									{:else}
+										<HugeiconsCopy01 width="18" height="18" />
+									{/if}
+								</button>
+							</code>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -754,6 +785,36 @@
 
 			&:hover {
 				text-decoration: underline;
+			}
+		}
+	}
+
+	.copy-container {
+		position: relative;
+		overflow: hidden;
+		.copy-btn {
+			display: flex;
+			position: absolute;
+			top: 0.5rem;
+			right: 0.5rem;
+			align-items: center;
+			justify-content: center;
+			padding: 0.4rem;
+			border: 1px solid #3a3a3a;
+			border-radius: 4px;
+			background: #2a2a2a;
+			color: #aaa;
+			cursor: pointer;
+			transition: all 0.2s ease;
+
+			&:hover {
+				border-color: #4a9eff;
+				background: #3a3a3a;
+				color: white;
+			}
+
+			&:active {
+				transform: scale(0.95);
 			}
 		}
 	}

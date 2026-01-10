@@ -60,6 +60,9 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog}>
+	<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
+		><MingcuteCloseFill />
+	</button>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		bind:this={dialog_inner}
@@ -75,9 +78,6 @@
 					<PixelarticonsScriptText /> Full Description
 				</a>
 			{/if}
-			<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-				><MingcuteCloseFill />
-			</button>
 		</div>
 		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft /> swipe left anywhere to close</span>
 		<slot name="header" />
@@ -102,10 +102,10 @@
 		margin: 0 auto 0 0;
 		padding: 0.5rem 0 0.5rem 0.5rem;
 		border: none;
+		outline: none;
 		background: none;
 		color: #e9e9ec;
-		scrollbar-color: #383838 #141414;
-
+		scrollbar-color: #383838 #ff000000;
 		scrollbar-width: thin;
 
 		&::backdrop {
@@ -146,6 +146,46 @@
 	dialog[open] {
 		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
+
+	.modal-close-button {
+			display: flex;
+			z-index: 1000;
+			position: fixed;
+			top: 0.5rem;
+			right: 0.5rem;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+			margin: 0;
+			margin-left: auto;
+
+			padding: 0;
+			border: 2px solid #4a4a4a;
+			border-radius: 0.5rem;
+			background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
+			color: #ffffff;
+			font-size: x-large;
+			line-height: 1;
+			cursor: pointer;
+			transition: all 0.1s ease;
+
+			&:hover {
+				transform: translateY(-1px);
+				border-color: #5a5a5a;
+				background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			}
+
+			&:active {
+				transform: translateY(0);
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			}
+			@media screen and (max-width: 1000px) {
+				display: none;
+			}
+		}
+
 	.dialog-inner {
 		width: 100%;
 		min-height: 100%;
@@ -223,51 +263,9 @@
 				width: min-content;
 			}
 		}
-
-		.modal-close-button {
-			display: flex;
-			position: absolute;
-			top: 0;
-			right: 0;
-			align-items: center;
-			justify-content: center;
-			width: 40px;
-			height: 40px;
-			margin: 0;
-			margin-left: auto;
-			z-index: 1000;
-
-			padding: 0;
-			border: 2px solid #4a4a4a;
-			border-radius: 0.5rem;
-			background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
-			color: #ffffff;
-			font-size: x-large;
-			line-height: 1;
-			cursor: pointer;
-			transition: all 0.1s ease;
-
-			&:hover {
-				transform: translateY(-1px);
-				border-color: #5a5a5a;
-				background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-			}
-
-			&:active {
-				transform: translateY(0);
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-			}
-		}
 	}
 
 	// Mobile
-	@media screen and (max-width: 1000px) {
-		.modal-close-button {
-			display: none;
-		}
-	}
-
 	.mobile-swipe-indicator {
 		display: none;
 	}

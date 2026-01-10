@@ -1736,6 +1736,7 @@
 		&.youtube {
 			color: var(--color-link-youtube);
 			&.disabled {
+				display: none;
 				color: var(--color-text-secondary);
 				pointer-events: none;
 			}

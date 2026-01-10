@@ -242,11 +242,11 @@
 		Build your own material packs for Basic Weapons!
 	</NewFeatureWidget> -->
 
-	<audio id="click-sound" preload="auto">
+	<audio id="click-sound" preload="none">
 		<source src={btn_press_sound} type="audio/mpeg" />
 		Your browser does not support the audio element.
 	</audio>
-	<audio id="audio-activated-sound" preload="auto">
+	<audio id="audio-activated-sound" preload="none">
 		<source src={audio_activated_sound} type="audio/mpeg" />
 		Your browser does not support the audio element.
 	</audio>
@@ -428,11 +428,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			<PlushablesColoured />
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -479,11 +482,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Basic Weapons
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/basicweapons?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -550,11 +556,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Bronze
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -597,11 +606,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Basic Storage
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/basicstorage?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -650,11 +662,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Block Breaker & Block Placer
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -697,11 +712,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Heirlooms
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/heirlooms?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -747,11 +765,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Helpful Campfires
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/helpfulcampfires?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -802,11 +823,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Mecha Soldier PLASTAR
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/plastar?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -849,11 +873,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Kreebles
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -904,11 +931,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Hook a Duck
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -951,11 +981,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Beef & Blade
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/beefandblade?style=flat&label=&color=%2311B848" />
 	</h2>
 
@@ -993,11 +1026,14 @@
 				alt="logo for the currently opened project"
 				width="32"
 				height="32"
+				loading="lazy"
+				decoding="async"
 				draggable="false" />
 			Dwayne 'The Block' Johnson
 		</span>
 		<img
 			alt="latest minecraft version"
+			loading="lazy"
 			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=&color=%2311B848" />
 	</h2>
 

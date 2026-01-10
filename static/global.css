@@ -2,39 +2,46 @@
 	font-weight: 500;
 	src: url("fonts/OpenSauceSans-Regular.ttf") format("truetype");
 	font-family: "OpenSauceSans";
+	font-display: swap;
 }
 
 @font-face {
 	font-weight: 600;
 	src: url("fonts/OpenSauceSans-Medium.ttf") format("truetype");
 	font-family: "OpenSauceSans";
+	font-display: swap;
 }
 
 @font-face {
 	font-weight: 700;
 	src: url("fonts/OpenSauceSans-SemiBold.ttf") format("truetype");
 	font-family: "OpenSauceSans";
+	font-display: swap;
 }
 
 @font-face {
 	font-weight: 800;
 	src: url("fonts/OpenSauceSans-Bold.ttf") format("truetype");
 	font-family: "OpenSauceSans";
+	font-display: swap;
 }
 
 @font-face {
 	src: url("fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
 	font-family: "Quicksand";
+	font-display: swap;
 }
 
 @font-face {
 	src: url("fonts/Lexend-VariableFont_wght.ttf") format("truetype");
 	font-family: "Lexend";
+	font-display: swap;
 }
 
 @font-face {
 	src: url("fonts/pokemon-ds-font.ttf") format("truetype");
 	font-family: "dsFont";
+	font-display: swap;
 }
 
 :root {

@@ -123,6 +123,7 @@
 	};
 
 	let audioEnabled = true;
+	let hintsEnabled = true;
 	enum RegisteredAudio {
 		Click = "click-sound",
 		AudioActivated = "audio-activated-sound"
@@ -132,6 +133,11 @@
 		const storedPreference = localStorage.getItem("audioEnabled");
 		if (storedPreference !== null) {
 			audioEnabled = storedPreference === "true";
+		}
+
+		const storedHintsPreference = localStorage.getItem("hintsEnabled");
+		if (storedHintsPreference !== null) {
+			hintsEnabled = storedHintsPreference === "true";
 		}
 		// Add event listeners
 		window.addEventListener("keydown", handleKeydown);
@@ -181,6 +187,10 @@
 
 	function toggleAudioEnabled(node: HTMLElement) {
 		localStorage.setItem("audioEnabled", audioEnabled.toString());
+	}
+
+	function toggleHintsEnabled(node: HTMLElement) {
+		localStorage.setItem("hintsEnabled", hintsEnabled.toString());
 	}
 
 	function playAudio(node: HTMLElement, audioName?: RegisteredAudio) {
@@ -427,7 +437,7 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal modalID={0} learnMoreURL="/plushables">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={0} learnMoreURL="/plushables">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_plushables}
@@ -471,7 +481,7 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal modalID={1} learnMoreURL="/basicweapons">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={1} learnMoreURL="/basicweapons">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_basicweapons}
@@ -535,7 +545,7 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal modalID={2} learnMoreURL="/bronze">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={2} learnMoreURL="/bronze">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_bronze}
@@ -575,7 +585,7 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal modalID={3} learnMoreURL="/basicstorage">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={3} learnMoreURL="/basicstorage">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_basicstorage}
@@ -621,7 +631,7 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal modalID={4} learnMoreURL="/breakerplacer">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={4} learnMoreURL="/breakerplacer">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_breakerplacer}
@@ -661,7 +671,7 @@
 </Modal>
 
 <!--#region Heirlooms Modal -->
-<Modal bind:showModal modalID={5} learnMoreURL="/heirlooms">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={5} learnMoreURL="/heirlooms">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_heirlooms}
@@ -704,7 +714,7 @@
 </Modal>
 
 <!--#region Helpful Campfires Modal -->
-<Modal bind:showModal modalID={93} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={93} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -756,7 +766,7 @@
 </Modal>
 
 <!--#region PLASTAR Modal -->
-<Modal bind:showModal modalID={95} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={95} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -800,7 +810,7 @@
 </Modal>
 
 <!--#region Kreebles Modal -->
-<Modal bind:showModal modalID={96} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={96} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -852,7 +862,7 @@
 </Modal>
 
 <!--#region Hook a Duck Modal -->
-<Modal bind:showModal modalID={97} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={97} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -896,7 +906,7 @@
 </Modal>
 
 <!-- #region Beef & Blade Modal -->
-<Modal bind:showModal modalID={98} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={98} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -935,7 +945,7 @@
 </Modal>
 
 <!--#region Dwayne The Block Johnson Modal -->
-<Modal bind:showModal modalID={99} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={99} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -1055,6 +1065,18 @@
 					id="audio-volume"
 					bind:checked={audioEnabled}
 					on:change={e => toggleAudioEnabled(e.currentTarget)} />
+			</div>
+		</div>
+
+		<div class="section">
+			<span class="section-title">Visual</span>
+			<div class="audio-section">
+				<label for="hints-toggle">Swipe Hints</label>
+				<input
+					type="checkbox"
+					id="hints-toggle"
+					bind:checked={hintsEnabled}
+					on:change={e => toggleHintsEnabled(e.currentTarget)} />
 			</div>
 		</div>
 

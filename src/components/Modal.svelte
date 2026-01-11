@@ -8,6 +8,7 @@
 	export let modalID: number;
 	export let returnToURL: string | undefined = undefined;
 	export let learnMoreURL: string | undefined = undefined;
+	export let hintsEnabled = true;
 
 	let dialog: HTMLDialogElement;
 	let playHintAnimation = false;
@@ -16,10 +17,14 @@
 	$: if (dialog && showModal[modalID]) {
 		if (!isCurrentlyOpen) {
 			isCurrentlyOpen = true;
-			const hintSeenCount = parseInt(sessionStorage.getItem("swipe_hint_count") || "0");
-			if (hintSeenCount < 2) {
-				playHintAnimation = true;
-				sessionStorage.setItem("swipe_hint_count", (hintSeenCount + 1).toString());
+			if (hintsEnabled) {
+				const hintSeenCount = parseInt(sessionStorage.getItem("swipe_hint_count") || "0");
+				if (hintSeenCount < 2) {
+					playHintAnimation = true;
+					sessionStorage.setItem("swipe_hint_count", (hintSeenCount + 1).toString());
+				} else {
+					playHintAnimation = false;
+				}
 			} else {
 				playHintAnimation = false;
 			}

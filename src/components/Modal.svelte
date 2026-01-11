@@ -194,6 +194,10 @@
 		padding: 1rem;
 		border-radius: 0.5rem;
 		background: #141414;
+		outline: none;
+		&:focus, &:focus-visible {
+			outline: none;
+		}
 	}
 
 	.dialog-top {

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import MingcuteCloseFill from "virtual:icons/mingcute/close-fill";
-	import IcRoundSwipeLeft from "virtual:icons/ic/round-swipe-left";
 	import PixelarticonsScriptText from "~icons/pixelarticons/script-text";
 
 	import { replaceState } from "$app/navigation";
@@ -9,11 +7,27 @@
 	export let showModal: boolean[];
 	export let modalID: number;
 	export let returnToURL: string | undefined = undefined;
-	export let fullDescriptionURL: string | undefined = undefined;
+	export let learnMoreURL: string | undefined = undefined;
 
 	let dialog: HTMLDialogElement;
-	let dialog_inner: HTMLDivElement;
-	$: if (dialog && showModal[modalID]) dialog.showModal();
+	let playHintAnimation = false;
+	let isCurrentlyOpen = false;
+
+	$: if (dialog && showModal[modalID]) {
+		if (!isCurrentlyOpen) {
+			isCurrentlyOpen = true;
+			const hintSeenCount = parseInt(sessionStorage.getItem("swipe_hint_count") || "0");
+			if (hintSeenCount < 2) {
+				playHintAnimation = true;
+				sessionStorage.setItem("swipe_hint_count", (hintSeenCount + 1).toString());
+			} else {
+				playHintAnimation = false;
+			}
+			dialog.showModal();
+		}
+	} else {
+		isCurrentlyOpen = false;
+	}
 
 	// Modal Swipe Detection
 	let touchStartX: number | null = null;
@@ -37,15 +51,15 @@
 		// console.log(distance_swiped);
 
 		if (distance_swiped >= swipe_dist_required) {
-			dialog_inner.style.transform = "translateX(-150%)";
-			dialog_inner.style.opacity = "0";
+			dialog.style.transform = "translateX(-150%)";
+			dialog.style.opacity = "0";
 			dialog.style.setProperty("--mobile-backdrop-opacity", "0");
 
 			setTimeout(() => {
 				document.getElementsByTagName("body")[0].style.overscrollBehavior = "unset";
 				dialog.close();
-				dialog_inner.style.transform = "translateX(0%)";
-				dialog_inner.style.opacity = "1";
+				dialog.style.transform = "translateX(0%)";
+				dialog.style.opacity = "1";
 				dialog.style.setProperty("--mobile-backdrop-opacity", "1");
 			}, 450);
 		}
@@ -59,54 +73,56 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog}>
-	<button autofocus on:click={() => dialog.close()} class="modal-close-button" type="button"
-		><MingcuteCloseFill />
-	</button>
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
-		bind:this={dialog_inner}
-		class="dialog-inner"
-		on:click|stopPropagation
+	<dialog
+		bind:this={dialog}
+		class:animate-hint={playHintAnimation}
+		on:close={closeDialog}
+		on:click|self={closeDialog}
 		on:touchstart|capture={swipeStart}
 		on:touchmove={swipeMove}
 		on:touchend={swipeEnd}>
-		<!-- svelte-ignore a11y-autofocus -->
-		<div class="top-buttons">
-			{#if fullDescriptionURL}
-				<a href={fullDescriptionURL} class="full-description-button" title="View Full Description">
-					<PixelarticonsScriptText /> Full Description
-				</a>
-			{/if}
+		<div class="dialog-top">
+			<div class="swipe-indicator" class:animate-hint={playHintAnimation}></div>
+			<slot name="header" />
 		</div>
-		<span class="mobile-swipe-indicator"><IcRoundSwipeLeft /> swipe left anywhere to close</span>
-		<slot name="header" />
-		<hr />
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div class="dialog-middle" on:click|stopPropagation>
+		<!-- svelte-ignore a11y-autofocus -->
 		<slot name="description" />
 		<hr />
 		<slot name="info" />
 		<hr />
 		<slot name="feature" class="feature-slot" />
 	</div>
+	<div class="dialog-bottom">
+		{#if learnMoreURL}
+			<a href={learnMoreURL} class="learn-more-button" title="Learn More">
+				<PixelarticonsScriptText /> Learn More
+			</a>
+		{/if}
+	</div>
 </dialog>
 
 <style lang="scss">
 	dialog {
 		--mobile-backdrop-opacity: 1;
-		width: 100%;
 
+		flex-direction: column;
+		width: 100%;
 		min-width: 25rem;
 		max-width: 30%;
 		height: 100%;
 		min-height: 100dvh;
 		margin: 0 auto 0 0;
-		padding: 0.5rem 0 0.5rem 0.5rem;
+		padding: 0.5rem;
+		gap: 0.5rem;
 		border: none;
 		outline: none;
 		background: none;
 		color: #e9e9ec;
 		scrollbar-color: #383838 #ff000000;
 		scrollbar-width: thin;
+		transition: transform 0.5s ease, opacity 0.5s ease;
 
 		&::backdrop {
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
@@ -132,71 +148,113 @@
 			background-color: #505050;
 		}
 	}
+	
+	
 	@media screen and (max-width: 1000px) {
 		dialog {
 			width: 100%;
 			min-width: 100%;
+			max-width: 100%;
 			padding: 0.5rem;
 
 			&::backdrop {
 				opacity: var(--mobile-backdrop-opacity);
 			}
 		}
-	}
-	dialog[open] {
-		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-	}
 
-	.modal-close-button {
-			display: flex;
-			z-index: 1000;
-			position: fixed;
-			top: 0.5rem;
-			right: 0.5rem;
-			align-items: center;
-			justify-content: center;
-			width: 40px;
-			height: 40px;
-			margin: 0;
-			margin-left: auto;
-
-			padding: 0;
-			border: 2px solid #4a4a4a;
-			border-radius: 0.5rem;
-			background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
-			color: #ffffff;
-			font-size: x-large;
-			line-height: 1;
-			cursor: pointer;
-			transition: all 0.1s ease;
-
-			&:hover {
-				transform: translateY(-1px);
-				border-color: #5a5a5a;
-				background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-			}
-
-			&:active {
-				transform: translateY(0);
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-			}
-			@media screen and (max-width: 1000px) {
-				display: none;
-			}
+		dialog[open] {
+			animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 		}
 
-	.dialog-inner {
+		dialog[open].animate-hint {
+			animation: zoomAndNudge 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) 1;
+		}
+	}
+	
+	dialog[open] {
+		display: flex;
+	}
+
+	@media screen and (min-width: 1001px) {
+		dialog[open] {
+			animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+	}
+
+	.dialog-top,
+	.dialog-middle,
+	.dialog-bottom {
 		width: 100%;
-		min-height: 100%;
 		margin: 0;
 		padding: 1rem;
 		border-radius: 0.5rem;
 		background: #141414;
-		transition:
-			transform 0.5s ease,
-			opacity 0.5s ease;
 	}
+
+	.dialog-top {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		min-height: 70px;
+		max-height: 70px;
+		border-radius: 0.5rem 0.5rem 0 0;
+		box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
+	}
+
+	.dialog-middle {
+		flex: 1 1 auto;
+		overflow-y: auto;
+		border-radius: 0;
+	}
+
+	.dialog-bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: sticky;
+		bottom: 0;
+		z-index: 10;
+		min-height: 70px;
+		max-height: 70px;
+		border-radius: 0 0 0.5rem 0.5rem;
+		box-shadow: 0 -0.25rem 0.25rem rgba(0, 0, 0, 0.5);
+	}
+
+	.learn-more-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		gap: 0.5rem;
+		border: 2px solid #4a4a4a;
+		border-radius: 0.5rem;
+		background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
+		color: #ffffff;
+		font-weight: 500;
+		font-size: 1rem;
+		text-decoration: none;
+		white-space: nowrap;
+		cursor: pointer;
+		transition: all 0.2s ease;
+
+		&:hover {
+			transform: translateY(-2px);
+			border-color: #5a5a5a;
+			background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+			color: #4ae4ff;
+		}
+
+		&:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+		}
+	}
+
 	@keyframes zoom {
 		from {
 			transform: scale(0.95);
@@ -206,95 +264,71 @@
 		}
 	}
 
-	.top-buttons {
-		display: flex;
-		position: relative;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-		height: 40px;
-		gap: 0.5rem;
-		@media screen and (max-width: 1000px) {
-			height: 0px;
+	@keyframes zoomAndNudge {
+		0% {
+			transform: scale(0.95) translateX(0);
 		}
-		@media screen and (max-width: 500px) {
-			height: 55px;
+		20% {
+			transform: scale(1) translateX(0);
 		}
+		40% {
+			transform: scale(1) translateX(-8px);
+		}
+		100% {
+			transform: scale(1) translateX(0);
+		}
+	}
 
-		.full-description-button {
-			display: flex;
-			z-index: 1000;
+	// Swipe Indicator (Mobile Only)
+	.swipe-indicator {
+		display: none;
+	}
+
+	@media screen and (max-width: 1000px) {
+		.swipe-indicator {
+			display: block;
 			position: absolute;
+			right: 0;
 			top: 0;
-			left: 0;
-			align-items: center;
-			justify-content: center;
-			height: 40px;
-			margin: 0;
-			padding: 0.75rem 1rem;
-			gap: 0.5rem;
-			border: 2px solid #4a4a4a;
-			border-radius: 0.5rem;
-			background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
-			color: #ffffff;
-			font-weight: 500;
-			font-size: 1rem;
-			line-height: 40px;
-			text-decoration: none;
-			white-space: nowrap;
-			cursor: pointer;
-			transition: all 0.1s ease;
-
-			&:hover {
-				transform: translateY(-1px);
-				border-color: #5a5a5a;
-				background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			bottom: 0;
+			width: 100%;
+			max-width: 0;
+			background: #333;
+			pointer-events: none;
+			z-index: 1000;
+			border-radius: 4px 0 0 4px;
+			
+			&.animate-hint {
+				animation: swipeExpand 1s 0.25s cubic-bezier(0.4, 0.0, 0.2, 1) 1 forwards;
 			}
+		}
+	}
 
-			&:active {
-				transform: translateY(0);
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-			}
-
-			@media screen and (max-width: 1000px) {
-				right: 50px;
-				left: unset;
-				width: min-content;
-			}
+	@keyframes swipeExpand {
+		0% {
+			max-width: 4px;
+			opacity: 0.8;
+		}
+		40% {
+			max-width: 30px;
+			opacity: 1;
+		}
+		100% {
+			max-width: 0;
+			opacity: 0;
 		}
 	}
 
 	// Mobile
-	.mobile-swipe-indicator {
-		display: none;
-	}
 	@media screen and (max-width: 1000px) {
-		.mobile-swipe-indicator {
-			display: inline-flex;
-			position: relative;
-			justify-content: flex-start;
-			width: 100%;
-			gap: 0.25rem;
-			color: #868686;
-			font-size: small;
-
-			&::before {
-				position: absolute;
-				top: 50%;
-				left: -1rem;
-				width: 0.5rem;
-				height: 2rem;
-				transform: translateY(-50%);
-				border-radius: 0 0.25rem 0.25rem 0;
-				background-color: rgba(134, 199, 108, 0.8);
-				content: "";
-			}
+		.dialog-top {
+			padding: 0;
 		}
 	}
 
 	hr {
-		border-style: solid;
-		border-color: #868686;
+		margin: 1rem 0;
+		border: none;
+		border-top: 1px solid #868686;
 	}
 </style>

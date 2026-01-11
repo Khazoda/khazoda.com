@@ -30,7 +30,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog bind:this={dialog} on:close={closeDialog} on:click|self={closeDialog} {style}>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div class="dialog-inner" on:click|stopPropagation>
+	<div class="dialog-middle" on:click|stopPropagation>
 		<button
 			autofocus
 			on:click={() => dialog.close()}
@@ -73,7 +73,7 @@
 		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.dialog-inner {
+	.dialog-middle {
 		width: 100%;
 		padding: 1.5rem;
 		border-radius: 0.5rem;

@@ -30,6 +30,14 @@
 	import helpfulcampfires_project_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon.webp";
 	import creator_logo from "$lib/materialpack/media/creator_logo.webp";
 
+	// Project Stylized Names
+	import title_plushables from "$lib/media/stylized_names/plushables.webp";
+	import title_basicweapons from "$lib/media/stylized_names/basicweapons.webp";
+	import title_bronze from "$lib/media/stylized_names/bronze.webp";
+	import title_basicstorage from "$lib/media/stylized_names/basicstorage.webp";
+	import title_breakerplacer from "$lib/media/stylized_names/breakerplacer.webp";
+	import title_heirlooms from "$lib/media/stylized_names/heirlooms.webp";
+
 	// Project Feature Images
 	import plushables_feature from "$lib/media/animated/plushables_feature.webm";
 	import kreebles_feature from "$lib/media/animated/kreebles_feature.webm";
@@ -419,27 +427,17 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal modalID={0} fullDescriptionURL="/plushables">
+<Modal bind:showModal modalID={0} learnMoreURL="/plushables">
 	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={platform_plushables}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			<PlushablesColoured />
-		</span>
 		<img
-			alt="latest minecraft version"
+			src={title_plushables}
+			alt="logo for the currently opened project"
 			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/plushables?style=flat&label=&color=%2311B848" />
+			decoding="async"
+			draggable="false" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Plushables adds over 45 new plushies to Minecraft.</li>
 			<li>From cats to dogs to small mushroom people, wizards and mammoths - there's a plushie for everyone.</li>
@@ -473,27 +471,17 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal modalID={1} fullDescriptionURL="/basicweapons">
+<Modal bind:showModal modalID={1} learnMoreURL="/basicweapons">
 	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={platform_basicweapons}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Basic Weapons
-		</span>
 		<img
-			alt="latest minecraft version"
+			src={title_basicweapons}
+			alt="logo for the currently opened project"
 			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/basicweapons?style=flat&label=&color=%2311B848" />
+			decoding="async"
+			draggable="false" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Basic Weapons adds 6 new vanilla-esque weapon types to Minecraft.</li>
 			<li>Each weapon has a distinctly different combat style.</li>
@@ -547,27 +535,17 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal modalID={2} fullDescriptionURL="/bronze">
+<Modal bind:showModal modalID={2} learnMoreURL="/bronze">
 	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={platform_bronze}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Bronze
-		</span>
 		<img
-			alt="latest minecraft version"
+			src={title_bronze}
+			alt="logo for the currently opened project"
 			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/bronze?style=flat&label=&color=%2311B848" />
+			decoding="async"
+			draggable="false" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Bronze adds two new materials; Tin and Bronze.</li>
 			<li>Bronze can be turned into new armor, weaponry, tools and blocks.</li>
@@ -597,27 +575,17 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal modalID={3} fullDescriptionURL="/basicstorage">
+<Modal bind:showModal modalID={3} learnMoreURL="/basicstorage">
 	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={platform_basicstorage}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Basic Storage
-		</span>
 		<img
-			alt="latest minecraft version"
+			src={title_basicstorage}
+			alt="logo for the currently opened project"
 			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/basicstorage?style=flat&label=&color=%2311B848" />
+			decoding="async"
+			draggable="false" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Basic Storage adds one block - the crate.</li>
 			<li>
@@ -653,27 +621,17 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal modalID={4} fullDescriptionURL="/breakerplacer">
+<Modal bind:showModal modalID={4} learnMoreURL="/breakerplacer">
 	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={platform_breakerplacer}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Block Breaker & Block Placer
-		</span>
 		<img
-			alt="latest minecraft version"
+			src={title_breakerplacer}
+			alt="logo for the currently opened project"
 			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/breakerplacer?style=flat&label=&color=%2311B848" />
+			decoding="async"
+			draggable="false" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Block Breaker & Block Placer is a content mod that adds two new blocks.</li>
 			<li>The Breaker breaks a block in front of it when powered by a redstone pulse.</li>
@@ -703,27 +661,17 @@
 </Modal>
 
 <!--#region Heirlooms Modal -->
-<Modal bind:showModal modalID={5} fullDescriptionURL="/heirlooms">
+<Modal bind:showModal modalID={5} learnMoreURL="/heirlooms">
 	<h2 slot="header" class="header-slot">
-		<span>
-			<img
-				class="project-logo"
-				src={platform_heirlooms}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Heirlooms
-		</span>
 		<img
-			alt="latest minecraft version"
+			src={title_heirlooms}
+			alt="logo for the currently opened project"
 			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/heirlooms?style=flat&label=&color=%2311B848" />
+			decoding="async"
+			draggable="false" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>This mod was made for the 2025 CurseForge ModJam</li>
 			<li>Crafting unstackable items affixes them with the date and the player's name</li>
@@ -751,14 +699,13 @@
 	</div>
 
 	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={heirlooms_feature} disableMuteButton visible={showModal[94]}/>
+		<VideoPlayer src={heirlooms_feature} disableMuteButton visible={showModal[94]} />
 	</div>
 </Modal>
 
 <!--#region Helpful Campfires Modal -->
 <Modal bind:showModal modalID={93} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
-		<span>
 			<img
 				class="project-logo"
 				src={helpfulcampfires_project_icon}
@@ -769,14 +716,9 @@
 				decoding="async"
 				draggable="false" />
 			Helpful Campfires
-		</span>
-		<img
-			alt="latest minecraft version"
-			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/helpfulcampfires?style=flat&label=&color=%2311B848" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>This mod was made for SpookyJam 2025</li>
 			<li>Minecraft's campfires now give buffs in an area</li>
@@ -816,7 +758,6 @@
 <!--#region PLASTAR Modal -->
 <Modal bind:showModal modalID={95} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
-		<span>
 			<img
 				class="project-logo"
 				src={plastar_project_icon}
@@ -827,14 +768,9 @@
 				decoding="async"
 				draggable="false" />
 			Mecha Soldier PLASTAR
-		</span>
-		<img
-			alt="latest minecraft version"
-			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/plastar?style=flat&label=&color=%2311B848" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>This mod was made for Modfest 1.21 in October 2024</li>
 			<li>Tree resin can be turned into modular mecha</li>
@@ -866,7 +802,6 @@
 <!--#region Kreebles Modal -->
 <Modal bind:showModal modalID={96} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
-		<span>
 			<img
 				class="project-logo"
 				src={kreebles_project_icon}
@@ -877,14 +812,9 @@
 				decoding="async"
 				draggable="false" />
 			Kreebles
-		</span>
-		<img
-			alt="latest minecraft version"
-			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/kreebles?style=flat&label=&color=%2311B848" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>This mod was made for SpookyJam 2024</li>
 			<li>Mining stone & deepslate can sometimes yield more than you bargained for.</li>
@@ -924,7 +854,6 @@
 <!--#region Hook a Duck Modal -->
 <Modal bind:showModal modalID={97} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
-		<span>
 			<img
 				class="project-logo"
 				src={hookaduck_project_icon}
@@ -935,14 +864,9 @@
 				decoding="async"
 				draggable="false" />
 			Hook a Duck
-		</span>
-		<img
-			alt="latest minecraft version"
-			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/hookaduck?style=flat&label=&color=%2311B848" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>This mod was made for Modfest: Carnival in 2024</li>
 			<li>Colourful ducks spawn in the rivers of your world.</li>
@@ -974,7 +898,6 @@
 <!-- #region Beef & Blade Modal -->
 <Modal bind:showModal modalID={98} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
-		<span>
 			<img
 				class="project-logo"
 				src={beef_project_icon}
@@ -985,14 +908,9 @@
 				decoding="async"
 				draggable="false" />
 			Beef & Blade
-		</span>
-		<img
-			alt="latest minecraft version"
-			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/beefandblade?style=flat&label=&color=%2311B848" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Beef & Blade is a serverside datapack that lets you prioritize raw beef or leather from cow drops</li>
 			<li>Using a sword will yield leather drops</li>
@@ -1019,7 +937,6 @@
 <!--#region Dwayne The Block Johnson Modal -->
 <Modal bind:showModal modalID={99} returnToURL="/#other-mods">
 	<h2 slot="header" class="header-slot">
-		<span>
 			<img
 				class="project-logo"
 				src={dwayne_project_icon}
@@ -1030,14 +947,9 @@
 				decoding="async"
 				draggable="false" />
 			Dwayne 'The Block' Johnson
-		</span>
-		<img
-			alt="latest minecraft version"
-			loading="lazy"
-			src="https://img.shields.io/modrinth/game-versions/dwayne?style=flat&label=&color=%2311B848" />
 	</h2>
 
-	<div slot="description" class="definition-list">
+	<div slot="description" class="mod-description-points">
 		<ul>
 			<li>Have you ever wanted to place The Block's head in your world? This mod is the solution.</li>
 			<li>Adds dwayne's head as an item, a block, stairs, walls, plant pots and even flowers.</li>
@@ -1289,10 +1201,10 @@
 						}
 					}
 					.island-center-right {
-						max-width: 250px;
 						flex: 0 0 auto;
-						gap: 8px;
+						max-width: 250px;
 						overflow-x: auto;
+						gap: 8px;
 					}
 				}
 
@@ -1319,18 +1231,21 @@
 				.element {
 					display: flex;
 					position: relative;
+					flex-shrink: 0;
 					align-items: center;
 					justify-content: center;
 					width: 52px;
 					height: 52px;
-					flex-shrink: 0;
 					overflow: hidden;
 					background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(28, 28, 28, 0.9));
 					box-shadow:
 						0 2px 4px rgba(0, 0, 0, 0.2),
 						inset 0 1px 1px rgba(255, 255, 255, 0.1),
 						inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-					transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+					transition:
+						background 0.2s ease,
+						box-shadow 0.2s ease,
+						transform 0.2s ease;
 
 					&::after {
 						position: absolute;
@@ -1338,10 +1253,10 @@
 						height: 150%;
 						inset: -25%;
 						transform: translateX(-100%);
+						background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), transparent 50%);
 						content: "";
 						pointer-events: none;
 						transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-						background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), transparent 50%);
 					}
 
 					&:hover {
@@ -1436,15 +1351,14 @@
 		}
 	}
 
-
 	//#region Projects
 	.projects-section {
 		display: flex;
+		row-gap: 2rem;
 		flex-wrap: wrap;
 		justify-content: center;
 		min-width: 192px;
 		padding: 2rem;
-		row-gap: 2rem;
 
 		/* Ensure 3 items per row on desktop */
 		@media screen and (min-width: 576px) {
@@ -1454,19 +1368,19 @@
 
 		@media screen and (max-width: 575px) {
 			flex-direction: column;
-			padding: 2rem calc(2rem + 96px) 2rem 2rem;
 			max-width: 100%;
+			padding: 2rem calc(2rem + 96px) 2rem 2rem;
 		}
 
 		li {
-			position: relative;
-			list-style: none;
 			display: flex;
+			position: relative;
 			justify-content: center;
+			list-style: none;
 
 			@media screen and (min-width: 576px) {
+				flex: 1 1 256px;
 				min-width: 256px;
-				flex: 1 1 256px; 
 				max-width: calc(100% / 3);
 			}
 
@@ -1623,24 +1537,25 @@
 
 	//#region Modal Styles
 	.header-slot {
-		display: flex;
+		display: inline-flex;
+		position: relative;
+
 		flex-direction: row;
+		flex-wrap:nowrap;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: center;
+		height: 2rem;
+		width: 100%;
+		margin-top: 0;
 		gap: 0.5rem;
 		line-height: 2rem;
 		text-wrap: pretty;
-		.project-logo {
-			border-radius: 4px;
-		}
 		img {
 			max-width: 100%;
+			max-height: 70px;
 			height: auto;
-		}
-		span {
-			display: inline-flex;
-			align-items: flex-start;
-			gap: 0.5rem;
+			width: auto;
+			object-fit: contain;
 		}
 		.mod-description-link-button {
 			box-sizing: content-box;
@@ -1679,6 +1594,13 @@
 		flex-direction: column;
 		margin: 1rem 0;
 		gap: 0.5rem;
+	}
+
+	.mod-description-points {
+		ul {
+			margin: 0;
+		}
+
 	}
 
 	.feature-slot {

@@ -4,7 +4,7 @@
 
 </span>
 
-![Plushables Banner](https://cdn.modrinth.com/data/cached_images/cb60b6ec48dfe11d96de002801e9950e443e3c27.webp)
+![Plushables Banner](https://cdn.modrinth.com/data/cached_images/c0717d3cea9c7e458b0cd062be0220282339bc2c.webp)
 
 <div class="markdown-row">
 

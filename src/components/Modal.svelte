@@ -1,11 +1,10 @@
 <script lang="ts">
-	import PixelarticonsScriptText from "~icons/pixelarticons/script-text";
-
 	import { replaceState } from "$app/navigation";
 	import { page } from "$app/stores";
 
 	export let showModal: boolean[];
 	export let modalID: number;
+	export let modIcon: string;
 	export let returnToURL: string | undefined = undefined;
 	export let learnMoreURL: string | undefined = undefined;
 	export let hintsEnabled = true;
@@ -102,7 +101,8 @@
 	<div class="dialog-bottom">
 		{#if learnMoreURL}
 			<a href={learnMoreURL} class="learn-more-button" title="Learn More">
-				<PixelarticonsScriptText /> Learn More
+				<img src={modIcon} alt="">
+				Learn More
 			</a>
 		{/if}
 	</div>
@@ -226,37 +226,49 @@
 		min-height: 70px;
 		max-height: 70px;
 		border-radius: 0 0 0.5rem 0.5rem;
+		padding: 0.5rem;
 		box-shadow: 0 -0.25rem 0.25rem rgba(0, 0, 0, 0.5);
 	}
 
 	.learn-more-button {
+		width: 100%;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.75rem 1.5rem;
-		gap: 0.5rem;
-		border: 2px solid #4a4a4a;
-		border-radius: 0.5rem;
-		background: linear-gradient(135deg, #2a2a2a 0%, #383838 100%);
+		gap: 0.75rem;
+		border: 2px solid #3d3d3d;
+		border-radius: 0.75rem;
+		background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+
 		color: #ffffff;
-		font-weight: 500;
-		font-size: 1rem;
+		font-weight: 400;
+		font-size: 1.25rem;
+		font-family: 'Lexend', sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.075em;
 		text-decoration: none;
 		white-space: nowrap;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+		
+		img {
+			width: 32px;
+			height: 32px;
+			object-fit: contain;
+			image-rendering: pixelated;
+			border-radius: 4px;
+		}
 
 		&:hover {
 			transform: translateY(-2px);
-			border-color: #5a5a5a;
-			background: linear-gradient(135deg, #3a3a3a 0%, #484848 100%);
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-			color: #4ae4ff;
+			border-color: #4a4a4a;
+			background: linear-gradient(135deg, #252525 0%, #323232 100%);
 		}
 
 		&:active {
-			transform: translateY(0);
-			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			transform: translateY(2px);
+			background: linear-gradient(135deg, #181818 0%, #222222 100%);
 		}
 	}
 

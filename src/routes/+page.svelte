@@ -437,7 +437,7 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={0} learnMoreURL="/plushables">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={0} learnMoreURL="/plushables" modIcon={platform_plushables}>
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_plushables}
@@ -481,7 +481,7 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={1} learnMoreURL="/basicweapons">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={1} learnMoreURL="/basicweapons" modIcon={platform_basicweapons}>
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_basicweapons}
@@ -545,7 +545,7 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={2} learnMoreURL="/bronze">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={2} learnMoreURL="/bronze" modIcon={platform_bronze}>
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_bronze}
@@ -585,7 +585,7 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={3} learnMoreURL="/basicstorage">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={3} learnMoreURL="/basicstorage" modIcon={platform_basicstorage}>
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_basicstorage}
@@ -631,7 +631,7 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={4} learnMoreURL="/breakerplacer">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={4} learnMoreURL="/breakerplacer" modIcon={platform_breakerplacer}>
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_breakerplacer}
@@ -671,7 +671,7 @@
 </Modal>
 
 <!--#region Heirlooms Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={5} learnMoreURL="/heirlooms">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={5} learnMoreURL="/heirlooms" modIcon={platform_heirlooms}>
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_heirlooms}
@@ -714,7 +714,7 @@
 </Modal>
 
 <!--#region Helpful Campfires Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={93} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={93} returnToURL="/#other-mods" modIcon={helpfulcampfires_project_icon}>
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -766,7 +766,7 @@
 </Modal>
 
 <!--#region PLASTAR Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={95} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={95} returnToURL="/#other-mods" modIcon={plastar_project_icon}>
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -810,7 +810,7 @@
 </Modal>
 
 <!--#region Kreebles Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={96} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={96} returnToURL="/#other-mods" modIcon={kreebles_project_icon}>
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -862,7 +862,7 @@
 </Modal>
 
 <!--#region Hook a Duck Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={97} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={97} returnToURL="/#other-mods" modIcon={hookaduck_project_icon}>
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -906,7 +906,7 @@
 </Modal>
 
 <!-- #region Beef & Blade Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={98} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={98} returnToURL="/#other-mods" modIcon={beef_project_icon}>
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
@@ -945,7 +945,7 @@
 </Modal>
 
 <!--#region Dwayne The Block Johnson Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={99} returnToURL="/#other-mods">
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={99} returnToURL="/#other-mods" modIcon={dwayne_project_icon}>
 	<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"

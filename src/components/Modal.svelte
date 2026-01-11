@@ -1,9 +1,12 @@
 <script lang="ts">
+	import IconoirBluesky from "virtual:icons/simple-icons/bluesky";
+
 	import { replaceState } from "$app/navigation";
 	import { page } from "$app/stores";
 
 	export let showModal: boolean[];
 	export let modalID: number;
+	export let bskyURL: string | undefined = undefined;
 	export let modIcon: string;
 	export let returnToURL: string | undefined = undefined;
 	export let learnMoreURL: string | undefined = undefined;
@@ -77,18 +80,18 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-	<dialog
-		bind:this={dialog}
-		class:animate-hint={playHintAnimation}
-		on:close={closeDialog}
-		on:click|self={closeDialog}
-		on:touchstart|capture={swipeStart}
-		on:touchmove={swipeMove}
-		on:touchend={swipeEnd}>
-		<div class="dialog-top">
-			<div class="swipe-indicator" class:animate-hint={playHintAnimation}></div>
-			<slot name="header" />
-		</div>
+<dialog
+	bind:this={dialog}
+	class:animate-hint={playHintAnimation}
+	on:close={closeDialog}
+	on:click|self={closeDialog}
+	on:touchstart|capture={swipeStart}
+	on:touchmove={swipeMove}
+	on:touchend={swipeEnd}>
+	<div class="dialog-top">
+		<div class="swipe-indicator" class:animate-hint={playHintAnimation}></div>
+		<slot name="header" />
+	</div>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="dialog-middle" on:click|stopPropagation>
 		<!-- svelte-ignore a11y-autofocus -->
@@ -99,9 +102,14 @@
 		<slot name="feature" class="feature-slot" />
 	</div>
 	<div class="dialog-bottom">
+		{#if bskyURL}
+			<a target="_blank" href={bskyURL} class="bsky-button" title="See Posts">
+				<IconoirBluesky width="32" height="32" />
+			</a>
+		{/if}
 		{#if learnMoreURL}
 			<a href={learnMoreURL} class="learn-more-button" title="Learn More">
-				<img src={modIcon} alt="">
+				<img src={modIcon} alt="" />
 				Learn More
 			</a>
 		{/if}
@@ -127,7 +135,9 @@
 		color: #e9e9ec;
 		scrollbar-color: #383838 #ff000000;
 		scrollbar-width: thin;
-		transition: transform 0.5s ease, opacity 0.5s ease;
+		transition:
+			transform 0.5s ease,
+			opacity 0.5s ease;
 
 		&::backdrop {
 			background-image: linear-gradient(90deg, rgb(0, 0, 0), rgb(17, 17, 17));
@@ -153,8 +163,7 @@
 			background-color: #505050;
 		}
 	}
-	
-	
+
 	@media screen and (max-width: 1000px) {
 		dialog {
 			width: 100%;
@@ -172,10 +181,10 @@
 		}
 
 		dialog[open].animate-hint {
-			animation: zoomAndNudge 1.5s cubic-bezier(0.4, 0.0, 0.2, 1) 1;
+			animation: zoomAndNudge 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1;
 		}
 	}
-	
+
 	dialog[open] {
 		display: flex;
 	}
@@ -193,21 +202,22 @@
 		margin: 0;
 		padding: 1rem;
 		border-radius: 0.5rem;
-		background: #141414;
 		outline: none;
-		&:focus, &:focus-visible {
+		background: #141414;
+		&:focus,
+		&:focus-visible {
 			outline: none;
 		}
 	}
 
 	.dialog-top {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+		z-index: 10;
 		position: sticky;
 		top: 0;
-		z-index: 10;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 		min-height: 70px;
 		max-height: 70px;
 		border-radius: 0.5rem 0.5rem 0 0;
@@ -222,57 +232,72 @@
 
 	.dialog-bottom {
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		z-index: 10;
 		position: sticky;
 		bottom: 0;
-		z-index: 10;
+		align-items: center;
+		justify-content: center;
 		min-height: 70px;
 		max-height: 70px;
-		border-radius: 0 0 0.5rem 0.5rem;
 		padding: 0.5rem;
+		gap: 0.5rem;
+		border-radius: 0 0 0.5rem 0.5rem;
 		box-shadow: 0 -0.25rem 0.25rem rgba(0, 0, 0, 0.5);
+	}
+
+	.learn-more-button,
+	.bsky-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid #3d3d3d;
+		border-radius: 0.75rem;
+		background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+		color: #ffffff;
+		cursor: pointer;
+		transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+
+		&:hover {
+			border-color: #2a2a2a;
+			background: linear-gradient(-135deg, #252525 0%, #2e2e2e 100%);
+		}
+
+		&:active {
+			background: linear-gradient(135deg, #181818 0%, #222222 100%);
+		}
+	}
+
+	.bsky-button {
+		width: 100%;
+		min-width: 54px;
+		max-width: 54px;
+		height: 100%;
+		min-height: 54px;
+		max-height: 54px;
+		&:hover {
+			color:#1188ff;
+		}
 	}
 
 	.learn-more-button {
 		width: 100%;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		height: 54px;
 		gap: 0.75rem;
-		border: 2px solid #3d3d3d;
-		border-radius: 0.75rem;
-		background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
-
-		color: #ffffff;
 		font-weight: 400;
 		font-size: 1.25rem;
-		font-family: 'Lexend', sans-serif;
-		text-transform: uppercase;
+		font-family: "Lexend", sans-serif;
 		letter-spacing: 0.075em;
 		text-decoration: none;
+		text-transform: uppercase;
 		white-space: nowrap;
-		cursor: pointer;
 		transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-		
+
 		img {
 			width: 32px;
 			height: 32px;
 			object-fit: contain;
-			image-rendering: pixelated;
 			border-radius: 4px;
-		}
-
-		&:hover {
-			transform: translateY(-2px);
-			border-color: #4a4a4a;
-			background: linear-gradient(135deg, #252525 0%, #323232 100%);
-		}
-
-		&:active {
-			transform: translateY(2px);
-			background: linear-gradient(135deg, #181818 0%, #222222 100%);
+			image-rendering: pixelated;
 		}
 	}
 
@@ -308,19 +333,19 @@
 	@media screen and (max-width: 1000px) {
 		.swipe-indicator {
 			display: block;
+			z-index: 1000;
 			position: absolute;
-			right: 0;
 			top: 0;
+			right: 0;
 			bottom: 0;
 			width: 100%;
 			max-width: 0;
+			border-radius: 4px 0 0 4px;
 			background: #333;
 			pointer-events: none;
-			z-index: 1000;
-			border-radius: 4px 0 0 4px;
-			
+
 			&.animate-hint {
-				animation: swipeExpand 1s 0.25s cubic-bezier(0.4, 0.0, 0.2, 1) 1 forwards;
+				animation: swipeExpand 1s 0.25s cubic-bezier(0.4, 0, 0.2, 1) 1 forwards;
 			}
 		}
 	}

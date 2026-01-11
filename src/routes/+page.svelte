@@ -437,7 +437,7 @@
 	</footer>
 </div>
 <!--#region Plushables Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={0} learnMoreURL="/plushables" modIcon={platform_plushables}>
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={0} learnMoreURL="/plushables" modIcon={platform_plushables} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+plushables">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_plushables}
@@ -481,7 +481,7 @@
 </Modal>
 
 <!--#region Basic Weapons Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={1} learnMoreURL="/basicweapons" modIcon={platform_basicweapons}>
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={1} learnMoreURL="/basicweapons" modIcon={platform_basicweapons} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+basicweapons">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_basicweapons}
@@ -545,7 +545,7 @@
 </Modal>
 
 <!-- #region Bronze Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={2} learnMoreURL="/bronze" modIcon={platform_bronze}>
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={2} learnMoreURL="/bronze" modIcon={platform_bronze} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+bronze">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_bronze}
@@ -585,7 +585,7 @@
 </Modal>
 
 <!-- #region Basic Storage Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={3} learnMoreURL="/basicstorage" modIcon={platform_basicstorage}>
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={3} learnMoreURL="/basicstorage" modIcon={platform_basicstorage} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+basicstorage">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_basicstorage}
@@ -631,7 +631,7 @@
 </Modal>
 
 <!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={4} learnMoreURL="/breakerplacer" modIcon={platform_breakerplacer}>
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={4} learnMoreURL="/breakerplacer" modIcon={platform_breakerplacer} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+breakerplacer">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_breakerplacer}
@@ -671,7 +671,7 @@
 </Modal>
 
 <!--#region Heirlooms Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={5} learnMoreURL="/heirlooms" modIcon={platform_heirlooms}>
+<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={5} learnMoreURL="/heirlooms" modIcon={platform_heirlooms} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+heirlooms">
 	<h2 slot="header" class="header-slot">
 		<img
 			src={title_heirlooms}

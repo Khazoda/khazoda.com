@@ -227,7 +227,9 @@ button:focus-visible {
 
 /* Border radius presets */
 .squircle {
-	border-radius: 8px;
+	border-radius: 16px;
+	corner-shape: superellipse(2);
+	transition: corner-shape 1s ease-in-out;
 }
 
 /* Stops filtering for pixel art */

@@ -11,17 +11,21 @@
 	import MingcuteCloseFill from "virtual:icons/mingcute/close-fill";
 	import { replaceState } from "$app/navigation";
 
-	export let showModal: boolean[];
-	export let modalID: number;
+	export let activeModal: string | null;
+	export let modalID: string;
 	export let returnToURL: string | undefined = undefined;
 	export let closeButtonOffset: number = 1;
 	export let style: string = "";
 
 	let dialog: HTMLDialogElement;
-	$: if (dialog && showModal[modalID]) dialog.showModal();
+	$: if (dialog && activeModal === modalID) {
+		if (!dialog.open) dialog.showModal();
+	} else if (dialog && dialog.open && activeModal !== modalID) {
+		dialog.close();
+	}
 
 	const closeDialog = () => {
-		showModal[modalID] = false;
+		if (activeModal === modalID) activeModal = null;
 		dialog.close();
 		if (returnToURL) replaceState(returnToURL, {});
 	};

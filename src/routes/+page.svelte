@@ -1,12 +1,5 @@
 <script lang="ts">
 	// Site Exclusive Icons
-	import web_large_plushables from "$lib/media/mod_icons/web_large_plushables.webp";
-	import web_large_basicweapons from "$lib/media/mod_icons/web_large_basicweapons.webp";
-	import web_large_bronze from "$lib/media/mod_icons/web_large_bronze.webp";
-	import web_large_basicstorage from "$lib/media/mod_icons/web_large_basicstorage.webp";
-	import web_large_breakerplacer from "$lib/media/mod_icons/web_large_breakerplacer.webp";
-	import web_large_heirlooms from "$lib/media/mod_icons/web_large_heirlooms.webp";
-
 	import beef_icon from "$lib/media/mod_icons/beef_project_icon_simple.webp";
 	import dwayne_icon from "$lib/media/mod_icons/dwayne_project_icon_simple.webp";
 	import hookaduck_icon from "$lib/media/mod_icons/hookaduck_project_icon_simple.webp";
@@ -14,43 +7,19 @@
 	import plastar_icon from "$lib/media/mod_icons/plastar_project_icon_simple.webp";
 	import helpfulcampfires_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon_simple.webp";
 
-	// Project Icons (Same as Modrinth/Curseforge)
-	import platform_plushables from "$lib/media/mod_icons/platform_plushables.webp";
-	import platform_basicweapons from "$lib/media/mod_icons/platform_basicweapons.webp";
-	import platform_bronze from "$lib/media/mod_icons/platform_bronze.webp";
-	import platform_basicstorage from "$lib/media/mod_icons/platform_basicstorage.webp";
-	import platform_breakerplacer from "$lib/media/mod_icons/platform_breakerplacer.webp";
-	import platform_heirlooms from "$lib/media/mod_icons/platform_heirlooms.webp";
+	import hytale_icon from "$lib/media/island_icons/hytale_icon.webp";
+	import more_mods_icon from "$lib/media/island_icons/more_mods_icon.webp";
+	import version_icon from "$lib/media/island_icons/version_icon.webp";
 
-	import beef_project_icon from "$lib/media/mod_icons/beef_project_icon.webp";
-	import dwayne_project_icon from "$lib/media/mod_icons/dwayne_project_icon.webp";
-	import hookaduck_project_icon from "$lib/media/mod_icons/hookaduck_project_icon.webp";
-	import kreebles_project_icon from "$lib/media/mod_icons/kreebles_project_icon.webp";
-	import plastar_project_icon from "$lib/media/mod_icons/plastar_project_icon.webp";
-	import helpfulcampfires_project_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon.webp";
-	import creator_logo from "$lib/materialpack/media/creator_logo.webp";
-
-	// Project Stylized Names
-	import title_plushables from "$lib/media/stylized_names/plushables.webp";
-	import title_basicweapons from "$lib/media/stylized_names/basicweapons.webp";
-	import title_bronze from "$lib/media/stylized_names/bronze.webp";
-	import title_basicstorage from "$lib/media/stylized_names/basicstorage.webp";
-	import title_breakerplacer from "$lib/media/stylized_names/breakerplacer.webp";
-	import title_heirlooms from "$lib/media/stylized_names/heirlooms.webp";
-
-	// Project Feature Images
-	import plushables_feature from "$lib/media/animated/plushables_feature.webm";
-	import kreebles_feature from "$lib/media/animated/kreebles_feature.webm";
-	import heirlooms_feature from "$lib/media/animated/heirlooms_feature.webm";
-	import helpfulcampfires_feature from "$lib/media/animated/helpfulcampfires_feature.webm";
+	import { mainProjects, otherMods } from "./project_modals";
 
 	import profile_icon from "$lib/media/profile_icon.webp";
 	import materialpack_link_logo from "$lib/media/materialpack-link-logo.webp";
 
 	import btn_press_sound from "$lib/sound/click.mp3";
 	import audio_activated_sound from "$lib/sound/audio_activated.mp3";
-
 	import Modal from "../components/Modal.svelte";
+
 	import IconoirBluesky from "virtual:icons/simple-icons/bluesky";
 	import IconoirDiscord from "virtual:icons/simple-icons/discord";
 	import SimpleIconsModrinth from "virtual:icons/simple-icons/modrinth";
@@ -58,67 +27,48 @@
 	import SimpleIconsGithub from "virtual:icons/simple-icons/github";
 	import SimpleIconsYoutube from "virtual:icons/simple-icons/youtube";
 	import SimpleIconsBookstack from "virtual:icons/simple-icons/bookstack";
-	import IconoirCollageFrame from "virtual:icons/iconoir/collage-frame";
-	import IconoirViewGrid from "virtual:icons/iconoir/view-grid";
 	import IconoirPlanetSat from "virtual:icons/iconoir/planet-sat";
 	import IconoirLensPlus from "virtual:icons/iconoir/lens-plus";
-	import HugeiconsMining01 from "virtual:icons/hugeicons/mining-01";
-	import HugeiconsBlockchain01 from "virtual:icons/hugeicons/blockchain-01";
-	import HugeiconsMonocle01 from "virtual:icons/hugeicons/monocle-01";
-	import PixelarticonsSortNumeric from "~icons/pixelarticons/sort-numeric";
-	import PixelarticonsHumanHandsup from "virtual:icons/pixelarticons/human-handsup";
-	import PixelarticonsGamepad from "~icons/pixelarticons/gamepad";
 	import PixelarticonsSliders2 from "virtual:icons/pixelarticons/sliders-2";
-	import PixelarticonsDice from "virtual:icons/pixelarticons/dice";
-	import HugeiconsDiagonalScrollPoint01 from "virtual:icons/hugeicons/diagonal-scroll-point-01";
 	import PixelArticonsUsers from "virtual:icons/pixelarticons/users";
-	import PixelarticonsCameraFace from "virtual:icons/pixelarticons/camera-face";
 
-	import PlushablesColoured from "components/PlushablesColoured.svelte";
 	import { onMount } from "svelte";
 	import { replaceState, goto } from "$app/navigation";
 	import { page } from "$app/stores";
 
-	import ImportantButton from "src/components/materialpack/ImportantButton.svelte";
-	import FluentNew16Filled from "~icons/fluent/new-16-filled";
-	import { SHOW_NEW_FEATURE_BANNER } from "src/config/general-config";
-	import NewFeatureWidget from "src/components/NewFeatureWidget.svelte";
-	import { fade, fly } from "svelte/transition";
-	import { cubicInOut, cubicOut } from "svelte/easing";
+	import { fly } from "svelte/transition";
+	import { cubicInOut } from "svelte/easing";
 	import CenterModal from "src/components/CenterModal.svelte";
 	import VideoPlayer from "src/components/VideoPlayer.svelte";
 
-	var showModal: boolean[] = Array(1000).fill(false);
+	let activeModal: string | null = null;
 	$: currentlyHovered = "";
-	const hashToModalID: Record<string, number> = {
-		"#plushables": 0,
-		"#basicweapons": 1,
-		"#bronze": 2,
-		"#basicstorage": 3,
-		"#breakerplacer": 4,
-		"#helpfulcampfires": 93,
-		"#heirlooms": 5,
-		"#plastar": 95,
-		"#kreebles": 96,
-		"#hookaduck": 97,
-		"#beefandblade": 98,
-		"#dwayne": 99,
-		"#modjam-mods": 997,
-		"#collaborations": 998,
-		"#other-mods": 999,
-		"#settings": 1000
-	};
-	const modalIDToHash = Object.fromEntries(Object.entries(hashToModalID).map(([hash, id]) => [id, hash]));
 
-	const showDialog = (modalID: number) => {
-		if (!showModal) return;
-		showModal[modalID] = true;
+	const validHashes = [
+		"plushables",
+		"basicweapons",
+		"bronze",
+		"basicstorage",
+		"breakerplacer",
+		"helpfulcampfires",
+		"heirlooms",
+		"plastar",
+		"kreebles",
+		"hookaduck",
+		"beefandblade",
+		"dwayne",
+		"settings",
+		"more-mods",
+		"hytale-mods"
+	];
+
+	const showDialog = (modalID: string) => {
+		activeModal = modalID;
 		document.getElementsByTagName("body")[0].style.overscrollBehavior = "none";
 
 		// Add the hash to the URL when the modal is opened
-		const hash = modalIDToHash[modalID];
-		if (hash) {
-			replaceState($page.url.origin + hash, {});
+		if (validHashes.includes(modalID)) {
+			replaceState($page.url.origin + "#" + modalID, {});
 		}
 	};
 
@@ -144,10 +94,9 @@
 
 		// setTimeout in order to delay and allow document root to be hydrated
 		setTimeout(() => {
-			const hash = $page.url.hash;
-			if (hash && hashToModalID[hash] !== undefined) {
-				const modalID = hashToModalID[hash];
-				showDialog(modalID);
+			const hash = $page.url.hash.replace("#", "");
+			if (hash && validHashes.includes(hash)) {
+				showDialog(hash);
 			}
 		}, 0);
 
@@ -246,20 +195,12 @@
 	}
 </script>
 
-<!-- #region HTML-->
+<!-- HTML -->
 <svelte:head>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Khazoda's Mods</title>
 </svelte:head>
 <div class="page-container">
-	<!-- <NewFeatureWidget
-		title="Material Pack Creator"
-		showBadge={true}
-		icon={creator_logo}
-		href="/basicweapons/materialpacks">
-		Build your own material packs for Basic Weapons!
-	</NewFeatureWidget> -->
-
 	<audio id="click-sound" preload="none">
 		<source src={btn_press_sound} type="audio/mpeg" />
 		Your browser does not support the audio element.
@@ -287,6 +228,15 @@
 				<!-- Separator -->
 				<div class="island-center generic-island-flex-container">
 					<div class="island-center-left generic-island-flex-container">
+						<span class="element squircle hytale-color-background">
+							<button
+								use:handleHover={["Swap to Hytale Mods", true]}
+								on:click={() => showDialog("hytale-mods")}
+								aria-label="Swap to Hytale Mods">
+								<img src={hytale_icon} alt="Hytale Mods" width="42" draggable="false" />
+							</button>
+						</span>
+						<div class="vertical-spacer"></div>
 						<span class="element squircle">
 							<a
 								href="/basicweapons/materialpacks"
@@ -303,23 +253,10 @@
 					<div class="island-center-right generic-island-flex-container">
 						<span class="element squircle">
 							<button
-								use:handleHover={["Mod Jam Mods", true]}
-								on:click={() => showDialog(997)}
-								aria-label="Mod Jam Mods">
-								<PixelarticonsDice width="42" height="42" />
-							</button>
-						</span>
-						<span class="element squircle">
-							<button
-								use:handleHover={["Collaborations", true]}
-								on:click={() => showDialog(998)}
-								aria-label="Collaborations">
-								<PixelarticonsCameraFace width="42" height="42" />
-							</button>
-						</span>
-						<span class="element squircle">
-							<button use:handleHover={["Other Mods", true]} on:click={() => showDialog(999)} aria-label="Other Mods">
-								<PixelarticonsGamepad width="42" height="42" />
+								use:handleHover={["More Mods", true]}
+								on:click={() => showDialog("more-mods")}
+								aria-label="More Mods">
+								<img src={more_mods_icon} alt="More Mods" width="42" draggable="false" />
 							</button>
 						</span>
 						<div class="vertical-spacer"></div>
@@ -328,7 +265,7 @@
 								href="/versions"
 								use:handleHover={["Version Information Table", false]}
 								aria-label="Version Information Table">
-								<PixelarticonsSortNumeric width="42" height="42" />
+								<img src={version_icon} alt="Version Information Table" width="42" draggable="false" />
 							</a>
 						</span>
 					</div>
@@ -339,7 +276,7 @@
 				<div class="island-right generic-island-flex-container">
 					<span class="element circquare-right settings-button">
 						<button
-							on:click={() => showDialog(1000)}
+							on:click={() => showDialog("settings")}
 							aria-label="Settings"
 							use:handleHover={["🔧 Change Preferences", true]}>
 							<PixelarticonsSliders2 width="32" height="32" />
@@ -349,73 +286,20 @@
 			</span>
 		</div>
 	</div>
-	<!-- #region Main Projects -->
+	<!-- Main Projects -->
 	<ul class="projects-section">
-		<li>
-			<button
-				use:handleHover={["Plushables", true]}
-				on:click={() => showDialog(0)}
-				type="button"
-				title="Plushables"
-				tabindex="0">
-				<img src={web_large_plushables} alt="Plushables" width="512" draggable="false" class="ms-edge-imgfix" />
-			</button>
-		</li>
-		<li>
-			<button
-				use:handleHover={["Basic Weapons", true]}
-				on:click={() => showDialog(1)}
-				type="button"
-				title="Basic Weapons"
-				tabindex="0">
-				<img src={web_large_basicweapons} alt="Basic Weapons" width="512" draggable="false" class="ms-edge-imgfix" />
-			</button>
-		</li>
-		<li>
-			<button
-				on:click={() => showDialog(2)}
-				use:handleHover={["Bronze", true]}
-				type="button"
-				title="Bronze"
-				tabindex="0">
-				<img src={web_large_bronze} alt="Bronze" width="512" draggable="false" class="ms-edge-imgfix" />
-			</button>
-		</li>
-		<li>
-			<button
-				on:click={() => showDialog(3)}
-				use:handleHover={["Basic Storage", true]}
-				type="button"
-				title="Basic Storage"
-				tabindex="0">
-				<img src={web_large_basicstorage} alt="Basic Storage" width="512" draggable="false" class="ms-edge-imgfix" />
-			</button>
-		</li>
-		<li>
-			<button
-				on:click={() => showDialog(4)}
-				use:handleHover={["Block Breaker & Block Placer", true]}
-				type="button"
-				title="Block Breaker & Block Placer"
-				tabindex="0">
-				<img
-					src={web_large_breakerplacer}
-					alt="Block Breaker & Block Placer"
-					width="512"
-					draggable="false"
-					class="ms-edge-imgfix" />
-			</button>
-		</li>
-		<li>
-			<button
-				on:click={() => showDialog(5)}
-				use:handleHover={["Heirlooms", true]}
-				type="button"
-				title="Heirlooms"
-				tabindex="0">
-				<img src={web_large_heirlooms} alt="Heirlooms" width="512" draggable="false" class="ms-edge-imgfix" />
-			</button>
-		</li>
+		{#each mainProjects as project}
+			<li>
+				<button
+					use:handleHover={[project.name, true]}
+					on:click={() => showDialog(project.id)}
+					type="button"
+					title={project.name}
+					tabindex="0">
+					<img src={project.image} alt={project.name} width="512" draggable="false" class="ms-edge-imgfix" />
+				</button>
+			</li>
+		{/each}
 	</ul>
 
 	<footer class="footer-section">
@@ -436,611 +320,183 @@
 			>&copy; <a href="https://khazoda.com">khazoda.com</a> {new Date().getFullYear() || 2025}</span>
 	</footer>
 </div>
-<!--#region Plushables Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={0} learnMoreURL="/plushables" modIcon={platform_plushables} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+plushables">
-	<h2 slot="header" class="header-slot">
-		<img
-			src={title_plushables}
-			alt="logo for the currently opened project"
-			loading="lazy"
-			decoding="async"
-			draggable="false" />
-	</h2>
+{#each mainProjects as project}
+	<Modal
+		bind:activeModal
+		{hintsEnabled}
+		modalID={project.id}
+		learnMoreURL={project.learnMoreURL}
+		modIcon={project.platformIcon}
+		bskyURL={project.bskyURL}>
+		<h2 slot="header" class="header-slot">
+			<img src={project.titleImage} alt={project.name} loading="lazy" decoding="async" draggable="false" />
+		</h2>
 
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Plushables adds over 45 new plushies to Minecraft.</li>
-			<li>From cats to dogs to small mushroom people, wizards and mammoths - there's a plushie for everyone.</li>
-			<li>Plushables aims to bring fresh new designs into the game rather than recreating existing Minecraft mobs.</li>
-			<li>Along with Plushables' original designs you will find plushies based on a variety of other mods.</li>
-			<li>Some plushies have custom sounds and particle effects!</li>
-		</ul>
-	</div>
+		<div slot="description">
+			<div class="mod-description-points">
+				<ul>
+					{#each project.description as point}
+						<li>{point}</li>
+					{/each}
+				</ul>
+			</div>
+			{#if project.featureSection}
+				<div class="structured-feature-section">
+					<h3>{project.featureSection.title}</h3>
+					{#each project.featureSection.description as line}
+						<p>{line}</p>
+					{/each}
+					<br />
+					{#each project.featureSection.links as link}
+						<span class="modal-link info {link.separator ? 'margin-top-2' : ''}">
+							{#if link.type === "planet"}<IconoirPlanetSat />
+							{:else if link.type === "lens"}<IconoirLensPlus />
+							{/if}
+							<a href={link.url}>{link.label}</a>
+						</span>
+					{/each}
+				</div>
+			{/if}
+		</div>
 
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/plushables">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/plushables"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/Plushables">View the GitHub repository</a>
-		</span>
-	</div>
-	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={plushables_feature} visible={showModal[0]} disableMuteButton />
-	</div>
-</Modal>
+		<div slot="info" class="info-slot">
+			{#each project.links as link}
+				<span class="modal-link {link.type} {link.separator ? 'separator-top' : ''} {link.disabled ? 'disabled' : ''}">
+					{#if link.type === "modrinth"}<SimpleIconsModrinth />
+					{:else if link.type === "curseforge"}<SimpleIconsCurseforge />
+					{:else if link.type === "youtube"}<SimpleIconsYoutube />
+					{:else if link.type === "github"}<SimpleIconsGithub />
+					{:else if link.type === "wiki"}<SimpleIconsBookstack />
+					{/if}
+					<a href={link.url}>{link.label}</a>
+				</span>
+			{/each}
+		</div>
 
-<!--#region Basic Weapons Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={1} learnMoreURL="/basicweapons" modIcon={platform_basicweapons} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+basicweapons">
-	<h2 slot="header" class="header-slot">
-		<img
-			src={title_basicweapons}
-			alt="logo for the currently opened project"
-			loading="lazy"
-			decoding="async"
-			draggable="false" />
-	</h2>
+		<div slot="feature" class={project.featureVideo ? "feature-slot" : ""}>
+			{#if project.featureVideo}
+				<VideoPlayer src={project.featureVideo} visible={activeModal === project.id} disableMuteButton />
+			{/if}
+		</div>
+	</Modal>
+{/each}
 
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Basic Weapons adds 6 new vanilla-esque weapon types to Minecraft.</li>
-			<li>Each weapon has a distinctly different combat style.</li>
-			<li>
-				Integration with the <a href="https://modrinth.com/mod/better-combat">Better Combat</a> and
-				<a href="https://khazoda.com#bronze">Bronze</a> mods lets Basic Weapons really shine.
-			</li>
-			<li>Sword & axe melee combat is too repetitive - treat yourself to some other options with Basic Weapons!</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/basicweapons">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basicweapons"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/basic-weapons">View the GitHub repository</a>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://basicweapons.khazoda.com/en/latest/">Visit the Wiki</a>
-		</span>
-	</div>
-	<div slot="feature">
-		<h3>Material Packs</h3>
-		<p>Your Basic Weapons experience can be evolved through material packs.</p>
-		<p>
-			These packs add new weapons to your game and are super easy to make! Explore the public list or try your hand at
-			making your own:
-		</p>
-		<br />
-		<span class="modal-link info">
-			<IconoirPlanetSat />
-			<a href="/basicweapons/materialpacks/list">View All Material Packs</a>
-		</span>
-		<span class="modal-link info margin-top-2">
-			<IconoirLensPlus />
-			<a href="/basicweapons/materialpacks/create">Create Your Own</a>
-		</span>
-	</div>
-</Modal>
-
-<!-- #region Bronze Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={2} learnMoreURL="/bronze" modIcon={platform_bronze} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+bronze">
-	<h2 slot="header" class="header-slot">
-		<img
-			src={title_bronze}
-			alt="logo for the currently opened project"
-			loading="lazy"
-			decoding="async"
-			draggable="false" />
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Bronze adds two new materials; Tin and Bronze.</li>
-			<li>Bronze can be turned into new armor, weaponry, tools and blocks.</li>
-			<li>The bronze tier is slightly better than iron across the board, though significantly worse than diamond.</li>
-			<li>Bronze is intended to be a material expansion that fits neatly into vanilla gameplay and progression.</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/bronze">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/bronze-mod"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/bronze">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
-<!-- #region Basic Storage Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={3} learnMoreURL="/basicstorage" modIcon={platform_basicstorage} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+basicstorage">
-	<h2 slot="header" class="header-slot">
-		<img
-			src={title_basicstorage}
-			alt="logo for the currently opened project"
-			loading="lazy"
-			decoding="async"
-			draggable="false" />
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Basic Storage adds one block - the crate.</li>
-			<li>
-				Crates fulfil a nieche in Minecraft's storage blocks that chests, barrels, shulker boxes and bundles don't.
-			</li>
-			<li>Interaction with crates happens directly, rather then in a GUI.</li>
-			<li>Crates can hold up to 1 billion items of a single type, and retain their contents when broken.</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/basicstorage">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/basic-storage"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/basic-storage">View the GitHub repository</a>
-		</span>
-		<span class="modal-link wiki">
-			<SimpleIconsBookstack />
-			<a href="https://modded.wiki/w/Mod:Basic_Storage">Visit the Wiki</a>
-		</span>
-	</div>
-</Modal>
-
-<!-- #region Block Breaker & Block Placer -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={4} learnMoreURL="/breakerplacer" modIcon={platform_breakerplacer} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+breakerplacer">
-	<h2 slot="header" class="header-slot">
-		<img
-			src={title_breakerplacer}
-			alt="logo for the currently opened project"
-			loading="lazy"
-			decoding="async"
-			draggable="false" />
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Block Breaker & Block Placer is a content mod that adds two new blocks.</li>
-			<li>The Breaker breaks a block in front of it when powered by a redstone pulse.</li>
-			<li>The Placer places a block in front of it when powered by a redstone pulse.</li>
-			<li>Considerations have been made in regards to gameplay balance for the Breaker</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/breakerplacer">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/breakerplacer"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/block-breaker-placer">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
-<!--#region Heirlooms Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={5} learnMoreURL="/heirlooms" modIcon={platform_heirlooms} bskyURL="https://bsky.app/search?q=from%3A%40khazoda.com+heirlooms">
-	<h2 slot="header" class="header-slot">
-		<img
-			src={title_heirlooms}
-			alt="logo for the currently opened project"
-			loading="lazy"
-			decoding="async"
-			draggable="false" />
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>This mod was made for the 2025 CurseForge ModJam</li>
-			<li>Crafting unstackable items affixes them with the date and the player's name</li>
-			<li>Look back at the history of your items and feel a greater sense of pride and ownership</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/heirlooms">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/heirlooms"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/@khazoda/videos">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/heirlooms">View the GitHub repository</a>
-		</span>
-	</div>
-
-	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={heirlooms_feature} disableMuteButton visible={showModal[94]} />
-	</div>
-</Modal>
-
-<!--#region Helpful Campfires Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={93} returnToURL="/#other-mods" modIcon={helpfulcampfires_project_icon}>
-	<h2 slot="header" class="header-slot">
+{#each otherMods as project}
+	<Modal bind:activeModal {hintsEnabled} modalID={project.id} returnToURL="/#more-mods" modIcon={project.platformIcon}>
+		<h2 slot="header" class="header-slot">
 			<img
 				class="project-logo"
-				src={helpfulcampfires_project_icon}
-				alt="logo for the currently opened project"
+				src={project.platformIcon}
+				alt={project.name}
 				width="32"
 				height="32"
 				loading="lazy"
 				decoding="async"
 				draggable="false" />
-			Helpful Campfires
-	</h2>
+			{project.name}
+		</h2>
 
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>This mod was made for SpookyJam 2025</li>
-			<li>Minecraft's campfires now give buffs in an area</li>
-			<li>Normal campfires give players a regeneration effect</li>
-			<li>Soul campfires give players a 2 block high jump boost</li>
-			<li>
-				Additionally, a new stump chair block lets you sit around a campfire with your friends, whether they're players
-				or animals
-			</li>
-		</ul>
-	</div>
+		<div slot="description">
+			<div class="mod-description-points">
+				<ul>
+					{#each project.description as point}
+						<li>{point}</li>
+					{/each}
+					{#if project.collabText}
+						<p class="collabtext">
+							<PixelArticonsUsers />
+							This project was a collaboration with
+							{#each project.collabLinks || [] as collab, i}
+								<a href={collab.url}>{collab.name}</a>{i < (project.collabLinks?.length || 0) - 1 ? ", " : ""}
+							{/each}.
+						</p>
+					{/if}
+				</ul>
+			</div>
+			{#if project.featureSection}
+				<div class="structured-feature-section">
+					<h3>{project.featureSection.title}</h3>
+					{#each project.featureSection.description as line}
+						<p>{line}</p>
+					{/each}
+					<br />
+					{#each project.featureSection.links as link}
+						<span class="modal-link info {link.separator ? 'margin-top-2' : ''}">
+							{#if link.type === "planet"}<IconoirPlanetSat />
+							{:else if link.type === "lens"}<IconoirLensPlus />
+							{/if}
+							<a href={link.url}>{link.label}</a>
+						</span>
+					{/each}
+				</div>
+			{/if}
+		</div>
 
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/helpfulcampfires">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/helpfulcampfires"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top disabled">
-			<SimpleIconsYoutube />
-			<a href="https://youtube.com/shorts/6ty8oi36AoQ?si=SHc_ngt0WaAd6-tj">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/helpful-campfires">View the GitHub repository</a>
-		</span>
-	</div>
+		<div slot="info" class="info-slot">
+			{#each project.links as link}
+				<span class="modal-link {link.type} {link.separator ? 'separator-top' : ''} {link.disabled ? 'disabled' : ''}">
+					{#if link.type === "modrinth"}<SimpleIconsModrinth />
+					{:else if link.type === "curseforge"}<SimpleIconsCurseforge />
+					{:else if link.type === "youtube"}<SimpleIconsYoutube />
+					{:else if link.type === "github"}<SimpleIconsGithub />
+					{:else if link.type === "wiki"}<SimpleIconsBookstack />
+					{/if}
+					<a href={link.url}>{link.label}</a>
+				</span>
+			{/each}
+		</div>
 
-	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={helpfulcampfires_feature} visible={showModal[93]} />
-	</div>
-</Modal>
+		<div slot="feature" class={project.featureVideo ? "feature-slot" : ""}>
+			{#if project.featureVideo}
+				<VideoPlayer src={project.featureVideo} visible={activeModal === project.id} disableMuteButton />
+			{/if}
+		</div>
+	</Modal>
+{/each}
 
-<!--#region PLASTAR Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={95} returnToURL="/#other-mods" modIcon={plastar_project_icon}>
-	<h2 slot="header" class="header-slot">
-			<img
-				class="project-logo"
-				src={plastar_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Mecha Soldier PLASTAR
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>This mod was made for Modfest 1.21 in October 2024</li>
-			<li>Tree resin can be turned into modular mecha</li>
-			<li>These mecha can fight for you and perform various tasks.</li>
-			<p class="collabtext">
-				<PixelArticonsUsers />
-				This project was a collaboration with
-				<a href="https://modrinth.com/user/MattiDragon">MattiDragon</a>,
-				<a href="https://modrinth.com/user/Kneelawk">Kneelawk</a>,
-				<a href="https://modrinth.com/user/LemmaEOF">LemmaEOF</a>,
-				<a href="https://modrinth.com/user/Pug">Pug</a> and
-				<a href="https://modrinth.com/user/snakefangox">snakefangox</a>.
-			</p>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/plastar">Download on Modrinth</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Kneelawk/Mecha-Soldier-PLASTAR">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
-<!--#region Kreebles Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={96} returnToURL="/#other-mods" modIcon={kreebles_project_icon}>
-	<h2 slot="header" class="header-slot">
-			<img
-				class="project-logo"
-				src={kreebles_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Kreebles
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>This mod was made for SpookyJam 2024</li>
-			<li>Mining stone & deepslate can sometimes yield more than you bargained for.</li>
-			<li>Kreebles jump out of broken rocks and attack any prey they can see.</li>
-			<li>Bearing the dastardly talisman, a rare drop from kreebles, will make them freeze in fear.</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/kreebles">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/kreebles"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link youtube separator-top">
-			<SimpleIconsYoutube />
-			<a href="https://youtube.com/shorts/SvPh7RlwnbA?feature=shared">Watch Teaser</a>
-		</span>
-		<span class="modal-link youtube">
-			<SimpleIconsYoutube />
-			<a href="https://www.youtube.com/watch?v=0YIWTT6_AQk">Watch Showcase</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/kreebles">View the GitHub repository</a>
-		</span>
-	</div>
-
-	<div class="feature-slot" slot="feature">
-		<VideoPlayer src={kreebles_feature} visible={showModal[96]} disableMuteButton />
-	</div>
-</Modal>
-
-<!--#region Hook a Duck Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={97} returnToURL="/#other-mods" modIcon={hookaduck_project_icon}>
-	<h2 slot="header" class="header-slot">
-			<img
-				class="project-logo"
-				src={hookaduck_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Hook a Duck
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>This mod was made for Modfest: Carnival in 2024</li>
-			<li>Colourful ducks spawn in the rivers of your world.</li>
-			<li>Hook them up with a fishing rod to receive tickets and prizes!</li>
-			<li>
-				For the best experience, try this mod out with the <a href="https://modrinth.com/modpack/modfest-carnival"
-					>Modfest Carnival</a> modpack
-			</li>
-			<p class="collabtext">
-				<PixelArticonsUsers />
-				This project was a collaboration with
-				<a href="https://modrinth.com/user/Dabloon">Dabloon</a>.
-			</p>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/hookaduck">Download on Modrinth</a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/Hook-a-Duck">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
-<!-- #region Beef & Blade Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={98} returnToURL="/#other-mods" modIcon={beef_project_icon}>
-	<h2 slot="header" class="header-slot">
-			<img
-				class="project-logo"
-				src={beef_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Beef & Blade
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Beef & Blade is a serverside datapack that lets you prioritize raw beef or leather from cow drops</li>
-			<li>Using a sword will yield leather drops</li>
-			<li>Using an axe will yield raw beef drops</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/beefandblade">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/beef-blade"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/beef-and-blade">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
-<!--#region Dwayne The Block Johnson Modal -->
-<Modal bind:showModal hintsEnabled={hintsEnabled} modalID={99} returnToURL="/#other-mods" modIcon={dwayne_project_icon}>
-	<h2 slot="header" class="header-slot">
-			<img
-				class="project-logo"
-				src={dwayne_project_icon}
-				alt="logo for the currently opened project"
-				width="32"
-				height="32"
-				loading="lazy"
-				decoding="async"
-				draggable="false" />
-			Dwayne 'The Block' Johnson
-	</h2>
-
-	<div slot="description" class="mod-description-points">
-		<ul>
-			<li>Have you ever wanted to place The Block's head in your world? This mod is the solution.</li>
-			<li>Adds dwayne's head as an item, a block, stairs, walls, plant pots and even flowers.</li>
-			<li>There are some magical interactions with the blocks that are up to you to discover.</li>
-		</ul>
-	</div>
-
-	<div class="info-slot" slot="info">
-		<span class="modal-link modrinth">
-			<SimpleIconsModrinth />
-			<a href="https://modrinth.com/mod/dwayne">Download on Modrinth</a>
-		</span>
-		<span class="modal-link curseforge">
-			<SimpleIconsCurseforge />
-			<a href="https://legacy.curseforge.com/minecraft/mc-mods/dwayne-the-block-johnson"> Download on CurseForge </a>
-		</span>
-		<span class="modal-link github separator-top">
-			<SimpleIconsGithub />
-			<a href="https://github.com/Khazoda/dwayne-the-block-johnson">View the GitHub repository</a>
-		</span>
-	</div>
-</Modal>
-
-<!--#region ModJam Mods Modal-->
-<CenterModal bind:showModal modalID={997} returnToURL="/">
+<!-- More Mods Modal -->
+<CenterModal bind:activeModal modalID="more-mods" returnToURL="/">
 	<h2 slot="header" class="header-slot" style="margin-top: 0;">
-		<span>Mod Jam Mods</span>
+		<span>More Mods</span>
 	</h2>
 
 	<div slot="description">
 		<div class="section">
+			<h3>Mod Jam Mods</h3>
 			<div class="mod-grid">
-				<button on:click={() => showDialog(96)} use:playAudio type="button" title="Kreebles">
+				<button on:click={() => showDialog("kreebles")} use:playAudio type="button" title="Kreebles">
 					<img src={kreebles_icon} alt="Kreebles" draggable="false" />
 					<span class="mod-label">Kreebles</span>
 				</button>
-				<button on:click={() => showDialog(93)} use:playAudio type="button" title="Helpful Campfires">
+				<button on:click={() => showDialog("helpfulcampfires")} use:playAudio type="button" title="Helpful Campfires">
 					<img src={helpfulcampfires_icon} alt="Helpful Campfires" draggable="false" />
 					<span class="mod-label">Helpful Campfires</span>
 				</button>
 			</div>
 		</div>
-	</div>
-</CenterModal>
 
-<!--#region Collaborations Modal -->
-<CenterModal bind:showModal modalID={998} returnToURL="/">
-	<h2 slot="header" class="header-slot" style="margin-top: 0;">
-		<span>Collaborations</span>
-	</h2>
-
-	<div slot="description">
 		<div class="section">
+			<h3>Collaborations</h3>
 			<div class="mod-grid">
-				<button on:click={() => showDialog(95)} use:playAudio type="button" title="Mecha Soldier PLASTAR">
+				<button on:click={() => showDialog("plastar")} use:playAudio type="button" title="Mecha Soldier PLASTAR">
 					<img src={plastar_icon} alt="Mecha Soldier PLASTAR" draggable="false" />
 					<span class="mod-label">PLASTAR</span>
 				</button>
-				<button on:click={() => showDialog(97)} use:playAudio type="button" title="Hook a Duck">
+				<button on:click={() => showDialog("hookaduck")} use:playAudio type="button" title="Hook a Duck">
 					<img src={hookaduck_icon} alt="Hook a Duck" draggable="false" />
 					<span class="mod-label">Hook a Duck</span>
 				</button>
 			</div>
 		</div>
-	</div>
-</CenterModal>
 
-<!-- #region Other Mods Modal -->
-<CenterModal bind:showModal modalID={999} returnToURL="/">
-	<h2 slot="header" class="header-slot" style="margin-top: 0;">
-		<span>Other Mods</span>
-	</h2>
-
-	<div slot="description">
 		<div class="section">
+			<h3>Other Mods</h3>
 			<div class="mod-grid">
-				<button on:click={() => showDialog(98)} use:playAudio type="button" title="Beef & Blade">
+				<button on:click={() => showDialog("beefandblade")} use:playAudio type="button" title="Beef & Blade">
 					<img src={beef_icon} alt="Beef & Blade" draggable="false" />
 					<span class="mod-label">Beef & Blade</span>
 				</button>
-				<button on:click={() => showDialog(99)} use:playAudio type="button" title="Dwayne 'The Block' Johnson">
+				<button on:click={() => showDialog("dwayne")} use:playAudio type="button" title="Dwayne 'The Block' Johnson">
 					<img src={dwayne_icon} alt="Dwayne 'The Block' Johnson" draggable="false" />
 					<span class="mod-label">Dwayne</span>
 				</button>
@@ -1049,8 +505,8 @@
 	</div>
 </CenterModal>
 
-<!-- #region Settings Modal -->
-<CenterModal bind:showModal modalID={1000} returnToURL="/">
+<!-- Settings Modal -->
+<CenterModal bind:activeModal modalID="settings" returnToURL="/">
 	<h2 slot="header" class="header-slot" style="margin-top: 0;">
 		<span>User Preferences</span>
 	</h2>
@@ -1093,7 +549,7 @@
 	</div>
 </CenterModal>
 
-<!-- #region CSS-->
+<!-- CSS -->
 <style lang="scss">
 	:root {
 		--color-text-primary: #e2e2e2;
@@ -1179,11 +635,11 @@
 				flex-direction: row;
 				align-items: center;
 				justify-content: center;
-				gap: 16px;
+				gap: 12px;
 
 				@media screen and (max-width: 575px) {
 					flex-direction: column;
-					gap: 8px;
+					gap: 12px;
 				}
 			}
 			.island-content {
@@ -1217,16 +673,16 @@
 
 					.island-center-left {
 						flex: 0 0 auto;
-						gap: 8px;
+						gap: 12px;
 						.element {
 							outline: 2px solid rgb(35, 35, 35);
 						}
 					}
 					.island-center-right {
 						flex: 0 0 auto;
-						max-width: 250px;
+						max-width: 300px;
 						overflow-x: auto;
-						gap: 8px;
+						gap: 12px;
 					}
 				}
 
@@ -1239,18 +695,22 @@
 				}
 
 				.vertical-spacer {
-					width: 3px;
-					height: 20px;
-					background: var(--color-background-dark);
+					width: 2px;
+					height: 16px;
+					border-radius: 2px;
+					background: rgba(0, 0, 0, 0.25);
 					pointer-events: none;
 
 					@media screen and (max-width: 575px) {
-						width: 20px;
-						height: 3px;
+						width: 16px;
+						height: 2px;
 					}
 				}
 
 				.element {
+					&.hytale-color-background:hover {
+						background: linear-gradient(45deg,#131B27,#284459, #163E24);
+					}
 					display: flex;
 					position: relative;
 					flex-shrink: 0;
@@ -1563,49 +1023,21 @@
 		position: relative;
 
 		flex-direction: row;
-		flex-wrap:nowrap;
+		flex-wrap: nowrap;
 		align-items: center;
 		justify-content: center;
-		height: 2rem;
 		width: 100%;
+		height: 2rem;
 		margin-top: 0;
 		gap: 0.5rem;
 		line-height: 2rem;
 		text-wrap: pretty;
 		img {
-			max-width: 100%;
-			max-height: 70px;
-			height: auto;
 			width: auto;
+			max-width: 100%;
+			height: auto;
+			max-height: 70px;
 			object-fit: contain;
-		}
-		.mod-description-link-button {
-			box-sizing: content-box;
-			display: flex;
-			position: absolute;
-			top: 1.5rem;
-			left: 1.5rem;
-			align-items: center;
-			justify-content: center;
-			aspect-ratio: 1;
-			width: 40px;
-			height: 40px;
-			margin: 0;
-			margin-left: auto;
-			padding: 0;
-			border: none;
-			border-radius: 0.5rem;
-			background: #383838;
-			color: #ffffff;
-			font-size: x-large;
-			line-height: 1;
-			&:hover {
-				background: #484848;
-			}
-			@media screen and (max-width: 1000px) {
-				right: 1.5rem;
-				left: unset;
-			}
 		}
 	}
 	ul {
@@ -1622,12 +1054,12 @@
 		ul {
 			margin: 0;
 		}
-
 	}
 
 	.feature-slot {
 		display: inline-flex;
 		position: relative;
+		flex-direction: column;
 		max-width: 500px;
 		margin-top: 1rem;
 		padding: 12px;
@@ -1663,14 +1095,22 @@
 			background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.02) 100%);
 			content: "";
 		}
-		img,
-		video {
-			z-index: 1;
-			position: relative;
-			width: 100%;
-			object-fit: scale-down;
-			border-radius: 8px;
-			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+	}
+
+	.structured-feature-section {
+		display: flex;
+		flex-direction: column;
+		margin-top: 2rem;
+		h3 {
+			margin: 0;
+			margin-bottom: 0.5rem;
+			font-family: Lexend, system-ui;
+		}
+		p {
+			margin: 0;
+			color: var(--color-text-secondary);
+			font-size: 0.95rem;
+			line-height: 1.4;
 		}
 	}
 
@@ -1678,6 +1118,9 @@
 		.modal-link.wiki {
 			margin-bottom: 2rem;
 		}
+	}
+	.margin-top-2 {
+		margin-top: 1rem;
 	}
 	a {
 		color: var(--color-link);
@@ -1798,7 +1241,6 @@
 		}
 	}
 
-	//#region Other Styles
 	.top-left-container {
 		z-index: 1000;
 		position: fixed;
@@ -1811,12 +1253,6 @@
 		font-weight: 800;
 		font-size: 0.8rem;
 		font-family: Quicksand, sans-serif;
-
-		img {
-			width: auto;
-			height: 3rem;
-			margin-bottom: auto;
-		}
 	}
 
 	@keyframes pulse {
@@ -1831,7 +1267,6 @@
 		}
 	}
 
-	// Mobile styles
 	@media screen and (max-width: 1000px) {
 		.top-left-container {
 			display: none;
@@ -1847,12 +1282,12 @@
 		flex-direction: row;
 		gap: 0.5rem;
 	}
+
 	.square-btn {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		margin: 0;
-		padding: 0;
 		padding: 0.4rem;
 		border: none;
 		border-radius: 25%;
@@ -1868,7 +1303,6 @@
 		}
 	}
 
-	// Mobile styles
 	@media screen and (max-width: 1000px) {
 		.audio-toggle {
 			top: 0.5rem;
@@ -1877,10 +1311,12 @@
 		}
 	}
 
-	//#region Other Mods Modal
 	.section {
 		margin: 3rem 0;
 
+		h3 {
+			margin-bottom: 1rem;
+		}
 		&:first-child {
 			margin-top: 1.5rem;
 		}
@@ -1940,11 +1376,9 @@
 
 				&:hover {
 					background: linear-gradient(to bottom, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-
 					img {
 						transform: scale(1.1);
 					}
-
 					.mod-label {
 						color: var(--color-text-primary);
 						opacity: 1;

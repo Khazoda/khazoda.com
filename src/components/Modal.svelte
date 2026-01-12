@@ -4,8 +4,8 @@
 	import { replaceState } from "$app/navigation";
 	import { page } from "$app/stores";
 
-	export let showModal: boolean[];
-	export let modalID: number;
+	export let activeModal: string | null;
+	export let modalID: string;
 	export let bskyURL: string | undefined = undefined;
 	export let modIcon: string;
 	export let returnToURL: string | undefined = undefined;
@@ -16,7 +16,7 @@
 	let playHintAnimation = false;
 	let isCurrentlyOpen = false;
 
-	$: if (dialog && showModal[modalID]) {
+	$: if (dialog && activeModal === modalID) {
 		if (!isCurrentlyOpen) {
 			isCurrentlyOpen = true;
 			if (hintsEnabled) {
@@ -32,6 +32,9 @@
 			}
 			dialog.showModal();
 		}
+	} else if (dialog && dialog.open && activeModal !== modalID) {
+		isCurrentlyOpen = false;
+		dialog.close();
 	} else {
 		isCurrentlyOpen = false;
 	}
@@ -44,18 +47,15 @@
 	const swipeStart = (e: TouchEvent) => {
 		touchEndX = null;
 		touchStartX = e.targetTouches[0].clientX;
-		// console.log('start: ' + touchStartX);
 	};
 	const swipeMove = (e: TouchEvent) => {
 		touchEndX = e.targetTouches[0].clientX;
-		// console.log(touchEndX);
 	};
 	const swipeEnd = (e: TouchEvent) => {
 		// Null check
 		if (!touchStartX || !touchEndX) return;
 
 		const distance_swiped = touchStartX - touchEndX;
-		// console.log(distance_swiped);
 
 		if (distance_swiped >= swipe_dist_required) {
 			dialog.style.transform = "translateX(-150%)";
@@ -72,7 +72,7 @@
 		}
 	};
 	const closeDialog = () => {
-		showModal[modalID] = false;
+		if (activeModal === modalID) activeModal = null;
 		dialog.close();
 		if (returnToURL) replaceState(returnToURL, {});
 		else replaceState($page.url.origin, {});

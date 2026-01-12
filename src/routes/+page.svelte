@@ -7,10 +7,11 @@
 	import plastar_icon from "$lib/media/mod_icons/plastar_project_icon_simple.webp";
 	import helpfulcampfires_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon_simple.webp";
 
-	import hytale_icon from "$lib/media/island_icons/hytale_icon.webp";
-	import minecraft_icon from "$lib/media/island_icons/minecraft_icon.webp";
-	import more_mods_icon from "$lib/media/island_icons/more_mods_icon.webp";
-	import version_icon from "$lib/media/island_icons/version_icon.webp";
+	import hytale_icon from "$lib/media/island_icons/hytale_icon.svg";
+	import minecraft_icon from "$lib/media/island_icons/minecraft_icon.svg";
+	import more_mods_icon from "$lib/media/island_icons/more_mods_icon.svg";
+	import version_icon from "$lib/media/island_icons/version_icon.svg";
+	import settings_icon from "$lib/media/island_icons/settings_icon.svg";
 
 	import { mainProjects, otherMods, hytaleProjects } from "./project_modals";
 
@@ -45,29 +46,29 @@
 
 	let activeModal: string | null = null;
 	$: currentlyHovered = "";
-	
+
 	// Initialize platform - check URL hash first, then localStorage
 	let platformReady = false;
-	let currentPlatform: 'minecraft' | 'hytale' = 'minecraft';
-	
+	let currentPlatform: "minecraft" | "hytale" = "minecraft";
+
 	if (browser) {
 		const hash = window.location.hash.replace("#", "");
 		if (hash === "hytale") {
 			currentPlatform = "hytale";
 		} else {
-			const stored = localStorage.getItem('currentPlatform');
-			if (stored === 'hytale') {
-				currentPlatform = 'hytale';
+			const stored = localStorage.getItem("currentPlatform");
+			if (stored === "hytale") {
+				currentPlatform = "hytale";
 			}
 		}
-		// Small delay to allow fade-in transitions to be visible
+		// Delay platformReady to trigger fade-in transitions
 		setTimeout(() => {
 			platformReady = true;
 		}, 10);
 	}
-	
-	$: currentProjects = currentPlatform === 'minecraft' ? mainProjects : hytaleProjects;
-	$: swapButtonLabel = currentPlatform === 'minecraft' ? "Swap to Hytale Mods" : "Swap to Minecraft Mods";
+
+	$: currentProjects = currentPlatform === "minecraft" ? mainProjects : hytaleProjects;
+	$: swapButtonLabel = currentPlatform === "minecraft" ? "Swap to Hytale Mods" : "Swap to Minecraft Mods";
 
 	const validHashes = [
 		"plushables",
@@ -122,7 +123,7 @@
 		// setTimeout in order to delay and allow document root to be hydrated
 		setTimeout(() => {
 			const hash = $page.url.hash.replace("#", "");
-			
+
 			// Check if hash is "hytale" and set platform accordingly
 			if (hash === "hytale") {
 				currentPlatform = "hytale";
@@ -246,8 +247,8 @@
 	<title>Khazoda's Mods</title>
 	<style>
 		html {
-			scrollbar-gutter: unset;
 			overflow-y: hidden;
+			scrollbar-gutter: unset;
 		}
 
 		@media screen and (max-width: 1000px) {
@@ -277,8 +278,38 @@
 		<div class="island">
 			<span class="island-content generic-island-flex-container">
 				<div class="island-left generic-island-flex-container">
-					<span class="element circquare-left inert" use:handleHover={["Thanks for visiting! 😎", false]}>
-						<img src={profile_icon} alt="Khazoda" width="64" draggable="false" /></span>
+					<span
+						class={"element circquare-left " +
+							(platformReady
+								? currentPlatform === "hytale"
+									? "minecraft-color-background"
+									: "hytale-color-background"
+								: "")}>
+						<button
+							use:handleHover={[swapButtonLabel, true]}
+							on:click={() => {
+								currentPlatform = currentPlatform === "minecraft" ? "hytale" : "minecraft";
+								currentlyHovered = currentPlatform === "minecraft" ? "Swap to Hytale Mods" : "Swap to Minecraft Mods";
+								// Save platform preference to localStorage
+								localStorage.setItem("currentPlatform", currentPlatform);
+								// Update URL hash
+								if (currentPlatform === "hytale") {
+									replaceState($page.url.origin + "#hytale", {});
+								} else {
+									replaceState($page.url.origin, {});
+								}
+							}}
+							aria-label={swapButtonLabel}>
+							{#if platformReady}
+								<img
+									in:fade={{ duration: 300, delay: 50 }}
+									src={currentPlatform === "minecraft" ? hytale_icon : minecraft_icon}
+									alt={swapButtonLabel}
+									width="42"
+									draggable="false" />
+							{/if}
+						</button>
+					</span>
 				</div>
 				<!-- Separator -->
 				<div class="vertical-spacer"></div>
@@ -286,27 +317,7 @@
 				<div class="island-center generic-island-flex-container">
 					{#if platformReady}
 						<div class="island-center-left generic-island-flex-container" in:fade={{ duration: 300, delay: 50 }}>
-							<span class={"element squircle " + (currentPlatform === 'hytale' ? 'minecraft-color-background' : 'hytale-color-background')}>
-								<button
-									use:handleHover={[swapButtonLabel, true]}
-									on:click={() => {
-										currentPlatform = currentPlatform === 'minecraft' ? 'hytale' : 'minecraft';
-										currentlyHovered = currentPlatform === 'minecraft' ? "Swap to Hytale Mods" : "Swap to Minecraft Mods";
-										// Save platform preference to localStorage
-										localStorage.setItem("currentPlatform", currentPlatform);
-										// Update URL hash
-										if (currentPlatform === 'hytale') {
-											replaceState($page.url.origin + "#hytale", {});
-										} else {
-											replaceState($page.url.origin, {});
-										}
-									}}
-									aria-label={swapButtonLabel}>
-									<img src={currentPlatform === 'minecraft' ? hytale_icon : minecraft_icon} alt={swapButtonLabel} width="42" draggable="false" />
-								</button>
-							</span>
-							{#if currentPlatform === 'minecraft'}
-								<div class="vertical-spacer"></div>
+							{#if currentPlatform === "minecraft"}
 								<span class="element squircle">
 									<a
 										href="/basicweapons/materialpacks"
@@ -322,7 +333,7 @@
 							{/if}
 						</div>
 						<div class="island-center-right generic-island-flex-container" in:fade={{ duration: 300, delay: 50 }}>
-							{#if currentPlatform === 'minecraft'}
+							{#if currentPlatform === "minecraft"}
 								<span class="element squircle">
 									<button
 										use:handleHover={["More Mods", true]}
@@ -353,7 +364,14 @@
 							on:click={() => showDialog("settings")}
 							aria-label="Settings"
 							use:handleHover={["🔧 Change Preferences", true]}>
-							<PixelarticonsSliders2 width="32" height="32" />
+							{#if platformReady}
+								<img
+									in:fade={{ duration: 300, delay: 50 }}
+									src={settings_icon}
+									alt="Settings"
+									width="42"
+									draggable="false" />
+							{/if}
 						</button>
 					</span>
 				</div>
@@ -366,8 +384,8 @@
 			{#key currentPlatform}
 				<ul class="projects-section" in:fly={{ y: 20, duration: 400, delay: 200 }} out:fly={{ y: -20, duration: 200 }}>
 					<!-- Remove once hytale mods are made! -->
-					 {#if currentPlatform === 'hytale'}
-						<h1>🐤 Hytale Mods Coming Soon! :) </h1>
+					{#if currentPlatform === "hytale"}
+						<h1>🐤 Hytale Mods Coming Soon! :)</h1>
 					{/if}
 					{#each currentProjects as project}
 						<li>
@@ -711,8 +729,6 @@
 		--color-link-youtube: rgb(255, 92, 113);
 	}
 
-
-
 	.page-container {
 		display: flex;
 		position: static;
@@ -850,12 +866,6 @@
 				}
 
 				.element {
-					&.hytale-color-background:hover {
-						background: linear-gradient(45deg,#131B27,#284459, #163E24);
-					}
-					&.minecraft-color-background:hover {
-						background: linear-gradient(45deg,#61371F,#854F2B, #70B237);
-					}
 					display: flex;
 					position: relative;
 					flex-shrink: 0;
@@ -873,6 +883,12 @@
 						background 0.2s ease,
 						box-shadow 0.2s ease,
 						transform 0.2s ease;
+					&.hytale-color-background:hover {
+						background: linear-gradient(45deg, #131b27, #284459, #163e24);
+					}
+					&.minecraft-color-background:hover {
+						background: linear-gradient(45deg, #61371f, #854f2b, #70b237);
+					}
 
 					&::after {
 						position: absolute;
@@ -933,14 +949,28 @@
 
 					&.circquare-left {
 						border-radius: 100% 8px 8px 100%;
+						button {
+							justify-content: flex-end;
+						}
 						@media screen and (max-width: 575px) {
 							border-radius: 100% 100% 8px 8px;
+							button {
+								justify-content: center;
+								align-items: flex-end;
+							}
 						}
 					}
 					&.circquare-right {
 						border-radius: 8px 100% 100% 8px;
+						button {
+							justify-content: flex-start;
+						}
 						@media screen and (max-width: 575px) {
 							border-radius: 8px 8px 100% 100%;
+							button {
+								justify-content: center;
+								align-items: flex-start;
+							}
 						}
 					}
 				}
@@ -1124,9 +1154,9 @@
 
 	//#region Footer
 	.footer-section {
+		display: flex;
 		position: fixed;
 		bottom: 0;
-		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
 		height: 128px;

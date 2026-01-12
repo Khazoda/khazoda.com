@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 84 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,0,-94)">
+        <g id="minecraft_icon" transform="matrix(0.65625,0,0,0.65625,0,94)">
+            <rect x="0" y="0" width="128" height="128" style="fill:none;"/>
+            <g transform="matrix(1.29806,0,0,1.29806,9.481481,-112.536155)">
+                <path d="M33,127L51,127L51,136L60,136L60,163L51,163L51,154L33,154L33,163L24,163L24,136L33,136L33,127Z" style="fill:none;stroke:white;stroke-width:6.11px;"/>
+            </g>
+            <g transform="matrix(1.29806,0,0,1.29806,9.481481,-112.536155)">
+                <rect x="15" y="109" width="18" height="18" style="fill:none;stroke:white;stroke-width:6.11px;"/>
+            </g>
+            <g transform="matrix(1.29806,0,0,1.29806,9.481481,-112.536155)">
+                <rect x="51" y="109" width="18" height="18" style="fill:none;stroke:white;stroke-width:6.11px;"/>
+            </g>
+        </g>
+    </g>
+</svg>

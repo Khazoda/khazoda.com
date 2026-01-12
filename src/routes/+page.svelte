@@ -8,10 +8,11 @@
 	import helpfulcampfires_icon from "$lib/media/mod_icons/helpfulcampfires_project_icon_simple.webp";
 
 	import hytale_icon from "$lib/media/island_icons/hytale_icon.webp";
+	import minecraft_icon from "$lib/media/island_icons/minecraft_icon.webp";
 	import more_mods_icon from "$lib/media/island_icons/more_mods_icon.webp";
 	import version_icon from "$lib/media/island_icons/version_icon.webp";
 
-	import { mainProjects, otherMods } from "./project_modals";
+	import { mainProjects, otherMods, hytaleProjects } from "./project_modals";
 
 	import profile_icon from "$lib/media/profile_icon.webp";
 	import materialpack_link_logo from "$lib/media/materialpack-link-logo.webp";
@@ -35,14 +36,38 @@
 	import { onMount } from "svelte";
 	import { replaceState, goto } from "$app/navigation";
 	import { page } from "$app/stores";
+	import { browser } from "$app/environment";
 
-	import { fly } from "svelte/transition";
+	import { fly, fade } from "svelte/transition";
 	import { cubicInOut } from "svelte/easing";
 	import CenterModal from "src/components/CenterModal.svelte";
 	import VideoPlayer from "src/components/VideoPlayer.svelte";
 
 	let activeModal: string | null = null;
 	$: currentlyHovered = "";
+	
+	// Initialize platform - check URL hash first, then localStorage
+	let platformReady = false;
+	let currentPlatform: 'minecraft' | 'hytale' = 'minecraft';
+	
+	if (browser) {
+		const hash = window.location.hash.replace("#", "");
+		if (hash === "hytale") {
+			currentPlatform = "hytale";
+		} else {
+			const stored = localStorage.getItem('currentPlatform');
+			if (stored === 'hytale') {
+				currentPlatform = 'hytale';
+			}
+		}
+		// Small delay to allow fade-in transitions to be visible
+		setTimeout(() => {
+			platformReady = true;
+		}, 10);
+	}
+	
+	$: currentProjects = currentPlatform === 'minecraft' ? mainProjects : hytaleProjects;
+	$: swapButtonLabel = currentPlatform === 'minecraft' ? "Swap to Hytale Mods" : "Swap to Minecraft Mods";
 
 	const validHashes = [
 		"plushables",
@@ -59,7 +84,8 @@
 		"dwayne",
 		"settings",
 		"more-mods",
-		"hytale-mods"
+		"hytale-mods",
+		"hytale"
 	];
 
 	const showDialog = (modalID: string) => {
@@ -89,13 +115,19 @@
 		if (storedHintsPreference !== null) {
 			hintsEnabled = storedHintsPreference === "true";
 		}
+
 		// Add event listeners
 		window.addEventListener("keydown", handleKeydown);
 
 		// setTimeout in order to delay and allow document root to be hydrated
 		setTimeout(() => {
 			const hash = $page.url.hash.replace("#", "");
-			if (hash && validHashes.includes(hash)) {
+			
+			// Check if hash is "hytale" and set platform accordingly
+			if (hash === "hytale") {
+				currentPlatform = "hytale";
+				localStorage.setItem("currentPlatform", "hytale");
+			} else if (hash && validHashes.includes(hash)) {
 				showDialog(hash);
 			}
 		}, 0);
@@ -123,6 +155,20 @@
 		}
 
 		return {
+			update(newParams: [string, boolean]) {
+				const [newLabel] = newParams;
+				const newHandleEnter = () => (currentlyHovered = newLabel);
+				// Remove old listeners
+				node.removeEventListener("mouseover", handleEnter);
+				node.removeEventListener("focus", handleEnter);
+				node.removeEventListener("mouseenter", handleEnter);
+				node.removeEventListener("focusin", handleEnter);
+				// Add new listeners with updated label
+				node.addEventListener("mouseover", newHandleEnter);
+				node.addEventListener("focus", newHandleEnter);
+				node.addEventListener("mouseenter", newHandleEnter);
+				node.addEventListener("focusin", newHandleEnter);
+			},
 			destroy() {
 				node.removeEventListener("mouseover", handleEnter);
 				node.removeEventListener("focus", handleEnter);
@@ -227,48 +273,65 @@
 				<div class="vertical-spacer"></div>
 				<!-- Separator -->
 				<div class="island-center generic-island-flex-container">
-					<div class="island-center-left generic-island-flex-container">
-						<span class="element squircle hytale-color-background">
-							<button
-								use:handleHover={["Swap to Hytale Mods", true]}
-								on:click={() => showDialog("hytale-mods")}
-								aria-label="Swap to Hytale Mods">
-								<img src={hytale_icon} alt="Hytale Mods" width="42" draggable="false" />
-							</button>
-						</span>
-						<div class="vertical-spacer"></div>
-						<span class="element squircle">
-							<a
-								href="/basicweapons/materialpacks"
-								use:handleHover={["Material Pack Creator", false]}
-								aria-label="Material Pack Creator">
-								<img
-									src={materialpack_link_logo}
-									alt="Creator Logo"
-									width="52"
-									draggable="false"
-									class="no-resample" /></a>
-						</span>
-					</div>
-					<div class="island-center-right generic-island-flex-container">
-						<span class="element squircle">
-							<button
-								use:handleHover={["More Mods", true]}
-								on:click={() => showDialog("more-mods")}
-								aria-label="More Mods">
-								<img src={more_mods_icon} alt="More Mods" width="42" draggable="false" />
-							</button>
-						</span>
-						<div class="vertical-spacer"></div>
-						<span class="element squircle">
-							<a
-								href="/versions"
-								use:handleHover={["Version Information Table", false]}
-								aria-label="Version Information Table">
-								<img src={version_icon} alt="Version Information Table" width="42" draggable="false" />
-							</a>
-						</span>
-					</div>
+					{#if platformReady}
+						<div class="island-center-left generic-island-flex-container" in:fade={{ duration: 300, delay: 50 }}>
+							<span class={"element squircle " + (currentPlatform === 'hytale' ? 'minecraft-color-background' : 'hytale-color-background')}>
+								<button
+									use:handleHover={[swapButtonLabel, true]}
+									on:click={() => {
+										currentPlatform = currentPlatform === 'minecraft' ? 'hytale' : 'minecraft';
+										currentlyHovered = currentPlatform === 'minecraft' ? "Swap to Hytale Mods" : "Swap to Minecraft Mods";
+										// Save platform preference to localStorage
+										localStorage.setItem("currentPlatform", currentPlatform);
+										// Update URL hash
+										if (currentPlatform === 'hytale') {
+											replaceState($page.url.origin + "#hytale", {});
+										} else {
+											replaceState($page.url.origin, {});
+										}
+									}}
+									aria-label={swapButtonLabel}>
+									<img src={currentPlatform === 'minecraft' ? hytale_icon : minecraft_icon} alt={swapButtonLabel} width="42" draggable="false" />
+								</button>
+							</span>
+							{#if currentPlatform === 'minecraft'}
+								<div class="vertical-spacer"></div>
+								<span class="element squircle">
+									<a
+										href="/basicweapons/materialpacks"
+										use:handleHover={["Material Pack Creator", false]}
+										aria-label="Material Pack Creator">
+										<img
+											src={materialpack_link_logo}
+											alt="Creator Logo"
+											width="52"
+											draggable="false"
+											class="no-resample" /></a>
+								</span>
+							{/if}
+						</div>
+						<div class="island-center-right generic-island-flex-container" in:fade={{ duration: 300, delay: 50 }}>
+							{#if currentPlatform === 'minecraft'}
+								<span class="element squircle">
+									<button
+										use:handleHover={["More Mods", true]}
+										on:click={() => showDialog("more-mods")}
+										aria-label="More Mods">
+										<img src={more_mods_icon} alt="More Mods" width="42" draggable="false" />
+									</button>
+								</span>
+								<div class="vertical-spacer"></div>
+								<span class="element squircle">
+									<a
+										href="/versions"
+										use:handleHover={["Version Information Table", false]}
+										aria-label="Version Information Table">
+										<img src={version_icon} alt="Version Information Table" width="42" draggable="false" />
+									</a>
+								</span>
+							{/if}
+						</div>
+					{/if}
 				</div>
 				<!-- Separator -->
 				<div class="vertical-spacer"></div>
@@ -287,20 +350,30 @@
 		</div>
 	</div>
 	<!-- Main Projects -->
-	<ul class="projects-section">
-		{#each mainProjects as project}
-			<li>
-				<button
-					use:handleHover={[project.name, true]}
-					on:click={() => showDialog(project.id)}
-					type="button"
-					title={project.name}
-					tabindex="0">
-					<img src={project.image} alt={project.name} width="512" draggable="false" class="ms-edge-imgfix" />
-				</button>
-			</li>
-		{/each}
-	</ul>
+	{#if platformReady}
+		<div in:fade={{ duration: 300, delay: 100 }}>
+			{#key currentPlatform}
+				<ul class="projects-section" in:fly={{ y: 20, duration: 400, delay: 200 }} out:fly={{ y: -20, duration: 200 }}>
+					<!-- Remove once hytale mods are made! -->
+					 {#if currentPlatform === 'hytale'}
+						<h1>🐤 Hytale Mods Coming Soon! :) </h1>
+					{/if}
+					{#each currentProjects as project}
+						<li>
+							<button
+								use:handleHover={[project.name, true]}
+								on:click={() => showDialog(project.id)}
+								type="button"
+								title={project.name}
+								tabindex="0">
+								<img src={project.image} alt={project.name} width="512" draggable="false" class="ms-edge-imgfix" />
+							</button>
+						</li>
+					{/each}
+				</ul>
+			{/key}
+		</div>
+	{/if}
 
 	<footer class="footer-section">
 		<span class="socials-container">
@@ -321,6 +394,67 @@
 	</footer>
 </div>
 {#each mainProjects as project}
+	<Modal
+		bind:activeModal
+		{hintsEnabled}
+		modalID={project.id}
+		learnMoreURL={project.learnMoreURL}
+		modIcon={project.platformIcon}
+		bskyURL={project.bskyURL}>
+		<h2 slot="header" class="header-slot">
+			<img src={project.titleImage} alt={project.name} loading="lazy" decoding="async" draggable="false" />
+		</h2>
+
+		<div slot="description">
+			<div class="mod-description-points">
+				<ul>
+					{#each project.description as point}
+						<li>{point}</li>
+					{/each}
+				</ul>
+			</div>
+			{#if project.featureSection}
+				<div class="structured-feature-section">
+					<h3>{project.featureSection.title}</h3>
+					{#each project.featureSection.description as line}
+						<p>{line}</p>
+					{/each}
+					<br />
+					{#each project.featureSection.links as link}
+						<span class="modal-link info {link.separator ? 'margin-top-2' : ''}">
+							{#if link.type === "planet"}<IconoirPlanetSat />
+							{:else if link.type === "lens"}<IconoirLensPlus />
+							{/if}
+							<a href={link.url}>{link.label}</a>
+						</span>
+					{/each}
+				</div>
+			{/if}
+		</div>
+
+		<div slot="info" class="info-slot">
+			{#each project.links as link}
+				<span class="modal-link {link.type} {link.separator ? 'separator-top' : ''} {link.disabled ? 'disabled' : ''}">
+					{#if link.type === "modrinth"}<SimpleIconsModrinth />
+					{:else if link.type === "curseforge"}<SimpleIconsCurseforge />
+					{:else if link.type === "youtube"}<SimpleIconsYoutube />
+					{:else if link.type === "github"}<SimpleIconsGithub />
+					{:else if link.type === "wiki"}<SimpleIconsBookstack />
+					{/if}
+					<a href={link.url}>{link.label}</a>
+				</span>
+			{/each}
+		</div>
+
+		<div slot="feature" class={project.featureVideo ? "feature-slot" : ""}>
+			{#if project.featureVideo}
+				<VideoPlayer src={project.featureVideo} visible={activeModal === project.id} disableMuteButton />
+			{/if}
+		</div>
+	</Modal>
+{/each}
+
+{#each hytaleProjects as project}
 	<Modal
 		bind:activeModal
 		{hintsEnabled}
@@ -568,6 +702,11 @@
 
 	:global(html) {
 		scrollbar-gutter: unset;
+		overflow-y: hidden;
+
+		@media screen and (max-width: 1000px) {
+			overflow-y: auto;
+		}
 	}
 
 	.page-container {
@@ -578,7 +717,6 @@
 		justify-content: space-between;
 		width: 100%;
 		height: auto;
-		min-height: calc(100dvh - 16px);
 	}
 
 	//#region Island
@@ -710,6 +848,9 @@
 				.element {
 					&.hytale-color-background:hover {
 						background: linear-gradient(45deg,#131B27,#284459, #163E24);
+					}
+					&.minecraft-color-background:hover {
+						background: linear-gradient(45deg,#61371F,#854F2B, #70B237);
 					}
 					display: flex;
 					position: relative;
@@ -979,6 +1120,8 @@
 
 	//#region Footer
 	.footer-section {
+		position: fixed;
+		bottom: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;

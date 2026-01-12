@@ -144,7 +144,7 @@
 		};
 	}
 
-	let showModal = Array(0).fill(false);
+	let activeModal: string | null = null;
 
 	let copySuccess = false;
 	const markdownHeader = `<div align="center">
@@ -181,7 +181,7 @@
 							label="Submit Material Pack"
 							color="blue"
 							backdropCorner="top-right"
-							onClick={() => (showModal[0] = true)} />
+							onClick={() => (activeModal = "0")} />
 					</span>
 				{/if}
 			</div>
@@ -288,7 +288,7 @@
 	{/if}
 </div>
 
-<CenterModal bind:showModal modalID={0}>
+<CenterModal bind:activeModal modalID="0">
 	<div slot="description" class="modal-content">
 		<h2>Submit Your Material Pack</h2>
 		<div class="submission-steps">
@@ -368,7 +368,6 @@
 	.page-container {
 		width: 100%;
 		max-width: 1200px;
-		min-height: calc(100dvh - 16px);
 		margin: 0 auto;
 		padding: 2rem;
 		@media screen and (max-width: 1000px) {

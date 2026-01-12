@@ -443,3 +443,78 @@ export const otherMods: Project[] = [
 		]
 	}
 ];
+
+export const hytaleProjects: Project[] = [
+	// {
+	// 	id: "hytale-placeholder-1",
+	// 	name: "Hytale Mod 1",
+	// 	image: platform_plushables, // Placeholder
+	// 	titleImage: title_plushables, // Placeholder
+	// 	platformIcon: platform_plushables,
+	// 	description: [
+	// 		"This is a placeholder for a future Hytale mod.",
+	// 		"Content will be added as Hytale mods are developed."
+	// 	],
+	// 	links: []
+	// },
+	// {
+	// 	id: "hytale-placeholder-2",
+	// 	name: "Hytale Mod 2",
+	// 	image: platform_basicweapons, // Placeholder
+	// 	titleImage: title_basicweapons, // Placeholder
+	// 	platformIcon: platform_basicweapons,
+	// 	description: [
+	// 		"This is a placeholder for a future Hytale mod.",
+	// 		"Content will be added as Hytale mods are developed."
+	// 	],
+	// 	links: []
+	// },
+	// {
+	// 	id: "hytale-placeholder-3",
+	// 	name: "Hytale Mod 3",
+	// 	image: platform_bronze, // Placeholder
+	// 	titleImage: title_bronze, // Placeholder
+	// 	platformIcon: platform_bronze,
+	// 	description: [
+	// 		"This is a placeholder for a future Hytale mod.",
+	// 		"Content will be added as Hytale mods are developed."
+	// 	],
+	// 	links: []
+	// },
+	// {
+	// 	id: "hytale-placeholder-4",
+	// 	name: "Hytale Mod 4",
+	// 	image: platform_basicstorage, // Placeholder
+	// 	titleImage: title_basicstorage, // Placeholder
+	// 	platformIcon: platform_basicstorage,
+	// 	description: [
+	// 		"This is a placeholder for a future Hytale mod.",
+	// 		"Content will be added as Hytale mods are developed."
+	// 	],
+	// 	links: []
+	// },
+	// {
+	// 	id: "hytale-placeholder-5",
+	// 	name: "Hytale Mod 5",
+	// 	image: platform_breakerplacer, // Placeholder
+	// 	titleImage: title_breakerplacer, // Placeholder
+	// 	platformIcon: platform_breakerplacer,
+	// 	description: [
+	// 		"This is a placeholder for a future Hytale mod.",
+	// 		"Content will be added as Hytale mods are developed."
+	// 	],
+	// 	links: []
+	// },
+	// {
+	// 	id: "hytale-placeholder-6",
+	// 	name: "Hytale Mod 6",
+	// 	image: platform_heirlooms, // Placeholder
+	// 	titleImage: title_heirlooms, // Placeholder
+	// 	platformIcon: platform_heirlooms,
+	// 	description: [
+	// 		"This is a placeholder for a future Hytale mod.",
+	// 		"Content will be added as Hytale mods are developed."
+	// 	],
+	// 	links: []
+	// }
+];

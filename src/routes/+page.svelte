@@ -241,10 +241,21 @@
 	}
 </script>
 
-<!-- HTML -->
 <svelte:head>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Khazoda's Mods</title>
+	<style>
+		html {
+			scrollbar-gutter: unset;
+			overflow-y: hidden;
+		}
+
+		@media screen and (max-width: 1000px) {
+			html {
+				overflow-y: auto;
+			}
+		}
+	</style>
 </svelte:head>
 <div class="page-container">
 	<audio id="click-sound" preload="none">
@@ -700,14 +711,7 @@
 		--color-link-youtube: rgb(255, 92, 113);
 	}
 
-	:global(html) {
-		scrollbar-gutter: unset;
-		overflow-y: hidden;
 
-		@media screen and (max-width: 1000px) {
-			overflow-y: auto;
-		}
-	}
 
 	.page-container {
 		display: flex;

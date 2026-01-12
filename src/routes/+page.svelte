@@ -887,7 +887,7 @@
 						background: linear-gradient(45deg, #131b27, #284459, #163e24);
 					}
 					&.minecraft-color-background:hover {
-						background: linear-gradient(45deg, #61371f, #854f2b, #70b237);
+						background: linear-gradient(45deg, #271b13, #593c28, #163e24);
 					}
 
 					&::after {

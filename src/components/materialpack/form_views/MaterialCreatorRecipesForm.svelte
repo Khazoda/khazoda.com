@@ -38,7 +38,7 @@
 	export let activeTab: string;
 	export let onTabChange: (newTab: string) => void;
 
-	let showModal: boolean[] = Array(1).fill(false);
+	let activeModal: string | null = null;
 
 	type ValidFields = keyof Omit<
 		Material,
@@ -231,7 +231,7 @@
 </script>
 
 <form class="material-recipes-form">
-	<button class="delete-material-btn" on:click={() => (showModal[0] = true)} type="button">
+	<button class="delete-material-btn" on:click={() => (activeModal = "0")} type="button">
 		<HugeiconsDelete02 width="24" height="24" />
 	</button>
 	<h2 class="grid-wide">
@@ -381,7 +381,7 @@
 </form>
 
 <!-- Delete Material Modal -->
-<CenterModal modalID={0} bind:showModal>
+<CenterModal modalID="0" bind:activeModal>
 	<div slot="description" class="modal-content">
 		<h2>Delete Material?</h2>
 		<p>

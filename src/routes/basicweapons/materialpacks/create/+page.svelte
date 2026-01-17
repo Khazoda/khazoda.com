@@ -69,7 +69,7 @@
 	let materials: Material[] = [];
 	let pack_icon: string | null = null; // For pack.png
 
-	let showModal: boolean[] = Array(8).fill(false);
+	let activeModal: string | null = null;
 	let packToDelete: string | null = null;
 
 	let show_pack_creator = false;
@@ -148,7 +148,7 @@
 			return;
 		}
 
-		showModal[3] = true;
+		activeModal = "3";
 	}
 
 	function handleStartFresh() {
@@ -177,7 +177,7 @@
 
 	function handleDeleteClick(packId: string) {
 		packToDelete = packId;
-		showModal[0] = true;
+		activeModal = "0";
 	}
 
 	function confirmDelete() {
@@ -189,15 +189,15 @@
 	}
 
 	function showBrowserStorageInfoModal() {
-		showModal[1] = true;
+		activeModal = "1";
 	}
 
 	function showMaterialPackSettingsInfoModal() {
-		showModal[2] = true;
+		activeModal = "2";
 	}
 
 	function handleAddMaterial() {
-		showModal[5] = true;
+		activeModal = "5";
 	}
 
 	function handleAddEmptyMaterial() {
@@ -347,7 +347,7 @@
 		const invalidInputs = document.querySelectorAll("input:invalid");
 		if (invalidInputs.length > 0) {
 			// Show the validation error modal instead of an alert
-			showModal[7] = true;
+			activeModal = "7";
 			return;
 		}
 
@@ -468,7 +468,7 @@
 								{#if activeTab}
 									{#if getContentType(activeTab) === "settings"}
 										<!-- Use indices of 100+ for InfoTabs, just incase :) -->
-										<InfoTab title="Material Pack Settings" modalID={100}>
+										<InfoTab title="Material Pack Settings" bind:activeModal modalID="100">
 											<h4 class="blurb">Change the main settings for your material pack</h4>
 											<div class="modal-content">
 												<h4>Pack Icon</h4>
@@ -520,7 +520,8 @@
 											{#if activeTab.startsWith(`material-${index}-`)}
 												<InfoTab
 													title="Edit Weapon Stats"
-													modalID={101}
+													bind:activeModal
+													modalID="101"
 													offset={9}
 													disabled={!activeTab.endsWith("-stats")}>
 													<h4 class="blurb">Set a material's various weapon stats</h4>
@@ -553,7 +554,8 @@
 												</InfoTab>
 												<InfoTab
 													title="Weapon Recipes"
-													modalID={102}
+													bind:activeModal
+													modalID="102"
 													offset={5}
 													disabled={!activeTab.endsWith("-recipes")}>
 													<h4 class="blurb">Choose a recipe type and tweak weapons' recipes</h4>
@@ -593,7 +595,8 @@
 												</InfoTab>
 												<InfoTab
 													title="Weapon Textures"
-													modalID={103}
+													bind:activeModal
+													modalID="103"
 													offset={1}
 													disabled={!activeTab.endsWith("-assets")}>
 													<h4 class="blurb">Set the weapon textures for your material</h4>
@@ -667,14 +670,14 @@
 {/if}
 
 <!-- LocalStorage Info Modal -->
-<CenterModal bind:showModal modalID={1}>
+<CenterModal bind:activeModal modalID="1">
 	<div slot="description" class="modal-content info-modal">
 		<h2>Browser Storage Information</h2>
 		<!-- Storage usage meter -->
 		<div class="storage-meter">
 			<h3>Storage Usage</h3>
 			<span class="storage-disclaimer">5MB is a pessimistic guess. Your browser may allow more.</span>
-			{#key showModal[1]}
+			{#key activeModal === "1"}
 				{#if typeof window !== "undefined"}
 					{@const usedStorage = getLocalStorageSize()}
 					{@const totalStorage = MAX_LOCAL_STORAGE_SIZE}
@@ -717,7 +720,7 @@
 </CenterModal>
 
 <!-- Material Pack Delete Modal -->
-<CenterModal bind:showModal modalID={0}>
+<CenterModal bind:activeModal modalID="0">
 	<div slot="description" class="modal-content">
 		<h2>Delete Material Pack?</h2>
 		<p>Are you sure you want to delete this material pack? This action cannot be undone.</p>
@@ -729,7 +732,7 @@
 </CenterModal>
 
 <!-- Material Pack Creation Options Modal -->
-<CenterModal bind:showModal modalID={3}>
+<CenterModal bind:activeModal modalID="3">
 	<div slot="description" class="modal-content">
 		<h2>Create New Material Pack</h2>
 		<p>Choose how you'd like to start your new material pack:</p>
@@ -738,7 +741,7 @@
 				<span class="option-title">Start Fresh</span>
 				<span class="option-desc">Begin with a blank material pack</span>
 			</button>
-			<button class="option-btn" on:click={() => (showModal[4] = true)}>
+			<button class="option-btn" on:click={() => (activeModal = "4")}>
 				<span class="option-title">From Template</span>
 				<span class="option-desc">Start from a pre-made template</span>
 			</button>
@@ -751,7 +754,7 @@
 	</div>
 </CenterModal>
 <!-- Material Pack Template Selection Modal -->
-<CenterModal bind:showModal modalID={4}>
+<CenterModal bind:activeModal modalID="4">
 	<div slot="description" class="modal-content">
 		<h2>Choose a Template</h2>
 		<div class="template-options">
@@ -770,7 +773,7 @@
 	</div>
 </CenterModal>
 <!-- Material Creation Options Modal -->
-<CenterModal bind:showModal modalID={5}>
+<CenterModal bind:activeModal modalID="5">
 	<div slot="description" class="modal-content">
 		<h2>Create New Material</h2>
 		<div class="creation-options">
@@ -778,7 +781,7 @@
 				<span class="option-title">Empty Material</span>
 				<span class="option-desc">Begin with a blank material</span>
 			</button>
-			<button class="option-btn" on:click={() => (showModal[6] = true)}>
+			<button class="option-btn" on:click={() => (activeModal = "6")}>
 				<span class="option-title">From Template</span>
 				<span class="option-desc">Use a vanilla material's stats as a starting point</span>
 			</button>
@@ -787,7 +790,7 @@
 </CenterModal>
 
 <!-- Add Material Template Selection Modal -->
-<CenterModal bind:showModal modalID={6}>
+<CenterModal bind:activeModal modalID="6">
 	<div slot="description" class="modal-content">
 		<h2>Choose a Template</h2>
 		<div class="template-options">
@@ -807,7 +810,7 @@
 </CenterModal>
 
 <!-- Add this new modal at the bottom with the other modals -->
-<CenterModal bind:showModal modalID={7}>
+<CenterModal bind:activeModal modalID="7">
 	<div slot="description" class="modal-content">
 		<h2>Invalid Fields Detected</h2>
 		<p>Are you sure you want to leave this page? Invalid fields may be saved.</p>

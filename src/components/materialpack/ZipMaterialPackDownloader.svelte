@@ -11,7 +11,7 @@
 	export let materialPack: MaterialPack;
 
 	let selectedVersion: VersionRange = VERSION_RANGE.V1_21_11;
-	let showModal = [false];
+	let activeModal: string | null = null;
 	let showPackwizInstructions = false;
 
 	async function downloadMaterialPack() {
@@ -45,11 +45,11 @@
 	}
 </script>
 
-<button class="export-pack-btn" on:click={() => (showModal[0] = true)} title="Download as ZIP">
+<button class="export-pack-btn" on:click={() => (activeModal = "0")} title="Download as ZIP">
 	<HugeiconsZip01 width="32" height="32" />
 </button>
 
-<CenterModal bind:showModal modalID={0}>
+<CenterModal bind:activeModal modalID="0">
 	<div slot="description" class="modal-content">
 		{#if showPackwizInstructions}
 			<h2>Install Material Pack with Packwiz</h2>

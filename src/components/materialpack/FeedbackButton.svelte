@@ -5,14 +5,14 @@
 	import SimpleIconsDiscord from "virtual:icons/simple-icons/discord";
 	import big_tater from "$lib/materialpack/media/big-tater.png";
 
-	let showModal: boolean[] = Array(1).fill(false);
+	let activeModal: string | null = null;
 </script>
 
-<button class="feedback-button" on:click={() => (showModal[0] = true)} title="Feedback">
+<button class="feedback-button" on:click={() => (activeModal = "0")} title="Feedback">
 	<HugeiconsMessageMultiple01 width="100%" height="100%" />
 </button>
 
-<CenterModal bind:showModal modalID={0} style="overflow: hidden;">
+<CenterModal bind:activeModal modalID="0" style="overflow: hidden;">
 	<div slot="description" class="modal-content">
 		<h2>Feedback & Support</h2>
 		<ul>

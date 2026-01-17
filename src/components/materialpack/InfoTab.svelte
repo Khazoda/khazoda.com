@@ -4,14 +4,14 @@
 	import { closeDialog } from "../CenterModal.svelte";
 
 	export let title: string;
-	export let showModal: boolean[] = Array(9).fill(false);
-	export let modalID: number;
+	export let activeModal: string | null;
+	export let modalID: string;
 	export let offset: number = 1;
 	export let disabled: boolean = false;
 </script>
 
 {#if !disabled}
-	<button class="info-tab" on:click={() => (showModal[modalID] = true)} style="right: {offset}rem;">
+	<button class="info-tab" on:click={() => (activeModal = modalID)} style="right: {offset}rem;">
 		<HugeiconsInformationSquare width="32" height="32" />
 	</button>
 {:else}
@@ -20,7 +20,7 @@
 	</button>
 {/if}
 <!-- Content is passed through the slot -->
-<CenterModal bind:showModal {modalID} closeButtonOffset={3.5}>
+<CenterModal bind:activeModal {modalID} closeButtonOffset={3.5}>
 	<div slot="description" class="modal-content info-modal">
 		<h2>{title}</h2>
 		<slot />

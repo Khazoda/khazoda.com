@@ -12,7 +12,7 @@
 
 	export let downloadOptions: Record<string, DownloadOption>;
 
-	let showModal: boolean[] = Array(1).fill(false);
+	let activeModal: string | null = null;
 
 	function downloadFile(key: string) {
 		const link = document.createElement("a");
@@ -24,11 +24,11 @@
 	}
 </script>
 
-<button class="download-examples-btn" on:click={() => (showModal[0] = true)} type="button">
+<button class="download-examples-btn" on:click={() => (activeModal = "0")} type="button">
 	<HugeiconsArchive02 width="32" height="32" />
 </button>
 
-<CenterModal bind:showModal modalID={0}>
+<CenterModal bind:activeModal modalID="0">
 	<div slot="description" class="modal-content">
 		<slot>
 			<h2>Download Example Textures</h2>

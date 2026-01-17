@@ -13,7 +13,7 @@
 	export let showButton: boolean = true;
 
 	let fileInput: HTMLInputElement;
-	let showModal = [false];
+	let activeModal: string | null = null;
 	let isImporting = false;
 	let importError: string | null = null;
 
@@ -24,7 +24,7 @@
 	let isDragging = false;
 
 	export function triggerFileInput() {
-		showModal[0] = true;
+		activeModal = "0";
 	}
 
 	async function processFile(file: File) {
@@ -44,7 +44,7 @@
 			detectedVersion = result.detectedVersion;
 			packName = result.pack.pack_name || "";
 
-			showModal[0] = true;
+			activeModal = "0";
 		} catch (error: any) {
 			importError = error.message || "Failed to import materialpack";
 			console.error("Import error:", error);
@@ -130,12 +130,12 @@
 </script>
 
 {#if showButton}
-	<button class="import-btn" on:click={() => (showModal[0] = true)} title="Import Material Pack">
+	<button class="import-btn" on:click={() => (activeModal = "0")} title="Import Material Pack">
 		<HugeiconsComputerArrowUp width="32" height="32" />
 	</button>
 {/if}
 
-<CenterModal bind:showModal modalID={0}>
+<CenterModal bind:activeModal modalID="0">
 	<div slot="description" class="modal-content">
 		{#if isImporting}
 			<h2>Importing Material Pack...</h2>

@@ -15,7 +15,7 @@
 	var showSupercededVersions = false;
 	var sortOrder: SortOrder = "major";
 	var displayedVersions: MinecraftVersion[] = [];
-	var showModal: boolean[] = Array(1).fill(false);
+	var activeModal: string | null = null;
 
 	// Filtering & Sorting
 	$: {
@@ -49,7 +49,7 @@
 	}
 
 	function openModal() {
-		showModal[0] = true;
+		activeModal = "0";
 	}
 </script>
 
@@ -134,7 +134,7 @@
 	</div>
 </div>
 
-<CenterModal bind:showModal modalID={0} returnToURL={$page.url.origin + "/versions"}>
+<CenterModal bind:activeModal modalID="0" returnToURL={$page.url.origin + "/versions"}>
 	<div slot="description" class="definition-list">
 		<h2>Version Types</h2>
 		<ul>

@@ -108,7 +108,7 @@ export let mods: ModCompatibility[] = [
 		modId: 'heirlooms',
 		icon: platform_heirlooms,
 		name: 'Heirlooms',
-		supportedVersions: ['1.21.1', '1.21.9', '1.21.10', '1.21.11']
+		supportedVersions: ['1.20.1', '1.21.1', '1.21.9', '1.21.10', '1.21.11']
 	},
 	{
 		modId: 'plastar',
